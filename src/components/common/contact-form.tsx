@@ -55,9 +55,8 @@ export default function ContactForm() {
       >
         <div className="relative mb-4">
           <h1
-            className="bg-gradient-to-r from-[#ccf0ff] via-[#ffd7ff] to-[#f1b3cf] bg-clip-text text-center text-3xl font-bold text-transparent lg:text-6xl"
+            className="font-feijoa bg-gradient-to-r from-[#ccf0ff] via-[#ffd7ff] to-[#f1b3cf] bg-clip-text text-center text-3xl font-bold text-transparent lg:text-6xl"
             style={{
-              fontFamily: "Feijoa,serif",
               height: "8vh",
             }}
           >

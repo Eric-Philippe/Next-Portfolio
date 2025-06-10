@@ -14,11 +14,33 @@ body {
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Feijoa";
+  src: url("/fonts/feijoa.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Expose";
+  src:
+    url("/fonts/Expose.otf") format("opentype"),
+    local("Expose"),
+    local("Arial"),
+    local("Helvetica");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --font-sans:
     var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-sohne: "Sohne", sans-serif;
+  --font-feijoa: "Feijoa", serif;
+  --font-expose: "Expose", sans-serif;
 }
 
 /* Custom animations for dev portfolio */
@@ -34,6 +56,14 @@ body {
 /* Font utilities */
 .font-sohne {
   font-family: var(--font-sohne);
+}
+
+.font-feijoa {
+  font-family: var(--font-feijoa);
+}
+
+.font-expose {
+  font-family: var(--font-expose);
 }
 
 /* GitHub colors for dev portfolio sections */

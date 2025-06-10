@@ -9,7 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sohne: ["var(--font-sohne)", "sans-serif"],
+        sohne: ["var(--font-sohne)", "system-ui", "sans-serif"],
+        feijoa: ["var(--font-feijoa)", "Georgia", "serif"],
+        expose: ["var(--font-expose)", "Arial", "Helvetica", "sans-serif"],
       },
       colors: {
         "gh-marketingDark": "#0d1117",
