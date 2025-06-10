@@ -1,21 +1,27 @@
-export interface RouterProps {
-  setIsDev: (isDev: boolean) => void;
-  isDev?: boolean;
-}
+export type DevProjectTags =
+  | "WebDev"
+  | "Bot"
+  | "Tools"
+  | "Challenges"
+  | "DevOps"
+  | "Other";
 
-export interface RouterFocusProps {
-  setFocus: (focus: number | null) => void;
-}
+export interface DevProject {
+  en: {
+    title: string;
+    shortDesc: string;
+  };
 
-export interface ProjectData {
-  title: string;
-  shortDesc: string;
-  techs: string[][];
-  gitLink: string;
+  fr: {
+    title: string;
+    shortDesc: string;
+  };
+  techs: string[];
+  link: string;
+  /** format YYYY/MM or YYYY/MM - YYYY/MM */
   date: string;
-  tag: string;
+  tags: DevProjectTags[];
   previewImg?: string;
-  content: string;
 }
 
 export interface AlbumData {
@@ -28,5 +34,3 @@ export interface AlbumData {
   previewImgOne: string;
   content: string;
 }
-
-export type PortfolioMode = "dev" | "photo";

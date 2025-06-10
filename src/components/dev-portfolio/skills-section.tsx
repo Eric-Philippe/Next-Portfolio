@@ -1,15 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 export default function SkillsSection() {
+  const t = useTranslations("DevPortfolio.Skills");
+
   const technicalSkills = [
     {
       title: "Frontend",
       items: [
-        "HTML, CSS, SCSS, Javascript, Typescript, PHP",
-        "Symfony, React, Angular, Vite, NextJS",
-        "TailwindCSS, Bootstrap, MaterialUI, PrimeNg",
+        "HTML5, CSS3, JavaScript (ES6+), TypeScript, PHP",
+        "React, Next.js, Angular, Symfony",
+        "SPA, SSR, SEO, Tailwind, Material, Bootstrap",
       ],
       colors: ["#ff6b35", "#ff8a65"], // Orange tones
       icon: "🎨",
@@ -17,17 +20,17 @@ export default function SkillsSection() {
     {
       title: "Backend",
       items: [
-        "JS, TS, Python, Java, Kotlin, C#, Cobol, Ada, Julia",
-        "NodeJS, Express, NestJS, SpringBoot, Flask, Django",
-        "API REST, GraphQL, Websocket, Socket.io",
+        "TS, Python, Golang, Java, C#, Kotlin, COBOL",
+        "Express, NestJS, SpringBoot, FastAPI, Flask",
+        "REST, Websocket, MQTT, Concurrency",
       ],
       colors: ["#ef4444", "#f87171"], // Red tones
       icon: "⚙️",
     },
     {
-      title: "Base de données",
+      title: "Database",
       items: [
-        "MySQL, PostgreSQL, MongoDB, SQLite, Access",
+        "PostgreSQL, MySQL, MongoDB, SQLite, Access",
         "ORM, PL/SQL, Migration, Forme Normale, MCD, MLD",
         "Datagrip, Oracle SQL Developer, MySQL Workbench",
       ],
@@ -37,25 +40,25 @@ export default function SkillsSection() {
     {
       title: "Sys Admin",
       items: [
-        "Shell, Bash, Batch, Powershell, Python",
-        "Docker, Kubernetes, Terraform, Grafana, Proxmox",
-        "Linux, Windows, MacOS, Debian, Ubuntu, Arch",
+        "Shell, Bash, Batch, Powershell, Odin",
+        "Docker, Kubernetes, Grafana, Proxmox, Ansible",
+        "Linux, Windows, Debian, Ubuntu, Arch",
       ],
       colors: ["#9ca3af", "#d1d5db"], // Gray tones
       icon: "🖥️",
     },
     {
-      title: "Intelligence Artificielle",
+      title: "Artificial Intelligence",
       items: [
-        "LLM Self-Hosted (Ollama, LM Studio, Oobabooga)",
-        "Python ML/AI (TensorFlow, PyTorch, scikit-learn)",
-        "Computer Vision (OpenCV, YOLO), NLP (Transformers)",
+        "Claude, Gemini, ChatGPT",
+        "Ollama, PyTorch, TensorFlow, LangChain",
+        "Self-hosting, Confidentiality, Ethics",
       ],
       colors: ["#f97316", "#fb923c"], // Orange-red gradient
       icon: "🤖",
     },
     {
-      title: "Versionning",
+      title: "Versioning",
       items: [
         "Git, Github, Gitlab, Bitbucket",
         "Gitflow, Github Flow",
@@ -68,24 +71,20 @@ export default function SkillsSection() {
 
   const softSkills = [
     {
-      title: "Langues",
-      items: [
-        "Français (langue maternelle)",
-        "Anglais (courant - TOEIC : C1)",
-        "Espagnol (scolaire)",
-      ],
+      title: t("languages"),
+      items: [t("french"), t("english"), t("spanish")],
       colors: ["#ef4444", "#f87171", "#60a5fa"], // Red to light blue
       icon: "🌍",
     },
     {
-      title: "Communication",
-      items: ["Présentation orale", "Rédaction technique", "Travail en équipe"],
+      title: t("communication"),
+      items: [t("oralPresentation"), t("technicalWriting"), t("teamwork")],
       colors: ["#ff6b35", "#60a5fa", "#9ca3af"], // Orange, light blue, gray
       icon: "💬",
     },
     {
-      title: "Gestion",
-      items: ["Méthodes Agiles (SCRUM)", "Gestion de projet", "Planification"],
+      title: t("managementSkills"),
+      items: [t("agileMethodologies"), t("projectManagement"), t("planning")],
       colors: ["#f97316", "#ef4444", "#60a5fa"], // Orange, red, light blue
       icon: "📊",
     },

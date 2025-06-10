@@ -8,7 +8,27 @@
   "DevPortfolio": {
     "title-1": "FullStack",
     "title-2": "Developer",
-    "about": "FullStack Developer with {years} years of experience, passionate about coding and possessing a strong IT expertise."
+    "about": "FullStack Developer with {years} years of experience, passionate about coding and possessing a strong IT expertise.",
+    "projects": "Projects",
+    "allCategories": "All Categories",
+    "filterByFeatured": "Filter by Featured",
+    "filterByDate": "Filter by Date",
+    "seeMore": "See More ({count} projects)",
+    "seeLess": "See Less",
+    "Skills": {
+      "languages": "Languages",
+      "french": "French (native)",
+      "english": "English (fluent - TOEIC: C1)",
+      "spanish": "Spanish (basic)",
+      "communication": "Communication",
+      "oralPresentation": "Oral Presentation",
+      "technicalWriting": "Technical Writing",
+      "teamwork": "Teamwork",
+      "managementSkills": "Management Skills",
+      "agileMethodologies": "Agile Methodologies (SCRUM)",
+      "projectManagement": "Project Management",
+      "planning": "Planning and Organization"
+    }
   },
   "LanguageSwitcher": {
     "currentLanguage": "Language",

@@ -4,30 +4,13 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { ParticlesDesign } from "../common/particles";
 import { useTranslations } from "next-intl";
+import { getMyAge } from "~/lib/utils/utils";
 
 // Color palette from your original design
 const DEV_COLOR_PALETTE = {
   first: "#9867f0",
   second: "#ed4e50",
   third: "#8a0101",
-};
-
-// Utility function to calculate age
-const getMyAge = () => {
-  const birthYear = 2003;
-  const birthMonth = 5; // May
-
-  const today = new Date();
-  const currentYear = today.getFullYear();
-  const currentMonth = today.getMonth() + 1; // JavaScript months are 0-indexed
-
-  let age = currentYear - birthYear;
-
-  if (currentMonth < birthMonth) {
-    age--;
-  }
-
-  return age;
 };
 
 const itemVariants = {

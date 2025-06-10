@@ -8,6 +8,7 @@
 
 - [ ] Put back a "Red circle" on the top right corner of the page
 - [ ] Rework the section selection (And traduce it)
+- [ ] Rework the "Réalisations" filter ("WebDev", "Bot", "Tools", "Challenges", "Other")
 - [ ] Traduce Sections titles
 - [ ] Rework a bit the tech stack listing (tech logo sliding ?)
 - [ ] Rework, traduce the "Parcours" section

@@ -1,15 +1,10 @@
-import {
-  FaCode,
-  FaDesktop,
-  FaLaptopCode,
-  FaPuzzlePiece,
-  FaRobot,
-  FaToolbox,
-} from "react-icons/fa";
+import type { DevProjectTags } from "~/types/portfolio";
 
 /**
  * @typedef {object} Tags
  * @property {string} name - The name of the tag
+ * @property {DevProjectTags} type - The DevProjectTags type
+ * @property {string} emoji - The emoji for the tag
  * @property {string} color - The color of the tag
  * @property {string} fadedColor - The faded color of the tag
  * @property {string} secColor - The secondary color of the tag
@@ -17,155 +12,105 @@ import {
  */
 export type Tags = {
   name: string;
+  type: DevProjectTags;
+  emoji: string;
   color: string;
   fadedColor: string;
   secColor: string;
   secGradientColor: string;
 };
 
-export const FULLSTACK: Tags = {
-  name: "Fullstack",
-  color: "rgb(51, 129, 245)",
-  fadedColor: "rgba(51, 129, 245, 0.2)",
-  secColor: "#95d1f9",
-  secGradientColor: "#99e9c8",
+export const WEBDEV: Tags = {
+  name: "WebDev",
+  type: "WebDev",
+  emoji: "💻",
+  color: "rgb(59, 130, 246)",
+  fadedColor: "rgba(59, 130, 246, 0.2)",
+  secColor: "#93c5fd",
+  secGradientColor: "#7c3aed",
 };
 
-const FRONTEND: Tags = {
-  name: "Frontend",
-  color: "rgb(123, 81, 220)",
-  fadedColor: "rgba(123, 81, 220, 0.2)",
-  secColor: "#3e62c0",
-  secGradientColor: "#9d78d2",
-};
-
-const BACKEND: Tags = {
-  name: "Backend",
-  color: "rgb(51, 245, 51)",
-  fadedColor: "rgba(51, 245, 51, 0.2)",
-  secColor: "#8D4DC7",
-  secGradientColor: "#01A2C2",
+export const DEVOPS: Tags = {
+  name: "DevOps",
+  type: "DevOps",
+  emoji: "⚙️",
+  color: "rgb(34, 197, 94)",
+  fadedColor: "rgba(34, 197, 94, 0.2)",
+  secColor: "#86efac",
+  secGradientColor: "#06b6d4",
 };
 
 const BOT: Tags = {
   name: "Bot",
-  color: "rgb(245, 51, 245)",
-  fadedColor: "rgba(245, 51, 245, 0.2)",
-  secColor: "#db6f02",
-  secGradientColor: "#b507fa",
+  type: "Bot",
+  emoji: "🤖",
+  color: "rgb(168, 85, 247)",
+  fadedColor: "rgba(168, 85, 247, 0.2)",
+  secColor: "#c084fc",
+  secGradientColor: "#ec4899",
 };
 
-const TOOL: Tags = {
-  name: "Tool",
-  color: "rgb(145, 39, 7)",
-  fadedColor: "rgba(145, 39, 7, 0.2)",
-  secColor: "#b0c9f5",
-  secGradientColor: "#912707",
+const TOOLS: Tags = {
+  name: "Tools",
+  type: "Tools",
+  emoji: "🛠️",
+  color: "rgb(34, 197, 94)",
+  fadedColor: "rgba(34, 197, 94, 0.2)",
+  secColor: "#86efac",
+  secGradientColor: "#06b6d4",
 };
 
-const CHALLENGE: Tags = {
-  name: "Challenge",
-  color: "rgb(242, 81, 17)",
-  fadedColor: "rgba(242, 81, 17, 0.2)",
-  secColor: "#f25111",
-  secGradientColor: "#63d498",
+const CHALLENGES: Tags = {
+  name: "Challenges",
+  type: "Challenges",
+  emoji: "🧩",
+  color: "rgb(249, 115, 22)",
+  fadedColor: "rgba(249, 115, 22, 0.2)",
+  secColor: "#fdba74",
+  secGradientColor: "#f59e0b",
 };
 
-export const ALL_TAGS: Tags[] = [
-  FULLSTACK,
-  FRONTEND,
-  BACKEND,
-  TOOL,
-  BOT,
-  CHALLENGE,
-];
+const OTHER: Tags = {
+  name: "Other",
+  type: "Other",
+  emoji: "✨",
+  color: "rgb(139, 92, 246)",
+  fadedColor: "rgba(139, 92, 246, 0.2)",
+  secColor: "#c4b5fd",
+  secGradientColor: "#8b5cf6",
+};
+
+export const ALL_TAGS: Tags[] = [WEBDEV, DEVOPS, BOT, TOOLS, CHALLENGES, OTHER];
 
 /**
- * @description - Gets the tags from a string
- * @param tags - The string to get the tags from
+ * @description - Gets the tags from a DevProjectTags type
+ * @param tagType - The DevProjectTags type to get the tag from
  * @returns {Tags} - The tags
  */
-export const getTagsFromString = (tags: string): Tags => {
-  switch (tags) {
-    case "FULLSTACK":
-      return FULLSTACK;
-    case "FRONTEND":
-      return FRONTEND;
-    case "BACKEND":
-      return BACKEND;
-    case "TOOL":
-      return TOOL;
-    case "BOT":
+export const getTagsFromString = (tagType: DevProjectTags): Tags => {
+  switch (tagType) {
+    case "WebDev":
+      return WEBDEV;
+    case "DevOps":
+      return DEVOPS;
+    case "Bot":
       return BOT;
-    case "CHALLENGE":
-      return CHALLENGE;
+    case "Tools":
+      return TOOLS;
+    case "Challenges":
+      return CHALLENGES;
+    case "Other":
+      return OTHER;
     default:
-      return FULLSTACK;
+      return WEBDEV;
   }
 };
 
 /**
- * @description - Gets the icon from a tag
- * @param tag - The tag to get the icon from
- * @returns {React.ReactNode} - The icon
+ * @description - Gets the emoji from a tag
+ * @param tag - The tag to get the emoji from
+ * @returns {string} - The emoji
  */
-export const getIconFromTag = (tag: Tags): React.ReactNode => {
-  switch (tag.name) {
-    case "Fullstack":
-      return (
-        <FaLaptopCode
-          style={{
-            marginRight: "0.5rem",
-          }}
-        />
-      );
-    case "Frontend":
-      return (
-        <FaDesktop
-          style={{
-            marginRight: "0.5rem",
-          }}
-        />
-      );
-    case "Backend":
-      return (
-        <FaCode
-          style={{
-            marginRight: "0.5rem",
-          }}
-        />
-      );
-    case "Tool":
-      return (
-        <FaToolbox
-          style={{
-            marginRight: "0.5rem",
-          }}
-        />
-      );
-    case "Bot":
-      return (
-        <FaRobot
-          style={{
-            marginRight: "0.5rem",
-          }}
-        />
-      );
-    case "Challenge":
-      return (
-        <FaPuzzlePiece
-          style={{
-            marginRight: "0.5rem",
-          }}
-        />
-      );
-    default:
-      return (
-        <FaLaptopCode
-          style={{
-            marginRight: "0.5rem",
-          }}
-        />
-      );
-  }
+export const getEmojiFromTag = (tag: Tags): string => {
+  return tag.emoji;
 };
