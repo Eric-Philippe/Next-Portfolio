@@ -1,0 +1,71 @@
+/**
+ * Get the user's age based on birth date
+ */
+export const getMyAge = () => {
+  const birthYear = 2003;
+  const birthMonth = 5; // May
+
+  const today = new Date();
+  const currentYear = today.getFullYear();
+  const currentMonth = today.getMonth() + 1;
+
+  let age = currentYear - birthYear;
+
+  if (currentMonth < birthMonth) {
+    age--;
+  }
+
+  return age;
+};
+
+const TECH_COLOR: Record<string, string> = {
+  Python: "#4f8ebd",
+  TypeScript: "rgba(47, 116, 192, 1)",
+  JavaScript: "#f7e02a",
+  emailjs: "#f7e02a",
+  "Chart.js": "#f7e02a",
+  React: "#61dafb",
+  Vite: "#b643fe",
+  TailwindCSS: "#54bfbb",
+  Bootstrap: "#901dfd",
+  PostgreSQL: "#316193",
+  Express: "#2c2c2c",
+  Julia: "#aa79c1",
+  Rust: "#f15e3a",
+  Haskell: "#63568a",
+  "C++": "#6a9dd4",
+  Java: "#ed2c28",
+  Docker: "#309aee",
+  "C#": "#a0559b",
+  Gherkin: "#5abd6c",
+  HTML: "#ff5d2b",
+  CSS: "#2076b8",
+  Excel: "#1f7c39",
+  MySQL: "#e59115",
+  Git: "#f1573b",
+  PHP: "#7b7fb6",
+  Symfony: "#080808",
+  "CI/CD": "#8f1704",
+  Markdown: "#9fd25c",
+  Shell: "#4eaa25",
+  Batch: "#4eaa25",
+  GitBook: "#4eaa25",
+  Crontab: "#8c8c8c",
+  PlantUML: "#7d4e1e",
+  Angular: "#dd0031",
+  MariaDb: "#003545",
+  "API-REST": "#f7e02a",
+  PrimeNg: "#42a5f5",
+  "IBM-MQ": "#7d4e1e",
+  nginx: "#009639",
+  Proxmox: "#e57000",
+  TrueNas: "#002d72",
+  Grafana: "#f46800",
+  Prometheus: "#e6522c",
+  HomeAssistant: "#41bdf5",
+};
+
+export const getTechColor = (tech: string) => {
+  if (tech in TECH_COLOR) return TECH_COLOR[tech];
+  return "bg-gray-300";
+};
