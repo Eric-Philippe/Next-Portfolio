@@ -26,6 +26,7 @@
     "@tsparticles/slim": "^3.8.1",
     "@types/negotiator": "^0.6.4",
     "framer-motion": "^12.16.0",
+    "lucide-react": "^0.513.0",
     "negotiator": "^1.0.0",
     "next": "^15.2.3",
     "next-intl": "^4.1.0",

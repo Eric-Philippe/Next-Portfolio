@@ -1,20 +1,25 @@
 "use client";
 
-import { FaCamera, FaDesktop } from "react-icons/fa";
+import { FaCamera, FaDesktop, FaBlog } from "react-icons/fa";
 import Image from "next/image";
-import type { RouterProps } from "../../types/portfolio";
+import { LanguageSwitcher } from "./language-switcher";
+import { useTranslations } from "next-intl";
+import { Link, usePathname } from "~/i18n/navigation";
 
-interface HeaderProps extends RouterProps {
+interface HeaderProps {
   firstColor: string;
   secondColor: string;
 }
 
-export function Header({
-  setIsDev,
-  isDev,
-  firstColor,
-  secondColor,
-}: HeaderProps) {
+export function Header({ firstColor, secondColor }: HeaderProps) {
+  const t = useTranslations("Header");
+  const pathname = usePathname();
+
+  // Determine current page based on pathname
+  const isOnTech = pathname === "/tech";
+  const isOnPhoto = pathname === "/photo";
+  const isOnBlog = pathname === "/blog";
+
   return (
     <>
       <div
@@ -29,9 +34,7 @@ export function Header({
           <button
             aria-label="Home"
             className="z-50 inline-block rounded-full transition-transform hover:scale-105"
-            onClick={() => {
-              // Optional: Add home navigation logic here
-            }}
+            onClick={() => (window.location.href = "/")}
           >
             <Image
               src="/icon.png"
@@ -41,46 +44,43 @@ export function Header({
               className="h-16 w-16"
               priority
             />
-          </button>
-
-          <nav className="-mt-6 flex space-x-4 text-sm text-gray-800">
-            <button
+          </button>{" "}
+          <nav className="-mt-6 flex items-center space-x-4 text-sm text-gray-800">
+            <Link
+              href="/tech"
               className={`flex items-center space-x-1.5 transition-all duration-200 hover:underline ${
-                isDev ? "text-dev-gradient glow" : "head-icon"
+                isOnTech ? "text-dev-gradient glow" : "head-icon"
               }`}
-              onClick={() => setIsDev(true)}
               style={{
                 zIndex: 10,
-                cursor: "pointer",
                 border: "1px solid",
-                borderColor: isDev ? firstColor : "transparent",
+                borderColor: isOnTech ? firstColor : "transparent",
                 borderRadius: "0.5rem",
                 padding: "0.25rem 0.5rem",
               }}
             >
               <FaDesktop
                 className={`mt-0.5 w-4 transition-colors duration-200 ${
-                  isDev ? "text-gradient" : "head-icon"
+                  isOnTech ? "text-gradient" : "head-icon"
                 }`}
                 style={{
-                  color: isDev ? firstColor : "",
+                  color: isOnTech ? firstColor : "",
                 }}
               />
-              <span className={`${isDev ? "" : "hidden"} md:inline`}>
-                Informatique
+              <span className={`${isOnTech ? "" : "hidden"} md:inline`}>
+                {t("tech")}
               </span>
-            </button>
+            </Link>
 
-            <button
+            <Link
+              href="/photo"
               className={`flex items-center space-x-1.5 transition-all duration-200 hover:underline ${
-                !isDev ? "text-photo-gradient" : "head-icon"
+                isOnPhoto ? "text-photo-gradient" : "head-icon"
               }`}
-              onClick={() => setIsDev(false)}
               style={{
                 zIndex: 10,
-                cursor: "pointer",
                 border: "1px solid",
-                borderColor: isDev ? "transparent" : firstColor,
+                borderColor: isOnPhoto ? firstColor : "transparent",
                 borderRadius: "0.5rem",
                 padding: "0.25rem 0.5rem",
               }}
@@ -88,13 +88,44 @@ export function Header({
               <FaCamera
                 className="mt-0.5 w-4 transition-colors duration-200"
                 style={{
-                  color: isDev ? "" : secondColor,
+                  color: isOnPhoto ? secondColor : "",
                 }}
               />
-              <span className={`${isDev ? "hidden" : ""} md:inline`}>
-                Photographie
+              <span className={`${isOnPhoto ? "" : "hidden"} md:inline`}>
+                {t("photo")}
               </span>
-            </button>
+            </Link>
+
+            <Link
+              href="/blog"
+              className={`flex items-center space-x-1.5 transition-all duration-200 hover:underline ${
+                isOnBlog ? "text-blog-gradient" : "head-icon"
+              }`}
+              style={{
+                zIndex: 10,
+                border: "1px solid",
+                borderColor: isOnBlog ? "#4ecdc4" : "transparent",
+                borderRadius: "0.5rem",
+                padding: "0.25rem 0.5rem",
+              }}
+            >
+              <FaBlog
+                className="mt-0.5 w-4 transition-colors duration-200"
+                style={{
+                  color: isOnBlog ? "#45b7d1" : "",
+                }}
+              />
+              <span className={`${isOnBlog ? "" : "hidden"} md:inline`}>
+                Blog
+              </span>
+            </Link>
+
+            <div className="ml-2">
+              <LanguageSwitcher
+                firstColor={firstColor}
+                secondColor={secondColor}
+              />
+            </div>
           </nav>
         </div>
       </header>

@@ -1,0 +1,46 @@
+{
+  "Header": {
+    "tech": "Tech",
+    "photo": "Photography",
+    "blog": "Blog"
+  },
+
+  "DevPortfolio": {
+    "title-1": "FullStack",
+    "title-2": "Developer",
+    "about": "FullStack Developer with {years} years of experience, passionate about coding and possessing a strong IT expertise."
+  },
+  "LanguageSwitcher": {
+    "currentLanguage": "Language",
+    "selectLanguage": "Select Language"
+  },
+  "LinkTree": {
+    "welcome": "Welcome to my",
+    "universe": "Universe",
+    "subtitle": "Choose your path to explore my work and projects",
+    "portfolio": {
+      "tech": {
+        "title": "Tech Portfolio",
+        "description": "Discover my development projects and technical skills"
+      },
+      "photo": {
+        "title": "Photography",
+        "description": "Explore my creative photography work and visual stories"
+      },
+      "blog": {
+        "title": "Blog",
+        "description": "Read my thoughts and insights on tech and creativity"
+      }
+    },
+    "external": {
+      "github": {
+        "title": "GitHub",
+        "description": "View my open source projects and contributions"
+      },
+      "latest": {
+        "title": "Latest Project",
+        "description": "Check out my most recent work"
+      }
+    }
+  }
+}

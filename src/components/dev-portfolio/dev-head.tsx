@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { ParticlesDesign } from "../common/particles";
+import { useTranslations } from "next-intl";
 
 // Color palette from your original design
 const DEV_COLOR_PALETTE = {
@@ -40,6 +41,7 @@ const itemVariants = {
 
 export default function DevHead() {
   const [isOpen, setIsOpen] = useState(false);
+  const t = useTranslations("DevPortfolio");
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -136,7 +138,7 @@ export default function DevHead() {
                 backgroundClip: "text",
               }}
             >
-              Éric PHILIPPE - Développeur
+              Éric PHILIPPE - {t("title-1")}
             </span>{" "}
             <span
               style={{
@@ -146,7 +148,7 @@ export default function DevHead() {
                 backgroundClip: "text",
               }}
             >
-              FullStack
+              {t("title-2")}
             </span>
           </motion.h1>
 
@@ -157,8 +159,9 @@ export default function DevHead() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mx-auto mt-6 max-w-3xl leading-normal font-light text-gray-600 lg:text-xl"
           >
-            Développeur FullStack de {getMyAge()} ans, passionné par le code et
-            doté d&apos;une solide expertise informatique.
+            {t("about", {
+              years: getMyAge(),
+            })}
           </motion.div>
         </div>
       </div>

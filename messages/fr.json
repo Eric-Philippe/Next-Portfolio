@@ -1,0 +1,45 @@
+{
+  "Header": {
+    "tech": "Informatique",
+    "photo": "Photographie",
+    "blog": "Blog"
+  },
+  "DevPortfolio": {
+    "title-1": "Développeur",
+    "title-2": "FullStack",
+    "about": "Développeur FullStack de {years} ans, passionné par le code et doté d'une solide expertise informatique."
+  },
+  "LanguageSwitcher": {
+    "currentLanguage": "Langue",
+    "selectLanguage": "Sélectionner la langue"
+  },
+  "LinkTree": {
+    "welcome": "Bienvenue dans mon",
+    "universe": "Univers",
+    "subtitle": "Choisissez votre chemin pour explorer mon travail et mes projets",
+    "portfolio": {
+      "tech": {
+        "title": "Portfolio Tech",
+        "description": "Découvrez mes projets de développement et compétences techniques"
+      },
+      "photo": {
+        "title": "Photographie",
+        "description": "Explorez mon travail photographique créatif et mes histoires visuelles"
+      },
+      "blog": {
+        "title": "Blog",
+        "description": "Lisez mes réflexions sur la tech et la créativité"
+      }
+    },
+    "external": {
+      "github": {
+        "title": "GitHub",
+        "description": "Consultez mes projets open source et contributions"
+      },
+      "latest": {
+        "title": "Dernier Projet",
+        "description": "Découvrez mon travail le plus récent"
+      }
+    }
+  }
+}
