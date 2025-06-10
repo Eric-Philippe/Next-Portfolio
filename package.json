@@ -17,13 +17,16 @@
     "i18n:validate": "node scripts/validate-translations.cjs"
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "^0.6.1",
     "@react-three/drei": "^10.1.2",
     "@react-three/fiber": "^9.1.2",
     "@t3-oss/env-nextjs": "^0.12.0",
     "@tsparticles/engine": "^3.8.1",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.8.1",
+    "@types/negotiator": "^0.6.4",
     "framer-motion": "^12.16.0",
+    "negotiator": "^1.0.0",
     "next": "^15.2.3",
     "next-intl": "^4.1.0",
     "react": "^19.0.0",
