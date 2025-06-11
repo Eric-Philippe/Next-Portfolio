@@ -217,7 +217,7 @@ export default function AboutSection() {
                   <div className="lg:col-span-5">
                     <div className="relative">
                       <h3 className="mb-8 text-2xl font-bold text-white">
-                        Mon Parcours
+                        {t("timeline")}
                       </h3>
 
                       {/* Timeline */}
