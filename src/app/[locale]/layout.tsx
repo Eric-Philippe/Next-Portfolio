@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Eric Philippe - Portfolio",
   description:
     "Full Stack Developer & Photographer Portfolio - Modern web development and creative photography",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/favicon.svg" }],
 };
 
 export default async function LocaleLayout({

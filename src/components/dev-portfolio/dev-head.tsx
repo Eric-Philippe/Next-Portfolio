@@ -150,32 +150,62 @@ export default function DevHead() {
       </div>
 
       {/* Navigation */}
-      <div className="sticky top-0 z-30 bg-white/90 backdrop-blur backdrop-filter lg:py-6">
+      <div className="sticky top-0 z-30 bg-white/90 pb-4 backdrop-blur backdrop-filter lg:py-6">
         {/* Mobile Navigation */}
-        <div className="px-4 lg:hidden">
+        <div className="px-4 pt-4 lg:hidden">
           <motion.nav
             initial={false}
             animate={isOpen ? "open" : "closed"}
-            className="relative"
+            className="relative mb-6"
           >
             <motion.button
               whileTap={{ scale: 0.97 }}
+              whileHover={{ scale: 1.02 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="flex w-full items-center justify-between rounded-lg border bg-white px-4 py-3 shadow-sm"
+              className="relative flex w-full items-center justify-between overflow-hidden rounded-xl bg-white/80 px-5 py-4 backdrop-blur-sm"
+              style={{
+                background: `linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%)`,
+                border: `1px solid rgba(152, 103, 240, 0.15)`,
+                boxShadow: `0 4px 20px rgba(152, 103, 240, 0.1), 0 1px 4px rgba(0, 0, 0, 0.05)`,
+              }}
             >
-              <span className="font-semibold">Réalisations</span>
+              {/* Subtle animated glow */}
               <motion.div
+                className="absolute inset-0 rounded-xl opacity-0"
+                style={{
+                  background: `linear-gradient(135deg, rgba(152, 103, 240, 0.03) 0%, rgba(237, 78, 80, 0.03) 100%)`,
+                }}
+                animate={{
+                  opacity: isOpen ? 0.8 : 0,
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              />
+
+              <span
+                className="relative z-10 font-semibold text-gray-700"
+                style={{
+                  background: `linear-gradient(to right, ${DEV_COLOR_PALETTE.first}, ${DEV_COLOR_PALETTE.second})`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                {t("navigation")}
+              </span>
+
+              <motion.div
+                className="relative z-10"
                 variants={{
                   open: { rotate: 180 },
                   closed: { rotate: 0 },
                 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
               >
                 <svg
-                  width="15"
-                  height="15"
+                  width="16"
+                  height="16"
                   viewBox="0 0 20 20"
-                  fill="currentColor"
+                  style={{ fill: DEV_COLOR_PALETTE.first }}
                 >
                   <path d="M0 7 L 20 7 L 10 16" />
                 </svg>
@@ -183,72 +213,145 @@ export default function DevHead() {
             </motion.button>
 
             <motion.ul
-              className="absolute top-full right-0 left-0 mt-2 rounded-lg bg-white p-4 font-semibold shadow-lg"
+              className="absolute top-full right-0 left-0 mt-3 overflow-hidden rounded-xl bg-white/95 backdrop-blur-md"
+              style={{
+                border: `1px solid rgba(152, 103, 240, 0.12)`,
+                boxShadow: `0 8px 32px rgba(152, 103, 240, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1)`,
+                pointerEvents: isOpen ? "auto" : "none",
+              }}
               variants={{
                 open: {
-                  clipPath: "inset(0% 0% 0% 0% round 10px)",
+                  opacity: 1,
+                  scale: 1,
+                  y: 0,
                   transition: {
                     type: "spring",
-                    bounce: 0,
-                    duration: 0.7,
-                    delayChildren: 0.3,
-                    staggerChildren: 0.05,
+                    bounce: 0.2,
+                    duration: 0.6,
+                    delayChildren: 0.2,
+                    staggerChildren: 0.1,
                   },
-                  display: "block",
                 },
                 closed: {
-                  clipPath: "inset(10% 50% 90% 50% round 10px)",
+                  opacity: 0,
+                  scale: 0.95,
+                  y: -10,
                   transition: {
                     type: "spring",
                     bounce: 0,
                     duration: 0.3,
                   },
-                  display: "none",
                 },
               }}
-              style={{
-                pointerEvents: isOpen ? "auto" : "none",
-              }}
             >
+              {/* Very subtle background pattern */}
+              <div
+                className="absolute inset-0 opacity-[0.02]"
+                style={{
+                  background: `radial-gradient(circle at 30% 20%, ${DEV_COLOR_PALETTE.first} 0%, transparent 50%), 
+                               radial-gradient(circle at 70% 80%, ${DEV_COLOR_PALETTE.second} 0%, transparent 50%)`,
+                }}
+              />
+
               <motion.li
                 variants={itemVariants}
-                className="cursor-pointer py-2 transition-colors hover:text-purple-600"
+                className="hover:from-purple-25 hover:to-red-25 relative cursor-pointer border-b border-gray-50 px-5 py-4 font-medium text-gray-600 transition-all duration-300 hover:bg-gradient-to-r"
+                whileHover={{
+                  x: 4,
+                  transition: { duration: 0.2 },
+                }}
                 onClick={() => {
                   setIsOpen(false);
                   scrollToSection("realisations");
                 }}
               >
-                Réalisations
+                <span className="transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-600 hover:to-red-500 hover:bg-clip-text hover:text-transparent">
+                  {t("realisations")}
+                </span>
+                {/* Subtle hover indicator */}
+                <motion.div
+                  className="absolute top-1/2 left-0 h-1 w-1 rounded-full opacity-0"
+                  style={{
+                    background: DEV_COLOR_PALETTE.first,
+                    transform: "translateY(-50%)",
+                  }}
+                  whileHover={{ opacity: 1, scale: 1.5 }}
+                />
               </motion.li>
+
               <motion.li
                 variants={itemVariants}
-                className="cursor-pointer py-2 transition-colors hover:text-purple-600"
+                className="hover:from-purple-25 hover:to-red-25 relative cursor-pointer border-b border-gray-50 px-5 py-4 font-medium text-gray-600 transition-all duration-300 hover:bg-gradient-to-r"
+                whileHover={{
+                  x: 4,
+                  transition: { duration: 0.2 },
+                }}
                 onClick={() => {
                   setIsOpen(false);
                   scrollToSection("competences");
                 }}
               >
-                Mes compétences
+                <span className="transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-600 hover:to-red-500 hover:bg-clip-text hover:text-transparent">
+                  {t("skills")}
+                </span>
+                <motion.div
+                  className="absolute top-1/2 left-0 h-1 w-1 rounded-full opacity-0"
+                  style={{
+                    background: DEV_COLOR_PALETTE.first,
+                    transform: "translateY(-50%)",
+                  }}
+                  whileHover={{ opacity: 1, scale: 1.5 }}
+                />
               </motion.li>
+
               <motion.li
                 variants={itemVariants}
-                className="cursor-pointer py-2 transition-colors hover:text-purple-600"
+                className="hover:from-purple-25 hover:to-red-25 relative cursor-pointer border-b border-gray-50 px-5 py-4 font-medium text-gray-600 transition-all duration-300 hover:bg-gradient-to-r"
+                whileHover={{
+                  x: 4,
+                  transition: { duration: 0.2 },
+                }}
                 onClick={() => {
                   setIsOpen(false);
                   scrollToSection("about");
                 }}
               >
-                Parcours
+                <span className="transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-600 hover:to-red-500 hover:bg-clip-text hover:text-transparent">
+                  {t("aboutMe")}
+                </span>
+                <motion.div
+                  className="absolute top-1/2 left-0 h-1 w-1 rounded-full opacity-0"
+                  style={{
+                    background: DEV_COLOR_PALETTE.first,
+                    transform: "translateY(-50%)",
+                  }}
+                  whileHover={{ opacity: 1, scale: 1.5 }}
+                />
               </motion.li>
+
               <motion.li
                 variants={itemVariants}
-                className="cursor-pointer py-2 transition-colors hover:text-purple-600"
+                className="hover:from-purple-25 hover:to-red-25 relative cursor-pointer px-5 py-4 font-medium text-gray-600 transition-all duration-300 hover:bg-gradient-to-r"
+                whileHover={{
+                  x: 4,
+                  transition: { duration: 0.2 },
+                }}
                 onClick={() => {
                   setIsOpen(false);
                   scrollToSection("contact");
                 }}
               >
-                Contact
+                <span className="transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-600 hover:to-red-500 hover:bg-clip-text hover:text-transparent">
+                  {t("contact")}
+                </span>
+                <motion.div
+                  className="absolute top-1/2 left-0 h-1 w-1 rounded-full opacity-0"
+                  style={{
+                    background: DEV_COLOR_PALETTE.first,
+                    transform: "translateY(-50%)",
+                  }}
+                  whileHover={{ opacity: 1, scale: 1.5 }}
+                />
               </motion.li>
             </motion.ul>
           </motion.nav>
@@ -261,25 +364,25 @@ export default function DevHead() {
               className="inline-flex cursor-pointer font-medium text-gray-900 transition-all hover:text-purple-600"
               onClick={() => scrollToSection("realisations")}
             >
-              Réalisations
+              {t("realisations")}
             </a>
             <a
               className="inline-flex cursor-pointer text-gray-400 transition-all hover:text-gray-900"
               onClick={() => scrollToSection("competences")}
             >
-              Mes compétences
+              {t("skills")}
             </a>
             <a
               className="inline-flex cursor-pointer text-gray-400 transition-all hover:text-gray-900"
               onClick={() => scrollToSection("about")}
             >
-              Parcours
+              {t("aboutMe")}
             </a>
             <a
               className="inline-flex cursor-pointer text-gray-400 transition-all hover:text-gray-900"
               onClick={() => scrollToSection("contact")}
             >
-              Contact
+              {t("contact")}
             </a>
           </nav>
         </div>

@@ -8,6 +8,11 @@
     "title-1": "Développeur",
     "title-2": "FullStack",
     "about": "Ingénieur en développement logiciel, passionné par la technologie, guidé par la curiosité",
+    "navigation": "Découvrir",
+    "realisations": "Mes Réalisations",
+    "skills": "Mes compétences",
+    "aboutMe": "À propos de moi",
+    "contact": "Contact",
     "projects": "Réalisations",
     "allCategories": "Toutes les catégories",
     "filterByFeatured": "Filtrer par mis en avant",
@@ -72,7 +77,11 @@
       },
       "downloadCV": "Télécharger CV",
       "lastUpdate": "Dernière mise à jour",
-      "lastUpdateDate": "Février 2025"
+      "lastUpdateDate": "Février 2025",
+      "lastLinkedInPost": "Dernier post LinkedIn",
+      "seeFullPost": "Voir le post complet",
+      "featured": "Mis en avant",
+      "seeArticle": "Lire l'article"
     },
     "Contact": {
       "realisations": "RÉALISATIONS",
@@ -130,7 +139,6 @@
     "legalModal": {
       "title": "Mentions Légales",
       "editor": "Éditeur du site :",
-      "name": "Éric Philippe",
       "hosting": "Hébergement :",
       "hostingCompany": "Vercel Inc.",
       "personalData": "Données personnelles :",

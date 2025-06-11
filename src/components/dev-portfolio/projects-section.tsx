@@ -120,7 +120,7 @@ export default function ProjectsSection({
                 {/* @CATEGORIES */}
                 <div className="mb-8">
                   {/* Controls container */}
-                  <div className="mb-6 flex flex-wrap items-center gap-4">
+                  <div className="mb-6 flex flex-wrap items-center gap-8">
                     {/* Main toggle button */}
                     <button
                       className={`text-md group flex items-center rounded-full border px-6 py-3 font-medium whitespace-nowrap shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-xl focus:ring-0 focus:outline-none ${

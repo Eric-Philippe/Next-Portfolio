@@ -9,6 +9,11 @@
     "title-1": "Software",
     "title-2": "Engineer",
     "about": "Software Development Engineer, passionate about technology, led by curiosity",
+    "navigation": "Explore",
+    "realisations": "My Projects",
+    "skills": "My Skills",
+    "aboutMe": "More about Me",
+    "contact": "Contact me",
     "projects": "Projects",
     "allCategories": "All Categories",
     "filterByFeatured": "Filter by Featured",
@@ -73,7 +78,11 @@
       },
       "downloadCV": "Download CV",
       "lastUpdate": "Last Update",
-      "lastUpdateDate": "February 2025"
+      "lastUpdateDate": "February 2025",
+      "lastLinkedInPost": "Last LinkedIn Post",
+      "seeFullPost": "See Full Post",
+      "featured": "Featured",
+      "seeArticle": "See Article"
     },
     "Contact": {
       "realisations": "PROJECTS",
@@ -130,7 +139,6 @@
     "legalModal": {
       "title": "Legal Notice",
       "editor": "Website Editor:",
-      "name": "Éric Philippe",
       "hosting": "Hosting:",
       "hostingCompany": "Vercel Inc.",
       "personalData": "Personal Data:",

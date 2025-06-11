@@ -15,6 +15,7 @@ import AnimatedProgressBar from "../common/animated-progress-bar";
 import LINKS from "../../lib/utils/links";
 import { useTranslations } from "next-intl";
 import { getMyAge } from "~/lib/utils/utils";
+import { EMAIL } from "~/lib/data/data";
 
 export default function AboutSection() {
   const [isHovered, setIsHovered] = useState(false);
@@ -170,7 +171,7 @@ export default function AboutSection() {
                           </div>
                           <div className="flex items-center text-white/70">
                             <MdEmail className="mr-3 text-purple-400" />
-                            <span>ericphlpp@proton.me</span>
+                            <span>{EMAIL}</span>
                           </div>
                           <div className="flex items-center text-white/70">
                             <FaBirthdayCake className="mr-3 text-pink-400" />
@@ -271,8 +272,9 @@ export default function AboutSection() {
                     </div>
                   </div>
 
-                  {/* CV Section */}
-                  <div className="lg:col-span-3">
+                  {/* Right Column - Multiple Sections */}
+                  <div className="space-y-8 lg:col-span-3">
+                    {/* CV Section */}
                     <div className="relative">
                       <h3 className="mb-6 text-2xl font-bold text-white">
                         Curriculum Vitae
@@ -325,7 +327,7 @@ export default function AboutSection() {
                               onMouseEnter={() => setIsHovered(true)}
                             >
                               <FaDownload className="h-4 w-4" />
-                              <span>{t("downloadCV")}</span>
+                              <span className="text-sm">{t("downloadCV")}</span>
                             </button>
                           </div>
                         </div>
@@ -339,6 +341,136 @@ export default function AboutSection() {
                             {t("lastUpdateDate")}
                           </p>
                         </div>
+
+                        {/* Glass reflection effect */}
+                        <div className="pointer-events-none absolute top-0 left-0 h-1/2 w-full bg-gradient-to-b from-white/10 to-transparent opacity-50"></div>
+                      </div>
+                    </div>
+
+                    {/* LinkedIn Section */}
+                    <div className="relative">
+                      <h3 className="mb-6 text-2xl font-bold text-white">
+                        {t("lastLinkedInPost")}
+                      </h3>
+
+                      {/* LinkedIn Card */}
+                      <div
+                        className="group relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-6 shadow-lg backdrop-blur-md transition-all duration-500 hover:scale-[1.02] hover:bg-white/20 hover:shadow-2xl"
+                        style={{
+                          background:
+                            "linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+                          backdropFilter: "blur(20px)",
+                          border: "1px solid rgba(255, 255, 255, 0.18)",
+                        }}
+                      >
+                        {/* LinkedIn Content */}
+                        <div className="mb-4 flex items-center">
+                          <FaLinkedin className="mr-3 h-6 w-6 text-blue-400" />
+                          <div>
+                            <p className="font-semibold text-white">
+                              Éric PHILIPPE
+                            </p>
+                            <p className="text-sm text-white/70">
+                              10 Avril 2025
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="mb-4">
+                          <p className="mb-3 text-sm leading-relaxed text-white/80">
+                            🐝 Ravi de partager mon dernier projet : AlgoHive !
+                            🚀
+                            <br />
+                            <br />
+                            Je suis fier d&apos;annoncer l&apos;achèvement
+                            d&apos;AlgoHive, une plateforme de jeux de codage
+                            auto-hébergée que j&apos;ai développée pour les
+                            Campus Ynov. Cette plateforme permet aux
+                            développeurs de créer et de résoudre des énigmes de
+                            programmation...
+                          </p>
+                        </div>
+
+                        {/* LinkedIn Stats */}
+                        <div className="mb-4 flex items-center justify-between text-sm text-white/60">
+                          <span>❤️ 9 · 💬 2 commentaires</span>
+                        </div>
+
+                        {/* View Post Button */}
+                        <a
+                          href="https://www.linkedin.com/feed/update/urn:li:activity:7316173450325229570/"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex w-full items-center justify-center rounded-xl border border-white/30 bg-white/10 py-3 text-sm font-medium text-white transition-all duration-300 hover:bg-white/20"
+                        >
+                          {t("seeFullPost")}
+                        </a>
+
+                        {/* Glass reflection effect */}
+                        <div className="pointer-events-none absolute top-0 left-0 h-1/2 w-full bg-gradient-to-b from-white/10 to-transparent opacity-50"></div>
+                      </div>
+                    </div>
+
+                    {/* Featured Section */}
+                    <div className="relative">
+                      <h3 className="mb-6 text-2xl font-bold text-white">
+                        {t("featured")}
+                      </h3>
+
+                      {/* Featured Card */}
+                      <div
+                        className="group relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-6 shadow-lg backdrop-blur-md transition-all duration-500 hover:scale-[1.02] hover:bg-white/20 hover:shadow-2xl"
+                        style={{
+                          background:
+                            "linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+                          backdropFilter: "blur(20px)",
+                          border: "1px solid rgba(255, 255, 255, 0.18)",
+                        }}
+                      >
+                        {/* Featured Content */}
+                        <div className="mb-4">
+                          <div className="mb-3 flex items-center">
+                            <div className="mr-3 h-10 w-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 p-2">
+                              <div className="h-full w-full rounded-full bg-white/20"></div>
+                            </div>
+                            <div>
+                              <p className="font-semibold text-white">
+                                Ynov Campus
+                              </p>
+                              <p className="text-sm text-white/70">Blog Post</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="mb-4">
+                          <h4 className="mb-2 font-semibold text-white">
+                            AlgoHive 2025
+                          </h4>
+                          <p className="mb-3 text-sm leading-relaxed text-white/80">
+                            Pendant 7 heures, les étudiants Ynov des campus de
+                            Toulouse, Lyon et Montpellier ont relevé 32 défis de
+                            code. Une aventure tech, intense et
+                            professionnalisante...
+                          </p>
+                        </div>
+
+                        {/* Featured Stats */}
+                        <div className="mb-4 flex items-center text-sm text-white/60">
+                          <span>📖 Article · ⏱️ 3 min de lecture</span>
+                        </div>
+
+                        {/* View Article Button */}
+                        <button
+                          className="flex w-full items-center justify-center rounded-xl border border-white/30 bg-white/10 py-3 text-sm font-medium text-white transition-all duration-300 hover:bg-white/20"
+                          onClick={() =>
+                            window.open(
+                              "https://www.ynov.com/campus/toulouse/actualites/algohive-2025-un-coding-game-intense-pour-reveler-les-talents-tech-de-demain",
+                              "_blank",
+                            )
+                          }
+                        >
+                          {t("seeArticle")}
+                        </button>
 
                         {/* Glass reflection effect */}
                         <div className="pointer-events-none absolute top-0 left-0 h-1/2 w-full bg-gradient-to-b from-white/10 to-transparent opacity-50"></div>

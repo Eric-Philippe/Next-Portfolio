@@ -5,6 +5,7 @@ import { FaGithub, FaInstagram, FaLinkedin, FaTimes } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import LINKS from "../../lib/utils/links";
 import { getCurrentYear } from "~/lib/utils/utils";
+import { EMAIL } from "~/lib/data/data";
 
 export default function Footer() {
   const [mentionLegalOpen, setMentionLegalOpen] = useState(false);
@@ -19,7 +20,7 @@ export default function Footer() {
             {/* Left side - Contact info */}
             <div className="text-center md:text-left">
               <p className="text-sm font-medium text-white/90">Éric Philippe</p>
-              <p className="text-xs text-white/60">ericphlpp@proton.me</p>
+              <p className="text-xs text-white/60">{EMAIL}</p>
             </div>
 
             {/* Center - Social links */}
@@ -103,9 +104,9 @@ export default function Footer() {
                   {t("legalModal.editor")}
                 </h3>
                 <p className="text-sm">
-                  {t("legalModal.name")}
+                  Éric Philippe
                   <br />
-                  ericphlpp@proton.me
+                  {EMAIL}
                 </p>
               </div>
 
