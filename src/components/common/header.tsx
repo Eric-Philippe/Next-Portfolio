@@ -45,7 +45,7 @@ export function Header({ firstColor, secondColor }: HeaderProps) {
               priority
             />
           </button>{" "}
-          <nav className="-mt-6 flex items-center space-x-4 text-sm text-gray-800">
+          <nav className="-mt-6 flex items-center space-x-2 text-sm text-gray-800 sm:space-x-4">
             <Link
               href="/tech"
               className={`flex items-center space-x-1.5 transition-all duration-200 hover:underline ${
@@ -120,7 +120,7 @@ export function Header({ firstColor, secondColor }: HeaderProps) {
               </span>
             </Link>
 
-            <div className="ml-2">
+            <div className="">
               <LanguageSwitcher
                 firstColor={firstColor}
                 secondColor={secondColor}
