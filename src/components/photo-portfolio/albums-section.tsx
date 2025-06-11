@@ -5,7 +5,7 @@ import { albums } from "~/lib/data/albums";
 
 export default function AlbumsSection() {
   return (
-    <section className="bg-gray-900 px-4 py-20">
+    <section id="albums" className="bg-gray-900 px-4 py-20">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

@@ -10,19 +10,39 @@ Title: Canon 800D
 import { useGLTF } from "@react-three/drei";
 import { type Mesh } from "three";
 import { type ThreeElements } from "@react-three/fiber";
+import { useMemo } from "react";
 
 export function Canon800dModel(props: ThreeElements["group"]) {
   const { nodes, materials } = useGLTF("/canon_800d.glb");
 
+  // Optimize material properties for better performance
+  const optimizedMaterial = useMemo(() => {
+    if (materials.material_0) {
+      // Reduce material complexity for better performance
+      materials.material_0.needsUpdate = false;
+      materials.material_0.transparent = false; // Disable transparency if not needed
+    }
+    return materials.material_0;
+  }, [materials.material_0]);
+
+  // Precompute rotation for better performance
+  const modelRotation = useMemo(
+    () => [Math.PI / 6, -Math.PI / 2 - Math.PI / 6, 0] as const,
+    [],
+  );
+
   return (
     <group {...props} dispose={null}>
       <mesh
-        material={materials.material_0}
+        material={optimizedMaterial}
         geometry={(nodes.Object_4 as Mesh).geometry}
-        rotation={[Math.PI / 6, -Math.PI / 2 - Math.PI / 6, 0]}
+        rotation={modelRotation}
+        castShadow={false} // Disable shadows for performance
+        receiveShadow={false} // Disable shadows for performance
       />
     </group>
   );
 }
 
+// Preload the model for better performance
 useGLTF.preload("/canon_800d.glb");

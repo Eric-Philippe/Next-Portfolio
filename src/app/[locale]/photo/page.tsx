@@ -12,9 +12,8 @@ export default function PhotoPage() {
 
   return (
     <PortfolioProvider>
-      <Header firstColor={firstColor} secondColor={secondColor} />
       <Suspense fallback={<LoadingSpinner />}>
-        <PhotoPortfolio />
+        <PhotoPortfolio firstColor={firstColor} secondColor={secondColor} />
       </Suspense>
     </PortfolioProvider>
   );
