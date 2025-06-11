@@ -7,7 +7,7 @@
   "DevPortfolio": {
     "title-1": "Développeur",
     "title-2": "FullStack",
-    "about": "Développeur FullStack de {years} ans, passionné par le code et doté d'une solide expertise informatique.",
+    "about": "Ingénieur en développement logiciel, passionné par la technologie, guidé par la curiosité",
     "projects": "Réalisations",
     "allCategories": "Toutes les catégories",
     "filterByFeatured": "Filtrer par mis en avant",
@@ -15,6 +15,8 @@
     "seeMore": "Voir plus ({count} projets)",
     "seeLess": "Voir moins",
     "Skills": {
+      "skills": "Mes compétences",
+      "technics": "Techniques",
       "languages": "Langues",
       "french": "Français (langue maternelle)",
       "english": "Anglais (courant - TOEIC : C1)",
@@ -26,9 +28,70 @@
       "managementSkills": "Compétences en gestion",
       "agileMethodologies": "Méthodologies agiles (SCRUM)",
       "projectManagement": "Gestion de projet",
-      "planning": "Planification et organisation"
+      "planning": "Planification et organisation",
+      "ethicsAndIA": "Éthique et IA",
+      "selfHosting": "Auto-hébergement, confidentialité",
+      "isAsTool": "IA comme outil, pas comme dépendance",
+      "iaCritics": "Analyse critique des sorties de l'IA",
+      "creativity": "Créativité",
+      "uiux": "Design UI/UX",
+      "photography": "Photographie",
+      "blogWriting": "Rédaction de blog"
+    },
+    "About": {
+      "title": "À propos",
+      "currentRole": "Ingénieur en développement logiciel",
+      "roles": "Étudiant • Entrepreneur • Alternant en informatique",
+      "tagline": "Créer des expériences numériques avec passion et précision",
+      "timeline": "Mon Parcours",
+      "years": " ans",
+      "eko": {
+        "title": "Création de mon auto-entreprise",
+        "subtitle": "Eko",
+        "description": "Développement d'applications web et mobile personnalisées pour les entreprises"
+      },
+      "ynov": {
+        "title": "Mastère Ynov - Expert Développement Logiciel",
+        "subtitle": "Ynov Toulouse",
+        "description": "Expert Développement Logiciel. Major de promotion."
+      },
+      "adp": {
+        "title": "Alternance - ADP GSI",
+        "subtitle": "Développeur Java Informatique",
+        "description": "Développement d'une application pour le paramétrage des moteurs de paie dans plusieurs pays."
+      },
+      "but": {
+        "title": "BUT Informatique",
+        "subtitle": "IUT de Blagnac - Université Toulouse II Jean Jaurès",
+        "description": "Formation en informatique avec une spécialisation en développement logiciel. Major de promotion."
+      },
+      "bac": {
+        "title": "Baccalauréat - Mention Bien",
+        "subtitle": "Spécialité Mathématiques, Physique-Chimie, Sciences de l'Ingénieur",
+        "description": "Option Mathématiques Expertes, Section Européenne Anglais"
+      },
+      "downloadCV": "Télécharger CV",
+      "lastUpdate": "Dernière mise à jour",
+      "lastUpdateDate": "Février 2025"
+    },
+    "Contact": {
+      "realisations": "RÉALISATIONS",
+      "skills": "COMPÉTENCES",
+      "about": "PARCOURS",
+      "tagline": "Vous avez un projet ? Une idée ? Un besoin ? Contactez-moi !",
+      "name": "Nom",
+      "nameDesc": "Votre nom complet",
+      "email": "Email",
+      "emailDesc": "votre.email@example.com",
+      "message": "Message",
+      "messageDesc": "Décrivez votre projet ou votre message...",
+      "send": "Envoyer le message",
+      "sending": "Envoi en cours...",
+      "successMessage": "Votre message a été envoyé avec succès !",
+      "errorMessage": "Une erreur s'est produite lors de l'envoi du message. Veuillez réessayer plus tard."
     }
   },
+
   "LanguageSwitcher": {
     "currentLanguage": "Langue",
     "selectLanguage": "Sélectionner la langue"
@@ -60,6 +123,21 @@
         "title": "Dernier Projet",
         "description": "Découvrez mon travail le plus récent"
       }
+    }
+  },
+  "Footer": {
+    "legalNotice": "Mentions Légales",
+    "legalModal": {
+      "title": "Mentions Légales",
+      "editor": "Éditeur du site :",
+      "name": "Éric Philippe",
+      "hosting": "Hébergement :",
+      "hostingCompany": "Vercel Inc.",
+      "personalData": "Données personnelles :",
+      "dataPolicy": "Ce site ne collecte aucune donnée personnelle sans votre consentement explicite. Les données du formulaire de contact sont traitées uniquement pour répondre à vos demandes.",
+      "cookies": "Cookies :",
+      "cookiePolicy": "Ce site n'utilise aucun cookie. Aucun tracking, votre expérience de navigation est plus importante que vos données.",
+      "close": "Fermer"
     }
   }
 }

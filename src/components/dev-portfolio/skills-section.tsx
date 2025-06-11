@@ -89,18 +89,14 @@ export default function SkillsSection() {
       icon: "📊",
     },
     {
-      title: "IA & Éthique",
-      items: [
-        "Self-hosting pour la confidentialité",
-        "IA comme outil, pas comme dépendance",
-        "Analyse critique des sorties IA",
-      ],
+      title: t("ethicsAndIA"),
+      items: [t("selfHosting"), t("isAsTool"), t("iaCritics")],
       colors: ["#ff6b35", "#9ca3af", "#60a5fa"], // Orange, gray, light blue
       icon: "🎯",
     },
     {
-      title: "Créativité",
-      items: ["Design UI/UX", "Photographie", "Résolution de problèmes"],
+      title: t("creativity"),
+      items: [t("uiux"), t("photography"), t("blogWriting")],
       colors: ["#ef4444", "#f97316", "#6b7280"], // Red, orange, gray
       icon: "✨",
     },
@@ -129,7 +125,7 @@ export default function SkillsSection() {
               className="mb-8 text-center text-5xl font-extrabold text-white"
             >
               <span className="via-stale-400 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                Mes compétences
+                {t("skills")}
               </span>
             </motion.h2>
 
@@ -141,7 +137,7 @@ export default function SkillsSection() {
               viewport={{ once: true }}
               className="mb-6 text-center text-2xl font-semibold text-blue-300"
             >
-              Techniques
+              {t("technics")}
             </motion.h4>
 
             <div className="mb-12 flex flex-wrap justify-center">

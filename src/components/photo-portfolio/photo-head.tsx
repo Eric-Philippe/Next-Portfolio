@@ -1,11 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { usePortfolio } from "~/lib/portfolio-context";
 
 export default function PhotoHead() {
-  const { setMode } = usePortfolio();
-
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black">
       {/* Camera-like grid overlay */}
@@ -46,10 +43,7 @@ export default function PhotoHead() {
           <button className="rounded-lg border border-white/20 bg-white/10 px-8 py-3 font-light text-white backdrop-blur-sm transition-all hover:bg-white/20">
             View Gallery
           </button>
-          <button
-            onClick={() => setMode("dev")}
-            className="rounded-lg border border-gray-400 px-8 py-3 font-light text-gray-300 transition-colors hover:border-gray-300 hover:text-white"
-          >
+          <button className="rounded-lg border border-gray-400 px-8 py-3 font-light text-gray-300 transition-colors hover:border-gray-300 hover:text-white">
             Developer Portfolio
           </button>
         </motion.div>

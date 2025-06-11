@@ -1,12 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { usePortfolio } from "~/lib/portfolio-context";
 import { albums } from "~/lib/data/albums";
 
 export default function AlbumsSection() {
-  const { setFocusedAlbum } = usePortfolio();
-
   return (
     <section className="bg-gray-900 px-4 py-20">
       <div className="mx-auto max-w-7xl">
@@ -30,7 +27,6 @@ export default function AlbumsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              onClick={() => setFocusedAlbum(index)}
             >
               <div className="relative aspect-square overflow-hidden rounded-lg">
                 <div className="flex h-full w-full items-center justify-center bg-gray-800 transition-transform duration-500 group-hover:scale-110">

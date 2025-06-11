@@ -1,6 +1,5 @@
 "use client";
 
-import { usePortfolio } from "~/lib/portfolio-context";
 import PhotoHead from "./photo-head";
 import AlbumsSection from "./albums-section";
 import SetupSection from "./setup-section";
@@ -10,7 +9,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function PhotoPortfolio() {
-  const { focusedAlbum } = usePortfolio();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -25,28 +23,6 @@ export default function PhotoPortfolio() {
 
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
-
-  if (focusedAlbum !== null) {
-    // Return consultation view for specific album
-    return (
-      <div className="min-h-screen bg-black text-white">
-        <div className="container mx-auto px-4 py-8">
-          <h1 className="mb-4 text-3xl font-bold">Album Details</h1>
-          <p>
-            Album consultation view for album {focusedAlbum} - To be implemented
-          </p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!mounted) {
-    return (
-      <div className="min-h-screen bg-black text-white">
-        <PhotoHead />
-      </div>
-    );
-  }
 
   return (
     <div className="relative min-h-screen bg-black text-white">

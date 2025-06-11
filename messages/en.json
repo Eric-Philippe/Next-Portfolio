@@ -6,9 +6,9 @@
   },
 
   "DevPortfolio": {
-    "title-1": "FullStack",
-    "title-2": "Developer",
-    "about": "FullStack Developer with {years} years of experience, passionate about coding and possessing a strong IT expertise.",
+    "title-1": "Software",
+    "title-2": "Engineer",
+    "about": "Software Development Engineer, passionate about technology, led by curiosity",
     "projects": "Projects",
     "allCategories": "All Categories",
     "filterByFeatured": "Filter by Featured",
@@ -16,6 +16,8 @@
     "seeMore": "See More ({count} projects)",
     "seeLess": "See Less",
     "Skills": {
+      "skills": "My Skills",
+      "technics": "Technical",
       "languages": "Languages",
       "french": "French (native)",
       "english": "English (fluent - TOEIC: C1)",
@@ -27,7 +29,67 @@
       "managementSkills": "Management Skills",
       "agileMethodologies": "Agile Methodologies (SCRUM)",
       "projectManagement": "Project Management",
-      "planning": "Planning and Organization"
+      "planning": "Planning and Organization",
+      "ethicsAndIA": "Ethics and AI",
+      "selfHosting": "Self-hosting, Privacy",
+      "isAsTool": "AI as a tool, not a crutch",
+      "iaCritics": "Critical Analysis of AI Outputs",
+      "creativity": "Creativity",
+      "uiux": "UI/UX Design",
+      "photography": "Photography",
+      "blogWriting": "Blog Writing"
+    },
+    "About": {
+      "title": "About",
+      "currentRole": "Software Engineer",
+      "roles": "Student • Entrepreneur • IT Apprentice",
+      "tagline": "Crafting digital experiences with passion and precision",
+      "timeline": "My Journey",
+      "years": " years old",
+      "eko": {
+        "title": "Founded my own business",
+        "subtitle": "Eko",
+        "description": "Developing custom web and mobile applications for businesses"
+      },
+      "ynov": {
+        "title": "Ynov Master's - Software Development Expert",
+        "subtitle": "Ynov Toulouse",
+        "description": "Student in Software Development. Top of the class."
+      },
+      "adp": {
+        "title": "Apprenticeship - ADP GSI",
+        "subtitle": "Java Developer",
+        "description": "Development of an application for configuring payroll engines across multiple countries."
+      },
+      "but": {
+        "title": "BUT Informatique",
+        "subtitle": "Blagnac's University Institute of Technology",
+        "description": "Bachelor's in Computer Science. Focused on software development and systems administration"
+      },
+      "bac": {
+        "title": "Baccalauréat - Mention Bien",
+        "subtitle": "Specialization in Mathematics, Physics-Chemistry, Engineering Sciences",
+        "description": "With honors. Specialization in Mathematics, Physics-Chemistry, Engineering Sciences"
+      },
+      "downloadCV": "Download CV",
+      "lastUpdate": "Last Update",
+      "lastUpdateDate": "February 2025"
+    },
+    "Contact": {
+      "realisations": "PROJECTS",
+      "skills": "SKILLS",
+      "about": "ABOUT ME",
+      "tagline": "Do you have a project in mind? Let's discuss it!",
+      "name": "Name",
+      "nameDesc": "Your full name",
+      "email": "Email",
+      "emailDesc": "hello.world@example.com",
+      "message": "Message",
+      "messageDesc": "Describe your project or your message...",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "successMessage": "Your message has been sent successfully!",
+      "errorMessage": "An error occurred while sending your message. Please try again later."
     }
   },
   "LanguageSwitcher": {
@@ -61,6 +123,21 @@
         "title": "Latest Project",
         "description": "Check out my most recent work"
       }
+    }
+  },
+  "Footer": {
+    "legalNotice": "Legal Notice",
+    "legalModal": {
+      "title": "Legal Notice",
+      "editor": "Website Editor:",
+      "name": "Éric Philippe",
+      "hosting": "Hosting:",
+      "hostingCompany": "Vercel Inc.",
+      "personalData": "Personal Data:",
+      "dataPolicy": "This website does not collect any personal data without your explicit consent. Contact form data is processed solely for responding to your inquiries.",
+      "cookies": "Cookies:",
+      "cookiePolicy": "This site does not use cookies. No tracking or analytics cookies are set. Because your experience matters more than your data.",
+      "close": "Close"
     }
   }
 }

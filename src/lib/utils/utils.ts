@@ -18,6 +18,11 @@ export const getMyAge = () => {
   return age;
 };
 
+export const getCurrentYear = () => {
+  const today = new Date();
+  return today.getFullYear();
+};
+
 const TECH_COLOR: Record<string, string> = {
   Python: "#4f8ebd",
   TypeScript: "#3178c6",
