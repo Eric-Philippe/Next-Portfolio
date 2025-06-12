@@ -42,6 +42,17 @@ function RotatingCanon800d() {
 export default function SetupSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeCategory, setActiveCategory] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
 
   const equipment = [
     {
@@ -241,13 +252,11 @@ export default function SetupSection() {
               {/* 3D Canvas */}
               <Canvas camera={{ position: [0, 0, 20], fov: 45 }} dpr={[1, 2]}>
                 <ambientLight intensity={0.2} />
-
                 <Suspense fallback={null}>
                   <RotatingCanon800d />
-                </Suspense>
-
+                </Suspense>{" "}
                 <OrbitControls
-                  enabled={true}
+                  enabled={!isMobile}
                   enablePan={false}
                   autoRotate={false}
                   enableZoom={false}

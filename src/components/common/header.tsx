@@ -5,12 +5,51 @@ import Image from "next/image";
 import { LanguageSwitcher } from "./language-switcher";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "~/i18n/navigation";
+import type { ReactNode } from "react";
 
 interface HeaderProps {
   firstColor: string;
   secondColor: string;
   hideLogo?: boolean;
   showTopBorder?: boolean;
+}
+
+interface NavButtonProps {
+  href: string;
+  isActive: boolean;
+  firstColor: string;
+  secondColor?: string;
+  children: ReactNode;
+  blogColors?: boolean;
+}
+
+function NavButton({
+  href,
+  isActive,
+  firstColor,
+  children,
+  blogColors = false,
+}: NavButtonProps) {
+  const borderColor =
+    blogColors && isActive ? "#4ecdc4" : isActive ? firstColor : "transparent";
+
+  return (
+    <Link
+      href={href}
+      className={`flex items-center space-x-1.5 transition-all duration-200 hover:underline ${
+        isActive ? "text-gradient" : "head-icon"
+      }`}
+      style={{
+        zIndex: 10,
+        border: "1px solid",
+        borderColor,
+        borderRadius: "0.5rem",
+        padding: "0.25rem 0.5rem",
+      }}
+    >
+      {children}
+    </Link>
+  );
 }
 
 export function Header({
@@ -36,104 +75,150 @@ export function Header({
             background: `linear-gradient(90deg, ${firstColor} 0%, ${secondColor} 100%)`,
           }}
         />
-      )}
-
+      )}{" "}
       <header className="header-content -mt-3 p-4">
         <div className="flex items-center justify-between">
-          <button
-            aria-label="Home"
-            className="z-50 inline-block rounded-full transition-transform hover:scale-105"
-            onClick={() => (window.location.href = "/")}
-          >
-            <Image
-              src="/icon.png"
-              alt="Logo"
-              width={64}
-              height={64}
-              className={hideLogo ? "hidden" : "h-16 w-16"}
-              priority
-            />
-          </button>{" "}
-          <nav
-            className="flex items-center space-x-2 text-sm text-gray-800 sm:space-x-4"
-            style={
-              hideLogo ? { marginTop: "0.5rem" } : { marginTop: "-1.5rem" }
-            }
-          >
-            <Link
-              href="/tech"
-              className={`flex items-center space-x-1.5 transition-all duration-200 hover:underline ${
-                isOnTech ? "text-dev-gradient glow" : "head-icon"
-              }`}
-              style={{
-                zIndex: 10,
-                border: "1px solid",
-                borderColor: isOnTech ? firstColor : "transparent",
-                borderRadius: "0.5rem",
-                padding: "0.25rem 0.5rem",
-              }}
-            >
-              <FaDesktop
-                className={`mt-0.5 w-4 transition-colors duration-200 ${
-                  isOnTech ? "text-gradient" : "head-icon"
-                }`}
-                style={{
-                  color: isOnTech ? firstColor : "",
-                }}
-              />
-              <span className={`${isOnTech ? "" : "hidden"} md:inline`}>
-                {t("tech")}
-              </span>
-            </Link>
+          {/* Logo or Navigation Buttons */}
+          {hideLogo ? (
+            // When logo is hidden, show navigation buttons in its place
+            <nav className="flex items-center space-x-2">
+              <NavButton
+                href="/tech"
+                isActive={isOnTech}
+                firstColor={firstColor}
+              >
+                <FaDesktop
+                  className={`mt-0.5 w-4 transition-colors duration-200 ${
+                    isOnTech ? "text-gradient" : "head-icon"
+                  }`}
+                  style={{
+                    color: isOnTech ? firstColor : "",
+                  }}
+                />
+                <span className={`${isOnTech ? "" : "hidden"} md:inline`}>
+                  {t("tech")}
+                </span>
+              </NavButton>
 
-            <Link
-              href="/photo"
-              className={`flex items-center space-x-1.5 transition-all duration-200 hover:underline ${
-                isOnPhoto ? "text-photo-gradient" : "head-icon"
-              }`}
-              style={{
-                zIndex: 10,
-                border: "1px solid",
-                borderColor: isOnPhoto ? firstColor : "transparent",
-                borderRadius: "0.5rem",
-                padding: "0.25rem 0.5rem",
-              }}
-            >
-              <FaCamera
-                className="mt-0.5 w-4 transition-colors duration-200"
-                style={{
-                  color: isOnPhoto ? secondColor : "",
-                }}
-              />
-              <span className={`${isOnPhoto ? "" : "hidden"} md:inline`}>
-                {t("photo")}
-              </span>
-            </Link>
+              <NavButton
+                href="/photo"
+                isActive={isOnPhoto}
+                firstColor={firstColor}
+              >
+                <FaCamera
+                  className="mt-0.5 w-4 transition-colors duration-200"
+                  style={{
+                    color: isOnPhoto ? secondColor : "",
+                  }}
+                />
+                <span className={`${isOnPhoto ? "" : "hidden"} md:inline`}>
+                  {t("photo")}
+                </span>
+              </NavButton>
 
-            <Link
-              href="/blog"
-              className={`flex items-center space-x-1.5 transition-all duration-200 hover:underline ${
-                isOnBlog ? "text-blog-gradient" : "head-icon"
-              }`}
-              style={{
-                zIndex: 10,
-                border: "1px solid",
-                borderColor: isOnBlog ? "#4ecdc4" : "transparent",
-                borderRadius: "0.5rem",
-                padding: "0.25rem 0.5rem",
-              }}
+              <NavButton
+                href="/blog"
+                isActive={isOnBlog}
+                firstColor={firstColor}
+                blogColors={true}
+              >
+                <FaBlog
+                  className="mt-0.5 w-4 transition-colors duration-200"
+                  style={{
+                    color: isOnBlog ? "#45b7d1" : "",
+                  }}
+                />
+                <span className={`${isOnBlog ? "" : "hidden"} md:inline`}>
+                  Blog
+                </span>
+              </NavButton>
+            </nav>
+          ) : (
+            // When logo is visible, show logo
+            <button
+              aria-label="Home"
+              className="z-50 inline-block rounded-full transition-transform hover:scale-105"
+              onClick={() => (window.location.href = "/")}
             >
-              <FaBlog
-                className="mt-0.5 w-4 transition-colors duration-200"
-                style={{
-                  color: isOnBlog ? "#45b7d1" : "",
-                }}
+              <Image
+                src="/icon.png"
+                alt="Logo"
+                width={64}
+                height={64}
+                className="h-16 w-16"
+                priority
               />
-              <span className={`${isOnBlog ? "" : "hidden"} md:inline`}>
-                Blog
-              </span>
-            </Link>
+            </button>
+          )}
 
+          {/* Right side content */}
+          {!hideLogo ? (
+            // When logo is visible, show navigation on the right
+            <nav
+              className="flex items-center space-x-2 text-sm text-gray-800 sm:space-x-4"
+              style={{ marginTop: "-1.5rem" }}
+            >
+              <NavButton
+                href="/tech"
+                isActive={isOnTech}
+                firstColor={firstColor}
+              >
+                <FaDesktop
+                  className={`mt-0.5 w-4 transition-colors duration-200 ${
+                    isOnTech ? "text-gradient" : "head-icon"
+                  }`}
+                  style={{
+                    color: isOnTech ? firstColor : "",
+                  }}
+                />
+                <span className={`${isOnTech ? "" : "hidden"} md:inline`}>
+                  {t("tech")}
+                </span>
+              </NavButton>
+
+              <NavButton
+                href="/photo"
+                isActive={isOnPhoto}
+                firstColor={firstColor}
+              >
+                <FaCamera
+                  className="mt-0.5 w-4 transition-colors duration-200"
+                  style={{
+                    color: isOnPhoto ? secondColor : "",
+                  }}
+                />
+                <span className={`${isOnPhoto ? "" : "hidden"} md:inline`}>
+                  {t("photo")}
+                </span>
+              </NavButton>
+
+              <NavButton
+                href="/blog"
+                isActive={isOnBlog}
+                firstColor={firstColor}
+                blogColors={true}
+              >
+                <FaBlog
+                  className="mt-0.5 w-4 transition-colors duration-200"
+                  style={{
+                    color: isOnBlog ? "#45b7d1" : "",
+                  }}
+                />
+                <span className={`${isOnBlog ? "" : "hidden"} md:inline`}>
+                  Blog
+                </span>
+              </NavButton>
+
+              <div className="">
+                <LanguageSwitcher
+                  firstColor={firstColor}
+                  secondColor={secondColor}
+                  theme={isOnPhoto ? "photo" : "default"}
+                />
+              </div>
+            </nav>
+          ) : (
+            // When logo is hidden, show only language switcher on the right
             <div className="">
               <LanguageSwitcher
                 firstColor={firstColor}
@@ -141,7 +226,7 @@ export function Header({
                 theme={isOnPhoto ? "photo" : "default"}
               />
             </div>
-          </nav>
+          )}
         </div>
       </header>
     </>
