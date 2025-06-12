@@ -26,14 +26,15 @@ function RotatingCanon800d() {
   useEffect(() => {
     if (groupRef.current) {
       groupRef.current.rotation.y = rotation;
-      // Significantly larger scale for better visibility
-      groupRef.current.scale.set(6, 6, 6);
+      const isSmallScreen = window.innerWidth < 768;
+      const scale = isSmallScreen ? 50 : 70;
+      groupRef.current.scale.set(scale, scale, scale);
     }
   }, [rotation]);
 
   return (
     <group ref={groupRef}>
-      <Canon800dModel position={[0, -0.1, 0]} />
+      <Canon800dModel position={[0.02, 0.025, 0]} />
     </group>
   );
 }
@@ -88,11 +89,6 @@ export default function SetupSection() {
           name: "ND Filter Set",
           description: "Creative exposure control",
           specs: "ND4 • ND8 • ND64 • Circular Polarizer",
-        },
-        {
-          name: "Speedlite Flash",
-          description: "Additional lighting solution",
-          specs: "GN 60 • TTL • High-speed sync",
         },
       ],
     },
@@ -230,7 +226,7 @@ export default function SetupSection() {
             viewport={{ once: true, margin: "-50px" }}
             className="relative flex items-center justify-center"
           >
-            <div className="relative h-[600px] w-full max-w-lg border border-gray-300 bg-gradient-to-br from-gray-100 via-white to-gray-50">
+            <div className="relative h-[400px] w-full max-w-lg border border-gray-300 bg-gradient-to-br from-gray-100 via-white to-gray-50">
               {/* Minimal grid overlay */}
               <div className="absolute inset-0 opacity-[0.02]">
                 <div
@@ -243,22 +239,8 @@ export default function SetupSection() {
               </div>
 
               {/* 3D Canvas */}
-              <Canvas
-                camera={{ position: [0, 0, 3], fov: 45 }}
-                className="h-full w-full"
-                dpr={[1, 2]}
-              >
-                <ambientLight intensity={1.2} />
-                <directionalLight
-                  position={[10, 10, 5]}
-                  intensity={1.2}
-                  castShadow={false}
-                />
-                <pointLight
-                  position={[-5, 5, 5]}
-                  intensity={0.5}
-                  color="#666666"
-                />
+              <Canvas camera={{ position: [0, 0, 20], fov: 45 }} dpr={[1, 2]}>
+                <ambientLight intensity={0.2} />
 
                 <Suspense fallback={null}>
                   <RotatingCanon800d />
@@ -266,12 +248,9 @@ export default function SetupSection() {
 
                 <OrbitControls
                   enabled={true}
-                  enableZoom={true}
                   enablePan={false}
-                  autoRotate={true}
-                  autoRotateSpeed={0.3}
-                  maxDistance={5}
-                  minDistance={2}
+                  autoRotate={false}
+                  enableZoom={false}
                 />
               </Canvas>
 

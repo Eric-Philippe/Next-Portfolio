@@ -9,9 +9,16 @@ import { Link, usePathname } from "~/i18n/navigation";
 interface HeaderProps {
   firstColor: string;
   secondColor: string;
+  hideLogo?: boolean;
+  showTopBorder?: boolean;
 }
 
-export function Header({ firstColor, secondColor }: HeaderProps) {
+export function Header({
+  firstColor,
+  secondColor,
+  hideLogo = false,
+  showTopBorder = true,
+}: HeaderProps) {
   const t = useTranslations("Header");
   const pathname = usePathname();
 
@@ -22,12 +29,14 @@ export function Header({ firstColor, secondColor }: HeaderProps) {
 
   return (
     <>
-      <div
-        className="h-1"
-        style={{
-          background: `linear-gradient(90deg, ${firstColor} 0%, ${secondColor} 100%)`,
-        }}
-      />
+      {showTopBorder && (
+        <div
+          className="h-1"
+          style={{
+            background: `linear-gradient(90deg, ${firstColor} 0%, ${secondColor} 100%)`,
+          }}
+        />
+      )}
 
       <header className="header-content -mt-3 p-4">
         <div className="flex items-center justify-between">
@@ -41,11 +50,16 @@ export function Header({ firstColor, secondColor }: HeaderProps) {
               alt="Logo"
               width={64}
               height={64}
-              className="h-16 w-16"
+              className={hideLogo ? "hidden" : "h-16 w-16"}
               priority
             />
           </button>{" "}
-          <nav className="-mt-6 flex items-center space-x-2 text-sm text-gray-800 sm:space-x-4">
+          <nav
+            className="flex items-center space-x-2 text-sm text-gray-800 sm:space-x-4"
+            style={
+              hideLogo ? { marginTop: "0.5rem" } : { marginTop: "-1.5rem" }
+            }
+          >
             <Link
               href="/tech"
               className={`flex items-center space-x-1.5 transition-all duration-200 hover:underline ${
@@ -124,6 +138,7 @@ export function Header({ firstColor, secondColor }: HeaderProps) {
               <LanguageSwitcher
                 firstColor={firstColor}
                 secondColor={secondColor}
+                theme={isOnPhoto ? "photo" : "default"}
               />
             </div>
           </nav>

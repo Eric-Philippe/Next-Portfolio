@@ -3,7 +3,6 @@
 import { Suspense } from "react";
 import { PortfolioProvider } from "~/lib/portfolio-context";
 import LoadingSpinner from "~/components/common/loading-spinner";
-import { Header } from "~/components/common/header";
 import PhotoPortfolio from "~/components/photo-portfolio";
 
 export default function PhotoPage() {

@@ -27,7 +27,7 @@ export function Canon800dModel(props: ThreeElements["group"]) {
 
   // Precompute rotation for better performance
   const modelRotation = useMemo(
-    () => [Math.PI / 6, -Math.PI / 2 - Math.PI / 6, 0] as const,
+    () => [-Math.PI / 9, Math.PI / 2 - Math.PI / 6, 0] as const,
     [],
   );
 
