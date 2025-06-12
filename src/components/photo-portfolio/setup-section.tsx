@@ -255,12 +255,14 @@ export default function SetupSection() {
                 <Suspense fallback={null}>
                   <RotatingCanon800d />
                 </Suspense>{" "}
-                <OrbitControls
-                  enabled={!isMobile}
-                  enablePan={false}
-                  autoRotate={false}
-                  enableZoom={false}
-                />
+                {isMobile ? (
+                  <OrbitControls
+                    enabled={true}
+                    enablePan={false}
+                    autoRotate={false}
+                    enableZoom={false}
+                  />
+                ) : null}
               </Canvas>
 
               {/* Geometric corner accents */}

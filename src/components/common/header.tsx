@@ -75,8 +75,11 @@ export function Header({
             background: `linear-gradient(90deg, ${firstColor} 0%, ${secondColor} 100%)`,
           }}
         />
-      )}{" "}
-      <header className="header-content -mt-3 p-4">
+      )}
+      <header
+        className="header-content -mt-3 p-4"
+        style={!showTopBorder ? { paddingTop: "1.5rem" } : {}}
+      >
         <div className="flex items-center justify-between">
           {/* Logo or Navigation Buttons */}
           {hideLogo ? (
