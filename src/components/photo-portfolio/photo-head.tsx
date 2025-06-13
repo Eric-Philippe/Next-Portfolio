@@ -1,10 +1,10 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { useRef } from "react";
 import { Header } from "~/components/common/header";
 
-// Photography color palette - warm tones inspired by golden hour
 const PHOTO_COLOR_PALETTE = {
   primary: "#ff6b6b", // Warm coral
   secondary: "#feca57", // Golden yellow
@@ -27,6 +27,8 @@ export default function PhotoHead({
     target: containerRef,
     offset: ["start start", "end start"],
   });
+
+  const t = useTranslations("PhotoPortfolio");
 
   // Transform values for parallax effects
   const y = useTransform(scrollYProgress, [0, 1], [0, -200]);
@@ -215,7 +217,7 @@ export default function PhotoHead({
                 backgroundClip: "text",
               }}
             >
-              PHOTOGRAPHY PORTFOLIO
+              Photo Portfolio
             </span>
           </motion.div>
 
@@ -251,7 +253,7 @@ export default function PhotoHead({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Capturing light, shadow & emotion
+            Capturing light, shadow & instant memories
           </motion.p>
 
           {/* Action buttons */}
@@ -268,7 +270,9 @@ export default function PhotoHead({
                 background: `linear-gradient(135deg, ${firstColor}, ${secondColor})`,
               }}
             >
-              <span className="relative z-10 text-white">View Gallery</span>
+              <span className="relative z-10 text-white">
+                {t("viewGallery")}
+              </span>
               <div className="absolute inset-0 -translate-x-full transform bg-white/20 transition-transform duration-300 group-hover:translate-x-0" />
             </button>
 
@@ -276,7 +280,7 @@ export default function PhotoHead({
               onClick={() => (window.location.href = "/tech")}
               className="rounded-lg border border-white/20 px-8 py-3 font-light tracking-wider text-white/80 backdrop-blur-sm transition-all duration-300 hover:border-white/40 hover:bg-white/10 hover:text-white"
             >
-              Developer Work
+              {t("seeMore")}
             </button>
           </motion.div>
 

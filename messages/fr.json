@@ -100,7 +100,22 @@
       "errorMessage": "Une erreur s'est produite lors de l'envoi du message. Veuillez réessayer plus tard."
     }
   },
-
+  "PhotoPortfolio": {
+    "viewGallery": "Voir la galerie",
+    "seeMore": "Voir plus",
+    "Setup": {
+      "subtitle": "ÉQUIPEMENT",
+      "title": "Mon matériel",
+      "description": "L'équipement soigneusement sélectionné pour profiter de la photographie avec passion.",
+      "body": "BOITIER",
+      "optics": "OPTIQUES",
+      "accessories": "ACCESSOIRES",
+      "photoEditing": "Retouche photo",
+      "advancedEditing": "Retouche avancée",
+      "motionDesign": "Motion Design",
+      "moodboardDesign": "Moodboard"
+    }
+  },
   "LanguageSwitcher": {
     "currentLanguage": "Langue",
     "selectLanguage": "Sélectionner la langue"

@@ -4,7 +4,6 @@
     "photo": "Photo",
     "blog": "Blog"
   },
-
   "DevPortfolio": {
     "title-1": "Software",
     "title-2": "Engineer",
@@ -99,6 +98,22 @@
       "sending": "Sending...",
       "successMessage": "Your message has been sent successfully!",
       "errorMessage": "An error occurred while sending your message. Please try again later."
+    }
+  },
+  "PhotoPortfolio": {
+    "viewGallery": "View Gallery",
+    "seeMore": "See More",
+    "Setup": {
+      "title": "Photography Setup",
+      "subtitle": "EQUIPMENT",
+      "description": "Carefully selected equipment to enjoy photography with passion.",
+      "body": "BODY",
+      "optics": "OPTICS",
+      "accessories": "ACCESSORIES",
+      "photoEditing": "Photo Editing",
+      "advancedEditing": "Advanced Editing",
+      "motionDesign": "Motion Design",
+      "moodboardDesign": "Moodboard"
     }
   },
   "LanguageSwitcher": {

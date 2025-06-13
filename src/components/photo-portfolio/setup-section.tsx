@@ -6,6 +6,8 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { Canon800dModel } from "./canon-800d-model";
 import type * as THREE from "three";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 // Wrapper component for the rotating 3D model
 function RotatingCanon800d() {
@@ -44,6 +46,8 @@ export default function SetupSection() {
   const [activeCategory, setActiveCategory] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
+  const t = useTranslations("PhotoPortfolio.Setup");
+
   useEffect(() => {
     const checkIsMobile = () => {
       setIsMobile(window.innerWidth < 768);
@@ -56,7 +60,7 @@ export default function SetupSection() {
 
   const equipment = [
     {
-      category: "Body",
+      category: t("body"),
       icon: "camera",
       items: [
         {
@@ -65,36 +69,36 @@ export default function SetupSection() {
           specs: "24.2MP • Dual Pixel CMOS AF • 4K Video",
         },
         {
-          name: "Galaxy ZFold4",
+          name: "Google Pixel 9 Pro XL",
           description: "Mobile photography companion",
-          specs: "108MP • Ultra-wide • Portrait",
+          specs: "50MP • Ultra-wide • Telephoto",
         },
       ],
     },
     {
-      category: "Optics",
+      category: t("optics"),
       icon: "lens",
       items: [
         {
-          name: "EF-S 18-55mm f/4-5.6 IS STM",
-          description: "Versatile standard zoom lens",
-          specs: "18-55mm • Image Stabilization • STM Motor",
+          name: "EF-S 18-55mm f/3.5-5.6 IS STM",
+          description: "Versatile kit lens",
+          specs: "18-55mm • f/3.5-5.6 • Image Stabilization",
         },
         {
-          name: "EF-S 10-18mm f/4.5-5.6 IS STM",
-          description: "Ultra-wide angle lens",
-          specs: "10-18mm • Wide-angle • Landscape Photography",
+          name: "EF 10-18mm f/4.5-5.6 IS STM",
+          description: "Wide-angle for landscapes",
+          specs: "10-18mm • f/4.5-5.6 • Image Stabilization",
         },
       ],
     },
     {
-      category: "Accessories",
+      category: t("accessories"),
       icon: "gear",
       items: [
         {
-          name: "Carbon Fiber Tripod",
+          name: "Joby GorillaPod 3K Stand",
           description: "Lightweight stability",
-          specs: "1.2kg • 165cm max height • Ball head",
+          specs: "Max. 3kg • 24cm height • 0.247kg",
         },
         {
           name: "ND Filter Set",
@@ -144,7 +148,7 @@ export default function SetupSection() {
           >
             <div className="mr-3 h-2 w-2 border border-gray-400"></div>
             <span className="text-xs font-medium tracking-[0.2em] text-gray-600 uppercase">
-              ÉQUIPEMENT
+              {t("subtitle")}
             </span>
           </motion.div>
 
@@ -152,12 +156,11 @@ export default function SetupSection() {
             className="mb-4 font-light tracking-tight text-gray-900"
             style={{ fontSize: "clamp(2.5rem, 6vw, 4rem)" }}
           >
-            Photography Setup
+            {t("title")}
           </h2>
 
           <p className="mx-auto max-w-2xl text-base leading-relaxed font-light text-gray-500">
-            L&apos;équipement soigneusement sélectionné pour capturer
-            l&apos;essence de chaque moment
+            {t("description")}
           </p>
         </motion.div>
 
@@ -305,10 +308,27 @@ export default function SetupSection() {
           className="mt-20 grid grid-cols-2 gap-4 md:grid-cols-4"
         >
           {[
-            { label: "Photos", value: "10K+", icon: "camera" },
-            { label: "Équipements", value: "8", icon: "gear" },
-            { label: "Années", value: "5+", icon: "time" },
-            { label: "Projets", value: "50+", icon: "project" },
+            {
+              label: "Adobe Lightroom",
+              value: t("photoEditing"),
+              iconURL:
+                "https://static-00.iconduck.com/assets.00/adobe-lightroom-icon-512x512-r5i43yti.png",
+            },
+            {
+              label: "Adobe Photoshop",
+              value: t("advancedEditing"),
+              iconURL: "https://skillicons.dev/icons?i=ps",
+            },
+            {
+              label: "Adobe After Effects",
+              value: t("motionDesign"),
+              iconURL: "https://skillicons.dev/icons?i=ae",
+            },
+            {
+              label: "Figma",
+              value: t("moodboardDesign"),
+              iconURL: "https://skillicons.dev/icons?i=figma",
+            },
           ].map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -317,7 +337,16 @@ export default function SetupSection() {
               transition={{ delay: index * 0.1 }}
             >
               <div className="mb-2 flex justify-center">
-                <div className="h-4 w-4 border border-gray-400"></div>
+                <div className="h-8 w-8 border border-gray-400">
+                  <Image
+                    src={stat.iconURL}
+                    alt={stat.label}
+                    width={16}
+                    height={16}
+                    className="h-full w-full object-contain"
+                    style={{ filter: "grayscale(100%)" }}
+                  />
+                </div>
               </div>
               <div className="mb-1 text-xl font-light text-gray-900">
                 {stat.value}

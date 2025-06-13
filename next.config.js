@@ -15,7 +15,26 @@ const config = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "skillicons.dev",
+        port: "",
+        pathname: "/icons/**",
+      },
+      {
+        protocol: "https",
+        hostname: "static-00.iconduck.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.jsdelivr.net",
+        port: "",
+        pathname: "/npm/**",
+      },
     ],
+    dangerouslyAllowSVG: true,
   },
 };
 
