@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProjectCard from "./project-card";
 import { ALL_TAGS, getEmojiFromTag } from "../../lib/utils/tags";
-import { projects } from "../../lib/data/projects";
-import type { DevProjectTags } from "../../types/portfolio";
+import { fetchProjects } from "../../lib/data/projects";
+import type { DevProject, DevProjectTags } from "../../types/portfolio";
 import { useTranslations } from "next-intl";
 
 interface ProjectsSectionProps {
@@ -20,9 +20,28 @@ export default function ProjectsSection({
   >(new Set());
   const [showAllProjects, setShowAllProjects] = useState(false);
   const [sortByDate, setSortByDate] = useState(false);
+  const [projects, setProjects] = useState<DevProject[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const INITIAL_PROJECTS_COUNT = 6;
 
   const t = useTranslations("DevPortfolio");
+  // Fetch projects on component mount
+  useEffect(() => {
+    const loadProjects = async () => {
+      setIsLoading(true);
+      try {
+        const projectsData = await fetchProjects();
+        setProjects(projectsData);
+      } catch (error) {
+        console.error("Error loading projects:", error);
+        setProjects([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    void loadProjects();
+  }, []);
 
   const toggleCategories = () => {
     setCategoriesVisible(!categoriesVisible);
@@ -116,7 +135,6 @@ export default function ProjectsSection({
                   {/* Subtitle line */}
                   <div className="mt-4 h-1 w-24 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 shadow-lg"></div>
                 </div>
-
                 {/* @CATEGORIES */}
                 <div className="mb-8">
                   {/* Controls container */}
@@ -316,35 +334,54 @@ export default function ProjectsSection({
                       )}
                     </div>
                   </div>
-                </div>
-
+                </div>{" "}
                 {/* @PROJECTS */}
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2 lg:gap-10 xl:grid-cols-2 2xl:grid-cols-3">
-                  {projectsToShow.map((project, index) => (
-                    <div
-                      key={`${project.en.title}-${index}`}
-                      className={`transform transition-all duration-700 ease-out ${
-                        index >= INITIAL_PROJECTS_COUNT && showAllProjects
-                          ? "animate-slideInUp"
-                          : ""
-                      }`}
-                      style={{
-                        animationDelay:
-                          index >= INITIAL_PROJECTS_COUNT
-                            ? `${(index - INITIAL_PROJECTS_COUNT) * 150}ms`
-                            : "0ms",
-                        animationFillMode: "both",
-                      }}
-                    >
-                      <ProjectCard
-                        project={project}
-                        onFocus={onProjectFocus}
-                        index={index}
-                      />
+                {isLoading ? (
+                  <div className="flex items-center justify-center py-16">
+                    <div className="flex flex-col items-center space-y-4">
+                      <div className="h-12 w-12 animate-spin rounded-full border-4 border-white/20 border-t-blue-500"></div>
+                      <p className="text-lg text-white/70">
+                        Loading projects...
+                      </p>
                     </div>
-                  ))}
-                </div>
-
+                  </div>
+                ) : projects.length === 0 ? (
+                  <div className="flex items-center justify-center py-16">
+                    <div className="flex flex-col items-center space-y-4">
+                      <div className="text-6xl">😔</div>
+                      <p className="text-lg text-white/70">No projects found</p>
+                      <p className="text-sm text-white/50">
+                        There might be an issue loading the data
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2 lg:gap-10 xl:grid-cols-2 2xl:grid-cols-3">
+                    {projectsToShow.map((project, index) => (
+                      <div
+                        key={`${project.en.title}-${index}`}
+                        className={`transform transition-all duration-700 ease-out ${
+                          index >= INITIAL_PROJECTS_COUNT && showAllProjects
+                            ? "animate-slideInUp"
+                            : ""
+                        }`}
+                        style={{
+                          animationDelay:
+                            index >= INITIAL_PROJECTS_COUNT
+                              ? `${(index - INITIAL_PROJECTS_COUNT) * 150}ms`
+                              : "0ms",
+                          animationFillMode: "both",
+                        }}
+                      >
+                        <ProjectCard
+                          project={project}
+                          onFocus={onProjectFocus}
+                          index={index}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
                 {/* See More Button */}
                 {hasMoreProjects && (
                   <div className="mt-12 flex justify-center">

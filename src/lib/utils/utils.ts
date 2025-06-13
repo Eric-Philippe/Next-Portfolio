@@ -1,3 +1,5 @@
+export const API_CONTENT_URL = "https://common.homeserver-ericp.fr";
+
 /**
  * Get the user's age based on birth date
  */
