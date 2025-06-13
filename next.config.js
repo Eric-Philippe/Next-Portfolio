@@ -29,9 +29,9 @@ const config = {
       },
       {
         protocol: "https",
-        hostname: "cdn.jsdelivr.net",
+        hostname: "live.staticflickr.com",
         port: "",
-        pathname: "/npm/**",
+        pathname: "/**",
       },
     ],
     dangerouslyAllowSVG: true,

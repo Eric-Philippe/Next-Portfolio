@@ -258,7 +258,7 @@ export default function SetupSection() {
                 <Suspense fallback={null}>
                   <RotatingCanon800d />
                 </Suspense>{" "}
-                {isMobile ? (
+                {!isMobile ? (
                   <OrbitControls
                     enabled={true}
                     enablePan={false}

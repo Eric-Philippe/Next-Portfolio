@@ -24,13 +24,28 @@ export interface DevProject {
   previewImg?: string;
 }
 
+export type AlbumCategory =
+  | "Urban"
+  | "Portrait"
+  | "Landscape"
+  | "Street"
+  | "Nature"
+  | "Architecture"
+  | "Travel"
+  | "Event"
+  | "Other";
+
 export interface AlbumData {
   title: string;
   shortTitle: string;
   date: string;
   camera: string;
-  phone: string;
+  phone?: string;
   lenses: string[][];
   previewImgOne: string;
-  content: string;
+  featured?: boolean;
+  category: AlbumCategory;
+  slug: string;
+  description: string;
+  photos: string[];
 }
