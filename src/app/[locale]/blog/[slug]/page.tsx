@@ -26,10 +26,13 @@ interface Props {
 export default async function BlogPostPage({ params }: Props) {
   const resolvedParams = await params;
 
-  // Try to get post from MDX files first
-  let post = getPostBySlug(resolvedParams.slug);
+  // Try to get post from MDX files for the current locale first
+  let post = getPostBySlug(resolvedParams.slug, resolvedParams.locale);
 
-  // If not found in MDX, try fallback posts
+  // If not found for current locale, try any available locale
+  post ??= getPostBySlug(resolvedParams.slug);
+
+  // If still not found in MDX, try fallback posts
   if (!post) {
     const fallbackPosts = getBlogPosts();
     const fallbackPost = fallbackPosts.find(
@@ -46,6 +49,7 @@ export default async function BlogPostPage({ params }: Props) {
           tags: fallbackPost.tags,
           published: true,
         },
+        locale: resolvedParams.locale,
       };
     }
   }

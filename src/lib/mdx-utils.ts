@@ -20,23 +20,80 @@ export interface BlogPostMeta {
 export interface BlogPostWithContent extends BlogPost {
   content: string;
   meta: BlogPostMeta;
+  locale: string;
+}
+
+export interface BlogPostGroup {
+  slug: string;
+  locales: Record<string, BlogPostWithContent>;
+  // Use the first available locale's data for display
+  title: string;
+  description: string;
+  lastUpdated: Date;
+  readingTime: number;
+  tags: string[];
 }
 
 export function getAllPostSlugs(): string[] {
   try {
-    const fileNames = fs.readdirSync(postsDirectory);
-    return fileNames
-      .filter((name) => name.endsWith(".mdx"))
-      .map((name) => name.replace(/\.mdx$/, ""));
+    const slugs = new Set<string>();
+    const locales = ["en", "fr"]; // Add more locales as needed
+
+    for (const locale of locales) {
+      const localeDir = path.join(postsDirectory, locale);
+      if (fs.existsSync(localeDir)) {
+        const fileNames = fs.readdirSync(localeDir);
+        fileNames
+          .filter((name) => name.endsWith(".mdx"))
+          .forEach((name) => {
+            slugs.add(name.replace(/\.mdx$/, ""));
+          });
+      }
+    }
+
+    return Array.from(slugs);
   } catch (error) {
     console.warn("Could not read blog posts directory:", error);
     return [];
   }
 }
 
-export function getPostBySlug(slug: string): BlogPostWithContent | null {
+export function getPostBySlug(
+  slug: string,
+  locale?: string,
+): BlogPostWithContent | null {
   try {
-    const fullPath = path.join(postsDirectory, `${slug}.mdx`);
+    // If locale is specified, try that first
+    if (locale) {
+      const localePost = getPostForLocale(slug, locale);
+      if (localePost) return localePost;
+    }
+
+    // Otherwise, try to find in any available locale (prioritize 'en')
+    const locales = ["en", "fr"];
+    for (const loc of locales) {
+      const post = getPostForLocale(slug, loc);
+      if (post) return post;
+    }
+
+    return null;
+  } catch (error) {
+    console.warn(`Could not read post ${slug}:`, error);
+    return null;
+  }
+}
+
+function getPostForLocale(
+  slug: string,
+  locale: string,
+): BlogPostWithContent | null {
+  try {
+    const fullPath = path.join(postsDirectory, locale, `${slug}.mdx`);
+
+    if (!fs.existsSync(fullPath)) {
+      return null;
+    }
+
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(fileContents);
 
@@ -58,33 +115,72 @@ export function getPostBySlug(slug: string): BlogPostWithContent | null {
       tags: meta.tags || [],
       content,
       meta,
+      locale,
     };
-  } catch (error) {
-    console.warn(`Could not read post ${slug}:`, error);
+  } catch {
     return null;
   }
 }
 
-export function getAllPosts(): BlogPost[] {
+export function getAllPostGroups(): BlogPostGroup[] {
   const slugs = getAllPostSlugs();
-  const posts = slugs
-    .map((slug) => getPostBySlug(slug))
-    .filter((post): post is BlogPostWithContent => post !== null)
-    .sort((post1, post2) => (post1.lastUpdated > post2.lastUpdated ? -1 : 1));
+  const groups: BlogPostGroup[] = [];
 
-  return posts;
+  for (const slug of slugs) {
+    const locales = ["en", "fr"];
+    const postGroup: BlogPostGroup = {
+      slug,
+      locales: {},
+      title: "",
+      description: "",
+      lastUpdated: new Date(),
+      readingTime: 0,
+      tags: [],
+    };
+
+    let primaryPost: BlogPostWithContent | null = null;
+
+    // Get posts for all available locales
+    for (const locale of locales) {
+      const post = getPostForLocale(slug, locale);
+      if (post) {
+        postGroup.locales[locale] = post;
+
+        // Use the first found post (preferably English) as primary
+        if (!primaryPost || locale === "en") {
+          primaryPost = post;
+        }
+      }
+    }
+
+    if (primaryPost && Object.keys(postGroup.locales).length > 0) {
+      postGroup.title = primaryPost.title;
+      postGroup.description = primaryPost.description;
+      postGroup.lastUpdated = primaryPost.lastUpdated;
+      postGroup.readingTime = primaryPost.readingTime;
+      postGroup.tags = primaryPost.tags;
+
+      groups.push(postGroup);
+    }
+  }
+
+  return groups.sort((a, b) => (a.lastUpdated > b.lastUpdated ? -1 : 1));
+}
+
+export function getAllPosts(): BlogPost[] {
+  const groups = getAllPostGroups();
+  return groups.map((group) => ({
+    slug: group.slug,
+    title: group.title,
+    description: group.description,
+    lastUpdated: group.lastUpdated,
+    readingTime: group.readingTime,
+    tags: group.tags,
+  }));
 }
 
 export function getPostsMetadata(): BlogPost[] {
-  const posts = getAllPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-    title: post.title,
-    description: post.description,
-    lastUpdated: post.lastUpdated,
-    readingTime: post.readingTime,
-    tags: post.tags,
-  }));
+  return getAllPosts();
 }
 
 // This function will be used for static generation

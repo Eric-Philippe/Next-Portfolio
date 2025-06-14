@@ -1,0 +1,180 @@
+---
+title: "Construire des applications React modernes"
+description: "Apprenez à construire des applications React évolutives et maintenables en utilisant des outils modernes et les meilleures pratiques. De la gestion d'état à l'optimisation des performances."
+date: "2025-06-10"
+tags: ["React", "JavaScript", "Frontend", "Performance"]
+author: "Éric Philippe"
+published: true
+---
+
+# Construire des applications React modernes
+
+React a révolutionné la façon dont nous construisons des interfaces utilisateur, mais avec un grand pouvoir vient le besoin d'une grande architecture. Dans ce post, nous explorerons les patterns et pratiques essentiels qui rendent les applications React évolutives, maintenables et performantes.
+
+## Architecture des composants
+
+La fondation de toute grande application React est son architecture de composants. Pensez aux composants comme aux blocs de construction de votre UI - ils devraient être :
+
+- **Responsabilité unique** : Chaque composant devrait avoir un but clair
+- **Composables** : Les composants devraient bien fonctionner ensemble
+- **Réutilisables** : Écrire une fois, utiliser partout
+- **Testables** : Faciles à tester de manière isolée
+
+```typescript
+// Exemple d'un composant bien structuré
+interface ButtonProps {
+  variant: 'primary' | 'secondary' | 'danger';
+  size: 'sm' | 'md' | 'lg';
+  loading?: boolean;
+  children: React.ReactNode;
+  onClick?: () => void;
+}
+
+export function Button({
+  variant = 'primary',
+  size = 'md',
+  loading = false,
+  children,
+  onClick
+}: ButtonProps) {
+  return (
+    <button
+      className={cn(
+        'rounded-lg font-medium transition-all duration-200',
+        variants[variant],
+        sizes[size],
+        loading && 'opacity-50 cursor-not-allowed'
+      )}
+      onClick={loading ? undefined : onClick}
+      disabled={loading}
+    >
+      {loading ? <Spinner /> : children}
+    </button>
+  );
+}
+```
+
+## Gestion d'état
+
+Les applications React modernes ont plusieurs options pour la gestion d'état :
+
+### 1. État React intégré
+
+Pour les applications simples, `useState` et `useContext` sont souvent suffisants :
+
+```typescript
+const UserContext = createContext<UserContextType | null>(null);
+
+export function UserProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  return (
+    <UserContext.Provider value={{ user, setUser, loading }}>
+      {children}
+    </UserContext.Provider>
+  );
+}
+```
+
+### 2. Zustand pour l'état complexe
+
+Pour des applications plus complexes, considérez Zustand :
+
+```typescript
+import { create } from "zustand";
+
+interface TodoStore {
+  todos: Todo[];
+  addTodo: (text: string) => void;
+  toggleTodo: (id: string) => void;
+  removeTodo: (id: string) => void;
+}
+
+export const useTodoStore = create<TodoStore>((set) => ({
+  todos: [],
+  addTodo: (text) =>
+    set((state) => ({
+      todos: [...state.todos, { id: nanoid(), text, completed: false }],
+    })),
+  toggleTodo: (id) =>
+    set((state) => ({
+      todos: state.todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+      ),
+    })),
+  removeTodo: (id) =>
+    set((state) => ({
+      todos: state.todos.filter((todo) => todo.id !== id),
+    })),
+}));
+```
+
+## Optimisation des performances
+
+Les performances sont cruciales pour l'expérience utilisateur. Voici les stratégies clés :
+
+### React.memo et useMemo
+
+```typescript
+const ExpensiveComponent = React.memo(({ data }: { data: ComplexData }) => {
+  const processedData = useMemo(() => {
+    return heavyDataProcessing(data);
+  }, [data]);
+
+  return <div>{/* Rendre les données traitées */}</div>;
+});
+```
+
+### Chargement paresseux
+
+```typescript
+const LazyComponent = lazy(() => import('./LazyComponent'));
+
+function App() {
+  return (
+    <Suspense fallback={<LoadingSpinner />}>
+      <LazyComponent />
+    </Suspense>
+  );
+}
+```
+
+## Stratégie de test
+
+Une stratégie de test robuste inclut :
+
+1. **Tests unitaires** : Tester les composants et hooks individuels
+2. **Tests d'intégration** : Tester les interactions entre composants
+3. **Tests E2E** : Tester les flux utilisateur complets
+
+```typescript
+// Exemple de test unitaire avec Testing Library
+import { render, screen, fireEvent } from '@testing-library/react';
+import { Button } from './Button';
+
+test('appelle onClick quand cliqué', () => {
+  const handleClick = jest.fn();
+  render(<Button onClick={handleClick}>Cliquez-moi</Button>);
+
+  fireEvent.click(screen.getByRole('button'));
+
+  expect(handleClick).toHaveBeenCalledTimes(1);
+});
+```
+
+## Outils de développement
+
+Outils essentiels pour le développement React moderne :
+
+- **TypeScript** : Pour la sécurité de type et une meilleure expérience développeur
+- **ESLint & Prettier** : Pour la qualité et la cohérence du code
+- **Husky** : Pour les hooks pre-commit
+- **Storybook** : Pour la documentation et les tests de composants
+- **React DevTools** : Pour le débogage
+
+## Conclusion
+
+Construire des applications React modernes nécessite une architecture réfléchie, une gestion d'état appropriée, une optimisation des performances et des tests complets. En suivant ces pratiques, vous créerez des applications qui sont non seulement fonctionnelles mais aussi maintenables et évolutives.
+
+Rappelez-vous : la meilleure architecture est celle qui grandit avec les besoins de votre application tout en gardant la complexité gérable.
