@@ -114,6 +114,20 @@
       "advancedEditing": "Retouche avancée",
       "motionDesign": "Motion Design",
       "moodboardDesign": "Moodboard"
+    },
+    "PhotoGallery": {
+      "photoAlbumTitleFirst": "Gallerie",
+      "photoAlbumTitleSecond": "Photo",
+      "photoAlbumDescription": "Collections soigneusement sélectionnées de moments, d'émotions et d'histoires capturées à travers l'objectif"
+    },
+    "Contact": {
+      "title": "Réserver une séance",
+      "subtitle": "Créons quelque chose de beau ensemble",
+      "description": "Que ce soit pour un portrait, un événement ou une séance photo de produit, je serais ravi de capturer votre vision.",
+      "namePlaceholder": "Votre nom",
+      "emailPlaceholder": "Votre email",
+      "contentPlaceholder": "Parlez-moi de votre projet...",
+      "sendInquiry": "Envoyer la demande"
     }
   },
   "LanguageSwitcher": {

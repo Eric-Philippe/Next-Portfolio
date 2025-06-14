@@ -68,7 +68,7 @@ export default function AlbumCard({
       >
         {/* Featured Badge */}
         {album.featured && (
-          <div className="absolute top-4 right-4 z-10">
+          <div className="absolute top-10 right-4 z-10">
             <div className="border border-orange-400/50 bg-orange-400/20 px-2 py-1 text-xs font-medium text-orange-400 backdrop-blur-sm">
               Featured
             </div>

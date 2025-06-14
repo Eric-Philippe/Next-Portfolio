@@ -114,6 +114,20 @@
       "advancedEditing": "Advanced Editing",
       "motionDesign": "Motion Design",
       "moodboardDesign": "Moodboard"
+    },
+    "PhotoGallery": {
+      "photoAlbumTitleFirst": "Photo",
+      "photoAlbumTitleSecond": "Gallery",
+      "photoAlbumDescription": "Curated collections of moments, emotions, and stories captured through the lens"
+    },
+    "Contact": {
+      "title": "Book a Session",
+      "subtitle": "Let's create something beautiful together",
+      "description": "Whether it's a portrait, event, or product shoot, I'd be thrilled to capture your vision.",
+      "namePlaceholder": "Your Name",
+      "emailPlaceholder": "Your Email",
+      "contentPlaceholder": "Tell me about your project...",
+      "sendInquiry": "Send Inquiry"
     }
   },
   "LanguageSwitcher": {

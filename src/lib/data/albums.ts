@@ -11,8 +11,9 @@ interface ApiAlbum {
   lens?: string;
   phone?: string;
   preview_img_one_url: string;
-  feature: boolean;
+  featured: boolean;
   category: string;
+  content: { slug: string; img_url: string; caption: string }[];
 }
 
 // Transform API album data to AlbumData format
@@ -27,11 +28,14 @@ const transformApiAlbum = (apiAlbum: ApiAlbum): AlbumData => {
     lenses: apiAlbum.lens
       ? apiAlbum.lens.split(",").map((l) => [l.trim()])
       : [["Unknown Lens"]],
-    previewImgOne: API_CONTENT_URL + apiAlbum.preview_img_one_url,
-    featured: apiAlbum.feature,
+    previewImgOne: apiAlbum.preview_img_one_url,
+    featured: apiAlbum.featured,
     category: apiAlbum.category as AlbumData["category"],
     description: apiAlbum.description,
-    photos: [], // Initially empty, can be populated later
+    photos: apiAlbum.content.map((photo) => ({
+      imgUrl: photo.img_url,
+      caption: photo.caption,
+    })),
   };
 };
 
@@ -41,7 +45,7 @@ export const fetchAlbums = async (): Promise<AlbumData[]> => {
     const response = await fetch(`${API_CONTENT_URL}/albums`, {
       // Enable caching and make suitable for SSG
       cache: "force-cache",
-      next: { revalidate: 3600 }, // Revalidate every hour
+      next: { revalidate: 5 }, // Revalidate every hour
     });
 
     if (!response.ok) {

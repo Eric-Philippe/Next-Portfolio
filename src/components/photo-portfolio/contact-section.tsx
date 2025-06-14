@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { EMAIL } from "~/lib/data/data";
 
 interface ContactFormData {
   name: string;
@@ -24,6 +26,8 @@ export default function ContactSection() {
     formState: { errors },
   } = useForm<ContactFormData>();
 
+  const t = useTranslations("PhotoPortfolio.Contact");
+
   const onSubmit = async (_data: ContactFormData) => {
     setIsSubmitting(true);
     setSubmitStatus("idle");
@@ -40,15 +44,6 @@ export default function ContactSection() {
     }
   };
 
-  const projectTypes = [
-    "Portrait Photography",
-    "Event Photography",
-    "Product Photography",
-    "Wedding Photography",
-    "Commercial Work",
-    "Other",
-  ];
-
   return (
     <section className="bg-gray-900 px-4 py-20">
       <div className="mx-auto max-w-4xl">
@@ -59,7 +54,7 @@ export default function ContactSection() {
           viewport={{ once: true }}
         >
           <h2 className="mb-16 text-center text-4xl font-light text-white md:text-5xl">
-            Book a Session
+            {t("title")}
           </h2>
         </motion.div>
 
@@ -72,13 +67,11 @@ export default function ContactSection() {
             className="space-y-6"
           >
             <h3 className="mb-6 text-2xl font-light text-white">
-              Let&apos;s create something beautiful together
+              {t("subtitle")}
             </h3>
 
             <p className="text-lg leading-relaxed font-light text-gray-300">
-              Whether you&apos;re looking for portrait photography, event
-              coverage, or commercial work, I&apos;d love to discuss your vision
-              and bring it to life.
+              {t("description")}
             </p>
 
             <div className="space-y-4">
@@ -86,21 +79,14 @@ export default function ContactSection() {
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10">
                   <span className="text-sm text-white">📧</span>
                 </div>
-                <span className="text-gray-300">eric.photo@example.com</span>
-              </div>
-
-              <div className="flex items-center space-x-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10">
-                  <span className="text-sm text-white">📱</span>
-                </div>
-                <span className="text-gray-300">+33 6 XX XX XX XX</span>
+                <span className="text-gray-300">{EMAIL}</span>
               </div>
 
               <div className="flex items-center space-x-3">
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10">
                   <span className="text-sm text-white">📍</span>
                 </div>
-                <span className="text-gray-300">Based in France</span>
+                <span className="text-gray-300">Based in South France</span>
               </div>
             </div>
           </motion.div>
@@ -116,7 +102,7 @@ export default function ContactSection() {
                 <input
                   {...register("name", { required: "Name is required" })}
                   type="text"
-                  placeholder="Your Name"
+                  placeholder={t("namePlaceholder")}
                   className="w-full rounded-lg border border-white/20 bg-black/50 px-4 py-3 text-white placeholder-gray-400 transition-colors focus:border-white/40 focus:outline-none"
                 />
                 {errors.name && (
@@ -136,7 +122,7 @@ export default function ContactSection() {
                     },
                   })}
                   type="email"
-                  placeholder="Your Email"
+                  placeholder={t("emailPlaceholder")}
                   className="w-full rounded-lg border border-white/20 bg-black/50 px-4 py-3 text-white placeholder-gray-400 transition-colors focus:border-white/40 focus:outline-none"
                 />
                 {errors.email && (
@@ -147,31 +133,10 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <select
-                  {...register("projectType", {
-                    required: "Please select a project type",
-                  })}
-                  className="w-full rounded-lg border border-white/20 bg-black/50 px-4 py-3 text-white transition-colors focus:border-white/40 focus:outline-none"
-                >
-                  <option value="">Select Project Type</option>
-                  {projectTypes.map((type) => (
-                    <option key={type} value={type} className="bg-gray-900">
-                      {type}
-                    </option>
-                  ))}
-                </select>
-                {errors.projectType && (
-                  <p className="mt-1 text-sm text-red-400">
-                    {errors.projectType.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
                 <textarea
                   {...register("message", { required: "Message is required" })}
                   rows={5}
-                  placeholder="Tell me about your project..."
+                  placeholder={t("contentPlaceholder")}
                   className="w-full resize-none rounded-lg border border-white/20 bg-black/50 px-4 py-3 text-white placeholder-gray-400 transition-colors focus:border-white/40 focus:outline-none"
                 />
                 {errors.message && (
@@ -186,7 +151,7 @@ export default function ContactSection() {
                 disabled={isSubmitting}
                 className="w-full rounded-lg border border-white/20 bg-white/10 px-6 py-3 font-light text-white transition-colors hover:bg-white/20 disabled:bg-gray-600"
               >
-                {isSubmitting ? "Sending..." : "Send Inquiry"}
+                {isSubmitting ? "Sending..." : t("sendInquiry")}
               </button>
 
               {submitStatus === "success" && (

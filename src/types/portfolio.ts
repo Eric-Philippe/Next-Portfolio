@@ -47,5 +47,8 @@ export interface AlbumData {
   category: AlbumCategory;
   slug: string;
   description: string;
-  photos: string[];
+  photos: {
+    imgUrl: string;
+    caption: string;
+  }[];
 }

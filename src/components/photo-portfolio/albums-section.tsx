@@ -5,6 +5,7 @@ import { useState, useMemo, useEffect } from "react";
 import type { AlbumCategory, AlbumData } from "~/types/portfolio";
 import AlbumCard from "./album-card";
 import { fetchAlbums } from "~/lib/data/albums";
+import { useTranslations } from "next-intl";
 
 interface AlbumsSectionProps {
   initialAlbums?: AlbumData[];
@@ -21,6 +22,8 @@ export default function AlbumsSection({ initialAlbums }: AlbumsSectionProps) {
     AlbumCategory | "all"
   >("all");
   const [hoveredAlbum, setHoveredAlbum] = useState<string | null>(null);
+
+  const t = useTranslations("PhotoPortfolio.PhotoGallery");
 
   useEffect(() => {
     if (initialAlbums) {
@@ -142,16 +145,15 @@ export default function AlbumsSection({ initialAlbums }: AlbumsSectionProps) {
               className="mb-6 font-light tracking-tight text-white"
               style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)" }}
             >
-              Photo
+              {t("photoAlbumTitleFirst")}
               <span className="bg-gradient-to-r from-orange-400 to-pink-400 bg-clip-text text-transparent">
                 {" "}
-                Albums
+                {t("photoAlbumTitleSecond")}
               </span>
             </h2>
 
             <p className="mx-auto max-w-2xl text-lg font-light text-white/60">
-              Curated collections of moments, emotions, and stories captured
-              through the lens
+              {t("photoAlbumDescription")}
             </p>
           </div>
 
