@@ -1,8 +1,6 @@
 import { getAllPostSlugs, getPostBySlug } from "~/lib/mdx-utils";
 import { getBlogPosts } from "~/lib/blog-server";
 import BlogPostPageClient from "./page-client";
-import { serialize } from "next-mdx-remote/serialize";
-import type { MDXRemoteSerializeResult } from "next-mdx-remote";
 
 // Generate static params for all blog posts
 export async function generateStaticParams() {
@@ -34,22 +32,6 @@ export default async function BlogPostPage({ params }: Props) {
   // If not found for current locale, try any available locale
   post ??= getPostBySlug(resolvedParams.slug);
 
-  // Serialize MDX content if available
-  let serializedContent: MDXRemoteSerializeResult | null = null;
-  if (post?.content) {
-    try {
-      serializedContent = await serialize(post.content, {
-        mdxOptions: {
-          remarkPlugins: [],
-          rehypePlugins: [],
-          development: process.env.NODE_ENV === "development",
-        },
-      });
-    } catch (error) {
-      console.error("Error serializing MDX content:", error);
-    }
-  }
-
   // If still not found in MDX, try fallback posts
   if (!post) {
     const fallbackPosts = getBlogPosts();
@@ -71,12 +53,7 @@ export default async function BlogPostPage({ params }: Props) {
       };
     }
   }
-
   return (
-    <BlogPostPageClient
-      params={Promise.resolve(resolvedParams)}
-      post={post}
-      serializedContent={serializedContent}
-    />
+    <BlogPostPageClient params={Promise.resolve(resolvedParams)} post={post} />
   );
 }
