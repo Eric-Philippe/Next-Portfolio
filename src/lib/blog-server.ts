@@ -50,9 +50,9 @@ export const placeholderPosts: BlogPost[] = [
 ];
 
 // Get blog posts from MDX files, with fallback to placeholder posts (server-only)
-export function getBlogPosts(): BlogPost[] {
+export function getBlogPosts(preferredLocale = "en"): BlogPost[] {
   try {
-    const mdxPosts = getPostsMetadata();
+    const mdxPosts = getPostsMetadata(preferredLocale);
     return mdxPosts.length > 0 ? mdxPosts : placeholderPosts;
   } catch (error) {
     console.warn("Failed to load MDX posts, using placeholder posts:", error);

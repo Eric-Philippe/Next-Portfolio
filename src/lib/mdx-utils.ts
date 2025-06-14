@@ -122,7 +122,7 @@ function getPostForLocale(
   }
 }
 
-export function getAllPostGroups(): BlogPostGroup[] {
+export function getAllPostGroups(preferredLocale = "en"): BlogPostGroup[] {
   const slugs = getAllPostSlugs();
   const groups: BlogPostGroup[] = [];
 
@@ -146,8 +146,12 @@ export function getAllPostGroups(): BlogPostGroup[] {
       if (post) {
         postGroup.locales[locale] = post;
 
-        // Use the first found post (preferably English) as primary
-        if (!primaryPost || locale === "en") {
+        // Prioritize the preferred locale, then English, then any available
+        if (
+          !primaryPost ||
+          locale === preferredLocale ||
+          (locale === "en" && primaryPost.locale !== preferredLocale)
+        ) {
           primaryPost = post;
         }
       }
@@ -167,8 +171,8 @@ export function getAllPostGroups(): BlogPostGroup[] {
   return groups.sort((a, b) => (a.lastUpdated > b.lastUpdated ? -1 : 1));
 }
 
-export function getAllPosts(): BlogPost[] {
-  const groups = getAllPostGroups();
+export function getAllPosts(preferredLocale = "en"): BlogPost[] {
+  const groups = getAllPostGroups(preferredLocale);
   return groups.map((group) => ({
     slug: group.slug,
     title: group.title,
@@ -176,11 +180,13 @@ export function getAllPosts(): BlogPost[] {
     lastUpdated: group.lastUpdated,
     readingTime: group.readingTime,
     tags: group.tags,
+    en_url: group.locales.en ? `/en/blog/${group.slug}` : undefined,
+    fr_url: group.locales.fr ? `/fr/blog/${group.slug}` : undefined,
   }));
 }
 
-export function getPostsMetadata(): BlogPost[] {
-  return getAllPosts();
+export function getPostsMetadata(preferredLocale = "en"): BlogPost[] {
+  return getAllPosts(preferredLocale);
 }
 
 // This function will be used for static generation

@@ -86,21 +86,23 @@ export function BlogPostCard({ post }: { post: BlogPost }) {
 
           <div className="flex items-center gap-3">
             <FiGlobe className="h-4 w-4 text-slate-400" />
-            <div className="flex gap-2 text-xs">
+            <div className="flex gap-1">
               {post.en_url && (
                 <Link
                   href={post.en_url}
-                  className="rounded-md bg-slate-100/70 px-2 py-1 text-slate-600 transition-all duration-200 hover:bg-slate-200/70 hover:text-slate-700"
+                  className="flex h-7 w-7 items-center justify-center rounded-md bg-slate-100/70 text-sm transition-all duration-200 hover:scale-110 hover:bg-slate-200/70"
+                  title="Available in English"
                 >
-                  EN
+                  🇺🇸
                 </Link>
               )}
               {post.fr_url && (
                 <Link
                   href={post.fr_url}
-                  className="rounded-md bg-slate-100/70 px-2 py-1 text-slate-600 transition-all duration-200 hover:bg-slate-200/70 hover:text-slate-700"
+                  className="flex h-7 w-7 items-center justify-center rounded-md bg-slate-100/70 text-sm transition-all duration-200 hover:scale-110 hover:bg-slate-200/70"
+                  title="Available in French"
                 >
-                  FR
+                  🇫🇷
                 </Link>
               )}
             </div>

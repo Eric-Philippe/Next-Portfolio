@@ -20,6 +20,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MDXContent } from "~/components/blog/mdx-content";
 import type { BlogPostWithContent } from "~/lib/mdx-utils";
+import type { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { ArticleContent } from "~/blog-posts/first-post";
 
 interface Props {
@@ -28,9 +29,14 @@ interface Props {
     locale: string;
   }>;
   post: BlogPostWithContent | null;
+  serializedContent: MDXRemoteSerializeResult | null;
 }
 
-export default function BlogPostPageClient({ params, post }: Props) {
+export default function BlogPostPageClient({
+  params,
+  post,
+  serializedContent,
+}: Props) {
   const resolvedParams = use(params);
   // const t = useTranslations("BlogPage");
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -295,7 +301,9 @@ export default function BlogPostPageClient({ params, post }: Props) {
                 boxShadow: "0 8px 32px rgba(0, 0, 0, 0.06)",
               }}
             >
-              {post.content ? (
+              {serializedContent ? (
+                <MDXContent serializedContent={serializedContent} />
+              ) : post.content ? (
                 <MDXContent content={post.content} />
               ) : (
                 <ArticleContent />
