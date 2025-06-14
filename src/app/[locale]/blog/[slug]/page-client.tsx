@@ -21,7 +21,6 @@ import Link from "next/link";
 import { MDXContent } from "~/components/blog/mdx-content";
 import type { BlogPostWithContent } from "~/lib/mdx-utils";
 import type { MDXRemoteSerializeResult } from "next-mdx-remote";
-import { ArticleContent } from "~/blog-posts/first-post";
 
 interface Props {
   params: Promise<{
@@ -312,7 +311,9 @@ export default function BlogPostPageClient({
               ) : post.content ? (
                 <MDXContent content={post.content} />
               ) : (
-                <ArticleContent />
+                <div className="prose prose-lg max-w-none text-slate-600">
+                  <p className="text-center">Loading content...</p>
+                </div>
               )}
             </div>
           </motion.div>
