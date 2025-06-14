@@ -130,6 +130,18 @@
       "sendInquiry": "Send Inquiry"
     }
   },
+  "BlogPage": {
+    "titleFirstPart": "Insights &",
+    "titleSecondPart": "Ideas",
+    "subtitleFirstPart": "A space for my thoughts, experiences, and explorations in the world of technology and creativity.",
+    "subtitleSecondPart": "Welcome to my digital journal.",
+    "searchPlaceholder": "Search articles, tags, or topics...",
+    "readMore": "Read Full Article",
+    "lastUpdated": "Last Updated: {date}",
+    "minutesRead": "{count} minutes read",
+    "noResultsTitle": "No Matches Found",
+    "noResultsDescription": "Sorry, we couldn't find any articles matching your search. Try different keywords or explore all posts."
+  },
   "LanguageSwitcher": {
     "currentLanguage": "Language",
     "selectLanguage": "Select Language"

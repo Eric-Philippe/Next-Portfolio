@@ -130,6 +130,18 @@
       "sendInquiry": "Envoyer la demande"
     }
   },
+  "BlogPage": {
+    "titleFirstPart": "Perspectives &",
+    "titleSecondPart": "Expériences",
+    "subtitleFirstPart": "Exploration des intersections entre technologie, design et créativité.",
+    "subtitleSecondPart": "Bienvenue dans mon espace de réflexion.",
+    "searchPlaceholder": "Rechercher articles, tags, ou sujets...",
+    "readMore": "Lire l'article complet",
+    "lastUpdated": "Mis à jour le: {date}",
+    "minutesRead": "{count} minutes de lecture",
+    "noResultsTitle": "Aucun résultat",
+    "noResultsDescription": "Désolé, aucun article ne correspond à votre recherche. Essayez d'autres mots-clés ou explorez tous les articles."
+  },
   "LanguageSwitcher": {
     "currentLanguage": "Langue",
     "selectLanguage": "Sélectionner la langue"
