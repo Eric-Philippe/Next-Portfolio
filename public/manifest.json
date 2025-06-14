@@ -1,0 +1,21 @@
+{
+  "name": "Eric PHILIPPE Portfolio Developer / Photo",
+  "short_name": "Eric Portfolio",
+  "description": "Portfolio of Eric PHILIPPE, a software developer and photographer.",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

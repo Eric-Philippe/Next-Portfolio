@@ -26,6 +26,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
+      <link rel="manifest" href="/manifest.json" />
       <body>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>

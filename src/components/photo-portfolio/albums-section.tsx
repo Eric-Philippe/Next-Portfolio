@@ -1,20 +1,49 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useMemo } from "react";
-import { albums } from "~/lib/data/albums";
-import type { AlbumCategory } from "~/types/portfolio";
+import { useState, useMemo, useEffect } from "react";
+import type { AlbumCategory, AlbumData } from "~/types/portfolio";
 import AlbumCard from "./album-card";
+import { fetchAlbums } from "~/lib/data/albums";
 
-export default function AlbumsSection() {
+interface AlbumsSectionProps {
+  initialAlbums?: AlbumData[];
+}
+
+export default function AlbumsSection({ initialAlbums }: AlbumsSectionProps) {
   const [viewMode, setViewMode] = useState<"grid" | "masonry">("masonry");
   const [sortBy, setSortBy] = useState<"date" | "featured" | "category">(
     "featured",
   );
+  const [albums, setAlbums] = useState<AlbumData[]>(initialAlbums ?? []);
+  const [isLoading, setIsLoading] = useState(!initialAlbums);
   const [selectedCategory, setSelectedCategory] = useState<
     AlbumCategory | "all"
   >("all");
   const [hoveredAlbum, setHoveredAlbum] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (initialAlbums) {
+      // If we have initial albums, use them and don't fetch
+      setAlbums(initialAlbums);
+      setIsLoading(false);
+      return;
+    }
+
+    const loadAlbums = async () => {
+      setIsLoading(true);
+      try {
+        const fetchedAlbums = await fetchAlbums();
+        setAlbums(fetchedAlbums);
+      } catch (error) {
+        console.error("Failed to fetch albums:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    void loadAlbums();
+  }, [initialAlbums]);
 
   // Get unique categories
   const categories = useMemo(() => {
@@ -22,7 +51,7 @@ export default function AlbumsSection() {
       ...new Set(albums.map((album) => album.category)),
     ];
     return ["all", ...uniqueCategories] as const;
-  }, []);
+  }, [albums]);
 
   // Filter and sort albums
   const filteredAndSortedAlbums = useMemo(() => {
@@ -52,7 +81,7 @@ export default function AlbumsSection() {
     });
 
     return sorted;
-  }, [selectedCategory, sortBy]);
+  }, [albums, selectedCategory, sortBy]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -215,82 +244,96 @@ export default function AlbumsSection() {
           </div>
         </motion.div>
 
-        {/* Albums Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className={`${
-            viewMode === "masonry"
-              ? "columns-1 gap-6 md:columns-2 lg:columns-3"
-              : "grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-          }`}
-        >
-          <AnimatePresence>
-            {filteredAndSortedAlbums.map((album, index) => (
-              <AlbumCard
-                key={album.slug}
-                album={album}
-                index={index}
-                viewMode={viewMode}
-                hoveredAlbum={hoveredAlbum}
-                onMouseEnter={() => setHoveredAlbum(album.slug)}
-                onMouseLeave={() => setHoveredAlbum(null)}
-                onClick={() => {
-                  // Handle album click - can be used for navigation later
-                  console.log(`Clicked on album: ${album.slug}`);
-                }}
-              />
-            ))}
-          </AnimatePresence>
-        </motion.div>
+        {/* @ALBUMS */}
+        <div>
+          {isLoading ? (
+            <div className="flex items-center justify-center py-16">
+              <div className="flex flex-col items-center space-y-4">
+                <div className="h-12 w-12 animate-spin rounded-full border-4 border-white/20 border-t-orange-400"></div>
+                <p className="text-lg text-white/70">Loading albums...</p>
+              </div>
+            </div>
+          ) : (
+            <>
+              {/* Albums Grid */}
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className={`${
+                  viewMode === "masonry"
+                    ? "columns-1 gap-6 md:columns-2 lg:columns-3"
+                    : "grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+                }`}
+              >
+                <AnimatePresence>
+                  {filteredAndSortedAlbums.map((album, index) => (
+                    <AlbumCard
+                      key={album.slug}
+                      album={album}
+                      index={index}
+                      viewMode={viewMode}
+                      hoveredAlbum={hoveredAlbum}
+                      onMouseEnter={() => setHoveredAlbum(album.slug)}
+                      onMouseLeave={() => setHoveredAlbum(null)}
+                      onClick={() => {
+                        // Handle album click - can be used for navigation later
+                        console.log(`Clicked on album: ${album.slug}`);
+                      }}
+                    />
+                  ))}
+                </AnimatePresence>
+              </motion.div>
 
-        {/* Stats Footer */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="mt-20 text-center"
-        >
-          <div
-            className="inline-flex items-center gap-8 border border-white/10 px-8 py-4 backdrop-blur-sm"
-            style={{
-              background:
-                "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)",
-            }}
-          >
-            <div className="text-center">
-              <div className="text-2xl font-light text-white">
-                {albums.length}
-              </div>
-              <div className="text-xs tracking-wider text-white/60 uppercase">
-                Albums
-              </div>
-            </div>
-            <div className="h-8 w-px bg-white/20" />
-            <div className="text-center">
-              <div className="text-2xl font-light text-white">
-                {albums.reduce(
-                  (total, album) => total + album.photos.length,
-                  0,
-                )}
-              </div>
-              <div className="text-xs tracking-wider text-white/60 uppercase">
-                Photos
-              </div>
-            </div>
-            <div className="h-8 w-px bg-white/20" />
-            <div className="text-center">
-              <div className="text-2xl font-light text-white">
-                {albums.filter((album) => album.featured).length}
-              </div>
-              <div className="text-xs tracking-wider text-white/60 uppercase">
-                Featured
-              </div>
-            </div>
-          </div>
-        </motion.div>
+              {/* Stats Footer */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="mt-20 text-center"
+              >
+                <div
+                  className="inline-flex items-center gap-8 border border-white/10 px-8 py-4 backdrop-blur-sm"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)",
+                  }}
+                >
+                  <div className="text-center">
+                    <div className="text-2xl font-light text-white">
+                      {albums.length}
+                    </div>
+                    <div className="text-xs tracking-wider text-white/60 uppercase">
+                      Albums
+                    </div>
+                  </div>
+                  <div className="h-8 w-px bg-white/20" />
+                  <div className="text-center">
+                    <div className="text-2xl font-light text-white">
+                      {albums.reduce(
+                        (total, album) => total + album.photos.length,
+                        0,
+                      )}
+                    </div>
+                    <div className="text-xs tracking-wider text-white/60 uppercase">
+                      Photos
+                    </div>
+                  </div>
+                  <div className="h-8 w-px bg-white/20" />
+                  <div className="text-center">
+                    <div className="text-2xl font-light text-white">
+                      {albums.filter((album) => album.featured).length}
+                    </div>
+                    <div className="text-xs tracking-wider text-white/60 uppercase">
+                      Featured
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </div>
       </div>
     </section>
   );

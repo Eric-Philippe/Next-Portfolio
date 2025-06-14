@@ -1,4 +1,69 @@
 import type { AlbumData } from "~/types/portfolio";
+import { API_CONTENT_URL } from "../utils/utils";
+
+interface ApiAlbum {
+  slug: string;
+  title: string;
+  short_title: string;
+  description: string;
+  date: string;
+  camera?: string;
+  lens?: string;
+  phone?: string;
+  preview_img_one_url: string;
+  feature: boolean;
+  category: string;
+}
+
+// Transform API album data to AlbumData format
+const transformApiAlbum = (apiAlbum: ApiAlbum): AlbumData => {
+  return {
+    title: apiAlbum.title,
+    shortTitle: apiAlbum.short_title,
+    slug: apiAlbum.slug,
+    date: apiAlbum.date,
+    camera: apiAlbum.camera ?? "Unknown Camera",
+    phone: apiAlbum.phone ?? "Unknown Phone",
+    lenses: apiAlbum.lens
+      ? apiAlbum.lens.split(",").map((l) => [l.trim()])
+      : [["Unknown Lens"]],
+    previewImgOne: API_CONTENT_URL + apiAlbum.preview_img_one_url,
+    featured: apiAlbum.feature,
+    category: apiAlbum.category as AlbumData["category"],
+    description: apiAlbum.description,
+    photos: [], // Initially empty, can be populated later
+  };
+};
+
+// Fetch albums from API
+export const fetchAlbums = async (): Promise<AlbumData[]> => {
+  try {
+    const response = await fetch(`${API_CONTENT_URL}/albums`, {
+      // Enable caching and make suitable for SSG
+      cache: "force-cache",
+      next: { revalidate: 3600 }, // Revalidate every hour
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = (await response.json()) as unknown;
+
+    // Validate that the response is an array
+    if (!Array.isArray(data)) {
+      throw new Error("Invalid response format: expected array");
+    }
+
+    const apiAlbums = data as ApiAlbum[];
+    return apiAlbums
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) // Sort by date descending
+      .map(transformApiAlbum);
+  } catch (error) {
+    console.error("Failed to fetch albums:", error);
+    // Fallback to static albums if API fails
+    return albums;
+  }
+};
 
 // Photography albums data
 export const albums: AlbumData[] = [
