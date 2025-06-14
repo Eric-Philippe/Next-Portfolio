@@ -3,8 +3,8 @@
 import { PortfolioProvider } from "~/lib/portfolio-context";
 import { Header } from "~/components/common/header";
 import { mdxComponents } from "~/components/blog/mdx-components";
-import { useTranslations } from "next-intl";
-import { useState, useEffect } from "react";
+// import { useTranslations } from "next-intl";
+import { useState, use } from "react";
 import {
   FiArrowLeft,
   FiShare2,
@@ -20,17 +20,17 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { placeholderPosts } from "~/lib/data/blog";
-import type { BlogPost } from "~/types/portfolio";
 
 interface Props {
-  params: {
+  params: Promise<{
     slug: string;
     locale: string;
-  };
+  }>;
 }
 
 export default function BlogPostPage({ params }: Props) {
-  const t = useTranslations("BlogPage");
+  const resolvedParams = use(params);
+  // const t = useTranslations("BlogPage");
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [shareMenuOpen, setShareMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -38,7 +38,7 @@ export default function BlogPostPage({ params }: Props) {
 
   // Mock post data - in real app this would come from CMS/API
   const post =
-    placeholderPosts.find((p) => p.slug === params.slug) ??
+    placeholderPosts.find((p) => p.slug === resolvedParams.slug) ??
     placeholderPosts[0]!;
 
   const shareUrl = typeof window !== "undefined" ? window.location.href : "";
@@ -252,7 +252,7 @@ export function Button({ variant, size, children, onClick }: ButtonProps) {
             transition={{ duration: 0.5 }}
           >
             <Link
-              href={`/${params.locale}/blog`}
+              href={`/${resolvedParams.locale}/blog`}
               className="inline-flex items-center gap-2 text-slate-600 transition-colors hover:text-slate-900"
             >
               <FiArrowLeft className="h-4 w-4" />
@@ -426,7 +426,7 @@ export function Button({ variant, size, children, onClick }: ButtonProps) {
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             <Link
-              href={`/${params.locale}/blog`}
+              href={`/${resolvedParams.locale}/blog`}
               className="flex items-center gap-2 rounded-xl bg-slate-100 px-6 py-3 transition-colors hover:bg-slate-200"
             >
               <FiArrowLeft className="h-4 w-4" />
