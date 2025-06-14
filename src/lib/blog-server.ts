@@ -1,6 +1,8 @@
+import "server-only";
+import { getPostsMetadata } from "~/lib/mdx-utils";
 import type { BlogPost } from "~/types/portfolio";
 
-// Client-safe placeholder posts
+// Fallback posts for development or when MDX files aren't available
 export const placeholderPosts: BlogPost[] = [
   {
     slug: "first-post",
@@ -46,3 +48,14 @@ export const placeholderPosts: BlogPost[] = [
     fr_url: "/fr/blog/ai-software",
   },
 ];
+
+// Get blog posts from MDX files, with fallback to placeholder posts (server-only)
+export function getBlogPosts(): BlogPost[] {
+  try {
+    const mdxPosts = getPostsMetadata();
+    return mdxPosts.length > 0 ? mdxPosts : placeholderPosts;
+  } catch (error) {
+    console.warn("Failed to load MDX posts, using placeholder posts:", error);
+    return placeholderPosts;
+  }
+}

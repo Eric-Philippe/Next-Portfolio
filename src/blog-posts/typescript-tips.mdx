@@ -1,0 +1,312 @@
+---
+title: "TypeScript Tips for Better Code"
+description: "Discover advanced TypeScript techniques that will help you write more robust, maintainable, and type-safe code. From utility types to advanced patterns."
+date: "2025-06-08"
+tags: ["TypeScript", "JavaScript", "Development", "Best Practices"]
+author: "Éric Philippe"
+published: true
+---
+
+# TypeScript Tips for Better Code
+
+TypeScript has become the de facto standard for building large-scale JavaScript applications. While many developers know the basics, there are advanced features and patterns that can significantly improve your code quality and developer experience.
+
+## Advanced Type Patterns
+
+### Utility Types
+
+TypeScript provides powerful utility types that can transform existing types:
+
+```typescript
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  createdAt: Date;
+}
+
+// Create types for different use cases
+type CreateUserInput = Omit<User, "id" | "createdAt">;
+type UserProfile = Pick<User, "id" | "name" | "email">;
+type UpdateUserInput = Partial<Pick<User, "name" | "email">>;
+
+// Make properties optional or required
+type OptionalUser = Partial<User>;
+type RequiredUser = Required<User>;
+```
+
+### Conditional Types
+
+Create types that depend on conditions:
+
+```typescript
+type ApiResponse<T> = T extends string
+  ? { message: T }
+  : T extends number
+    ? { count: T }
+    : { data: T };
+
+// Usage
+type StringResponse = ApiResponse<string>; // { message: string }
+type NumberResponse = ApiResponse<number>; // { count: number }
+type DataResponse = ApiResponse<User[]>; // { data: User[] }
+```
+
+### Template Literal Types
+
+Generate types from string patterns:
+
+```typescript
+type EventNames = "click" | "focus" | "blur";
+type EventHandlers = {
+  [K in EventNames as `on${Capitalize<K>}`]: (event: Event) => void;
+};
+
+// Results in:
+// {
+//   onClick: (event: Event) => void;
+//   onFocus: (event: Event) => void;
+//   onBlur: (event: Event) => void;
+// }
+```
+
+## Generic Patterns
+
+### Constrained Generics
+
+Limit generic types to specific constraints:
+
+```typescript
+interface Identifiable {
+  id: string;
+}
+
+function updateEntity<T extends Identifiable>(
+  entities: T[],
+  id: string,
+  updates: Partial<T>,
+): T[] {
+  return entities.map((entity) =>
+    entity.id === id ? { ...entity, ...updates } : entity,
+  );
+}
+```
+
+### Mapped Types
+
+Transform properties of existing types:
+
+```typescript
+type Getters<T> = {
+  [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K];
+};
+
+type UserGetters = Getters<User>;
+// Results in:
+// {
+//   getId: () => string;
+//   getName: () => string;
+//   getEmail: () => string;
+//   // ... etc
+// }
+```
+
+## Type Guards and Assertion Functions
+
+### Custom Type Guards
+
+Create functions that narrow types:
+
+```typescript
+function isUser(obj: unknown): obj is User {
+  return (
+    typeof obj === "object" &&
+    obj !== null &&
+    "id" in obj &&
+    "name" in obj &&
+    "email" in obj
+  );
+}
+
+// Usage
+function processData(data: unknown) {
+  if (isUser(data)) {
+    // TypeScript knows data is User here
+    console.log(data.name);
+  }
+}
+```
+
+### Assertion Functions
+
+Functions that assert a condition or throw:
+
+```typescript
+function assertIsNumber(value: unknown): asserts value is number {
+  if (typeof value !== "number") {
+    throw new Error("Expected number");
+  }
+}
+
+function calculateTax(amount: unknown) {
+  assertIsNumber(amount);
+  // TypeScript knows amount is number here
+  return amount * 0.1;
+}
+```
+
+## Advanced Function Types
+
+### Function Overloads
+
+Provide multiple type signatures for the same function:
+
+```typescript
+function createElement(tag: "div"): HTMLDivElement;
+function createElement(tag: "span"): HTMLSpanElement;
+function createElement(tag: "input"): HTMLInputElement;
+function createElement(tag: string): HTMLElement {
+  return document.createElement(tag);
+}
+
+// TypeScript provides precise return types
+const div = createElement("div"); // HTMLDivElement
+const span = createElement("span"); // HTMLSpanElement
+const input = createElement("input"); // HTMLInputElement
+```
+
+### Higher-Order Function Types
+
+Type functions that return other functions:
+
+```typescript
+type EventHandler<T> = (event: T) => void;
+type EventListenerAdder<T> = (handler: EventHandler<T>) => () => void;
+
+function createEventListener<T>(
+  element: EventTarget,
+  eventType: string,
+): EventListenerAdder<T> {
+  return (handler: EventHandler<T>) => {
+    const listener = (event: Event) => handler(event as T);
+    element.addEventListener(eventType, listener);
+
+    // Return cleanup function
+    return () => element.removeEventListener(eventType, listener);
+  };
+}
+```
+
+## Configuration and Environment
+
+### Environment Variables
+
+Type your environment variables:
+
+```typescript
+interface Environment {
+  NODE_ENV: "development" | "production" | "test";
+  API_URL: string;
+  DATABASE_URL: string;
+  JWT_SECRET: string;
+}
+
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv extends Environment {}
+  }
+}
+
+// Usage with validation
+function getConfig(): Environment {
+  const requiredVars: (keyof Environment)[] = [
+    "NODE_ENV",
+    "API_URL",
+    "DATABASE_URL",
+    "JWT_SECRET",
+  ];
+
+  for (const varName of requiredVars) {
+    if (!process.env[varName]) {
+      throw new Error(`Missing required environment variable: ${varName}`);
+    }
+  }
+
+  return process.env as Environment;
+}
+```
+
+## Best Practices
+
+### 1. Use `strict` Mode
+
+Always enable strict mode in your `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true
+  }
+}
+```
+
+### 2. Prefer Interfaces for Object Shapes
+
+```typescript
+// Prefer this
+interface User {
+  id: string;
+  name: string;
+}
+
+// Over this (for object shapes)
+type User = {
+  id: string;
+  name: string;
+};
+```
+
+### 3. Use Const Assertions
+
+```typescript
+const themes = ["light", "dark"] as const;
+type Theme = (typeof themes)[number]; // 'light' | 'dark'
+
+const config = {
+  apiUrl: "https://api.example.com",
+  timeout: 5000,
+} as const;
+// Properties are readonly and have literal types
+```
+
+### 4. Avoid `any`, Use `unknown`
+
+```typescript
+// Bad
+function processData(data: any) {
+  return data.someProperty;
+}
+
+// Good
+function processData(data: unknown) {
+  if (typeof data === "object" && data !== null && "someProperty" in data) {
+    return (data as { someProperty: unknown }).someProperty;
+  }
+  throw new Error("Invalid data structure");
+}
+```
+
+## Conclusion
+
+TypeScript's type system is incredibly powerful when used effectively. These advanced patterns and practices will help you:
+
+- Write more robust and maintainable code
+- Catch errors at compile time rather than runtime
+- Improve your development experience with better IntelliSense
+- Create more expressive and self-documenting APIs
+
+The key is to gradually adopt these patterns as your TypeScript skills grow. Start with the basics and progressively incorporate more advanced techniques as they become relevant to your projects.

@@ -1,0 +1,180 @@
+---
+title: "Building Modern React Applications"
+description: "Learn how to build scalable and maintainable React applications using modern tools and best practices. From state management to performance optimization."
+date: "2025-06-10"
+tags: ["React", "JavaScript", "Frontend", "Performance"]
+author: "Éric Philippe"
+published: true
+---
+
+# Building Modern React Applications
+
+React has revolutionized the way we build user interfaces, but with great power comes the need for great architecture. In this post, we'll explore the essential patterns and practices that make React applications scalable, maintainable, and performant.
+
+## Component Architecture
+
+The foundation of any great React application is its component architecture. Think of components as the building blocks of your UI - they should be:
+
+- **Single Responsibility**: Each component should have one clear purpose
+- **Composable**: Components should work well together
+- **Reusable**: Write once, use anywhere
+- **Testable**: Easy to test in isolation
+
+```typescript
+// Example of a well-structured component
+interface ButtonProps {
+  variant: 'primary' | 'secondary' | 'danger';
+  size: 'sm' | 'md' | 'lg';
+  loading?: boolean;
+  children: React.ReactNode;
+  onClick?: () => void;
+}
+
+export function Button({
+  variant = 'primary',
+  size = 'md',
+  loading = false,
+  children,
+  onClick
+}: ButtonProps) {
+  return (
+    <button
+      className={cn(
+        'rounded-lg font-medium transition-all duration-200',
+        variants[variant],
+        sizes[size],
+        loading && 'opacity-50 cursor-not-allowed'
+      )}
+      onClick={loading ? undefined : onClick}
+      disabled={loading}
+    >
+      {loading ? <Spinner /> : children}
+    </button>
+  );
+}
+```
+
+## State Management
+
+Modern React applications have several options for state management:
+
+### 1. Built-in React State
+
+For simple applications, `useState` and `useContext` are often sufficient:
+
+```typescript
+const UserContext = createContext<UserContextType | null>(null);
+
+export function UserProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  return (
+    <UserContext.Provider value={{ user, setUser, loading }}>
+      {children}
+    </UserContext.Provider>
+  );
+}
+```
+
+### 2. Zustand for Complex State
+
+For more complex applications, consider Zustand:
+
+```typescript
+import { create } from "zustand";
+
+interface TodoStore {
+  todos: Todo[];
+  addTodo: (text: string) => void;
+  toggleTodo: (id: string) => void;
+  removeTodo: (id: string) => void;
+}
+
+export const useTodoStore = create<TodoStore>((set) => ({
+  todos: [],
+  addTodo: (text) =>
+    set((state) => ({
+      todos: [...state.todos, { id: nanoid(), text, completed: false }],
+    })),
+  toggleTodo: (id) =>
+    set((state) => ({
+      todos: state.todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+      ),
+    })),
+  removeTodo: (id) =>
+    set((state) => ({
+      todos: state.todos.filter((todo) => todo.id !== id),
+    })),
+}));
+```
+
+## Performance Optimization
+
+Performance is crucial for user experience. Here are key strategies:
+
+### React.memo and useMemo
+
+```typescript
+const ExpensiveComponent = React.memo(({ data }: { data: ComplexData }) => {
+  const processedData = useMemo(() => {
+    return heavyDataProcessing(data);
+  }, [data]);
+
+  return <div>{/* Render processed data */}</div>;
+});
+```
+
+### Lazy Loading
+
+```typescript
+const LazyComponent = lazy(() => import('./LazyComponent'));
+
+function App() {
+  return (
+    <Suspense fallback={<LoadingSpinner />}>
+      <LazyComponent />
+    </Suspense>
+  );
+}
+```
+
+## Testing Strategy
+
+A robust testing strategy includes:
+
+1. **Unit Tests**: Test individual components and hooks
+2. **Integration Tests**: Test component interactions
+3. **E2E Tests**: Test complete user flows
+
+```typescript
+// Example unit test with Testing Library
+import { render, screen, fireEvent } from '@testing-library/react';
+import { Button } from './Button';
+
+test('calls onClick when clicked', () => {
+  const handleClick = jest.fn();
+  render(<Button onClick={handleClick}>Click me</Button>);
+
+  fireEvent.click(screen.getByRole('button'));
+
+  expect(handleClick).toHaveBeenCalledTimes(1);
+});
+```
+
+## Development Tools
+
+Essential tools for modern React development:
+
+- **TypeScript**: For type safety and better developer experience
+- **ESLint & Prettier**: For code quality and consistency
+- **Husky**: For pre-commit hooks
+- **Storybook**: For component documentation and testing
+- **React DevTools**: For debugging
+
+## Conclusion
+
+Building modern React applications requires thoughtful architecture, proper state management, performance optimization, and comprehensive testing. By following these practices, you'll create applications that are not only functional but also maintainable and scalable.
+
+Remember: the best architecture is the one that grows with your application's needs while keeping complexity manageable.

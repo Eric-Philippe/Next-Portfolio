@@ -4,9 +4,11 @@
  */
 import "./src/env.js";
 import createNextIntlPlugin from "next-intl/plugin";
+import createMDX from "@next/mdx";
 
 /** @type {import("next").NextConfig} */
 const config = {
+  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   images: {
     remotePatterns: [
       {
@@ -33,11 +35,24 @@ const config = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
     dangerouslyAllowSVG: true,
   },
 };
 
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
+});
+
 const withNextIntl = createNextIntlPlugin();
 
-export default withNextIntl(config);
+export default withNextIntl(withMDX(config));
