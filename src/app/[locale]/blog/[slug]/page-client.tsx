@@ -174,24 +174,30 @@ export default function BlogPostPageClient({
                 </motion.span>
               ))}
             </div>
-
             {/* Title */}
             <h1 className="mb-6 text-4xl leading-tight font-light tracking-tight md:text-5xl lg:text-6xl">
               {post.title}
-            </h1>
-
+            </h1>{" "}
             {/* Meta Info */}
             <div className="mb-8 flex flex-wrap items-center gap-6 text-slate-600">
               <div className="flex items-center gap-2">
                 <FiCalendar className="h-4 w-4" />
-                <span>{post.lastUpdated.toLocaleDateString()}</span>
+                <span>
+                  {post.lastUpdated.toLocaleDateString(
+                    resolvedParams.locale === "fr" ? "fr-FR" : "en-US",
+                    {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    },
+                  )}
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <FiClock className="h-4 w-4" />
                 <span>{post.readingTime} min read</span>
               </div>
             </div>
-
             {/* Author Info */}
             <motion.div
               className="flex items-center justify-between rounded-2xl border border-white/20 p-6 backdrop-blur-md"

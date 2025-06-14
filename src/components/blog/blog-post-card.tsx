@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { motion } from "framer-motion";
 import { FiCalendar, FiClock, FiArrowUpRight, FiGlobe } from "react-icons/fi";
 import type { BlogPost } from "~/types/portfolio";
 
 export function BlogPostCard({ post }: { post: BlogPost }) {
   const t = useTranslations("BlogPage");
+  const locale = useLocale();
 
   return (
     <motion.div
@@ -47,24 +48,28 @@ export function BlogPostCard({ post }: { post: BlogPost }) {
             </span>
           )}
         </div>
-
         {/* Title */}
         <h3 className="mb-3 line-clamp-2 text-xl font-semibold text-slate-900 transition-colors duration-300 group-hover:text-blue-600">
           {post.title}
         </h3>
-
         {/* Description */}
         <p className="mb-6 line-clamp-3 flex-grow text-sm leading-relaxed text-slate-600">
           {post.description}
-        </p>
-
+        </p>{" "}
         {/* Meta info */}
         <div className="mb-6 space-y-2 text-xs text-slate-500">
           <div className="flex items-center gap-2">
             <FiCalendar className="h-3 w-3 text-blue-500" />
             <span>
               {t("lastUpdated", {
-                date: post.lastUpdated.toLocaleDateString(),
+                date: post.lastUpdated.toLocaleDateString(
+                  locale === "fr" ? "fr-FR" : "en-US",
+                  {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  },
+                ),
               })}
             </span>
           </div>
@@ -73,7 +78,6 @@ export function BlogPostCard({ post }: { post: BlogPost }) {
             <span>{t("minutesRead", { count: post.readingTime })}</span>
           </div>
         </div>
-
         {/* Actions */}
         <div className="flex items-center justify-between border-t border-slate-200/50 pt-4">
           <Link
