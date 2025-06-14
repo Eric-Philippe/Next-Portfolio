@@ -31,7 +31,13 @@ export function MDXContent({ content, serializedContent }: MDXContentProps) {
 
     const serializeContent = async () => {
       try {
-        const serialized = await serialize(content);
+        const serialized = await serialize(content, {
+          mdxOptions: {
+            remarkPlugins: [],
+            rehypePlugins: [],
+            development: process.env.NODE_ENV === "development",
+          },
+        });
         setMdxSource(serialized);
       } catch (error) {
         console.error("Error serializing MDX content:", error);

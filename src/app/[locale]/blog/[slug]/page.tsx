@@ -38,7 +38,13 @@ export default async function BlogPostPage({ params }: Props) {
   let serializedContent: MDXRemoteSerializeResult | null = null;
   if (post?.content) {
     try {
-      serializedContent = await serialize(post.content);
+      serializedContent = await serialize(post.content, {
+        mdxOptions: {
+          remarkPlugins: [],
+          rehypePlugins: [],
+          development: process.env.NODE_ENV === "development",
+        },
+      });
     } catch (error) {
       console.error("Error serializing MDX content:", error);
     }

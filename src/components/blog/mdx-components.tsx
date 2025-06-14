@@ -163,26 +163,10 @@ export const mdxComponents = {
   ),
 
   img: ({ src, alt }: { src?: string; alt?: string }) => (
-    <motion.div
-      className="my-8"
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
-    >
-      <div
-        className="rounded-2xl border border-white/20 bg-white/60 p-4 backdrop-blur-md"
-        style={{
-          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.06)",
-        }}
-      >
-        <img src={src} alt={alt} className="h-auto w-full rounded-xl" />
-        {alt && (
-          <p className="mt-3 text-center text-sm text-slate-500 italic">
-            {alt}
-          </p>
-        )}
-      </div>
-    </motion.div>
+    <img
+      src={src}
+      alt={alt}
+      className="my-8 h-auto w-full rounded-xl shadow-lg"
+    />
   ),
 };
