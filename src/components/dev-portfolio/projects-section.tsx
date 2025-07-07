@@ -1,18 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ProjectCard from "./project-card";
 import { ALL_TAGS, getEmojiFromTag } from "../../lib/utils/tags";
-import { fetchProjects } from "../../lib/data/projects";
-import type { DevProject, DevProjectTags } from "../../types/portfolio";
+import type { EnhancedDevProject } from "~/lib/projects-service";
+import type { DevProjectTags } from "../../types/portfolio";
 import { useTranslations } from "next-intl";
 
 interface ProjectsSectionProps {
-  onProjectFocus: (index: number) => void;
+  onProjectFocus?: (index: number) => void; // Make optional
+  enhancedProjects: EnhancedDevProject[];
+  locale: string;
 }
 
 export default function ProjectsSection({
   onProjectFocus,
+  enhancedProjects,
+  locale: _locale,
 }: ProjectsSectionProps) {
   const [categoriesVisible, setCategoriesVisible] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<
@@ -20,28 +24,9 @@ export default function ProjectsSection({
   >(new Set());
   const [showAllProjects, setShowAllProjects] = useState(false);
   const [sortByDate, setSortByDate] = useState(false);
-  const [projects, setProjects] = useState<DevProject[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const INITIAL_PROJECTS_COUNT = 6;
 
   const t = useTranslations("DevPortfolio");
-  // Fetch projects on component mount
-  useEffect(() => {
-    const loadProjects = async () => {
-      setIsLoading(true);
-      try {
-        const projectsData = await fetchProjects();
-        setProjects(projectsData);
-      } catch (error) {
-        console.error("Error loading projects:", error);
-        setProjects([]);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    void loadProjects();
-  }, []);
 
   const toggleCategories = () => {
     setCategoriesVisible(!categoriesVisible);
@@ -72,7 +57,7 @@ export default function ProjectsSection({
   const isAllSelected = selectedCategories.size === 0;
 
   // Filter projects based on selected categories
-  let filteredProjects = projects.filter((project) =>
+  let filteredProjects = enhancedProjects.filter((project) =>
     selectedCategories.size === 0
       ? true
       : project.tags.some((tag) => selectedCategories.has(tag)),
@@ -336,16 +321,7 @@ export default function ProjectsSection({
                   </div>
                 </div>{" "}
                 {/* @PROJECTS */}
-                {isLoading ? (
-                  <div className="flex items-center justify-center py-16">
-                    <div className="flex flex-col items-center space-y-4">
-                      <div className="h-12 w-12 animate-spin rounded-full border-4 border-white/20 border-t-blue-500"></div>
-                      <p className="text-lg text-white/70">
-                        Loading projects...
-                      </p>
-                    </div>
-                  </div>
-                ) : projects.length === 0 ? (
+                {enhancedProjects.length === 0 ? (
                   <div className="flex items-center justify-center py-16">
                     <div className="flex flex-col items-center space-y-4">
                       <div className="text-6xl">😔</div>

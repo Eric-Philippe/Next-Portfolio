@@ -1,0 +1,157 @@
+---
+title: "Site Portfolio Moderne"
+description: "Une vitrine du développement web moderne avec Next.js, TypeScript et un design à la pointe"
+productDescription: "Ce site portfolio représente une vitrine complète des pratiques modernes de développement web. Construit avec la performance, l'accessibilité et l'expérience utilisateur à l'esprit, il propose une interface multilingue supportant l'anglais et le français, un système de blog dynamique, des galeries photo interactives et des animations fluides. Le design suit une esthétique minimaliste 'verre liquide' avec des dégradés subtils et des effets de glassmorphisme qui créent de la profondeur et un intérêt visuel tout en maintenant une excellente lisibilité et utilisabilité."
+heroImage: "/images/portfolio-hero.jpg"
+gallery:
+  - "/images/portfolio-1.jpg"
+  - "/images/portfolio-2.jpg"
+  - "/images/portfolio-3.jpg"
+liveUrl: "https://ericphilippe.dev"
+githubUrl: "https://github.com/Eric-Philippe/Next-Portfolio"
+techs:
+  - "Next.js"
+  - "TypeScript"
+  - "Tailwind CSS"
+  - "Framer Motion"
+  - "MDX"
+  - "next-intl"
+tags:
+  - "Développement Web"
+  - "Portfolio"
+  - "Full-Stack"
+  - "UI/UX"
+date: "2024-12-01"
+featured: true
+priority: 1
+published: true
+---
+
+## Aperçu de l'Architecture
+
+Ce portfolio est construit avec une stack technologique moderne qui privilégie la performance, la maintenabilité et l'expérience développeur.
+
+### Technologies Principales
+
+**Next.js 14** sert de fondation, fournissant :
+
+- App Router pour un routage et des layouts améliorés
+- Rendu côté serveur pour un SEO optimal
+- Génération de site statique pour des temps de chargement rapides
+- Optimisation d'images intégrée
+
+**TypeScript** assure la sécurité des types dans toute l'application, réduisant les bugs et améliorant l'expérience développeur avec un meilleur support IDE et autocomplétion.
+
+### Système de Style et Design
+
+Le design implémente une **esthétique verre liquide** utilisant :
+
+```css
+.glass-morphism {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+```
+
+**Tailwind CSS** fournit un style utility-first avec :
+
+- Palette de couleurs personnalisée pour un thème cohérent
+- Points de rupture de design responsive
+- Support mode sombre
+- Animations et transitions personnalisées
+
+### Système d'Animation
+
+**Framer Motion** alimente toutes les animations :
+
+- Transitions de page
+- Animations déclenchées par le défilement
+- États de survol interactifs
+- États de chargement et micro-interactions
+
+```tsx
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6 },
+};
+```
+
+## Internationalisation
+
+Le site supporte plusieurs langues en utilisant **next-intl** :
+
+### Routage Dynamique
+
+```
+/en/blog/[slug]
+/fr/blog/[slug]
+/en/tech/[slug]
+/fr/tech/[slug]
+```
+
+### Gestion du Contenu
+
+- Fichiers MDX séparés pour chaque locale
+- Système de fallback pour les traductions manquantes
+- Liens de langues alternatives optimisés pour le SEO
+
+## Système de Gestion de Contenu
+
+### Système de Blog
+
+Traitement MDX intégré avec :
+
+- Gray-matter pour l'analyse des métadonnées
+- Calcul du temps de lecture
+- Catégorisation par tags
+- Fonctionnalité de recherche
+
+### Vitrine Technologique
+
+Similaire au système de blog mais optimisé pour les vitrines de projets :
+
+- Descriptions axées sur le produit
+- Détails d'implémentation technique
+- Galeries d'images
+- Liens vers démo live et code source
+
+## Optimisations de Performance
+
+### Gestion des Images
+
+- Composant Image de Next.js pour optimisation automatique
+- Conversion WebP avec fallbacks
+- Chargement paresseux avec placeholders flous
+- Dimensionnement d'images responsives
+
+### Division du Code
+
+- Division du code basée sur les routes
+- Chargement paresseux au niveau des composants
+- Imports dynamiques pour les composants lourds
+
+### Fonctionnalités SEO
+
+- Génération automatique de sitemap
+- Balisage de données structurées
+- Meta tags Open Graph et Twitter Card
+- Structure HTML sémantique
+
+## Sécurité et Bonnes Pratiques
+
+### Sécurité des Types
+
+- Configuration TypeScript stricte
+- Validation des types à l'exécution pour les données externes
+- Limites d'erreur appropriées
+
+### Surveillance de Performance
+
+- Suivi des Core Web Vitals
+- Analyse de la taille des bundles
+- Intégration Lighthouse CI
+
+Ce portfolio démontre les pratiques modernes de développement web tout en maintenant un focus sur l'expérience utilisateur et la performance.

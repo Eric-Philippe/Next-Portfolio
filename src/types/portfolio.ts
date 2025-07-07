@@ -22,6 +22,12 @@ export interface DevProject {
   date: string;
   tags: DevProjectTags[];
   previewImg?: string;
+  slug?: string; // Add slug for linking to tech details
+}
+
+export interface EnhancedDevProject extends DevProject {
+  hasDetailPage?: boolean;
+  techPostSlug?: string;
 }
 
 export type AlbumCategory =

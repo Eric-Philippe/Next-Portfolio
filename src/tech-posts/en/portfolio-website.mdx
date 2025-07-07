@@ -1,0 +1,157 @@
+---
+title: "Modern Portfolio Website"
+description: "A showcase of modern web development with Next.js, TypeScript, and cutting-edge design"
+productDescription: "This portfolio website represents a comprehensive showcase of modern web development practices. Built with performance, accessibility, and user experience in mind, it features a multilingual interface supporting both English and French, dynamic blog system, interactive photo galleries, and smooth animations. The design follows a minimalist 'liquid glass' aesthetic with subtle gradients and glass-morphism effects that create depth and visual interest while maintaining excellent readability and usability."
+heroImage: "/images/portfolio-hero.jpg"
+gallery:
+  - "/images/portfolio-1.jpg"
+  - "/images/portfolio-2.jpg"
+  - "/images/portfolio-3.jpg"
+liveUrl: "https://ericphilippe.dev"
+githubUrl: "https://github.com/Eric-Philippe/Next-Portfolio"
+techs:
+  - "Next.js"
+  - "TypeScript"
+  - "Tailwind CSS"
+  - "Framer Motion"
+  - "MDX"
+  - "next-intl"
+tags:
+  - "Web Development"
+  - "Portfolio"
+  - "Full-Stack"
+  - "UI/UX"
+date: "2024-12-01"
+featured: true
+priority: 1
+published: true
+---
+
+## Architecture Overview
+
+This portfolio is built using a modern tech stack that prioritizes performance, maintainability, and developer experience.
+
+### Core Technologies
+
+**Next.js 14** serves as the foundation, providing:
+
+- App Router for improved routing and layouts
+- Server-side rendering for optimal SEO
+- Static site generation for fast loading times
+- Built-in image optimization
+
+**TypeScript** ensures type safety throughout the application, reducing bugs and improving developer experience with better IDE support and autocomplete.
+
+### Styling & Design System
+
+The design implements a **liquid glass aesthetic** using:
+
+```css
+.glass-morphism {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+```
+
+**Tailwind CSS** provides utility-first styling with:
+
+- Custom color palette for consistent theming
+- Responsive design breakpoints
+- Dark mode support
+- Custom animations and transitions
+
+### Animation System
+
+**Framer Motion** powers all animations:
+
+- Page transitions
+- Scroll-triggered animations
+- Interactive hover states
+- Loading states and micro-interactions
+
+```tsx
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6 },
+};
+```
+
+## Internationalization
+
+The site supports multiple languages using **next-intl**:
+
+### Dynamic Routing
+
+```
+/en/blog/[slug]
+/fr/blog/[slug]
+/en/tech/[slug]
+/fr/tech/[slug]
+```
+
+### Content Management
+
+- Separate MDX files for each locale
+- Fallback system for missing translations
+- SEO-optimized alternate language links
+
+## Content Management System
+
+### Blog System
+
+Built-in MDX processing with:
+
+- Gray-matter for frontmatter parsing
+- Reading time calculation
+- Tag categorization
+- Search functionality
+
+### Tech Showcase
+
+Similar to the blog system but optimized for project showcases:
+
+- Product-focused descriptions
+- Technical implementation details
+- Image galleries
+- Live demo and source code links
+
+## Performance Optimizations
+
+### Image Handling
+
+- Next.js Image component for automatic optimization
+- WebP conversion with fallbacks
+- Lazy loading with blur placeholders
+- Responsive image sizing
+
+### Code Splitting
+
+- Route-based code splitting
+- Component-level lazy loading
+- Dynamic imports for heavy components
+
+### SEO Features
+
+- Automatic sitemap generation
+- Structured data markup
+- Open Graph and Twitter Card meta tags
+- Semantic HTML structure
+
+## Security & Best Practices
+
+### Type Safety
+
+- Strict TypeScript configuration
+- Runtime type validation for external data
+- Proper error boundaries
+
+### Performance Monitoring
+
+- Core Web Vitals tracking
+- Bundle size analysis
+- Lighthouse CI integration
+
+This portfolio demonstrates modern web development practices while maintaining a focus on user experience and performance.
