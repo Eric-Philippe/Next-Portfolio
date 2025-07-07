@@ -34,6 +34,7 @@ export default function BlogPageClient({ posts }: Props) {
       transition: {
         staggerChildren: 0.08,
         delayChildren: 0.2,
+        duration: 0.6,
       },
     },
   };
@@ -43,10 +44,6 @@ export default function BlogPageClient({ posts }: Props) {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
-      },
     },
   };
 
