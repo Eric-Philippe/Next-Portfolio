@@ -3,19 +3,18 @@
 import { useState } from "react";
 import ProjectCard from "./project-card";
 import { ALL_TAGS, getEmojiFromTag } from "../../lib/utils/tags";
-import type { EnhancedDevProject } from "~/lib/projects-service";
-import type { DevProjectTags } from "../../types/portfolio";
+import type { DevProject, DevProjectTags } from "../../types/portfolio";
 import { useTranslations } from "next-intl";
 
 interface ProjectsSectionProps {
   onProjectFocus?: (index: number) => void; // Make optional
-  enhancedProjects: EnhancedDevProject[];
+  devProjects: DevProject[];
   locale: string;
 }
 
 export default function ProjectsSection({
   onProjectFocus,
-  enhancedProjects,
+  devProjects,
   locale: _locale,
 }: ProjectsSectionProps) {
   const [categoriesVisible, setCategoriesVisible] = useState(false);
@@ -57,7 +56,7 @@ export default function ProjectsSection({
   const isAllSelected = selectedCategories.size === 0;
 
   // Filter projects based on selected categories
-  let filteredProjects = enhancedProjects.filter((project) =>
+  let filteredProjects = devProjects.filter((project) =>
     selectedCategories.size === 0
       ? true
       : project.tags.some((tag) => selectedCategories.has(tag)),
@@ -321,7 +320,7 @@ export default function ProjectsSection({
                   </div>
                 </div>{" "}
                 {/* @PROJECTS */}
-                {enhancedProjects.length === 0 ? (
+                {devProjects.length === 0 ? (
                   <div className="flex items-center justify-center py-16">
                     <div className="flex flex-col items-center space-y-4">
                       <div className="text-6xl">😔</div>

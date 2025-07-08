@@ -2,15 +2,15 @@
 
 import { useState } from "react";
 import { FaPlus } from "react-icons/fa";
-import type { EnhancedDevProject } from "~/lib/projects-service";
 import { formatDevProjectDate, getTechColor } from "../../lib/utils/utils";
 import { getTagsFromString } from "../../lib/utils/tags";
 import Image from "next/image";
 import { useLocale } from "next-intl";
 import Link from "next/link";
+import type { DevProject } from "~/types/portfolio";
 
 interface ProjectCardProps {
-  project: EnhancedDevProject;
+  project: DevProject;
   onFocus?: (index: number) => void; // Make optional for backward compatibility
   index: number;
 }

@@ -4,8 +4,6 @@ import LoadingSpinner from "~/components/common/loading-spinner";
 import { Header } from "~/components/common/header";
 import DevPortfolio from "~/components/dev-portfolio";
 import { fetchProjects } from "~/lib/data/projects";
-import { getAllTechPostSlugs } from "~/lib/tech-utils";
-import { enhanceProjectsWithTechPosts } from "~/lib/projects-service";
 
 interface Props {
   params: Promise<{
@@ -19,23 +17,14 @@ export default async function TechPage({ params }: Props) {
   const secondColor = "#ed4f51";
 
   // Fetch data server-side
-  const [apiProjects, techPostSlugs] = await Promise.all([
-    fetchProjects(),
-    getAllTechPostSlugs(),
-  ]);
-
-  // Enhance projects with tech post information
-  const enhancedProjects = enhanceProjectsWithTechPosts(
-    apiProjects,
-    techPostSlugs,
-  );
+  const [apiProjects] = await Promise.all([fetchProjects()]);
 
   return (
     <PortfolioProvider>
       <Header firstColor={firstColor} secondColor={secondColor} />
       <Suspense fallback={<LoadingSpinner />}>
         <DevPortfolio
-          enhancedProjects={enhancedProjects}
+          devProjects={apiProjects}
           locale={resolvedParams.locale}
         />
       </Suspense>

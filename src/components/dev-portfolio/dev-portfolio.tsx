@@ -5,21 +5,21 @@ import ProjectsSection from "./projects-section";
 import SkillsSection from "./skills-section";
 import AboutSection from "./about-section";
 import ContactSection from "./contact-section";
-import type { EnhancedDevProject } from "~/lib/projects-service";
+import type { DevProject } from "~/types/portfolio";
 
 interface DevPortfolioProps {
-  enhancedProjects: EnhancedDevProject[];
+  devProjects: DevProject[];
   locale: string;
 }
 
 export default function DevPortfolio({
-  enhancedProjects,
+  devProjects,
   locale,
 }: DevPortfolioProps) {
   return (
     <div className="min-h-screen text-white">
       <DevHead />
-      <ProjectsSection enhancedProjects={enhancedProjects} locale={locale} />
+      <ProjectsSection devProjects={devProjects} locale={locale} />
       <SkillsSection />
       <AboutSection />
       <ContactSection />

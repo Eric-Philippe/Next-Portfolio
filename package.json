@@ -14,7 +14,8 @@
     "preview": "next build && next start",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "i18n:validate": "node scripts/validate-translations.cjs"
+    "i18n:validate": "node scripts/validate-translations.cjs",
+    "knip": "knip"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.6.1",
@@ -48,16 +49,17 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@tailwindcss/postcss": "^4.0.15",
-    "@types/node": "^20.14.10",
+    "@types/node": "^20.19.4",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "eslint": "^9.23.0",
     "eslint-config-next": "^15.2.3",
+    "knip": "^5.61.3",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^4.0.15",
-    "typescript": "^5.8.2",
+    "typescript": "^5.8.3",
     "typescript-eslint": "^8.27.0"
   },
   "ct3aMetadata": {
