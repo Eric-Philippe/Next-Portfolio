@@ -36,15 +36,6 @@ export function enhanceProjectsWithTechPosts(
       }
     }
 
-    // Manual mappings for specific projects
-    if (
-      (project.en.title.includes("Portfolio") ||
-        project.en.title.includes("portfolio")) &&
-      techPostSlugSet.has("portfolio-website")
-    ) {
-      matchingSlug = "portfolio-website";
-    }
-
     return {
       ...project,
       slug: matchingSlug ?? undefined,

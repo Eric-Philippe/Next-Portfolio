@@ -522,7 +522,7 @@ export default function TechPostPageClient({ params, post }: Props) {
                   </div>
                   {post.content ? (
                     <div className="prose prose-lg prose-invert max-w-none">
-                      <MDXContent content={post.content} />
+                      <MDXContent content={post.content} theme="dark" />
                     </div>
                   ) : (
                     <div className="prose prose-lg max-w-none text-slate-400">

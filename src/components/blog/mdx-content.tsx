@@ -1,21 +1,24 @@
 "use client";
 
 import React, { useMemo } from "react";
-import { mdxComponents } from "./mdx-components";
+import { createMdxComponents } from "./mdx-components";
+
+type Theme = "light" | "dark";
 
 interface MDXContentProps {
   content?: string;
   serializedContent?: unknown;
+  theme?: Theme;
 }
 
 // Simple MDX renderer using MDX components
-function useMDXComponent(code: string) {
+function useMDXComponent(code: string, theme: Theme = "light") {
   return useMemo(() => {
     if (!code) return null;
 
     try {
       // Parse markdown and create React elements using mdxComponents
-      const content = parseMarkdownToReact(code);
+      const content = parseMarkdownToReact(code, theme);
 
       // Return a component that renders the parsed content
       const MDXComponent = () => (
@@ -28,20 +31,26 @@ function useMDXComponent(code: string) {
       console.error("Error creating MDX component:", error);
       const ErrorComponent = () => (
         <div className="prose prose-lg max-w-none">
-          <p className="text-slate-600">Error loading content.</p>
+          <p className={theme === "dark" ? "text-slate-400" : "text-slate-600"}>
+            Error loading content.
+          </p>
         </div>
       );
 
       ErrorComponent.displayName = "MDXErrorComponent";
       return ErrorComponent;
     }
-  }, [code]);
+  }, [code, theme]);
 }
 
 // Parse markdown and convert to React elements using mdxComponents
-function parseMarkdownToReact(markdown: string): React.ReactNode[] {
+function parseMarkdownToReact(
+  markdown: string,
+  theme: Theme = "light",
+): React.ReactNode[] {
   if (!markdown) return [];
 
+  const mdxComponents = createMdxComponents(theme);
   const lines = markdown.split("\n");
   const elements: React.ReactNode[] = [];
   let currentParagraph: string[] = [];
@@ -57,7 +66,7 @@ function parseMarkdownToReact(markdown: string): React.ReactNode[] {
       if (text) {
         elements.push(
           <mdxComponents.p key={elementKey++}>
-            {parseInlineElements(text)}
+            {parseInlineElements(text, mdxComponents)}
           </mdxComponents.p>,
         );
       }
@@ -71,7 +80,7 @@ function parseMarkdownToReact(markdown: string): React.ReactNode[] {
         <mdxComponents.ul key={elementKey++}>
           {listItems.map((item, index) => (
             <mdxComponents.li key={index}>
-              {parseInlineElements(item)}
+              {parseInlineElements(item, mdxComponents)}
             </mdxComponents.li>
           ))}
         </mdxComponents.ul>,
@@ -120,7 +129,7 @@ function parseMarkdownToReact(markdown: string): React.ReactNode[] {
       flushList();
       elements.push(
         <mdxComponents.h1 key={elementKey++}>
-          {parseInlineElements(line.slice(2))}
+          {parseInlineElements(line.slice(2), mdxComponents)}
         </mdxComponents.h1>,
       );
       continue;
@@ -131,7 +140,7 @@ function parseMarkdownToReact(markdown: string): React.ReactNode[] {
       flushList();
       elements.push(
         <mdxComponents.h2 key={elementKey++}>
-          {parseInlineElements(line.slice(3))}
+          {parseInlineElements(line.slice(3), mdxComponents)}
         </mdxComponents.h2>,
       );
       continue;
@@ -142,7 +151,7 @@ function parseMarkdownToReact(markdown: string): React.ReactNode[] {
       flushList();
       elements.push(
         <mdxComponents.h3 key={elementKey++}>
-          {parseInlineElements(line.slice(4))}
+          {parseInlineElements(line.slice(4), mdxComponents)}
         </mdxComponents.h3>,
       );
       continue;
@@ -154,7 +163,7 @@ function parseMarkdownToReact(markdown: string): React.ReactNode[] {
       flushList();
       elements.push(
         <mdxComponents.blockquote key={elementKey++}>
-          {parseInlineElements(line.slice(2))}
+          {parseInlineElements(line.slice(2), mdxComponents)}
         </mdxComponents.blockquote>,
       );
       continue;
@@ -188,7 +197,10 @@ function parseMarkdownToReact(markdown: string): React.ReactNode[] {
 }
 
 // Parse inline elements (bold, italic, links, etc.)
-function parseInlineElements(text: string): React.ReactNode[] {
+function parseInlineElements(
+  text: string,
+  mdxComponents: ReturnType<typeof createMdxComponents>,
+): React.ReactNode[] {
   const elements: React.ReactNode[] = [];
   let remaining = text;
   let elementKey = 0;
@@ -275,13 +287,19 @@ function parseInlineElements(text: string): React.ReactNode[] {
   return elements;
 }
 
-export function MDXContent({ content, serializedContent }: MDXContentProps) {
-  const MDXComponent = useMDXComponent(content ?? "");
+export function MDXContent({
+  content,
+  serializedContent,
+  theme = "light",
+}: MDXContentProps) {
+  const MDXComponent = useMDXComponent(content ?? "", theme);
 
   if (!content && !serializedContent) {
     return (
       <div className="prose prose-lg max-w-none">
-        <p className="text-slate-600">No content available.</p>
+        <p className={theme === "dark" ? "text-slate-400" : "text-slate-600"}>
+          No content available.
+        </p>
       </div>
     );
   }
@@ -290,9 +308,15 @@ export function MDXContent({ content, serializedContent }: MDXContentProps) {
     return (
       <div className="prose prose-lg max-w-none">
         <div className="animate-pulse space-y-4">
-          <div className="h-4 w-3/4 rounded bg-slate-200"></div>
-          <div className="h-4 w-1/2 rounded bg-slate-200"></div>
-          <div className="h-4 w-5/6 rounded bg-slate-200"></div>
+          <div
+            className={`h-4 w-3/4 rounded ${theme === "dark" ? "bg-slate-700" : "bg-slate-200"}`}
+          ></div>
+          <div
+            className={`h-4 w-1/2 rounded ${theme === "dark" ? "bg-slate-700" : "bg-slate-200"}`}
+          ></div>
+          <div
+            className={`h-4 w-5/6 rounded ${theme === "dark" ? "bg-slate-700" : "bg-slate-200"}`}
+          ></div>
         </div>
       </div>
     );
