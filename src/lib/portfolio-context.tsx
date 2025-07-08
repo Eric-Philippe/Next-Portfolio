@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useState, type ReactNode } from "react";
 
 interface PortfolioContextType {
   focusedProject: number | null;
@@ -24,12 +24,4 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
       {children}
     </PortfolioContext.Provider>
   );
-}
-
-export function usePortfolio() {
-  const context = useContext(PortfolioContext);
-  if (context === undefined) {
-    throw new Error("usePortfolio must be used within a PortfolioProvider");
-  }
-  return context;
 }

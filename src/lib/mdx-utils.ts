@@ -7,7 +7,7 @@ import type { BlogPost } from "~/types/portfolio";
 
 const postsDirectory = path.join(process.cwd(), "src/blog-posts");
 
-export interface BlogPostMeta {
+interface BlogPostMeta {
   title: string;
   description: string;
   date: string;
@@ -23,7 +23,7 @@ export interface BlogPostWithContent extends BlogPost {
   locale: string;
 }
 
-export interface BlogPostGroup {
+interface BlogPostGroup {
   slug: string;
   locales: Record<string, BlogPostWithContent>;
   // Use the first available locale's data for display

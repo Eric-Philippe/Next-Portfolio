@@ -10,7 +10,7 @@ import type { DevProjectTags } from "~/types/portfolio";
  * @property {string} secColor - The secondary color of the tag
  * @property {string} secGradientColor - The secondary gradient color of the tag
  */
-export type Tags = {
+type Tags = {
   name: string;
   type: DevProjectTags;
   emoji: string;

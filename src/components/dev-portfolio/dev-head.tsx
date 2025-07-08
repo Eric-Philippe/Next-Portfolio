@@ -6,7 +6,6 @@ import { ParticlesDesign } from "../common/particles";
 import { useTranslations } from "next-intl";
 import { getMyAge } from "~/lib/utils/utils";
 
-// Color palette from your original design
 const DEV_COLOR_PALETTE = {
   first: "#9867f0",
   second: "#ed4e50",
@@ -43,7 +42,6 @@ export default function DevHead() {
 
       {/* Gradient Background with animated elements */}
       <div className="relative z-10">
-        {/* Animated circles similar to your original design */}
         <motion.div
           className="absolute h-96 w-96 rounded-full opacity-20"
           style={{

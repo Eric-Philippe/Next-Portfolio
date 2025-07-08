@@ -6,7 +6,7 @@ import readingTime from "reading-time";
 
 const techPostsDirectory = path.join(process.cwd(), "src/tech-posts");
 
-export interface TechPostMeta {
+interface TechPostMeta {
   title: string;
   description: string;
   productDescription: string;
@@ -40,7 +40,7 @@ export interface TechPostWithContent {
   locale: string;
 }
 
-export interface TechPostGroup {
+interface TechPostGroup {
   slug: string;
   locales: Record<string, TechPostWithContent>;
   title: string;
