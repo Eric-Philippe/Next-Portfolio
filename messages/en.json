@@ -103,6 +103,8 @@
       "backToProjects": "Back to Projects",
       "productOverview": "Product Overview",
       "technicalDetails": "Technical Details",
+      "smProductOverview": "Project",
+      "smTechnicalDetails": "Technical",
       "descriptionTitle": "What is this project ?",
       "galleryTitle": "Project Gallery",
       "technologiesUsed": "Technologies Used",

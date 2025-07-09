@@ -134,73 +134,76 @@ export default function ShareButton({
         )}
 
       {/* Toast */}
-      {showToast && (
-        <div
-          style={{
-            position: "fixed",
-            top: "24px",
-            right: "24px",
-            background: darkMode
-              ? "linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(5, 150, 105, 0.35))"
-              : "linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.95))",
-            backdropFilter: "blur(20px)",
-            WebkitBackdropFilter: "blur(20px)",
-            border: darkMode
-              ? "1px solid rgba(255, 255, 255, 0.2)"
-              : "1px solid rgba(16, 185, 129, 0.2)",
-            borderRadius: "16px",
-            padding: "16px 20px",
-            zIndex: 999999,
-            fontSize: "14px",
-            fontWeight: "500",
-            color: darkMode ? "white" : "#059669",
-            boxShadow: darkMode
-              ? "0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(16, 185, 129, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
-              : "0 8px 32px rgba(16, 185, 129, 0.15), 0 2px 8px rgba(16, 185, 129, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)",
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            minWidth: "280px",
-            transform: showToast ? "translateX(0)" : "translateX(100%)",
-            opacity: showToast ? 1 : 0,
-            transition: "all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
-          }}
-        >
+      {showToast &&
+        typeof document !== "undefined" &&
+        createPortal(
           <div
             style={{
-              width: "20px",
-              height: "20px",
-              borderRadius: "50%",
-              background: "linear-gradient(135deg, #10b981, #059669)",
+              position: "fixed",
+              top: "25px",
+              right: "25px",
+              background: darkMode
+                ? "linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(5, 150, 105, 0.35))"
+                : "linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.95))",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+              border: darkMode
+                ? "1px solid rgba(255, 255, 255, 0.2)"
+                : "1px solid rgba(16, 185, 129, 0.2)",
+              borderRadius: "16px",
+              padding: "16px 20px",
+              zIndex: 999999,
+              fontSize: "14px",
+              fontWeight: "500",
+              color: darkMode ? "white" : "#059669",
+              boxShadow: darkMode
+                ? "0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(16, 185, 129, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
+                : "0 8px 32px rgba(16, 185, 129, 0.15), 0 2px 8px rgba(16, 185, 129, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)",
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
-              fontSize: "12px",
-              flexShrink: 0,
-              boxShadow: darkMode
-                ? "0 2px 8px rgba(16, 185, 129, 0.4)"
-                : "0 2px 8px rgba(16, 185, 129, 0.3), 0 0 0 3px rgba(16, 185, 129, 0.1)",
-              color: "white",
+              gap: "8px",
+              minWidth: "280px",
+              transform: showToast ? "translateX(0)" : "translateX(100%)",
+              opacity: showToast ? 1 : 0,
+              transition: "all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
             }}
           >
-            ✓
-          </div>
-          <span style={{ flex: 1, fontWeight: darkMode ? "500" : "600" }}>
-            {t("copied")}
-          </span>
-          <div
-            style={{
-              width: "4px",
-              height: "4px",
-              borderRadius: "50%",
-              background: darkMode
-                ? "rgba(255, 255, 255, 0.6)"
-                : "rgba(16, 185, 129, 0.7)",
-              animation: "pulse 2s infinite",
-            }}
-          />
-        </div>
-      )}
+            <div
+              style={{
+                width: "20px",
+                height: "20px",
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, #10b981, #059669)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "12px",
+                flexShrink: 0,
+                boxShadow: darkMode
+                  ? "0 2px 8px rgba(16, 185, 129, 0.4)"
+                  : "0 2px 8px rgba(16, 185, 129, 0.3), 0 0 0 3px rgba(16, 185, 129, 0.1)",
+                color: "white",
+              }}
+            >
+              ✓
+            </div>
+            <span style={{ flex: 1, fontWeight: darkMode ? "500" : "600" }}>
+              {t("copied")}
+            </span>
+            <div
+              style={{
+                width: "4px",
+                height: "4px",
+                borderRadius: "50%",
+                background: darkMode
+                  ? "rgba(255, 255, 255, 0.6)"
+                  : "rgba(16, 185, 129, 0.7)",
+                animation: "pulse 2s infinite",
+              }}
+            />
+          </div>,
+          document.body,
+        )}
     </>
   );
 }

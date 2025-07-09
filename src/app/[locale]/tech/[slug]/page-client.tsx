@@ -5,13 +5,9 @@ import { Header } from "~/components/common/header";
 import { useState, use } from "react";
 import {
   FiArrowLeft,
-  FiShare2,
   FiClock,
   FiCalendar,
   FiTag,
-  FiTwitter,
-  FiLinkedin,
-  FiLink,
   FiExternalLink,
   FiGithub,
   FiMonitor,
@@ -75,24 +71,6 @@ export default function TechPostPageClient({ params, post }: Props) {
 
   const shareUrl = typeof window !== "undefined" ? window.location.href : "";
   const shareText = `Check out this project: ${post.title}`;
-
-  const handleShare = (platform: string) => {
-    let url = "";
-    switch (platform) {
-      case "twitter":
-        url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
-        break;
-      case "linkedin":
-        url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
-        break;
-      case "copy":
-        void navigator.clipboard.writeText(shareUrl);
-        setShareMenuOpen(false);
-        return;
-    }
-    if (url) window.open(url, "_blank");
-    setShareMenuOpen(false);
-  };
 
   return (
     <PortfolioProvider>
@@ -207,12 +185,12 @@ export default function TechPostPageClient({ params, post }: Props) {
             </div>
 
             {/* Title */}
-            <h1 className="mb-6 text-4xl leading-tight font-light tracking-tight md:text-5xl lg:text-6xl">
+            <h1 className="mb-6 text-3xl leading-tight font-light tracking-tight md:text-4xl lg:text-5xl xl:text-6xl">
               {post.title}
             </h1>
 
             {/* Meta Info */}
-            <div className="mb-8 flex flex-wrap items-center gap-6 text-slate-400">
+            <div className="mb-8 flex flex-col items-start gap-4 text-slate-400 sm:flex-row sm:items-center sm:gap-6">
               <div className="flex items-center gap-2">
                 <FiCalendar className="h-4 w-4" />
                 <span>
@@ -234,7 +212,7 @@ export default function TechPostPageClient({ params, post }: Props) {
 
             {/* Project Links & Actions */}
             <motion.div
-              className="flex items-center justify-between rounded-2xl border border-white/10 p-6 backdrop-blur-md"
+              className="flex flex-col gap-6 rounded-2xl border border-white/10 p-6 backdrop-blur-md md:flex-row md:items-center md:justify-between"
               style={{
                 background: "rgba(255, 255, 255, 0.05)",
                 boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
@@ -244,7 +222,7 @@ export default function TechPostPageClient({ params, post }: Props) {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <div className="flex items-center gap-4">
-                <div className="relative">
+                <div className="relative flex-shrink-0">
                   <Image
                     src="https://avatars.githubusercontent.com/u/66321178?v=4"
                     alt="Éric Philippe"
@@ -254,7 +232,7 @@ export default function TechPostPageClient({ params, post }: Props) {
                   />
                   <div className="absolute -right-1 -bottom-1 h-4 w-4 rounded-full border-2 border-white bg-green-500" />
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <h3 className="font-medium text-white">Éric Philippe</h3>
                   <p className="text-sm text-slate-400">
                     Full-Stack Developer & Designer
@@ -263,7 +241,7 @@ export default function TechPostPageClient({ params, post }: Props) {
               </div>
 
               {/* Project Links & Actions */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center gap-3 md:justify-end">
                 {post.liveUrl && (
                   <motion.a
                     href={post.liveUrl}
@@ -320,25 +298,29 @@ export default function TechPostPageClient({ params, post }: Props) {
             >
               <button
                 onClick={() => setActiveSection("product")}
-                className={`flex flex-1 items-center justify-center gap-2 rounded-xl px-6 py-3 font-medium transition-all duration-300 ${
+                className={`flex flex-1 items-center justify-center gap-2 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-300 md:px-6 md:text-base ${
                   activeSection === "product"
                     ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg"
                     : "text-slate-400 hover:bg-white/5 hover:text-white"
                 }`}
               >
                 <FiMonitor className="h-4 w-4" />
-                {t("productOverview")}
+                <span className="hidden sm:inline">{t("productOverview")}</span>
+                <span className="sm:hidden">{t("smProductOverview")}</span>
               </button>
               <button
                 onClick={() => setActiveSection("tech")}
-                className={`flex flex-1 items-center justify-center gap-2 rounded-xl px-6 py-3 font-medium transition-all duration-300 ${
+                className={`flex flex-1 items-center justify-center gap-2 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-300 md:px-6 md:text-base ${
                   activeSection === "tech"
                     ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg"
                     : "text-slate-400 hover:bg-white/5 hover:text-white"
                 }`}
               >
                 <FiCode className="h-4 w-4" />
-                {t("technicalDetails")}
+                <span className="hidden sm:inline">
+                  {t("technicalDetails")}
+                </span>
+                <span className="sm:hidden">{t("smTechnicalDetails")}</span>
               </button>
             </div>
           </motion.div>
@@ -393,7 +375,7 @@ export default function TechPostPageClient({ params, post }: Props) {
                         {t("galleryTitle")}
                       </h2>
                     </div>
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                       {post.gallery.map((image, index) => (
                         <motion.div
                           key={index}
@@ -437,11 +419,11 @@ export default function TechPostPageClient({ params, post }: Props) {
                       {t("technologiesUsed")}
                     </h2>
                   </div>
-                  <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+                  <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                     {post.techs.map((tech, index) => (
                       <motion.div
                         key={tech}
-                        className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm transition-all duration-300 hover:bg-white/10"
+                        className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 p-3 backdrop-blur-sm transition-all duration-300 hover:bg-white/10 md:gap-3 md:p-4"
                         style={{
                           borderColor: `${getTechColor(tech)}40`,
                           background: `linear-gradient(135deg, ${getTechColor(tech)}10, rgba(255, 255, 255, 0.05))`,
@@ -451,10 +433,12 @@ export default function TechPostPageClient({ params, post }: Props) {
                         transition={{ duration: 0.4, delay: index * 0.1 }}
                       >
                         <div
-                          className="h-3 w-3 rounded-full"
+                          className="h-2 w-2 flex-shrink-0 rounded-full md:h-3 md:w-3"
                           style={{ backgroundColor: getTechColor(tech) }}
                         />
-                        <span className="font-medium text-white">{tech}</span>
+                        <span className="text-sm font-medium text-white md:text-base">
+                          {tech}
+                        </span>
                       </motion.div>
                     ))}
                   </div>
@@ -492,7 +476,7 @@ export default function TechPostPageClient({ params, post }: Props) {
 
           {/* Navigation */}
           <motion.div
-            className="flex items-center justify-between border-t border-white/10 pt-8"
+            className="flex flex-col-reverse items-center justify-between gap-4 border-t border-white/10 pt-8 md:flex-row md:gap-0"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
@@ -505,7 +489,7 @@ export default function TechPostPageClient({ params, post }: Props) {
               {t("backToProjects")}
             </Link>
 
-            <div className="text-sm text-slate-400">
+            <div className="text-center text-sm text-slate-400 md:text-right">
               {t("thanksForChecking")}
             </div>
           </motion.div>
