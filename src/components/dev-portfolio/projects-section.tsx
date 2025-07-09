@@ -7,13 +7,11 @@ import type { DevProject, DevProjectTags } from "../../types/portfolio";
 import { useTranslations } from "next-intl";
 
 interface ProjectsSectionProps {
-  onProjectFocus?: (index: number) => void; // Make optional
   devProjects: DevProject[];
   locale: string;
 }
 
 export default function ProjectsSection({
-  onProjectFocus,
   devProjects,
   locale: _locale,
 }: ProjectsSectionProps) {
@@ -348,11 +346,7 @@ export default function ProjectsSection({
                           animationFillMode: "both",
                         }}
                       >
-                        <ProjectCard
-                          project={project}
-                          onFocus={onProjectFocus}
-                          index={index}
-                        />
+                        <ProjectCard project={project} />
                       </div>
                     ))}
                   </div>

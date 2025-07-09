@@ -11,29 +11,17 @@ import type { DevProject } from "~/types/portfolio";
 
 interface ProjectCardProps {
   project: DevProject;
-  onFocus?: (index: number) => void; // Make optional for backward compatibility
-  index: number;
 }
 
-export default function ProjectCard({
-  project,
-  onFocus,
-  index,
-}: ProjectCardProps) {
+const getProjectLink = (link: string) => {
+  // If the link starts with "http" or "https", return it as is
+  if (link.startsWith("http://") || link.startsWith("https://")) return link;
+  return `/tech${link}`;
+};
+
+export default function ProjectCard({ project }: ProjectCardProps) {
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   const locale = useLocale() as "en" | "fr";
-
-  const handleClick = () => {
-    // If project has a slug, navigate to tech details page
-    if (project.slug) {
-      // Navigation will be handled by the Link component
-      return;
-    }
-    // Otherwise, use the old focus behavior
-    if (onFocus) {
-      onFocus(index);
-    }
-  };
 
   const CardContent = (
     <div
@@ -156,11 +144,9 @@ export default function ProjectCard({
       className="h-full w-full overflow-hidden rounded-3xl"
       style={{ opacity: 1, transform: "none" }}
     >
-      {project.slug ? (
-        <Link href={`/${locale}/tech/${project.slug}`}>{CardContent}</Link>
-      ) : (
-        <div onClick={handleClick}>{CardContent}</div>
-      )}
+      <Link href={getProjectLink(project.link)} target="_blank">
+        {CardContent}
+      </Link>
     </div>
   );
 }
