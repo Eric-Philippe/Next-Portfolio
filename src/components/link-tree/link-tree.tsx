@@ -42,31 +42,54 @@ function LinkCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      className="group"
+      whileHover={{
+        scale: 1.02,
+        transition: { duration: 0.3, ease: "easeOut" },
+      }}
+      whileTap={{
+        scale: 0.98,
+        transition: { duration: 0.15, ease: "easeOut" },
+      }}
+      className="group link-tree-card will-change-transform"
+      style={{ transformOrigin: "center" }}
     >
       <CardComponent
         {...linkProps}
-        className="relative block h-full overflow-hidden rounded-2xl border border-white/20 bg-white/10 p-6 backdrop-blur-md transition-all duration-300 hover:border-white/30 hover:bg-white/15 hover:shadow-xl hover:shadow-black/20"
+        className="liquid-glass relative block h-full overflow-hidden rounded-2xl p-6 transition-all duration-300 ease-out"
       >
+        {/* Liquid Glass shine effect */}
+        <div className="shine-effect rounded-2xl" />
+
+        {/* Liquid ripple effect */}
+        <div className="liquid-ripple" />
+
+        {/* Gradient overlay */}
         <div
-          className={`absolute inset-0 opacity-10 transition-opacity duration-300 group-hover:opacity-30 ${gradient}`}
+          className={`absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-25 ${gradient}`}
+        />
+
+        {/* Inner glow effect */}
+        <div
+          className="absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-60"
+          style={{
+            background:
+              "radial-gradient(circle at 50% 0%, rgba(255,255,255,0.1) 0%, transparent 50%)",
+          }}
         />
 
         <div className="relative z-10 flex h-full flex-col">
           <div className="mb-4 flex items-center justify-between">
-            <div className="rounded-xl border border-white/20 bg-white/15 p-3 backdrop-blur-sm transition-colors group-hover:border-white/30 group-hover:bg-white/20">
+            <div className="rounded-xl border border-white/30 bg-white/20 p-3 backdrop-blur-sm transition-all duration-300 group-hover:border-white/40 group-hover:bg-white/30 group-hover:shadow-lg group-hover:shadow-black/20">
               {icon}
             </div>
-            <ArrowRight className="h-5 w-5 text-white/70 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white" />
+            <ArrowRight className="h-5 w-5 text-white/70 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white group-hover:drop-shadow-lg" />
           </div>
 
-          <h3 className="mb-2 text-xl font-semibold text-white/95 transition-colors group-hover:text-white">
+          <h3 className="mb-2 text-xl font-semibold text-white/95 transition-all duration-300 group-hover:text-white group-hover:drop-shadow-sm">
             {title}
           </h3>
 
-          <p className="text-sm leading-relaxed text-white/80 transition-colors group-hover:text-white/90">
+          <p className="text-sm leading-relaxed text-white/80 transition-all duration-300 group-hover:text-white/90">
             {description}
           </p>
         </div>
