@@ -6,7 +6,6 @@ import { useState, use } from "react";
 import {
   FiArrowLeft,
   FiShare2,
-  FiBookmark,
   FiClock,
   FiCalendar,
   FiTag,
@@ -25,6 +24,9 @@ import Link from "next/link";
 import { MDXContent } from "~/components/blog/mdx-content";
 import type { TechPostWithContent } from "~/lib/tech-utils";
 import { getTechColor } from "~/lib/utils/utils";
+import { useTranslations } from "next-intl";
+import BookmarkButton from "~/components/common/bookmarkButton";
+import ShareButton from "~/components/common/shareButton";
 
 interface Props {
   params: Promise<{
@@ -36,7 +38,6 @@ interface Props {
 
 export default function TechPostPageClient({ params, post }: Props) {
   const resolvedParams = use(params);
-  const [isBookmarked, setIsBookmarked] = useState(false);
   const [shareMenuOpen, setShareMenuOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [activeSection, setActiveSection] = useState<"product" | "tech">(
@@ -44,6 +45,7 @@ export default function TechPostPageClient({ params, post }: Props) {
   );
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const t = useTranslations("DevPortfolio.Details");
 
   // If no post provided, show a fallback
   if (!post) {
@@ -63,7 +65,7 @@ export default function TechPostPageClient({ params, post }: Props) {
               className="inline-flex items-center gap-2 rounded-xl bg-purple-600 px-6 py-3 text-white transition-colors hover:bg-purple-700"
             >
               <FiArrowLeft className="h-4 w-4" />
-              Back to Projects
+              {t("backToProjects")}
             </Link>
           </div>
         </div>
@@ -158,7 +160,7 @@ export default function TechPostPageClient({ params, post }: Props) {
               className="inline-flex items-center gap-2 text-slate-400 transition-colors hover:text-white"
             >
               <FiArrowLeft className="h-4 w-4" />
-              Back to Projects
+              {t("backToProjects")}
             </Link>
           </motion.div>
 
@@ -290,65 +292,17 @@ export default function TechPostPageClient({ params, post }: Props) {
                   </motion.a>
                 )}
 
-                <motion.button
-                  onClick={() => setIsBookmarked(!isBookmarked)}
-                  className={`rounded-lg p-2 transition-all duration-200 ${
-                    isBookmarked
-                      ? "bg-purple-600 text-white"
-                      : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <FiBookmark className="h-4 w-4" />
-                </motion.button>
+                <BookmarkButton
+                  slug={post.slug}
+                  domain="tech"
+                  darkMode={true}
+                />
 
-                <div className="relative">
-                  <motion.button
-                    onClick={() => setShareMenuOpen(!shareMenuOpen)}
-                    className="rounded-lg bg-slate-700 p-2 text-slate-300 transition-all duration-200 hover:bg-slate-600"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <FiShare2 className="h-4 w-4" />
-                  </motion.button>
-
-                  {shareMenuOpen && (
-                    <motion.div
-                      className="absolute top-12 right-0 z-20 rounded-xl border border-white/10 p-2 shadow-lg backdrop-blur-md"
-                      style={{
-                        background: "rgba(0, 0, 0, 0.8)",
-                      }}
-                      initial={{ opacity: 0, scale: 0.9, y: -10 }}
-                      animate={{ opacity: 1, scale: 1, y: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <div className="flex min-w-[120px] flex-col gap-1">
-                        <button
-                          onClick={() => handleShare("twitter")}
-                          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-white/10"
-                        >
-                          <FiTwitter className="h-4 w-4" />
-                          Twitter
-                        </button>
-                        <button
-                          onClick={() => handleShare("linkedin")}
-                          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-white/10"
-                        >
-                          <FiLinkedin className="h-4 w-4" />
-                          LinkedIn
-                        </button>
-                        <button
-                          onClick={() => handleShare("copy")}
-                          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-white/10"
-                        >
-                          <FiLink className="h-4 w-4" />
-                          Copy Link
-                        </button>
-                      </div>
-                    </motion.div>
-                  )}
-                </div>
+                <ShareButton
+                  link={shareUrl}
+                  title={shareText}
+                  darkMode={true}
+                />
               </div>
             </motion.div>
           </motion.div>
@@ -373,7 +327,7 @@ export default function TechPostPageClient({ params, post }: Props) {
                 }`}
               >
                 <FiMonitor className="h-4 w-4" />
-                Product Overview
+                {t("productOverview")}
               </button>
               <button
                 onClick={() => setActiveSection("tech")}
@@ -384,7 +338,7 @@ export default function TechPostPageClient({ params, post }: Props) {
                 }`}
               >
                 <FiCode className="h-4 w-4" />
-                Technical Details
+                {t("technicalDetails")}
               </button>
             </div>
           </motion.div>
@@ -414,7 +368,7 @@ export default function TechPostPageClient({ params, post }: Props) {
                   <div className="mb-6 flex items-center gap-3">
                     <FiMonitor className="h-6 w-6 text-purple-400" />
                     <h2 className="text-2xl font-semibold text-white">
-                      What is this project?
+                      {t("descriptionTitle")}
                     </h2>
                   </div>
                   <div className="prose prose-lg max-w-none text-slate-300">
@@ -436,7 +390,7 @@ export default function TechPostPageClient({ params, post }: Props) {
                     <div className="mb-6 flex items-center gap-3">
                       <FiImage className="h-6 w-6 text-purple-400" />
                       <h2 className="text-2xl font-semibold text-white">
-                        Project Gallery
+                        {t("galleryTitle")}
                       </h2>
                     </div>
                     <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -480,7 +434,7 @@ export default function TechPostPageClient({ params, post }: Props) {
                   <div className="mb-6 flex items-center gap-3">
                     <FiTag className="h-6 w-6 text-purple-400" />
                     <h2 className="text-2xl font-semibold text-white">
-                      Technologies Used
+                      {t("technologiesUsed")}
                     </h2>
                   </div>
                   <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
@@ -517,7 +471,7 @@ export default function TechPostPageClient({ params, post }: Props) {
                   <div className="mb-6 flex items-center gap-3">
                     <FiCode className="h-6 w-6 text-purple-400" />
                     <h2 className="text-2xl font-semibold text-white">
-                      Technical Implementation
+                      {t("technicalImplementation")}
                     </h2>
                   </div>
                   {post.content ? (
@@ -548,11 +502,11 @@ export default function TechPostPageClient({ params, post }: Props) {
               className="flex items-center gap-2 rounded-xl bg-slate-700 px-6 py-3 transition-colors hover:bg-slate-600"
             >
               <FiArrowLeft className="h-4 w-4" />
-              All Projects
+              {t("backToProjects")}
             </Link>
 
             <div className="text-sm text-slate-400">
-              Thanks for checking out this project! 🚀
+              {t("thanksForChecking")}
             </div>
           </motion.div>
         </div>

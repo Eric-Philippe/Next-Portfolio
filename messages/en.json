@@ -98,6 +98,16 @@
       "sending": "Sending...",
       "successMessage": "Your message has been sent successfully!",
       "errorMessage": "An error occurred while sending your message. Please try again later."
+    },
+    "Details": {
+      "backToProjects": "Back to Projects",
+      "productOverview": "Product Overview",
+      "technicalDetails": "Technical Details",
+      "descriptionTitle": "What is this project ?",
+      "galleryTitle": "Project Gallery",
+      "technologiesUsed": "Technologies Used",
+      "technicalImplementation": "Technical Implementation",
+      "thanksForChecking": "Thanks for checking out this project! 🚀"
     }
   },
   "PhotoPortfolio": {
@@ -188,5 +198,9 @@
       "cookiePolicy": "This site does not use cookies. No tracking or analytics cookies are set. Because your experience matters more than your data.",
       "close": "Close"
     }
+  },
+  "Common": {
+    "copyLink": "Copy Link",
+    "copied": "Link copied!"
   }
 }

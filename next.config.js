@@ -13,6 +13,12 @@ const config = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "github.com",
+        port: "",
+        pathname: "/Eric-Philippe/Next-Portfolio/blob/main/img/**",
+      },
+      {
+        protocol: "https",
         hostname: "avatars.githubusercontent.com",
         port: "",
         pathname: "/**",

@@ -98,6 +98,16 @@
       "sending": "Envoi en cours...",
       "successMessage": "Votre message a été envoyé avec succès !",
       "errorMessage": "Une erreur s'est produite lors de l'envoi du message. Veuillez réessayer plus tard."
+    },
+    "Details": {
+      "backToProjects": "Retour aux projets",
+      "productOverview": "Présentation du projet",
+      "technicalDetails": "Détails techniques",
+      "descriptionTitle": "Qu'est-ce que ce projet ?",
+      "galleryTitle": "Galerie du projet",
+      "technologiesUsed": "Technologies utilisées",
+      "technicalImplementation": "Implémentation technique",
+      "thanksForChecking": "Merci d'avoir consulté ce projet ! 🚀"
     }
   },
   "PhotoPortfolio": {
@@ -188,5 +198,9 @@
       "cookiePolicy": "Ce site n'utilise aucun cookie. Aucun tracking, votre expérience de navigation est plus importante que vos données.",
       "close": "Fermer"
     }
+  },
+  "Common": {
+    "copyLink": "Copier le lien",
+    "copied": "Lien copié !"
   }
 }

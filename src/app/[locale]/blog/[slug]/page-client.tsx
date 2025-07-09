@@ -2,24 +2,15 @@
 
 import { PortfolioProvider } from "~/lib/portfolio-context";
 import { Header } from "~/components/common/header";
-// import { useTranslations } from "next-intl";
 import { useState, use } from "react";
-import {
-  FiArrowLeft,
-  FiShare2,
-  FiBookmark,
-  FiClock,
-  FiCalendar,
-  FiTag,
-  FiTwitter,
-  FiLinkedin,
-  FiLink,
-} from "react-icons/fi";
+import { FiArrowLeft, FiClock, FiCalendar, FiTag } from "react-icons/fi";
 import { motion, useScroll, useSpring } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { MDXContent } from "~/components/blog/mdx-content";
 import type { BlogPostWithContent } from "~/lib/mdx-utils";
+import BookmarkButton from "~/components/common/bookmarkButton";
+import ShareButton from "~/components/common/shareButton";
 
 interface Props {
   params: Promise<{
@@ -32,7 +23,6 @@ interface Props {
 export default function BlogPostPageClient({ params, post }: Props) {
   const resolvedParams = use(params);
   // const t = useTranslations("BlogPage");
-  const [isBookmarked, setIsBookmarked] = useState(false);
   const [shareMenuOpen, setShareMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
@@ -62,27 +52,6 @@ export default function BlogPostPageClient({ params, post }: Props) {
       </PortfolioProvider>
     );
   }
-
-  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
-  const shareText = `Check out this article: ${post.title}`;
-
-  const handleShare = (platform: string) => {
-    let url = "";
-    switch (platform) {
-      case "twitter":
-        url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
-        break;
-      case "linkedin":
-        url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
-        break;
-      case "copy":
-        void navigator.clipboard.writeText(shareUrl);
-        setShareMenuOpen(false);
-        return;
-    }
-    if (url) window.open(url, "_blank");
-    setShareMenuOpen(false);
-  };
 
   return (
     <PortfolioProvider>
@@ -223,65 +192,13 @@ export default function BlogPostPageClient({ params, post }: Props) {
 
               {/* Action Buttons */}
               <div className="flex items-center gap-3">
-                <motion.button
-                  onClick={() => setIsBookmarked(!isBookmarked)}
-                  className={`rounded-lg p-2 transition-all duration-200 ${
-                    isBookmarked
-                      ? "bg-blue-100 text-blue-600"
-                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <FiBookmark className="h-4 w-4" />
-                </motion.button>
+                <BookmarkButton slug={post.slug} domain="blog" />
 
-                <div className="relative">
-                  <motion.button
-                    onClick={() => setShareMenuOpen(!shareMenuOpen)}
-                    className="rounded-lg bg-slate-100 p-2 text-slate-600 transition-all duration-200 hover:bg-slate-200"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <FiShare2 className="h-4 w-4" />
-                  </motion.button>
-
-                  {shareMenuOpen && (
-                    <motion.div
-                      className="absolute top-12 right-0 z-20 rounded-xl border border-white/20 p-2 shadow-lg backdrop-blur-md"
-                      style={{
-                        background: "rgba(255, 255, 255, 0.9)",
-                      }}
-                      initial={{ opacity: 0, scale: 0.9, y: -10 }}
-                      animate={{ opacity: 1, scale: 1, y: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <div className="flex min-w-[120px] flex-col gap-1">
-                        <button
-                          onClick={() => handleShare("twitter")}
-                          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-slate-100"
-                        >
-                          <FiTwitter className="h-4 w-4" />
-                          Twitter
-                        </button>
-                        <button
-                          onClick={() => handleShare("linkedin")}
-                          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-slate-100"
-                        >
-                          <FiLinkedin className="h-4 w-4" />
-                          LinkedIn
-                        </button>
-                        <button
-                          onClick={() => handleShare("copy")}
-                          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-slate-100"
-                        >
-                          <FiLink className="h-4 w-4" />
-                          Copy Link
-                        </button>
-                      </div>
-                    </motion.div>
-                  )}
-                </div>
+                <ShareButton
+                  link={`/${resolvedParams.locale}/blog/${post.slug}`}
+                  title={post.title}
+                  darkMode={false}
+                />
               </div>
             </motion.div>
           </motion.header>
