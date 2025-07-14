@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
+import { useRef, useCallback } from "react";
 import {
   ArrowRight,
   Github,
@@ -32,6 +33,25 @@ function LinkCard({
   gradient,
   delay,
 }: LinkCardProps) {
+  const shineRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseEnter = useCallback(() => {
+    if (shineRef.current) {
+      // Remove any existing animation class
+      shineRef.current.classList.remove("animate");
+      // Force reflow to ensure the class is removed
+      void shineRef.current.offsetHeight;
+      // Add the animation class
+      shineRef.current.classList.add("animate");
+    }
+  }, []);
+
+  const handleAnimationEnd = useCallback(() => {
+    if (shineRef.current) {
+      shineRef.current.classList.remove("animate");
+    }
+  }, []);
+
   const CardComponent = isExternal ? "a" : Link;
   const linkProps = isExternal
     ? { href, target: "_blank", rel: "noopener noreferrer" }
@@ -52,13 +72,18 @@ function LinkCard({
       }}
       className="group link-tree-card will-change-transform"
       style={{ transformOrigin: "center" }}
+      onMouseEnter={handleMouseEnter}
     >
       <CardComponent
         {...linkProps}
         className="liquid-glass relative block h-full overflow-hidden rounded-2xl p-6 transition-all duration-300 ease-out"
       >
         {/* Liquid Glass shine effect */}
-        <div className="shine-effect rounded-2xl" />
+        <div
+          ref={shineRef}
+          className="shine-effect rounded-2xl"
+          onAnimationEnd={handleAnimationEnd}
+        />
 
         {/* Liquid ripple effect */}
         <div className="liquid-ripple" />

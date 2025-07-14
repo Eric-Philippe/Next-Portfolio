@@ -36,6 +36,8 @@ export interface TechPostWithContent {
   lastUpdated: Date;
   readingTime: number;
   content: string;
+  productContent: string; // added
+  techContent: string; // added
   meta: TechPostMeta;
   locale: string;
 }
@@ -127,6 +129,11 @@ function getTechPostForLocale(
       return null;
     }
 
+    // Split content by marker
+    const marker = "<!--tech-->";
+    const [productContent, ...techParts] = content.split(marker);
+    const techContent = techParts.join(marker);
+
     const stats = readingTime(content);
 
     return {
@@ -143,6 +150,10 @@ function getTechPostForLocale(
       lastUpdated: new Date(meta.date),
       readingTime: Math.ceil(stats.minutes),
       content,
+      productContent: productContent
+        ? productContent.trim()
+        : "Missing product content",
+      techContent: techContent ? techContent.trim() : "Missing tech content",
       meta,
       locale,
     };

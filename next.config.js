@@ -25,6 +25,12 @@ const config = {
       },
       {
         protocol: "https",
+        hostname: "snapfilething.homeserver-ericp.fr",
+        port: "",
+        pathname: "/uploads/**",
+      },
+      {
+        protocol: "https",
         hostname: "skillicons.dev",
         port: "",
         pathname: "/icons/**",

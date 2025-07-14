@@ -1,0 +1,109 @@
+---
+title: "SnapFileThing"
+description: "A modern, minimalist, and lightning-fast self-hosted file sharing solution."
+productDescription: "SnapFileThing is a lightweight, database-less, and performant file sharing platform designed for simplicity and speed. It lets you securely upload, manage, and share files from your own server, with a beautiful and responsive interface. Whether you need direct URLs for your files, thumbnails for your assets, or a complete file explorer, SnapFileThing has you covered—without any of the bloat or restrictions of other solutions."
+heroImage: "https://snapfilething.homeserver-ericp.fr/uploads/sft1_1752510115_a12251cc_.png"
+gallery:
+  - "https://snapfilething.homeserver-ericp.fr/uploads/sft1_1752510115_a12251cc_.png"
+  - "https://snapfilething.homeserver-ericp.fr/uploads/sft2_1752510115_de58f32c_.png"
+  - "https://snapfilething.homeserver-ericp.fr/uploads/sft3_1752510116_2625aae7_.png"
+liveUrl: "https://github.com/Eric-Philippe/snapfilething"
+githubUrl: "https://github.com/Eric-Philippe/snapfilething"
+techs:
+  - "Rust"
+  - "Docker"
+  - "QOI"
+  - "OpenAPI"
+  - "JWT"
+tags:
+  - "File Sharing"
+  - "Self-Hosted"
+  - "Rust"
+  - "Minimalist"
+date: "2024-06-01"
+featured: true
+priority: 2
+published: true
+---
+
+## Overview
+
+HI
+
+<!--tech-->
+
+## Architecture Overview
+
+SnapFileThing is built for speed, simplicity, and security. Its dual-port architecture separates the secure API/UI from static file serving, minimizing attack surface and maximizing performance.
+
+### Core Technologies
+
+- **Rust**: Ensures blazing fast performance, memory safety, and reliability.
+- **Docker**: Provides a tiny, all-in-one image under 40MB for easy deployment.
+- **QOI (Quite OK Image)**: Native support for ultra-fast, lossless image format.
+- **OpenAPI/Swagger**: Built-in API documentation for easy integration.
+- **JWT Authentication**: Secure admin interface and API endpoints.
+
+### Features
+
+- **Instant File Sharing**: Upload and share files with direct URLs.
+- **Modern File Explorer**: Responsive UI for browsing, previewing, and managing files.
+- **Thumbnail Generation**: Automatic thumbnails for images (QOI, JPEG, PNG, WebP).
+- **Multi-Device Support**: Works seamlessly on desktop, tablet, and mobile.
+- **Secure by Default**: Authentication, rate limiting, and protected endpoints.
+- **Database-less**: No database required—just run and go.
+- **Direct URLs & Thumbnails**: Perfect for embedding assets across your sites.
+- **Open Source**: MIT licensed and ready for contributions.
+
+## Technical Details
+
+### Dual-Port Architecture
+
+- **Main Port**: Hosts the secure API, uploads, Swagger docs, and file explorer.
+- **Static File Port**: Dedicated to fast, isolated static file serving.
+
+### QOI Format Integration
+
+QOI files are supported natively, offering faster and smaller lossless images compared to PNG—ideal for efficient storage and transfer.
+
+### Security
+
+- **Authentication**: Configurable via environment variables.
+- **Rate Limiting**: Fine-grained control for API, upload, and static routes.
+- **CORS**: Customizable origins, methods, and headers.
+
+## Quick Start
+
+### Docker
+
+```sh
+docker run -d \
+  -p 8080:8080 \
+  -v /your/files:/data \
+  ghcr.io/Eric-Philippe/snapfilething:latest
+```
+
+### Local Development
+
+```sh
+git clone https://github.com/Eric-Philippe/snapfilething.git
+cd snapfilething
+cargo run --release
+```
+
+## Configuration
+
+All settings are handled via environment variables:
+
+```env
+WEB_PORT=8080
+STATIC_PORT=8081
+UPLOAD_DIR=./uploads
+MAX_FILE_SIZE=104857600
+AUTH_MODE=protected
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=changeme
+JWT_SECRET=your-super-secret-jwt-key
+THUMBNAIL_SIZE=200
+QOI_ENABLED=true
+```

@@ -1,0 +1,109 @@
+---
+title: "SnapFileThing"
+description: "Une solution moderne, minimaliste et ultra-rapide d’hébergement de fichiers en auto-hébergement."
+productDescription: "SnapFileThing est une plateforme légère, sans base de données et performante pour le partage de fichiers, conçue pour la simplicité et la rapidité. Elle vous permet de téléverser, gérer et partager vos fichiers en toute sécurité depuis votre propre serveur, avec une interface élégante et réactive. Que vous ayez besoin d’URLs directes, de miniatures pour vos assets ou d’un explorateur complet, SnapFileThing répond à tous ces besoins—sans la complexité ou les restrictions des autres solutions."
+heroImage: "https://snapfilething.homeserver-ericp.fr/uploads/sft1_1752510115_a12251cc_.png"
+gallery:
+  - "https://snapfilething.homeserver-ericp.fr/uploads/sft1_1752510115_a12251cc_.png"
+  - "https://snapfilething.homeserver-ericp.fr/uploads/sft2_1752510115_de58f32c_.png"
+  - "https://snapfilething.homeserver-ericp.fr/uploads/sft3_1752510116_2625aae7_.png"
+liveUrl: "https://github.com/Eric-Philippe/snapfilething"
+githubUrl: "https://github.com/Eric-Philippe/snapfilething"
+techs:
+  - "Rust"
+  - "Docker"
+  - "QOI"
+  - "OpenAPI"
+  - "JWT"
+tags:
+  - "Partage de fichiers"
+  - "Auto-hébergement"
+  - "Rust"
+  - "Minimaliste"
+date: "2024-06-01"
+featured: true
+priority: 2
+published: true
+---
+
+## Overview
+
+HI
+
+<!--tech-->
+
+## Vue d’ensemble de l’architecture
+
+SnapFileThing est conçu pour la rapidité, la simplicité et la sécurité. Son architecture à double port sépare l’API/UI sécurisée du service de fichiers statiques, minimisant la surface d’attaque et maximisant les performances.
+
+### Technologies principales
+
+- **Rust** : Performances fulgurantes, sécurité mémoire et fiabilité.
+- **Docker** : Image compacte tout-en-un de moins de 40 Mo pour un déploiement facile.
+- **QOI (Quite OK Image)** : Prise en charge native du format d’image ultra-rapide et sans perte.
+- **OpenAPI/Swagger** : Documentation API intégrée pour une intégration facile.
+- **Authentification JWT** : Interface admin et endpoints API sécurisés.
+
+### Fonctionnalités
+
+- **Partage instantané de fichiers** : Téléversez et partagez des fichiers avec des URLs directes.
+- **Explorateur moderne** : Interface réactive pour naviguer, prévisualiser et gérer vos fichiers.
+- **Génération de miniatures** : Miniatures automatiques pour les images (QOI, JPEG, PNG, WebP).
+- **Multi-appareils** : Fonctionne parfaitement sur ordinateur, tablette et mobile.
+- **Sécurisé par défaut** : Authentification, limitation de débit et endpoints protégés.
+- **Sans base de données** : Aucun besoin de base de données—il suffit de lancer et d’utiliser.
+- **URLs directes & miniatures** : Idéal pour intégrer des assets sur vos sites.
+- **Open Source** : Licence MIT et ouvert aux contributions.
+
+## Détails techniques
+
+### Architecture à double port
+
+- **Port principal** : Héberge l’API sécurisée, les téléversements, la documentation Swagger et l’explorateur de fichiers.
+- **Port statique** : Dédié au service rapide et isolé des fichiers statiques.
+
+### Intégration du format QOI
+
+Les fichiers QOI sont pris en charge nativement, offrant des images sans perte plus rapides et plus petites que PNG—idéal pour le stockage et le transfert efficaces.
+
+### Sécurité
+
+- **Authentification** : Configurable via les variables d’environnement.
+- **Limitation de débit** : Contrôle précis pour l’API, les téléversements et les routes statiques.
+- **CORS** : Origines, méthodes et headers personnalisables.
+
+## Démarrage rapide
+
+### Docker
+
+```sh
+docker run -d \
+  -p 8080:8080 \
+  -v /vos/fichiers:/data \
+  ghcr.io/Eric-Philippe/snapfilething:latest
+```
+
+### Développement local
+
+```sh
+git clone https://github.com/Eric-Philippe/snapfilething.git
+cd snapfilething
+cargo run --release
+```
+
+## Configuration
+
+Tous les paramètres sont gérés via des variables d’environnement :
+
+```env
+WEB_PORT=8080
+STATIC_PORT=8081
+UPLOAD_DIR=./uploads
+MAX_FILE_SIZE=104857600
+AUTH_MODE=protected
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=changeme
+JWT_SECRET=cle-jwt-super-secrete
+THUMBNAIL_SIZE=200
+QOI_ENABLED=true
+```

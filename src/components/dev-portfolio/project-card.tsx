@@ -13,7 +13,9 @@ interface ProjectCardProps {
   project: DevProject;
 }
 
-const getProjectLink = (link: string) => {
+const getProjectLink = (link: string, locale: string) => {
+  // If the link looks like /blog/slug we redirect to /[locale]/blog/slug
+  if (link.startsWith("/blog/")) return `/${locale}${link}`;
   // If the link starts with "http" or "https", return it as is
   if (link.startsWith("http://") || link.startsWith("https://")) return link;
   return `/tech${link}`;
@@ -144,7 +146,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       className="h-full w-full overflow-hidden rounded-3xl"
       style={{ opacity: 1, transform: "none" }}
     >
-      <Link href={getProjectLink(project.link)} target="_blank">
+      <Link href={getProjectLink(project.link, locale)} target="_blank">
         {CardContent}
       </Link>
     </div>

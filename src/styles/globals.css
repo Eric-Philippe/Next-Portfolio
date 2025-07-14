@@ -166,11 +166,17 @@ body {
     transparent 70%
   );
   transform: translateX(-100%) skewX(-15deg);
-  transition: all 0.6s ease;
   pointer-events: none;
+  opacity: 0;
 }
 
-.group:hover .shine-effect {
+.shine-effect.animate {
+  animation: shine 0.8s ease-out forwards;
+  animation-fill-mode: forwards;
+}
+
+/* Fallback for browsers that might not support the JS approach */
+.group:hover .shine-effect:not(.animate) {
   animation: shine 0.8s ease-out;
 }
 

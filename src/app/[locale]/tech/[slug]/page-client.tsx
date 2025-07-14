@@ -23,6 +23,7 @@ import { getTechColor } from "~/lib/utils/utils";
 import { useTranslations } from "next-intl";
 import BookmarkButton from "~/components/common/bookmarkButton";
 import ShareButton from "~/components/common/shareButton";
+import { getGithubDevContentUrl } from "~/lib/data/data";
 
 interface Props {
   params: Promise<{
@@ -357,6 +358,7 @@ export default function TechPostPageClient({ params, post }: Props) {
                     <p className="text-lg leading-relaxed">
                       {post.productDescription}
                     </p>
+                    <MDXContent content={post.productContent} theme="dark" />
                   </div>
                 </div>
 
@@ -460,7 +462,7 @@ export default function TechPostPageClient({ params, post }: Props) {
                   </div>
                   {post.content ? (
                     <div className="prose prose-lg prose-invert max-w-none">
-                      <MDXContent content={post.content} theme="dark" />
+                      <MDXContent content={post.techContent} theme="dark" />
                     </div>
                   ) : (
                     <div className="prose prose-lg max-w-none text-slate-400">
@@ -487,6 +489,15 @@ export default function TechPostPageClient({ params, post }: Props) {
             >
               <FiArrowLeft className="h-4 w-4" />
               {t("backToProjects")}
+            </Link>
+
+            <Link
+              href={getGithubDevContentUrl(post.slug, resolvedParams.locale)}
+              target="_blank"
+              className="flex items-center gap-4 rounded-xl bg-slate-700 px-3 py-2 text-slate-400 transition-colors hover:bg-slate-600"
+            >
+              <FiGithub className="h-4 w-4" />
+              {t("suggestEdit")}
             </Link>
 
             <div className="text-center text-sm text-slate-400 md:text-right">
