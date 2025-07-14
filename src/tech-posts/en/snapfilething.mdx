@@ -26,9 +26,57 @@ priority: 2
 published: true
 ---
 
-## Overview
+## Product Vision
 
-HI
+SnapFileThing was born from a real need: having a simple and reliable tool to host and share files from your own server, without the complexity, restrictions, or subscriptions of existing solutions. While building my portfolio, I found that most platforms were too limited, too complex, or required payment. SnapFileThing solves this with a minimalist, database-free platform that just works.
+
+### Why SnapFileThing?
+
+The idea behind SnapFileThing is to offer a solution that fits any use case: whether you’re a developer, content creator, or simply looking for a fast way to share files, SnapFileThing provides a smooth and modern experience. No more outdated interfaces, arbitrary limits, or endless configuration—everything is designed for speed and simplicity.
+
+### Main Features
+
+- **Instant File Sharing**  
+  Upload your files in seconds and instantly get a direct URL to share or embed wherever you want. No waiting or extra steps—every file is accessible immediately.
+
+- **Modern, Responsive Explorer**  
+  The user interface is designed to be pleasant and efficient, whether on desktop, tablet, or mobile. Browse folders, preview images, manage files (rename, delete, move) easily, with smooth animations and thoughtful ergonomics.
+
+- **Automatic Thumbnail Generation**  
+  SnapFileThing automatically creates thumbnails for all your images (QOI, JPEG, PNG, WebP), making preview and integration on your sites or apps effortless. Thumbnails are generated on the fly, without slowing down the service.
+
+- **Native QOI Format Support**  
+  Take advantage of the QOI image format—ultra-fast and lossless—for storing and transferring images more efficiently than PNG. Perfect for portfolios, galleries, or any use needing high-quality, lightweight images.
+
+- **Multi-Device Support**  
+  The app works perfectly on all devices: desktop, tablet, smartphone. The interface adapts automatically to screen size for an optimal experience everywhere.
+
+- **Advanced Security**  
+  The API and admin interface are protected by JWT authentication, with fine-grained access control and rate limiting to prevent abuse. Critical routes are isolated, and CORS configuration is fully customizable.
+
+- **Dual-Port Architecture**  
+  SnapFileThing separates static file serving from the rest of the app: one port for the API and UI, another for ultra-fast static file service. This reduces attack surface and optimizes performance for every use.
+
+- **Database-Free**  
+  No database server to install or maintain—everything works directly on the filesystem, simplifying deployment and maintenance.
+
+- **Built-in OpenAPI/Swagger Docs**  
+  API documentation is generated automatically and accessible from the interface, making integration with your scripts, automations, or other apps easy.
+
+- **Ultra-Simple Docker Deployment**  
+  A compact Docker image (<40MB) contains everything needed to run SnapFileThing on any server or VPS. Just set a few environment variables and start the container.
+
+- **Open Source & Extensible**  
+  The project is MIT licensed, open to contributions, and easily extensible. You can adapt SnapFileThing to your needs, suggest improvements, or add new features.
+
+### Use Cases
+
+- **Portfolios and image galleries**: Host your assets, images, and thumbnails for your websites or apps.
+- **Fast file sharing**: Send large files to colleagues or friends without third-party services.
+- **Self-hosting**: Keep full control over your data and infrastructure.
+- **Workflow integration**: Use the API to automate file uploads or management from your scripts or tools.
+
+SnapFileThing gives you the freedom to share and manage your files however you want, without compromising on simplicity, speed, or security.
 
 <!--tech-->
 

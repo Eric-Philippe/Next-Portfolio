@@ -26,9 +26,57 @@ priority: 2
 published: true
 ---
 
-## Overview
+## Vision Produit
 
-HI
+SnapFileThing est né d’un besoin concret : disposer d’un outil simple et fiable pour héberger et partager des fichiers depuis son propre serveur, sans la complexité, les restrictions ou les abonnements des solutions existantes. En développant mon portfolio, j’ai constaté que la plupart des plateformes étaient trop limitées, trop complexes ou payantes. SnapFileThing répond à ce problème avec une plateforme minimaliste, sans base de données, qui fonctionne simplement.
+
+### Pourquoi SnapFileThing ?
+
+L’idée derrière SnapFileThing est de proposer une solution qui s’adapte à tous les usages : que vous soyez développeur, créateur de contenu, ou simplement à la recherche d’un moyen rapide de partager des fichiers, SnapFileThing vous offre une expérience fluide et moderne. Fini les interfaces vieillissantes, les limitations arbitraires ou les configurations interminables : ici, tout est pensé pour la rapidité et la simplicité.
+
+### Fonctionnalités détaillées
+
+- **Partage instantané de fichiers**  
+  Téléversez vos fichiers en quelques secondes et obtenez immédiatement une URL directe pour les partager ou les intégrer où vous voulez. Plus besoin d’attendre ou de passer par des étapes intermédiaires : chaque fichier est accessible instantanément.
+
+- **Explorateur moderne et réactif**  
+  L’interface utilisateur est conçue pour être agréable et efficace, que ce soit sur ordinateur, tablette ou mobile. Naviguez dans vos dossiers, prévisualisez vos images, gérez vos fichiers (renommer, supprimer, déplacer) en toute simplicité, avec des animations et une ergonomie soignée.
+
+- **Génération automatique de miniatures**  
+  SnapFileThing crée automatiquement des miniatures pour toutes vos images (QOI, JPEG, PNG, WebP), ce qui facilite la prévisualisation et l’intégration sur vos sites ou applications. Les miniatures sont générées à la volée, sans ralentir le service.
+
+- **Support natif du format QOI**  
+  Profitez du format d’image QOI, ultra-rapide et sans perte, pour stocker et transférer vos images plus efficacement que le PNG. Idéal pour les portfolios, galeries ou tout usage nécessitant des images de qualité et légères.
+
+- **Multi-appareils**  
+  L’application fonctionne parfaitement sur tous les supports : ordinateur, tablette, smartphone. L’interface s’adapte automatiquement à la taille de l’écran pour une expérience optimale partout.
+
+- **Sécurité avancée**  
+  L’API et l’interface admin sont protégées par authentification JWT, avec gestion fine des accès et limitation de débit pour éviter les abus. Les routes critiques sont isolées, et la configuration CORS est entièrement personnalisable.
+
+- **Architecture à double port**  
+  SnapFileThing sépare le service de fichiers statiques du reste de l’application : un port dédié pour l’API et l’UI, un autre pour le service ultra-rapide des fichiers. Cela réduit la surface d’attaque et optimise les performances pour chaque usage.
+
+- **Sans base de données**  
+  Aucun serveur de base de données à installer ou à maintenir : tout fonctionne directement sur le système de fichiers, ce qui simplifie le déploiement et la maintenance.
+
+- **OpenAPI/Swagger intégré**  
+  La documentation API est générée automatiquement et accessible depuis l’interface, facilitant l’intégration avec vos scripts, automatisations ou autres applications.
+
+- **Déploiement ultra-simple avec Docker**  
+  Une image Docker compacte (<40 Mo) contient tout le nécessaire pour lancer SnapFileThing sur n’importe quel serveur ou VPS. Il suffit de configurer quelques variables d’environnement et de lancer le conteneur.
+
+- **Open Source et extensible**  
+  Le projet est sous licence MIT, ouvert aux contributions et facilement extensible. Vous pouvez adapter SnapFileThing à vos besoins, proposer des améliorations ou intégrer de nouvelles fonctionnalités.
+
+### Cas d’usage
+
+- **Portfolio et galeries d’images** : hébergez vos assets, images et miniatures pour vos sites web ou applications.
+- **Partage rapide de fichiers** : envoyez des fichiers volumineux à vos collaborateurs ou amis sans passer par des services tiers.
+- **Auto-hébergement** : gardez le contrôle total sur vos données et votre infrastructure.
+- **Intégration dans des workflows** : utilisez l’API pour automatiser l’upload ou la gestion de fichiers depuis vos scripts ou outils.
+
+SnapFileThing, c’est la liberté de partager et gérer vos fichiers comme vous le souhaitez, sans compromis sur la simplicité, la rapidité ou la sécurité.
 
 <!--tech-->
 
