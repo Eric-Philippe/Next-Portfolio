@@ -1,0 +1,117 @@
+---
+title: "What's a Book? - Online Library"
+description: "A full-stack, modern library management system built as an end-of-year school project."
+productDescription: "What's a Book? is a comprehensive online library platform developed for my final year project at IUT Blagnac, where I achieved the highest grade. It features a PHP Symfony API, EasyAdmin back office, Angular frontend, and MariaDB database. The system allows users to search, reserve, and borrow books, while staff can manage all library operations through a tailored admin interface."
+heroImage: "https://github.com/Eric-Philippe/Sae-WhatsABook/raw/master/img/f-welcome.png"
+gallery:
+  - "https://github.com/Eric-Philippe/Sae-WhatsABook/raw/master/img/f-welcome.png"
+  - "https://github.com/Eric-Philippe/Sae-WhatsABook/raw/master/img/f-search.png"
+  - "https://github.com/Eric-Philippe/Sae-WhatsABook/raw/master/img/f-loans.png"
+  - "https://github.com/Eric-Philippe/Sae-WhatsABook/raw/master/img/b-welcome.png"
+  - "https://github.com/Eric-Philippe/Sae-WhatsABook/raw/master/img/b-loans.png"
+  - "https://github.com/Eric-Philippe/Sae-WhatsABook/raw/master/img/b-mail.png"
+liveUrl: "https://github.com/Eric-Philippe/Sae-WhatsABook"
+githubUrl: "https://github.com/Eric-Philippe/Sae-WhatsABook"
+techs:
+  - "PHP"
+  - "Symfony"
+  - "Angular"
+  - "MariaDB"
+  - "EasyAdmin"
+  - "Docker"
+  - "JWT"
+tags:
+  - "Library"
+  - "Full Stack"
+  - "School Project"
+  - "Symfony"
+  - "Angular"
+date: "2024-06-01"
+featured: true
+priority: 1
+published: true
+---
+
+## Project Vision
+
+What's a Book? was created as my end-of-year project at IUT Blagnac, designed to showcase advanced technical skills across the full stack. The goal was to build a modern, feature-rich library management system that could serve as a demo for real-world use, earning the highest grade in my class.
+
+### Why What's a Book?
+
+Most library systems are either outdated or overly complex. This project demonstrates how a clean, modular architecture can deliver a seamless experience for both users and staff, with a focus on usability, security, and maintainability.
+
+### Main Features
+
+- **User-Friendly Angular Frontend**  
+  Search for books, view details, reserve and borrow, manage your profile, and suggest new titles—all in a responsive, modern UI.
+
+- **Robust Symfony API**  
+  Secure, documented REST API with JWT authentication, handling all business logic and data operations.
+
+- **EasyAdmin Back Office**  
+  Custom admin dashboard for staff to manage books, users, loans, reservations, and more.
+
+- **MariaDB Database**  
+  3NF relational schema, managed via Symfony ORM and migrations, with fixtures for demo data.
+
+- **Automated Reservation Cleanup**  
+  Node.js crontab service deletes old reservations and notifies users by email.
+
+- **Dockerized Deployment**  
+  Full Docker support for easy setup and reproducibility.
+
+### Use Cases
+
+- **Library Members**: Search, reserve, and borrow books, manage profiles, and interact with support.
+- **Staff/Admins**: Oversee all library operations, manage inventory, users, and reservations.
+- **Demo/Portfolio**: Showcases full-stack development, security, and automation.
+
+<!--tech-->
+
+## Architecture Overview
+
+What's a Book? is split into four main components:
+
+- **Angular Frontend**: User interface for members.
+- **Symfony API**: Backend logic and data access.
+- **EasyAdmin Back Office**: Admin/staff dashboard.
+- **MariaDB Database**: Persistent storage.
+
+### Core Technologies
+
+- **PHP & Symfony**: Secure, scalable API and admin.
+- **Angular**: Modern, responsive frontend.
+- **MariaDB**: Reliable relational database.
+- **Docker**: Containerized deployment.
+- **JWT**: Authentication and access control.
+
+### Features
+
+- **Book Search & Reservation**: Fast, intuitive search and reservation system.
+- **Profile & Membership**: Registration, login, and member management.
+- **Admin Dashboard**: Full CRUD for books, users, loans, and more.
+- **Automated Tasks**: Reservation cleanup via Node.js service.
+- **API Documentation**: Swagger/OpenAPI docs for easy integration.
+
+## Quick Start
+
+### Docker
+
+```sh
+docker-compose up
+```
+
+### Manual Setup
+
+- Backend: `composer install && symfony server:start`
+- Frontend: `npm install && ng serve`
+- Database: `php bin/console doctrine:migrations:migrate`
+- Crontab: `node services/index.js`
+
+## Configuration
+
+All settings are managed via environment variables and config files for each component.
+
+---
+
+**End-of-year project at IUT Blagnac — Highest grade achieved.**

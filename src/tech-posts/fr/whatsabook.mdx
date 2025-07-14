@@ -1,0 +1,117 @@
+---
+title: "What's a Book? - Bibliothèque en ligne"
+description: "Système moderne de gestion de bibliothèque, projet de fin d'année scolaire."
+productDescription: "What's a Book? est une plateforme complète de bibliothèque en ligne, développée comme projet de fin d'année à l'IUT de Blagnac, où j'ai obtenu la meilleure note. Elle intègre une API Symfony PHP, un back office EasyAdmin, un frontend Angular et une base de données MariaDB. Les utilisateurs peuvent rechercher, réserver et emprunter des livres, tandis que le personnel gère toutes les opérations via une interface d'administration personnalisée."
+heroImage: "https://github.com/Eric-Philippe/Sae-WhatsABook/raw/master/img/f-welcome.png"
+gallery:
+  - "https://github.com/Eric-Philippe/Sae-WhatsABook/raw/master/img/f-welcome.png"
+  - "https://github.com/Eric-Philippe/Sae-WhatsABook/raw/master/img/f-search.png"
+  - "https://github.com/Eric-Philippe/Sae-WhatsABook/raw/master/img/f-loans.png"
+  - "https://github.com/Eric-Philippe/Sae-WhatsABook/raw/master/img/b-welcome.png"
+  - "https://github.com/Eric-Philippe/Sae-WhatsABook/raw/master/img/b-loans.png"
+  - "https://github.com/Eric-Philippe/Sae-WhatsABook/raw/master/img/b-mail.png"
+liveUrl: "https://github.com/Eric-Philippe/Sae-WhatsABook"
+githubUrl: "https://github.com/Eric-Philippe/Sae-WhatsABook"
+techs:
+  - "PHP"
+  - "Symfony"
+  - "Angular"
+  - "MariaDB"
+  - "EasyAdmin"
+  - "Docker"
+  - "JWT"
+tags:
+  - "Bibliothèque"
+  - "Full Stack"
+  - "Projet scolaire"
+  - "Symfony"
+  - "Angular"
+date: "2024-06-01"
+featured: true
+priority: 1
+published: true
+---
+
+## Vision du projet
+
+What's a Book? a été réalisé comme projet de fin d'année à l'IUT de Blagnac, pour démontrer des compétences techniques avancées sur tout le stack. L'objectif était de créer un système moderne et complet de gestion de bibliothèque, servant de démonstration pour un usage réel, et qui m'a valu la meilleure note de la promotion.
+
+### Pourquoi What's a Book?
+
+La plupart des systèmes de bibliothèque sont dépassés ou trop complexes. Ce projet montre comment une architecture claire et modulaire peut offrir une expérience fluide et efficace pour les utilisateurs comme pour le personnel, avec un accent sur la sécurité et la maintenabilité.
+
+### Fonctionnalités principales
+
+- **Frontend Angular convivial**  
+  Recherche de livres, consultation des détails, réservation et emprunt, gestion du profil, suggestion de nouveaux titres, le tout dans une interface moderne et réactive.
+
+- **API Symfony robuste**  
+  API REST sécurisée et documentée avec authentification JWT, gérant toute la logique métier et les opérations sur les données.
+
+- **Back Office EasyAdmin**  
+  Tableau de bord personnalisé pour le personnel, permettant de gérer livres, utilisateurs, prêts, réservations, et plus encore.
+
+- **Base de données MariaDB**  
+  Schéma relationnel en 3NF, géré via l'ORM Symfony et les migrations, avec des fixtures pour les données de démonstration.
+
+- **Nettoyage automatique des réservations**  
+  Service Node.js en crontab qui supprime les réservations expirées et informe les utilisateurs par email.
+
+- **Déploiement Dockerisé**  
+  Support complet de Docker pour une installation rapide et reproductible.
+
+### Cas d'usage
+
+- **Membres** : Recherche, réservation et emprunt de livres, gestion du profil, support.
+- **Personnel/Admin** : Gestion complète de la bibliothèque, inventaire, utilisateurs, réservations.
+- **Démo/Portfolio** : Mise en avant de compétences full-stack, sécurité et automatisation.
+
+<!--tech-->
+
+## Architecture
+
+What's a Book? est composé de quatre éléments principaux :
+
+- **Frontend Angular** : Interface utilisateur pour les membres.
+- **API Symfony** : Logique métier et accès aux données.
+- **Back Office EasyAdmin** : Tableau de bord pour le personnel.
+- **Base de données MariaDB** : Stockage persistant.
+
+### Technologies principales
+
+- **PHP & Symfony** : API et admin sécurisés et évolutifs.
+- **Angular** : Frontend moderne et réactif.
+- **MariaDB** : Base de données relationnelle fiable.
+- **Docker** : Déploiement en conteneur.
+- **JWT** : Authentification et contrôle d'accès.
+
+### Fonctionnalités
+
+- **Recherche et réservation de livres** : Système rapide et intuitif.
+- **Gestion des profils et adhésions** : Inscription, connexion, gestion des membres.
+- **Dashboard admin** : CRUD complet pour livres, utilisateurs, prêts, etc.
+- **Tâches automatisées** : Nettoyage des réservations via service Node.js.
+- **Documentation API** : Swagger/OpenAPI pour intégration facile.
+
+## Démarrage rapide
+
+### Docker
+
+```sh
+docker-compose up
+```
+
+### Installation manuelle
+
+- Backend : `composer install && symfony server:start`
+- Frontend : `npm install && ng serve`
+- Base de données : `php bin/console doctrine:migrations:migrate`
+- Crontab : `node services/index.js`
+
+## Configuration
+
+Tous les paramètres sont gérés via des variables d'environnement et fichiers de configuration pour chaque composant.
+
+---
+
+**Projet de fin d'année à l'IUT de Blagnac — Meilleure note obtenue.**
