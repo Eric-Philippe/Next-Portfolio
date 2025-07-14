@@ -15,7 +15,13 @@ const config = {
         protocol: "https",
         hostname: "github.com",
         port: "",
-        pathname: "/Eric-Philippe/Next-Portfolio/blob/main/img/**",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "eric-p.gitbook.io",
+        port: "",
+        pathname: "/**",
       },
       {
         protocol: "https",

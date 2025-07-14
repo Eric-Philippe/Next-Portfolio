@@ -1,0 +1,82 @@
+---
+title: "Jaguar Webex Bot"
+description: "A modular Webex chatbot built for my ADP team to automate shared mailbox management and daily routines."
+productDescription: "Jaguar Webex Bot is a Node.js chatbot designed for my work team at ADP. It streamlines our shared mailbox rotation, automates daily notifications, and provides a flexible, maintainable architecture. Built on the webex-node-bot-framework, Jaguar makes it easy to add new commands, events, and scripts, while keeping the codebase clean and extensible."
+heroImage: "https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-07-14_at_22-13-25_eric-philippe_jaguar-webex-bot_a_webex_chatbot_that_i_made_for_my_coworkers_1752524019_e1f61c17_.png"
+gallery:
+  - "https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-07-14_at_22-13-25_eric-philippe_jaguar-webex-bot_a_webex_chatbot_that_i_made_for_my_coworkers_1752524019_e1f61c17_.png"
+liveUrl: ""
+githubUrl: ""
+techs:
+  - "Node.js"
+  - "Webex"
+  - "SQLite"
+tags:
+  - "Chatbot"
+  - "Automation"
+  - "Webex"
+  - "Node.js"
+date: "2025-07-14"
+featured: false
+priority: 3
+published: true
+---
+
+## Product Vision
+
+Jaguar Webex Bot was created to solve a real problem for my ADP team: managing our shared mailbox rotation and automating daily notifications. Existing solutions were either too manual or lacked flexibility. Jaguar provides a modular, extensible platform that makes mailbox management effortless and keeps our workflow running smoothly.
+
+### Why Jaguar?
+
+Jaguar is built for teams who need reliable automation in their daily routines. With its modular architecture, you can easily add new commands, events, or scheduled scripts without touching the core logic. The bot is designed to be maintainable, secure, and easy to deploy.
+
+### Main Features
+
+- **Shared Mailbox Rotation**
+  - Add or remove users from the rotation
+  - View current and all users in the box
+  - Assign, set next, or previous user
+  - Announce the next user daily (excluding holidays)
+  - Customize announcement time and rotation direction
+
+- **Modular Handlers**
+  - Event listener, command handler, and cron script handler for easy extensibility
+
+- **API Helpers**
+  - EmbedBuilder for Webex cards
+  - ActionListener for message actions
+
+- **Centralized Logging & Messaging**
+  - Unified logger and message sender for info, error, and success messages
+
+- **SQLite Database**
+  - Simple user management with a single table
+
+<!--tech-->
+
+## Architecture Overview
+
+Jaguar's architecture is designed for flexibility and maintainability:
+
+- **Handlers:** Modular event, command, and cron script handlers
+- **API Integration:** Helper classes for cards and message actions
+- **Database:** SQLite for user data
+- **Logger:** Centralized logging for info and errors
+- **Message Sender:** Unified message dispatch
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js (v8.0.0+)
+- Webex Developer Account
+
+### Installation
+
+1. Create a Webex bot and save its token
+2. Set up ngrok for public webhook access
+3. Copy `.env.local` to `.env` and fill in your bot token, port, webhook URL, and group ID
+4. Start the bot server: `npm start`
+5. Add the bot to your Webex space
+
+Jaguar Webex Bot helped my ADP team automate mailbox management and daily notifications, making our workflow smoother and more reliable.

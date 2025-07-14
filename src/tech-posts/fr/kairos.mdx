@@ -1,0 +1,112 @@
+---
+title: "Kairos Bot Discord de Rappel"
+description: "Un bot Discord puissant, personnalisable et compatible avec tous les fuseaux horaires pour les rappels et le suivi du temps."
+productDescription: "Kairos est votre assistant personnel de gestion du temps sur Discord. Programmez des rappels pour vous, vos amis ou tout votre serveur, avec des options avancées de planification, de répétition et de gestion des fuseaux horaires. Suivez votre travail, automatisez les notifications et profitez d'une interface moderne basée sur Discord.js."
+heroImage: "https://github.com/Eric-Philippe/Kairos-Bot-Reminder/blob/master/img/remindme.png?raw=true"
+gallery:
+  - "https://github.com/Eric-Philippe/Kairos-Bot-Reminder/blob/master/img/remindme.png?raw=true"
+  - "https://github.com/Eric-Philippe/Kairos-Bot-Reminder/blob/master/img/excel.png?raw=true"
+  - "https://github.com/Eric-Philippe/Kairos-Bot-Reminder/blob/master/img/help.png?raw=true"
+  - "https://github.com/Eric-Philippe/Kairos-Bot-Reminder/blob/master/img/profile.png?raw=true"
+liveUrl: "https://discord.com/oauth2/authorize?client_id=955923021732913254&permissions=414666189889&scope=bot"
+githubUrl: "https://github.com/Eric-Philippe/Kairos-Bot-Reminder"
+techs:
+  - "Node.js"
+  - "TypeScript"
+  - "Discord.js"
+  - "MySQL"
+tags:
+  - "Bot Discord"
+  - "Rappels"
+  - "Suivi du temps"
+  - "Open Source"
+date: "2024-06-01"
+featured: true
+priority: 3
+published: true
+---
+
+## Vision du Produit
+
+Kairos a été créé pour simplifier la gestion du temps sur Discord. Que vous ayez besoin de rappels personnels, d'informer votre communauté ou de suivre vos heures de travail, Kairos apporte une planification puissante et automatisée à votre serveur—plus de tâches oubliées ou de délais manqués.
+
+### Pourquoi Kairos ?
+
+La plupart des bots de rappel sont limités, ne gèrent pas les fuseaux horaires ou sont dépassés. Kairos résout ces problèmes avec une expérience moderne et riche en fonctionnalités : répétition avancée, ciblage de canal, prise en charge complète des fuseaux horaires et une belle interface. Construit avec Discord.js dernière génération, il utilise les commandes slash et l'autocomplétion pour une interaction fluide.
+
+### Fonctionnalités Principales
+
+- **Rappels personnels & serveur**  
+  Programmez des rappels pour vous ou pour tout le serveur, avec des options flexibles de planification et de répétition.
+
+- **Gestion des fuseaux horaires**  
+  Ne ratez plus jamais un rappel—Kairos comprend tous les fuseaux horaires mondiaux et ajuste les notifications.
+
+- **Suivi du temps**  
+  Suivez vos sessions de travail directement sur Discord, idéal pour la productivité et le suivi.
+
+- **Intégration Discord moderne**  
+  Profitez des commandes slash, de l'autocomplétion et des embeds pour une expérience utilisateur optimale.
+
+- **Notifications personnalisables**  
+  Ciblez des canaux, utilisateurs ou rôles spécifiques. Personnalisez l'apparence et la diffusion des rappels.
+
+- **Open Source & extensible**  
+  Kairos est sous licence GPL et ouvert aux contributions. Adaptez-le à vos besoins ou ajoutez des fonctionnalités.
+
+### Cas d'usage
+
+- **Productivité personnelle** : Ne ratez plus vos tâches ou échéances importantes.
+- **Gestion de communauté** : Planifiez des événements, réunions ou annonces pour votre serveur.
+- **Suivi du travail** : Enregistrez vos sessions et surveillez votre productivité.
+- **Notifications automatisées** : Gardez votre serveur informé et organisé.
+
+Kairos apporte une gestion du temps fiable et flexible à Discord—rendez votre serveur plus intelligent et productif.
+
+<!--tech-->
+
+## Vue d'Architecture
+
+Kairos est construit avec Node.js, TypeScript et Discord.js, garantissant fiabilité et accès aux dernières fonctionnalités de l'API Discord.
+
+### Technologies Clés
+
+- **Node.js & TypeScript** : Backend moderne et évolutif.
+- **Discord.js** : Support complet des commandes slash, embeds et autocomplétion.
+- **MySQL** : Stockage robuste des rappels et du suivi.
+
+### Fonctionnalités
+
+- **Rappels flexibles** : Personnels ou serveur, avec répétition et planification.
+- **Gestion des fuseaux horaires** : Notifications précises pour tous les utilisateurs.
+- **Suivi du temps** : Journalisation intégrée des sessions de travail.
+- **Interface moderne** : Commandes slash et autocomplétion.
+- **Open Source** : Sous licence GPL et prêt à être personnalisé.
+
+## Démarrage Rapide
+
+### Ajouter sur votre serveur
+
+[Inviter Kairos](https://discord.com/oauth2/authorize?client_id=955923021732913254&permissions=414666189889&scope=bot) et autorisez-le à rejoindre votre serveur Discord.
+
+### Développement local
+
+```sh
+git clone https://github.com/Eric-Philippe/Kairos-Bot-Reminder.git
+cd Kairos-Bot-Reminder
+npm install
+npm run start
+```
+
+## Configuration
+
+Kairos utilise des variables d'environnement pour la configuration :
+
+```env
+DISCORD_TOKEN=token-de-votre-bot
+MYSQL_HOST=localhost
+MYSQL_USER=root
+MYSQL_PASSWORD=motdepasse
+MYSQL_DATABASE=kairos
+TIMEZONE=Europe/Paris
+```

@@ -1,0 +1,112 @@
+---
+title: "Kairos Discord Reminder Bot"
+description: "A powerful, customizable, and timezone-aware Discord bot for reminders and time tracking."
+productDescription: "Kairos is your personal time assistant for Discord. Set reminders for yourself, your friends, or your entire guild, with advanced scheduling, repetition, and timezone support. Track your work, automate notifications, and enjoy a modern interface powered by the latest Discord.js features."
+heroImage: "https://github.com/Eric-Philippe/Kairos-Bot-Reminder/blob/master/img/remindme.png?raw=true"
+gallery:
+  - "https://github.com/Eric-Philippe/Kairos-Bot-Reminder/blob/master/img/remindme.png?raw=true"
+  - "https://github.com/Eric-Philippe/Kairos-Bot-Reminder/blob/master/img/excel.png?raw=true"
+  - "https://github.com/Eric-Philippe/Kairos-Bot-Reminder/blob/master/img/help.png?raw=true"
+  - "https://github.com/Eric-Philippe/Kairos-Bot-Reminder/blob/master/img/profile.png?raw=true"
+liveUrl: "https://discord.com/oauth2/authorize?client_id=955923021732913254&permissions=414666189889&scope=bot"
+githubUrl: "https://github.com/Eric-Philippe/Kairos-Bot-Reminder"
+techs:
+  - "Node.js"
+  - "TypeScript"
+  - "Discord.js"
+  - "MySQL"
+tags:
+  - "Discord Bot"
+  - "Reminders"
+  - "Time Tracking"
+  - "Open Source"
+date: "2024-06-01"
+featured: true
+priority: 3
+published: true
+---
+
+## Product Vision
+
+Kairos was created to make time management effortless on Discord. Whether you need personal reminders, want to notify your community, or track your work hours, Kairos brings powerful scheduling and automation to your server—no more missed deadlines or forgotten tasks.
+
+### Why Kairos?
+
+Most reminder bots are limited, lack timezone support, or feel outdated. Kairos solves this with a modern, feature-rich experience: advanced repetition, channel targeting, full timezone coverage, and a beautiful interface. Built with the latest Discord.js, it leverages slash commands and autocomplete for seamless interaction.
+
+### Main Features
+
+- **Personal & Guild Reminders**  
+  Set reminders for yourself or broadcast to your entire server, with flexible scheduling and repetition options.
+
+- **Timezone Support**  
+  Never miss a reminder—Kairos understands all global timezones and adjusts notifications accordingly.
+
+- **Time Tracking**  
+  Track your work sessions directly in Discord, perfect for productivity and accountability.
+
+- **Modern Discord Integration**  
+  Enjoy slash commands, autocomplete, and rich embeds for a smooth user experience.
+
+- **Customizable Notifications**  
+  Target specific channels, users, or roles. Fine-tune how and where reminders appear.
+
+- **Open Source & Extensible**  
+  Kairos is GPL-licensed and welcomes contributions. Adapt it for your needs or extend its features.
+
+### Use Cases
+
+- **Personal productivity**: Never forget important tasks or deadlines.
+- **Community management**: Schedule events, meetings, or announcements for your guild.
+- **Work tracking**: Log work sessions and monitor productivity.
+- **Automated notifications**: Keep your server informed and organized.
+
+Kairos brings reliable, flexible time management to Discord—making your server smarter and more productive.
+
+<!--tech-->
+
+## Architecture Overview
+
+Kairos is built with Node.js, TypeScript, and Discord.js, ensuring reliability and access to the latest Discord API features.
+
+### Core Technologies
+
+- **Node.js & TypeScript**: Modern, scalable backend.
+- **Discord.js**: Full support for slash commands, embeds, and autocomplete.
+- **MySQL**: Robust data storage for reminders and tracking.
+
+### Features
+
+- **Flexible Reminders**: Personal and guild-wide, with repetition and scheduling.
+- **Timezone Awareness**: Accurate notifications for users worldwide.
+- **Time Tracking**: Built-in work session logging.
+- **Modern UI**: Slash commands and autocomplete.
+- **Open Source**: GPL licensed and ready for customization.
+
+## Quick Start
+
+### Add to Your Server
+
+[Invite Kairos](https://discord.com/oauth2/authorize?client_id=955923021732913254&permissions=414666189889&scope=bot) and authorize it to join your Discord server.
+
+### Local Development
+
+```sh
+git clone https://github.com/Eric-Philippe/Kairos-Bot-Reminder.git
+cd Kairos-Bot-Reminder
+npm install
+npm run start
+```
+
+## Configuration
+
+Kairos uses environment variables for setup:
+
+```env
+DISCORD_TOKEN=your-bot-token
+MYSQL_HOST=localhost
+MYSQL_USER=root
+MYSQL_PASSWORD=yourpassword
+MYSQL_DATABASE=kairos
+TIMEZONE=UTC
+```
