@@ -1,0 +1,123 @@
+---
+title: "YBoard"
+description: "Plateforme complète de gestion des intervenants et modules pour Ynov Toulouse."
+productDescription: "YBoard est une plateforme moderne et centralisée conçue pour Ynov Toulouse afin de gérer efficacement les intervenants, les affectations, les modules et les programmes. Elle simplifie la sélection des candidats, le suivi des volumes horaires et la gestion des CV, avec une interface intuitive en glisser-déposer et une authentification sécurisée."
+heroImage: "https://github.com/Eric-Philippe/YBoard-Intervenants/blob/main/img/yboard.png?raw=true"
+gallery:
+  - "https://github.com/Eric-Philippe/YBoard-Intervenants/blob/main/img/yboard.png?raw=true"
+  - "https://snapfilething.homeserver-ericp.fr/uploads/yboardmainpage_1752441392_14670b1c_.png"
+liveUrl: "https://github.com/Eric-Philippe/YBoard-Intervenants"
+githubUrl: "https://github.com/Eric-Philippe/YBoard-Intervenants"
+techs:
+  - "Next.js"
+  - "React"
+  - "TypeScript"
+  - "tRPC"
+  - "PostgreSQL"
+  - "Prisma"
+  - "Mantine UI"
+  - "Tailwind CSS"
+  - "Docker"
+tags:
+  - "Gestion Intervenants"
+  - "Éducation"
+  - "Plateforme Admin"
+  - "Next.js"
+date: "2025-06-01"
+featured: true
+priority: 1
+published: true
+---
+
+## Vision du Produit
+
+YBoard a été créé pour répondre aux besoins spécifiques de Ynov Toulouse en matière de gestion des intervenants, modules et programmes. Les solutions existantes étaient trop limitées ou inadaptées, YBoard propose donc une plateforme sur-mesure pour l’affectation, le suivi des volumes horaires et la sélection des candidats.
+
+### Pourquoi YBoard ?
+
+YBoard centralise tous les aspects de la gestion pédagogique : affectation des intervenants, suivi des volumes horaires, gestion des CV. Son interface en glisser-déposer, son authentification sécurisée et ses tableaux de bord interactifs facilitent le quotidien des responsables pédagogiques.
+
+### Fonctionnalités Principales
+
+- **Gestion des Intervenants**  
+  Création, modification et suppression de profils détaillés.
+
+- **Gestion des Modules & Programmes**  
+  Organisation des modules par programme et spécialité, gestion des affectations et suivi des volumes horaires.
+
+- **Gestion des CV**  
+  Téléversement, prévisualisation, remplacement et suppression sécurisée des CV (PDF, 5Mo max).
+
+- **Système d’Affectation**  
+  Affectation des intervenants aux modules avec trois statuts : En cours, Potentiel, Sélectionné.
+
+- **Suivi des Volumes Horaires**  
+  Suivi précis du volume horaire de chaque intervenant sur tous les programmes.
+
+- **Interface Drag & Drop**  
+  Gestion intuitive des affectations par glisser-déposer.
+
+- **Authentification Sécurisée**  
+  Connexion protégée par JWT.
+
+- **Tableaux de Bord Interactifs**  
+  Visualisation des affectations, statistiques et couverture des programmes.
+
+### Cas d’Usage
+
+- **Gestion pédagogique** : Centralisation des affectations et suivi des volumes horaires.
+- **Sélection des candidats** : Simplification du processus de candidature et sélection.
+- **Administration des programmes** : Gestion efficace des modules, programmes et spécialités.
+- **Gestion des CV** : Stockage et gestion sécurisée des CV des intervenants.
+
+<!--tech-->
+
+## Architecture
+
+YBoard s’appuie sur une stack moderne pour la fiabilité, la scalabilité et l’expérience développeur.
+
+### Technologies Clés
+
+- **Next.js 15 + React 19** : Frontend rapide et évolutif.
+- **TypeScript** : Typage fort sur tout le projet.
+- **tRPC** : API typesafe de bout en bout.
+- **PostgreSQL + Prisma** : Base de données robuste et ORM performant.
+- **Mantine UI + Tailwind CSS** : UI réactive et élégante.
+- **Docker** : Déploiement et stockage persistant simplifiés.
+
+### Fonctionnalités
+
+- **Gestion centralisée** : Intervenants, modules, programmes et affectations réunis.
+- **Stockage sécurisé des fichiers** : Local ou volume Docker pour les CV.
+- **Affectation par statut** : En cours, Potentiel, Sélectionné.
+- **Tableaux de bord interactifs** : Statistiques et suivi en temps réel.
+- **API complète** : Routes REST et tRPC pour toutes les opérations.
+
+## Démarrage Rapide
+
+### Développement local
+
+```sh
+git clone https://github.com/Eric-Philippe/YBoard-Intervenants.git
+cd YBoard-Intervenants
+npm install
+npm run dev
+```
+
+### Docker
+
+```sh
+docker-compose up -d
+```
+
+## Configuration
+
+Définir les variables d’environnement dans `.env` :
+
+```env
+DATABASE_URL="postgresql://postgres:password@localhost:5432/sourcing_intervenants_ynov"
+JWT_SECRET="votre-cle-jwt-super-secrete"
+NODE_ENV="development"
+```
+
+YBoard est ouvert aux améliorations et pensé pour les établissements nécessitant une gestion pédagogique avancée.

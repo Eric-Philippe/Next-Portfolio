@@ -1,0 +1,123 @@
+---
+title: "YBoard"
+description: "A comprehensive teacher and module management platform for Ynov Toulouse."
+productDescription: "YBoard is a modern, centralized platform designed for Ynov Toulouse to manage teachers, assignments, modules, and programs efficiently. It streamlines candidate selection, workload tracking, and CV management, offering an intuitive drag-and-drop interface and secure authentication."
+heroImage: "https://github.com/Eric-Philippe/YBoard-Intervenants/blob/main/img/yboard.png?raw=true"
+gallery:
+  - "https://github.com/Eric-Philippe/YBoard-Intervenants/blob/main/img/yboard.png?raw=true"
+  - "https://snapfilething.homeserver-ericp.fr/uploads/yboardmainpage_1752441392_14670b1c_.png"
+liveUrl: "https://github.com/Eric-Philippe/YBoard-Intervenants"
+githubUrl: "https://github.com/Eric-Philippe/YBoard-Intervenants"
+techs:
+  - "Next.js"
+  - "React"
+  - "TypeScript"
+  - "tRPC"
+  - "PostgreSQL"
+  - "Prisma"
+  - "Mantine UI"
+  - "Tailwind CSS"
+  - "Docker"
+tags:
+  - "Teacher Management"
+  - "Education"
+  - "Admin Platform"
+  - "Next.js"
+date: "2025-06-01"
+featured: true
+priority: 1
+published: true
+---
+
+## Product Vision
+
+YBoard was created to address the unique needs of Ynov Toulouse for managing teachers, modules, and programs. Existing solutions lacked the flexibility and depth required for educational resource management, so YBoard provides a tailored, all-in-one platform for assignment, workload tracking, and candidate selection.
+
+### Why YBoard?
+
+YBoard centralizes all aspects of teacher and module management, making it easy to assign instructors, track workloads, and manage CVs. Its drag-and-drop interface, secure authentication, and interactive dashboards simplify daily operations for administrators and program managers.
+
+### Main Features
+
+- **Teacher Management**  
+  Create, edit, and delete instructor profiles with detailed information.
+
+- **Module & Program Management**  
+  Organize modules by program and specialty, manage assignments, and track workloads.
+
+- **CV Management**  
+  Upload, preview, replace, and delete teacher CVs (PDF, 5MB max) securely.
+
+- **Assignment System**  
+  Assign teachers to modules with three statuses: Ongoing, Potential, Selected.
+
+- **Workload Tracking**  
+  Monitor and manage each instructor's hourly volume across all programs.
+
+- **Drag & Drop Interface**  
+  Easily manage assignments with an intuitive drag-and-drop UI.
+
+- **Secure Authentication**  
+  JWT-based login system for protected access.
+
+- **Interactive Dashboards**  
+  Visualize assignments, statistics, and program coverage.
+
+### Use Cases
+
+- **Educational Resource Management**: Centralize teacher assignments and workload tracking.
+- **Candidate Selection**: Streamline the application and selection process for instructors.
+- **Program Administration**: Manage modules, programs, and specialties efficiently.
+- **CV Handling**: Securely store and manage teacher resumes.
+
+<!--tech-->
+
+## Architecture Overview
+
+YBoard leverages a modern stack for reliability, scalability, and developer experience.
+
+### Core Technologies
+
+- **Next.js 15 + React 19**: Fast, scalable frontend.
+- **TypeScript**: Type safety throughout the codebase.
+- **tRPC**: End-to-end typesafe API.
+- **PostgreSQL + Prisma**: Robust relational database and ORM.
+- **Mantine UI + Tailwind CSS**: Beautiful, responsive UI.
+- **Docker**: Easy deployment and persistent storage.
+
+### Features
+
+- **Centralized Management**: Teachers, modules, programs, and assignments in one place.
+- **Secure File Storage**: Local or Docker volume for CVs.
+- **Role-Based Assignment**: Ongoing, Potential, Selected statuses for teachers.
+- **Interactive Dashboards**: Real-time statistics and workload views.
+- **API Endpoints**: RESTful and tRPC routes for all operations.
+
+## Quick Start
+
+### Local Development
+
+```sh
+git clone https://github.com/Eric-Philippe/YBoard-Intervenants.git
+cd YBoard-Intervenants
+npm install
+npm run dev
+```
+
+### Docker
+
+```sh
+docker-compose up -d
+```
+
+## Configuration
+
+Set environment variables in `.env`:
+
+```env
+DATABASE_URL="postgresql://postgres:password@localhost:5432/sourcing_intervenants_ynov"
+JWT_SECRET="your-super-secret-jwt-key"
+NODE_ENV="development"
+```
+
+YBoard is open for improvements and tailored for educational institutions needing advanced resource management.

@@ -1,0 +1,104 @@
+---
+title: "Range tes morts"
+description: "Un outil moderne et interactif pour la gestion des cimetières, basé sur une carte SVG personnalisable."
+productDescription: "Range tes morts vous permet de dessiner, éditer et gérer facilement la carte de votre cimetière en SVG, puis de visualiser et d’interagir avec vos données via un client Angular puissant. Le backend, basé sur Go et SQLite, simplifie la gestion des données. Que vous souhaitiez suivre les tombes, les lots ou les utilisateurs, Range tes morts s’adapte à la configuration unique de votre cimetière—modifiez simplement votre SVG et tout fonctionne."
+heroImage: "https://github.com/Eric-Philippe/Range-tes-morts/raw/main/img/general.png"
+gallery:
+  - "https://github.com/Eric-Philippe/Range-tes-morts/raw/main/img/general.png"
+  - "https://github.com/Eric-Philippe/Range-tes-morts/blob/main/img/edit.png?raw=true"
+  - "https://github.com/Eric-Philippe/Range-tes-morts/blob/main/img/stats.png?raw=true"
+liveUrl: "https://github.com/Eric-Philippe/Range-tes-morts"
+githubUrl: "https://github.com/Eric-Philippe/Range-tes-morts"
+techs:
+  - "Go"
+  - "Python"
+  - "Angular"
+  - "Docker"
+  - "SQLite"
+tags:
+  - "Gestion de cimetière"
+  - "SVG"
+  - "Carte interactive"
+  - "Open Source"
+date: "2024-12-01"
+featured: true
+priority: 3
+published: true
+---
+
+## Vision du produit
+
+Range tes morts a été conçu pour rendre la gestion des cimetières visuelle, flexible et simple. Plutôt que des formulaires rigides ou des tableaux statiques, vous commencez par dessiner votre propre carte du cimetière en SVG—avec l’outil de votre choix. Ce SVG devient le cœur du système : chaque tombe, lot et chemin est représenté exactement comme vous le souhaitez.
+
+### Pourquoi Range tes morts ?
+
+La plupart des logiciels de gestion de cimetière sont trop complexes, trop limités ou trop coûteux. Range tes morts est open-source, léger et s’adapte à n’importe quelle configuration. Vous contrôlez votre carte, vos données et votre organisation.
+
+### Fonctionnalités principales
+
+- **Carte SVG interactive**  
+  Visualisez votre cimetière avec une carte interactive. Cliquez sur les tombes, lots ou chemins pour afficher les détails, éditer les fiches ou gérer les affectations.
+
+- **Création de carte facile**  
+  Dessinez votre cimetière dans Inkscape ou tout éditeur SVG. Des scripts Python vous aident à convertir les labels en identifiants et à numéroter les tombes.
+
+- **Modèle de données flexible**  
+  Le backend analyse votre SVG et remplit une base SQLite. Modifiez votre SVG, relancez la migration, et vos données restent synchronisées.
+
+- **Client Angular**  
+  Une interface moderne et réactive pour explorer le cimetière, rechercher, filtrer et gérer les tombes directement sur la carte.
+
+- **Gestion des utilisateurs & sécurité**  
+  Ajoutez, supprimez et listez les utilisateurs via la CLI. Les mots de passe sont sécurisés.
+
+- **Sauvegarde Excel**  
+  Exportez vos données au format Excel pour archivage ou reporting.
+
+- **Support Docker**  
+  Déployez tout en une seule commande Docker—aucune configuration manuelle.
+
+### Cas d’usage
+
+- **Collectivités** : Digitalisez et gérez les cimetières publics avec des plans sur mesure.
+- **Paroisses & associations** : Suivez l’attribution des tombes et l’historique.
+- **Projets de généalogie** : Visualisez les sépultures et les lots familiaux.
+
+<!--tech-->
+
+## Architecture
+
+Range tes morts combine un backend Go, des outils Python pour le SVG, et un frontend Angular. La carte SVG est centrale—modifiez-la, et l’application s’adapte instantanément.
+
+### Technologies principales
+
+- **Go** : CLI et serveur rapides pour la base et l’API.
+- **Python** : Scripts pour le prétraitement du SVG.
+- **Angular** : Client interactif basé sur la carte.
+- **Docker** : Déploiement simplifié.
+- **SQLite** : Base de données portable et légère.
+
+### Fonctionnalités
+
+- **Carte SVG personnalisée** : Votre cimetière, votre organisation.
+- **UI interactive** : Gérez tout directement sur la carte.
+- **Outils CLI** : Migration, sauvegarde, gestion des utilisateurs.
+- **Export Excel** : Sauvegarde complète en un clic.
+- **Open Source** : Licence MIT, contributions bienvenues.
+
+## Démarrage rapide
+
+### Docker
+
+```sh
+docker-compose up --build
+```
+
+### Installation manuelle
+
+- Dessinez votre carte SVG et prétraitez-la avec les scripts Python fournis.
+- Placez le SVG dans `frontend/public` et `backend/static`.
+- Compilez le backend et le frontend comme indiqué dans le README.
+
+## Configuration
+
+Tous les paramètres se gèrent via des variables d’environnement et des options CLI. Voir le [README](https://github.com/Eric-Philippe/Range-tes-morts) pour plus de détails.

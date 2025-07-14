@@ -1,0 +1,104 @@
+---
+title: "Range tes morts"
+description: "A modern, interactive, and open-source cemetery management tool built around a customizable SVG map."
+productDescription: "Range tes morts lets you easily draw, edit, and manage your cemetery map using SVG, then visualize and interact with your data through a powerful Angular client. The backend, powered by Go and SQLite, makes data management simple and robust. Whether you need to track graves, lots, or users, Range tes morts adapts to your cemetery's unique layout—just update your SVG and everything works."
+heroImage: "https://github.com/Eric-Philippe/Range-tes-morts/raw/main/img/general.png"
+gallery:
+  - "https://github.com/Eric-Philippe/Range-tes-morts/raw/main/img/general.png"
+  - "https://github.com/Eric-Philippe/Range-tes-morts/blob/main/img/edit.png?raw=true"
+  - "https://github.com/Eric-Philippe/Range-tes-morts/blob/main/img/stats.png?raw=true"
+liveUrl: "https://github.com/Eric-Philippe/Range-tes-morts"
+githubUrl: "https://github.com/Eric-Philippe/Range-tes-morts"
+techs:
+  - "Go"
+  - "Python"
+  - "Angular"
+  - "Docker"
+  - "SQLite"
+tags:
+  - "Cemetery Management"
+  - "SVG"
+  - "Interactive Map"
+  - "Open Source"
+date: "2024-12-01"
+featured: true
+priority: 3
+published: true
+---
+
+## Product Vision
+
+Range tes morts was created to make cemetery management visual, flexible, and easy. Instead of rigid forms or static tables, you start by drawing your own cemetery map as an SVG—using any tool you like. This SVG becomes the heart of your system: every grave, lot, and path is mapped exactly as you want.
+
+### Why Range tes morts?
+
+Most cemetery software is either too complex, too limited, or too expensive. Range tes morts is open-source, lightweight, and adapts to any cemetery layout. You control your map, your data, and your workflow.
+
+### Main Features
+
+- **Interactive SVG Map**  
+  Visualize your cemetery with a fully interactive map. Click on graves, lots, or paths to view details, edit records, or manage assignments.
+
+- **Easy Map Creation**  
+  Draw your cemetery in Inkscape or any SVG editor. Python scripts help you convert labels to IDs and add identifiers, making your map ready for the app.
+
+- **Flexible Data Model**  
+  The backend parses your SVG and populates a SQLite database. Change your SVG, rerun the migration, and your data stays in sync.
+
+- **Angular Client**  
+  A modern, responsive UI lets you explore the cemetery, search, filter, and manage graves—all from the map.
+
+- **User Management & Security**  
+  Add, remove, and list users with CLI commands. Passwords are securely hashed.
+
+- **Excel Backup**  
+  Export your data to Excel for reporting or offline backup.
+
+- **Docker Support**  
+  Deploy everything with a single Docker command—no manual setup required.
+
+### Use Cases
+
+- **Municipalities**: Digitize and manage public cemeteries with custom layouts.
+- **Churches & Associations**: Track grave assignments and history.
+- **Genealogy Projects**: Visualize burial records and family plots.
+
+<!--tech-->
+
+## Architecture Overview
+
+Range tes morts combines a Go backend, Python SVG tools, and an Angular frontend. The SVG map is central—update it, and your app adapts instantly.
+
+### Core Technologies
+
+- **Go**: Fast CLI and server for database and API.
+- **Python**: Scripts for SVG preprocessing.
+- **Angular**: Interactive, map-driven client.
+- **Docker**: Easy deployment.
+- **SQLite**: Simple, portable database.
+
+### Features
+
+- **SVG-driven Map**: Your cemetery, your way.
+- **Interactive UI**: Click, edit, and manage directly from the map.
+- **CLI Tools**: Populate, backup, and manage users.
+- **Excel Export**: One command for full data backup.
+- **Open Source**: MIT licensed, ready for contributions.
+
+## Quick Start
+
+### Docker
+
+```sh
+docker-compose up --build
+```
+
+### Manual Setup
+
+- Draw your SVG map and preprocess with provided Python scripts.
+- Place SVG in `frontend/public` and `backend/static`.
+- Build backend and frontend as described in the README.
+
+## Configuration
+
+All settings are handled via environment variables and CLI flags. See the [README](https://github.com/Eric-Philippe/Range-tes-morts) for details.

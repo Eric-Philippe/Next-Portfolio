@@ -1,0 +1,96 @@
+---
+title: "MQMonitorSuite Broker"
+description: "Un broker de messages moderne et une console de monitoring pour les systèmes distribués."
+productDescription: "MQMonitorSuite Broker est un broker de messages puissant, sans base de données, conçu pour la fiabilité, la transparence et la simplicité. Il permet une communication fluide entre services, avec une journalisation avancée, un routage flexible des messages et une console web pour le monitoring et la gestion. Idéal pour les développeurs et opérateurs qui veulent un contrôle total et une visibilité complète sur leurs flux de messages."
+heroImage: "https://github.com/Eric-Philippe/MQMonitorSuite-Broker/raw/main/res/Home.png"
+gallery:
+  - "https://github.com/Eric-Philippe/MQMonitorSuite-Broker/raw/main/res/Home.png"
+  - "https://github.com/Eric-Philippe/MQMonitorSuite-Broker/raw/main/res/Table.png"
+  - "https://github.com/Eric-Philippe/MQMonitorSuite-Broker/raw/main/res/Preferences.png"
+liveUrl: "https://github.com/Eric-Philippe/MQMonitorSuite-Broker"
+githubUrl: "https://github.com/Eric-Philippe/MQMonitorSuite-Broker"
+techs:
+  - "Java"
+  - "Spring Boot"
+  - "Node.js"
+  - "Angular"
+  - "Log4j2"
+tags:
+  - "Broker de messages"
+  - "Monitoring"
+  - "Auto-hébergement"
+  - "Java"
+  - "Systèmes distribués"
+date: "2024-08-01"
+featured: true
+priority: 2
+published: true
+---
+
+## Vision du produit
+
+MQMonitorSuite Broker est né pour répondre aux défis de gestion et de monitoring des flux de messages dans les systèmes distribués. Les brokers existants manquent souvent de transparence, sont difficiles à étendre ou nécessitent des configurations complexes. MQMonitorSuite Broker propose une solution simple, sans base de données, avec une console web riche pour le suivi et le contrôle en temps réel.
+
+### Pourquoi MQMonitorSuite Broker ?
+
+Que vous développiez des microservices, intégriez des systèmes existants ou recherchiez une infrastructure fiable, MQMonitorSuite Broker offre une expérience moderne et intuitive. Sa console ergonomique, sa journalisation avancée et son routage flexible en font un choix idéal en développement comme en production.
+
+### Fonctionnalités principales
+
+- **Routage fiable des messages**  
+  Acheminement des messages entre services avec stratégies configurables et mécanismes de secours. Résolution via API, mémoire ou fichiers pour une disponibilité maximale.
+
+- **Journalisation avancée & Replay**  
+  Chaque message est journalisé avec tous les détails de son cycle de vie. Les logs lisibles et normalisés facilitent le debug et l’audit. Les messages en échec peuvent être reroutés directement depuis la console.
+
+- **Console web moderne**  
+  Suivi du statut du broker, inspection des logs, gestion des propriétés et reroutage des messages—tout depuis une interface Angular réactive.
+
+- **Architecture sans base de données**  
+  Aucun besoin de base externe. Tout l’état et les logs sont gérés sur disque pour plus de simplicité et de fiabilité.
+
+- **Extensible & Open Source**  
+  Développé en Java, Node.js et Angular. Facile à étendre ou intégrer à votre stack. Licence MIT et ouvert aux contributions.
+
+### Cas d’usage
+
+- **Communication microservices** : Transmission fiable entre services distribués.
+- **Monitoring système** : Visibilité en temps réel sur les flux et la santé du broker.
+- **Gestion des erreurs** : Replay et reroutage des messages en échec en quelques clics.
+- **Auto-hébergement** : Contrôle total sur votre infrastructure et vos données.
+
+<!--tech-->
+
+## Architecture
+
+MQMonitorSuite Broker combine un backend Spring Boot avec une console web Node.js/Angular. Il utilise un système de résolveurs pour le routage et une journalisation avancée pour la transparence.
+
+### Technologies principales
+
+- **Java & Spring Boot** : Backend performant pour la gestion des messages.
+- **Node.js & Angular** : Console web réactive pour le monitoring et la gestion.
+- **Log4j2** : Journalisation structurée et flexible pour l’audit et le replay.
+- **Stockage sur disque** : Pas de base de données—tout est géré localement.
+
+### Fonctionnalités
+
+- **Routage multi-résolveurs** : API, mémoire et fichiers.
+- **Journalisation complète** : Logs lisibles et normalisés.
+- **Console web** : Monitoring en temps réel, inspection des logs, gestion des messages.
+- **Autonome** : Facile à déployer et maintenir.
+
+## Détails techniques
+
+### Système de résolveurs
+
+Les messages sont routés selon un classement :
+
+1. **Résolveur API** : Utilise les données API en temps réel.
+2. **Résolveur mémoire** : Bascule sur le cache mémoire si besoin.
+3. **Résolveur fichier** : Utilise le cache disque en dernier recours.
+
+### Journalisation
+
+- **Logs applicatifs** : Lisibles pour le debug rapide.
+- **Logs système** : Normalisés pour l’audit et le replay.
+- **Logs Routing & MQFile** : Suivi du cycle de vie des messages et des fichiers associés.
