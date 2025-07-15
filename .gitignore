@@ -47,3 +47,5 @@ yarn-error.log*
 
 RES.md
 TODO.md
+
+*.lockc
