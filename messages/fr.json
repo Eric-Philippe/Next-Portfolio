@@ -110,7 +110,8 @@
       "technologiesUsed": "Technologies utilisées",
       "technicalImplementation": "Implémentation technique",
       "suggestEdit": "Suggérer une modification",
-      "thanksForChecking": "Merci d'avoir consulté ce projet ! 🚀"
+      "thanksForChecking": "Merci d'avoir consulté ce projet ! 🚀",
+      "minutesRead": "{count} minutes de lecture"
     }
   },
   "PhotoPortfolio": {
@@ -153,7 +154,12 @@
     "lastUpdated": "Mis à jour le: {date}",
     "minutesRead": "{count} minutes de lecture",
     "noResultsTitle": "Aucun résultat",
-    "noResultsDescription": "Désolé, aucun article ne correspond à votre recherche. Essayez d'autres mots-clés ou explorez tous les articles."
+    "noResultsDescription": "Désolé, aucun article ne correspond à votre recherche. Essayez d'autres mots-clés ou explorez tous les articles.",
+    "postNotFound": "Article non trouvé",
+    "noPostDescription": "L'article de blog que vous recherchez n'existe pas. Il a peut-être été supprimé ou n'a jamais existé.",
+    "backToBlog": "Retour au blog",
+    "allPosts": "Tous les articles",
+    "thanksForReading": "Merci de votre lecture ! 🚀"
   },
   "LanguageSwitcher": {
     "currentLanguage": "Langue",

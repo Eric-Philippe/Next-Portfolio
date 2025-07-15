@@ -1,30 +1,13 @@
+// ===================================================================
+// ============================= CONSTANTS ===========================
+// ===================================================================
+// @deprecated
 export const API_CONTENT_URL = "https://common.homeserver-ericp.fr";
 export const EMAIL = "ericphlpp@proton.me";
-
-/**
- * Get the user's age based on birth date
- */
-export const getMyAge = () => {
-  const birthYear = 2003;
-  const birthMonth = 5; // May
-
-  const today = new Date();
-  const currentYear = today.getFullYear();
-  const currentMonth = today.getMonth() + 1;
-
-  let age = currentYear - birthYear;
-
-  if (currentMonth < birthMonth) {
-    age--;
-  }
-
-  return age;
-};
-
-export const getCurrentYear = () => {
-  const today = new Date();
-  return today.getFullYear();
-};
+export const DEV_PROJECT_MDX_CONTENT_MARKER = "<!--tech-->";
+export const CONTENT_DIR_PATH = "src/content";
+export const TECH_POSTS_DIR_PATH = `${CONTENT_DIR_PATH}/tech-posts`;
+export const BLOG_POSTS_DIR_PATH = `${CONTENT_DIR_PATH}/blog-posts`;
 
 const EN_MONTHS = [
   "January",
@@ -55,6 +38,31 @@ const FR_MONTHS = [
   "Novembre",
   "Décembre",
 ];
+
+// ===================================================================
+// ============================= FUNCTIONS ===========================
+// ===================================================================
+export const getMyAge = () => {
+  const birthYear = 2003;
+  const birthMonth = 5; // May
+
+  const today = new Date();
+  const currentYear = today.getFullYear();
+  const currentMonth = today.getMonth() + 1;
+
+  let age = currentYear - birthYear;
+
+  if (currentMonth < birthMonth) {
+    age--;
+  }
+
+  return age;
+};
+
+export const getCurrentYear = () => {
+  const today = new Date();
+  return today.getFullYear();
+};
 
 /**
  * Format date string to "YYYY/MM" or "YYYY/MM - YYYY/MM"

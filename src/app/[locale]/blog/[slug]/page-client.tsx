@@ -10,6 +10,7 @@ import { MDXContent } from "~/components/blog/mdx-content";
 import type { BlogPostWithContent } from "~/lib/blog-utils";
 import BookmarkButton from "~/components/common/bookmarkButton";
 import ShareButton from "~/components/common/shareButton";
+import { useTranslations } from "next-intl";
 
 interface Props {
   params: Promise<{
@@ -21,7 +22,7 @@ interface Props {
 
 export default function BlogPostPageClient({ params, post }: Props) {
   const resolvedParams = use(params);
-  // const t = useTranslations("BlogPage");
+  const t = useTranslations("BlogPage");
   const [shareMenuOpen, setShareMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
@@ -34,17 +35,15 @@ export default function BlogPostPageClient({ params, post }: Props) {
         <div className="flex min-h-screen items-center justify-center">
           <div className="text-center">
             <h1 className="mb-4 text-4xl font-bold text-slate-900">
-              Post Not Found
+              {t("postNotFound")}
             </h1>
-            <p className="mb-8 text-slate-600">
-              The blog post you&apos;re looking for doesn&apos;t exist.
-            </p>
+            <p className="mb-8 text-slate-600">{t("noPostDescription")}</p>
             <Link
               href={`/${resolvedParams.locale}/blog`}
               className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700"
             >
               <FiArrowLeft className="h-4 w-4" />
-              Back to Blog
+              {t("backToBlog")}
             </Link>
           </div>
         </div>
@@ -104,7 +103,7 @@ export default function BlogPostPageClient({ params, post }: Props) {
               className="inline-flex items-center gap-2 text-slate-600 transition-colors hover:text-slate-900"
             >
               <FiArrowLeft className="h-4 w-4" />
-              Back to Blog
+              {t("backToBlog")}
             </Link>
           </motion.div>
 
@@ -156,7 +155,7 @@ export default function BlogPostPageClient({ params, post }: Props) {
               </div>
               <div className="flex items-center gap-2">
                 <FiClock className="h-4 w-4" />
-                <span>{post.readingTime} min read</span>
+                <span>{t("minutesRead", { count: post.readingTime })}</span>
               </div>
             </div>
             {/* Author Info */}
@@ -239,10 +238,12 @@ export default function BlogPostPageClient({ params, post }: Props) {
               className="flex items-center gap-2 rounded-xl bg-slate-100 px-6 py-3 transition-colors hover:bg-slate-200"
             >
               <FiArrowLeft className="h-4 w-4" />
-              All Posts
+              {t("allPosts")}
             </Link>
 
-            <div className="text-sm text-slate-600">Thanks for reading! 🚀</div>
+            <div className="text-sm text-slate-600">
+              {t("thanksForReading")}
+            </div>
           </motion.div>
         </div>
 

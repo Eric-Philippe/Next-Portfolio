@@ -5,6 +5,10 @@ import LoadingSpinner from "~/components/common/loading-spinner";
 import { Header } from "~/components/common/header";
 import DevPortfolio from "~/components/dev-portfolio";
 import type { DevProject } from "~/types/DevProjct";
+import {
+  DEV_PORTFOLIO_FIRST_COLOR,
+  DEV_PORTFOLIO_SECOND_COLOR,
+} from "~/content/dev-contents";
 
 interface Props {
   params: Promise<{
@@ -14,8 +18,6 @@ interface Props {
 
 export default async function TechPage({ params }: Props) {
   const resolvedParams = await params;
-  const firstColor = "#9967ef";
-  const secondColor = "#ed4f51";
 
   const file = fs.readFileSync(
     path.join(process.cwd(), "src/content/", "dev-index.json"),
@@ -26,7 +28,10 @@ export default async function TechPage({ params }: Props) {
 
   return (
     <div>
-      <Header firstColor={firstColor} secondColor={secondColor} />
+      <Header
+        firstColor={DEV_PORTFOLIO_FIRST_COLOR}
+        secondColor={DEV_PORTFOLIO_SECOND_COLOR}
+      />
       <Suspense fallback={<LoadingSpinner />}>
         <DevPortfolio
           devProjects={apiProjects}

@@ -205,7 +205,7 @@ export default function TechPostPageClient({ params, post }: Props) {
               </div>
               <div className="flex items-center gap-2">
                 <FiClock className="h-4 w-4" />
-                <span>{post.readingTime} min read</span>
+                <span>{t("minutesRead", { count: post.readingTime })}</span>
               </div>
             </div>
 

@@ -3,8 +3,9 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
+import { DEV_PROJECT_MDX_CONTENT_MARKER, TECH_POSTS_DIR_PATH } from "./utils";
 
-const techPostsDirectory = path.join(process.cwd(), "src/content/tech-posts");
+const techPostsDirectory = path.join(process.cwd(), TECH_POSTS_DIR_PATH);
 
 interface TechPostMeta {
   title: string;
@@ -17,9 +18,7 @@ interface TechPostMeta {
   techs: string[];
   tags: string[];
   date: string;
-  featured?: boolean;
   published?: boolean;
-  priority?: number;
 }
 
 export interface TechPostWithContent {
@@ -36,27 +35,10 @@ export interface TechPostWithContent {
   lastUpdated: Date;
   readingTime: number;
   content: string;
-  productContent: string; // added
-  techContent: string; // added
+  productContent: string;
+  techContent: string;
   meta: TechPostMeta;
   locale: string;
-}
-
-interface TechPostGroup {
-  slug: string;
-  locales: Record<string, TechPostWithContent>;
-  title: string;
-  description: string;
-  productDescription: string;
-  heroImage?: string;
-  gallery?: string[];
-  liveUrl?: string;
-  githubUrl?: string;
-  techs: string[];
-  tags: string[];
-  lastUpdated: Date;
-  readingTime: number;
-  priority: number;
 }
 
 export function getAllTechPostSlugs(): string[] {
@@ -130,9 +112,10 @@ function getTechPostForLocale(
     }
 
     // Split content by marker
-    const marker = "<!--tech-->";
-    const [productContent, ...techParts] = content.split(marker);
-    const techContent = techParts.join(marker);
+    const [productContent, ...techParts] = content.split(
+      DEV_PROJECT_MDX_CONTENT_MARKER,
+    );
+    const techContent = techParts.join(DEV_PROJECT_MDX_CONTENT_MARKER);
 
     const stats = readingTime(content);
 
@@ -160,73 +143,4 @@ function getTechPostForLocale(
   } catch {
     return null;
   }
-}
-
-export function getAllTechPostGroups(preferredLocale = "en"): TechPostGroup[] {
-  const slugs = getAllTechPostSlugs();
-  const groups: TechPostGroup[] = [];
-
-  for (const slug of slugs) {
-    const locales = ["en", "fr"];
-    const postGroup: TechPostGroup = {
-      slug,
-      locales: {},
-      title: "",
-      description: "",
-      productDescription: "",
-      heroImage: undefined,
-      gallery: undefined,
-      liveUrl: undefined,
-      githubUrl: undefined,
-      techs: [],
-      tags: [],
-      lastUpdated: new Date(),
-      readingTime: 0,
-      priority: 999,
-    };
-
-    let primaryPost: TechPostWithContent | null = null;
-
-    // Get posts for all available locales
-    for (const locale of locales) {
-      const post = getTechPostForLocale(slug, locale);
-      if (post) {
-        postGroup.locales[locale] = post;
-
-        // Prioritize the preferred locale, then English, then any available
-        if (
-          !primaryPost ||
-          locale === preferredLocale ||
-          (locale === "en" && primaryPost.locale !== preferredLocale)
-        ) {
-          primaryPost = post;
-        }
-      }
-    }
-
-    if (primaryPost && Object.keys(postGroup.locales).length > 0) {
-      postGroup.title = primaryPost.title;
-      postGroup.description = primaryPost.description;
-      postGroup.productDescription = primaryPost.productDescription;
-      postGroup.heroImage = primaryPost.heroImage;
-      postGroup.gallery = primaryPost.gallery;
-      postGroup.liveUrl = primaryPost.liveUrl;
-      postGroup.githubUrl = primaryPost.githubUrl;
-      postGroup.techs = primaryPost.techs;
-      postGroup.tags = primaryPost.tags;
-      postGroup.lastUpdated = primaryPost.lastUpdated;
-      postGroup.readingTime = primaryPost.readingTime;
-      postGroup.priority = primaryPost.meta.priority ?? 999;
-
-      groups.push(postGroup);
-    }
-  }
-
-  return groups.sort((a, b) => {
-    // Sort by priority first, then by date
-    if (a.priority !== b.priority) {
-      return a.priority - b.priority;
-    }
-    return a.lastUpdated > b.lastUpdated ? -1 : 1;
-  });
 }

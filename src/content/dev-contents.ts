@@ -1,6 +1,9 @@
 import type { DevProjectTags, Tags } from "~/types/DevProjct";
 import URLS from "./URLs";
 
+export const DEV_PORTFOLIO_FIRST_COLOR = "#9967ef";
+export const DEV_PORTFOLIO_SECOND_COLOR = "#ed4f51";
+
 const TECH_COLOR: Record<string, string> = {
   // WEB FRAMEWORKS
   NextJs: "#424242ff",

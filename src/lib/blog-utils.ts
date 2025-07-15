@@ -4,8 +4,9 @@ import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 import type { BlogPost } from "~/types/BlogPost";
+import { BLOG_POSTS_DIR_PATH } from "./utils";
 
-const postsDirectory = path.join(process.cwd(), "src/content/blog-posts");
+const postsDirectory = path.join(process.cwd(), BLOG_POSTS_DIR_PATH);
 
 interface BlogPostMeta {
   title: string;

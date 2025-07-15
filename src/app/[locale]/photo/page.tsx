@@ -3,15 +3,19 @@
 import { Suspense } from "react";
 import LoadingSpinner from "~/components/common/loading-spinner";
 import PhotoPortfolio from "~/components/photo-portfolio";
+import {
+  PHOTO_PORTFOLIO_FIRST_COLOR,
+  PHOTO_PORTFOLIO_SECOND_COLOR,
+} from "~/content/photo-contents";
 
 export default function PhotoPage() {
-  const firstColor = "#ff6b6b";
-  const secondColor = "#feca57";
-
   return (
     <div>
       <Suspense fallback={<LoadingSpinner />}>
-        <PhotoPortfolio firstColor={firstColor} secondColor={secondColor} />
+        <PhotoPortfolio
+          firstColor={PHOTO_PORTFOLIO_FIRST_COLOR}
+          secondColor={PHOTO_PORTFOLIO_SECOND_COLOR}
+        />
       </Suspense>
     </div>
   );

@@ -6,6 +6,7 @@
 - [x] Find a more subtle way to provide the content (Only by mdx ? Keep using the Rust API ? EVERYTHING in JSON ?) : Photo in MDX too
 - [ ] Clean Kneep
 - [ ] Make a working mailer (Connect it to the content provider made in rust, eh ?)
+- [ ] Make a proper README
 - [ ] Document the whole website archi to be able to come back on it later (Content Driven in conent/, page management exclusively in app/, utils/ details, etc.)
 
 ## Link Tree
