@@ -1,3 +1,4 @@
+.next/cache
 node_modules/.cache
 **/*.test.*
 **/__tests__/
@@ -5,4 +6,3 @@ docs/
 scripts/
 *.md
 *.log
-img/
