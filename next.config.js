@@ -8,6 +8,12 @@ import createMDX from "@next/mdx";
 
 /** @type {import("next").NextConfig} */
 const config = {
+  // Add any route here that should exclude the huge .next/cache directory
+  outputFileTracingExcludes: {
+    "/[locale]/tech/[slug]": ["./.next/cache/**/*"],
+    "/[locale]/blog/[slug]": ["./.next/cache/**/*"],
+    "/[locale]/blog": ["./.next/cache/**/*"],
+  },
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   images: {
     remotePatterns: [
