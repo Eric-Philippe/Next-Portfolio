@@ -1,6 +1,5 @@
 "use client";
 
-import { PortfolioProvider } from "~/lib/portfolio-context";
 import { Header } from "~/components/common/header";
 import { BlogPostCard } from "~/components/blog/blog-post-card";
 import { useTranslations } from "next-intl";
@@ -8,7 +7,7 @@ import { useState } from "react";
 import { FiSearch, FiEdit3 } from "react-icons/fi";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import type { BlogPost } from "~/types/portfolio";
+import type { BlogPost } from "~/types/BlogPost";
 
 interface Props {
   posts: BlogPost[];
@@ -48,7 +47,7 @@ export default function BlogPageClient({ posts }: Props) {
   };
 
   return (
-    <PortfolioProvider>
+    <div>
       <Header firstColor="#3b82f6" secondColor="#8b5cf6" />
 
       {/* Main Container */}
@@ -306,6 +305,6 @@ export default function BlogPageClient({ posts }: Props) {
           </motion.div>
         </div>
       </div>
-    </PortfolioProvider>
+    </div>
   );
 }

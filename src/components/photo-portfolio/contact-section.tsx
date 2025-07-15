@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { EMAIL } from "~/lib/data/data";
+import { EMAIL } from "~/lib/utils";
 
 interface ContactFormData {
   name: string;

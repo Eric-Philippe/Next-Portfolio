@@ -5,7 +5,7 @@ import ProjectsSection from "./projects-section";
 import SkillsSection from "./skills-section";
 import AboutSection from "./about-section";
 import ContactSection from "./contact-section";
-import type { DevProject } from "~/types/portfolio";
+import type { DevProject } from "~/types/DevProjct";
 
 interface DevPortfolioProps {
   devProjects: DevProject[];

@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Link } from "~/i18n/navigation";
 import { LanguageSwitcher } from "~/components/common/language-switcher";
+import URLS from "~/content/URLs";
 
 interface LinkCardProps {
   href: string;
@@ -155,7 +156,7 @@ export function LinkTree() {
 
   const externalLinks = [
     {
-      href: "https://github.com/Eric-Philippe",
+      href: URLS.GITHUB,
       title: t("external.github.title"),
       description: t("external.github.description"),
       icon: <Github className="h-6 w-6 text-white" />,
@@ -164,7 +165,7 @@ export function LinkTree() {
       delay: 0.4,
     },
     {
-      href: "https://your-latest-project.com",
+      href: URLS.LAST_PROJECT,
       title: t("external.latest.title"),
       description: t("external.latest.description"),
       icon: <ExternalLink className="h-6 w-6 text-purple-400" />,

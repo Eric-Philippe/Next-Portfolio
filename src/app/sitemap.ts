@@ -3,7 +3,6 @@ import type { MetadataRoute } from "next";
 const locales = ["en", "fr"];
 const baseUrl = "https://ericphilippe.com";
 
-// Define your static routes
 const staticRoutes = [
   "", // Home page
   "/blog",
@@ -46,7 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  // Add non-localized static routes if you have any (e.g., API routes, though typically not in sitemaps)
+  // Add non-localized static routes if we end up having any (e.g., API routes, though typically not in sitemaps)
   // sitemapEntries.push({
   //   url: `${baseUrl}/api/some-endpoint`,
   //   lastModified: new Date(),

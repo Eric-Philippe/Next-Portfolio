@@ -1,6 +1,5 @@
 "use client";
 
-import { PortfolioProvider } from "~/lib/portfolio-context";
 import { Header } from "~/components/common/header";
 import { useState, use } from "react";
 import {
@@ -19,11 +18,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { MDXContent } from "~/components/blog/mdx-content";
 import type { TechPostWithContent } from "~/lib/tech-utils";
-import { getTechColor } from "~/lib/utils/utils";
 import { useTranslations } from "next-intl";
 import BookmarkButton from "~/components/common/bookmarkButton";
 import ShareButton from "~/components/common/shareButton";
-import { getGithubDevContentUrl } from "~/lib/data/data";
+import { getGithubDevContentUrl, getTechColor } from "~/content/dev-contents";
 
 interface Props {
   params: Promise<{
@@ -47,7 +45,7 @@ export default function TechPostPageClient({ params, post }: Props) {
   // If no post provided, show a fallback
   if (!post) {
     return (
-      <PortfolioProvider>
+      <div>
         <Header firstColor="#9967ef" secondColor="#ed4f51" />
         <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800">
           <div className="text-center">
@@ -66,7 +64,7 @@ export default function TechPostPageClient({ params, post }: Props) {
             </Link>
           </div>
         </div>
-      </PortfolioProvider>
+      </div>
     );
   }
 
@@ -74,7 +72,7 @@ export default function TechPostPageClient({ params, post }: Props) {
   const shareText = `Check out this project: ${post.title}`;
 
   return (
-    <PortfolioProvider>
+    <div>
       {/* Reading Progress Bar */}
       <motion.div
         className="fixed top-0 right-0 left-0 z-50 h-1 origin-left bg-gradient-to-r from-purple-500 to-pink-500"
@@ -547,6 +545,6 @@ export default function TechPostPageClient({ params, post }: Props) {
           />
         )}
       </div>
-    </PortfolioProvider>
+    </div>
   );
 }

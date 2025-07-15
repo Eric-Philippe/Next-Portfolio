@@ -12,10 +12,10 @@ import {
 import { MdEmail, MdSchool, MdWork } from "react-icons/md";
 import Image from "next/image";
 import AnimatedProgressBar from "../common/animated-progress-bar";
-import LINKS from "../../lib/utils/links";
 import { useTranslations } from "next-intl";
-import { getMyAge } from "~/lib/utils/utils";
-import { EMAIL } from "~/lib/data/data";
+import { getMyAge } from "~/lib/utils";
+import { EMAIL } from "~/lib/utils";
+import URLS from "~/content/URLs";
 
 export default function AboutSection() {
   const [isHovered, setIsHovered] = useState(false);
@@ -182,7 +182,7 @@ export default function AboutSection() {
                         {/* Social Links */}
                         <div className="flex justify-center space-x-4">
                           <a
-                            href={LINKS.GITHUB}
+                            href={URLS.GITHUB}
                             target="_blank"
                             rel="noreferrer"
                             className="group relative overflow-hidden rounded-full border border-white/30 bg-white/20 p-3 shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-white/30"
@@ -190,7 +190,7 @@ export default function AboutSection() {
                             <FaGithub className="h-5 w-5 text-white transition-transform duration-300 group-hover:rotate-12" />
                           </a>
                           <a
-                            href={LINKS.LINKEDIN}
+                            href={URLS.LINKEDIN}
                             target="_blank"
                             rel="noreferrer"
                             className="group relative overflow-hidden rounded-full border border-white/30 bg-white/20 p-3 shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-white/30"
@@ -198,7 +198,7 @@ export default function AboutSection() {
                             <FaLinkedin className="h-5 w-5 text-blue-400 transition-transform duration-300 group-hover:rotate-12" />
                           </a>
                           <a
-                            href={LINKS.INSTAGRAM}
+                            href={URLS.INSTAGRAM}
                             target="_blank"
                             rel="noreferrer"
                             className="group relative overflow-hidden rounded-full border border-white/30 bg-white/20 p-3 shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-white/30"
@@ -317,7 +317,7 @@ export default function AboutSection() {
                               onClick={() => {
                                 const lienTelechargement =
                                   document.createElement("a");
-                                lienTelechargement.href = LINKS.DL_CV;
+                                lienTelechargement.href = URLS.CV_DL;
                                 lienTelechargement.download =
                                   "Eric_Philippe_CV.pdf";
                                 document.body.appendChild(lienTelechargement);

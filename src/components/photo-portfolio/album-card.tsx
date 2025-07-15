@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { AlbumData } from "~/types/portfolio";
+import type { AlbumData } from "~/types/AlbumData";
 
 interface AlbumCardProps {
   album: AlbumData;

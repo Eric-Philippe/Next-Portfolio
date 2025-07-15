@@ -2,10 +2,10 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useMemo, useEffect } from "react";
-import type { AlbumCategory, AlbumData } from "~/types/portfolio";
 import AlbumCard from "./album-card";
 import { fetchAlbums } from "~/lib/data/albums";
 import { useTranslations } from "next-intl";
+import type { AlbumCategory, AlbumData } from "~/types/AlbumData";
 
 interface AlbumsSectionProps {
   initialAlbums?: AlbumData[];

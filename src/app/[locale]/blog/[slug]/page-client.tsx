@@ -1,6 +1,5 @@
 "use client";
 
-import { PortfolioProvider } from "~/lib/portfolio-context";
 import { Header } from "~/components/common/header";
 import { useState, use } from "react";
 import { FiArrowLeft, FiClock, FiCalendar, FiTag } from "react-icons/fi";
@@ -8,7 +7,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { MDXContent } from "~/components/blog/mdx-content";
-import type { BlogPostWithContent } from "~/lib/mdx-utils";
+import type { BlogPostWithContent } from "~/lib/blog-utils";
 import BookmarkButton from "~/components/common/bookmarkButton";
 import ShareButton from "~/components/common/shareButton";
 
@@ -30,7 +29,7 @@ export default function BlogPostPageClient({ params, post }: Props) {
   // If no post provided, show a fallback
   if (!post) {
     return (
-      <PortfolioProvider>
+      <div>
         <Header firstColor="#3b82f6" secondColor="#8b5cf6" />
         <div className="flex min-h-screen items-center justify-center">
           <div className="text-center">
@@ -49,12 +48,12 @@ export default function BlogPostPageClient({ params, post }: Props) {
             </Link>
           </div>
         </div>
-      </PortfolioProvider>
+      </div>
     );
   }
 
   return (
-    <PortfolioProvider>
+    <div>
       {/* Reading Progress Bar */}
       <motion.div
         className="fixed top-0 right-0 left-0 z-50 h-1 origin-left bg-gradient-to-r from-blue-500 to-purple-500"
@@ -255,6 +254,6 @@ export default function BlogPostPageClient({ params, post }: Props) {
           />
         )}
       </div>
-    </PortfolioProvider>
+    </div>
   );
 }

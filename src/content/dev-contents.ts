@@ -1,23 +1,45 @@
-import type { DevProjectTags } from "~/types/portfolio";
+import type { DevProjectTags, Tags } from "~/types/DevProjct";
+import URLS from "./URLs";
 
-/**
- * @typedef {object} Tags
- * @property {string} name - The name of the tag
- * @property {DevProjectTags} type - The DevProjectTags type
- * @property {string} emoji - The emoji for the tag
- * @property {string} color - The color of the tag
- * @property {string} fadedColor - The faded color of the tag
- * @property {string} secColor - The secondary color of the tag
- * @property {string} secGradientColor - The secondary gradient color of the tag
- */
-type Tags = {
-  name: string;
-  type: DevProjectTags;
-  emoji: string;
-  color: string;
-  fadedColor: string;
-  secColor: string;
-  secGradientColor: string;
+const TECH_COLOR: Record<string, string> = {
+  // WEB FRAMEWORKS
+  NextJs: "#424242ff",
+  React: "#61dafb",
+  Angular: "#b52e31",
+  Symfony: "#c72d38",
+
+  // FRONTEND LANGUAGES
+  HTML: "#e34c26",
+  CSS: "#1572B6",
+  JavaScript: "#f7e02a",
+  TypeScript: "#3178c6",
+  PHP: "#777bb3",
+  Twig: "#c1d6f0",
+
+  // CSS FRAMEWORKS
+  Tailwind: "#38bdf8",
+  Bootstrap: "#563d7c",
+
+  // BACKEND LANGUAGES
+  Python: "#4f8ebd",
+  Go: "#00ADD8",
+  Rust: "#dea584",
+  CSharp: "#239120",
+  Julia: "#a270ba",
+  Java: "#f89820",
+
+  // DATABASES
+  PostgreSQL: "#336791",
+  MySQL: "#4479a1",
+  Redis: "#dc382d",
+  Prisma: "#2d3748",
+
+  // DEVOPS & INFRASTRUCTURE
+  Proxmox: "#e57100",
+  Docker: "#2496ed",
+  TrueNAS: "#0072c6",
+  Grafana: "#f46800",
+  Prometheus: "#e6522c",
 };
 
 export const WEBDEV: Tags = {
@@ -82,11 +104,6 @@ const OTHER: Tags = {
 
 export const ALL_TAGS: Tags[] = [WEBDEV, DEVOPS, BOT, TOOLS, CHALLENGES, OTHER];
 
-/**
- * @description - Gets the tags from a DevProjectTags type
- * @param tagType - The DevProjectTags type to get the tag from
- * @returns {Tags} - The tags
- */
 export const getTagsFromString = (tagType: DevProjectTags): Tags => {
   switch (tagType) {
     case "WebDev":
@@ -106,11 +123,17 @@ export const getTagsFromString = (tagType: DevProjectTags): Tags => {
   }
 };
 
-/**
- * @description - Gets the emoji from a tag
- * @param tag - The tag to get the emoji from
- * @returns {string} - The emoji
- */
 export const getEmojiFromTag = (tag: Tags): string => {
   return tag.emoji;
+};
+
+export const getTechColor = (tech: string) => {
+  if (tech in TECH_COLOR) return TECH_COLOR[tech];
+  return "bg-gray-300";
+};
+export const getGithubDevContentUrl = (
+  slug: string,
+  locale: string,
+): string => {
+  return `${URLS.PORTFOLIO_GITHUB}/blob/main/src/content/tech-posts/${locale}/${slug}.mdx`;
 };

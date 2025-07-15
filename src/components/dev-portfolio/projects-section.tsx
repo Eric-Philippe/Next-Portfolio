@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import ProjectCard from "./project-card";
-import { ALL_TAGS, getEmojiFromTag } from "../../lib/utils/tags";
-import type { DevProject, DevProjectTags } from "../../types/portfolio";
 import { useTranslations } from "next-intl";
+import type { DevProject, DevProjectTags } from "~/types/DevProjct";
+import { ALL_TAGS, getEmojiFromTag } from "~/content/dev-contents";
 
 interface ProjectsSectionProps {
   devProjects: DevProject[];
@@ -67,6 +67,15 @@ export default function ProjectsSection({
       const dateA = new Date(a.date.replace("/", "/01/")).getTime();
       const dateB = new Date(b.date.replace("/", "/01/")).getTime();
       return dateB - dateA; // Most recent first
+    });
+  } else {
+    filteredProjects = [...filteredProjects].sort((a, b) => {
+      // Sort by priority first
+      if (a.priority !== b.priority) {
+        return a.priority - b.priority;
+      }
+      // Then by title alphabetically
+      return a.en.title.localeCompare(b.en.title);
     });
   }
 

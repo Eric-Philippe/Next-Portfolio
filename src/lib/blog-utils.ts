@@ -3,9 +3,9 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
-import type { BlogPost } from "~/types/portfolio";
+import type { BlogPost } from "~/types/BlogPost";
 
-const postsDirectory = path.join(process.cwd(), "src/blog-posts");
+const postsDirectory = path.join(process.cwd(), "src/content/blog-posts");
 
 interface BlogPostMeta {
   title: string;

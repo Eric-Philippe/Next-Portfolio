@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import { FaPlus } from "react-icons/fa";
-import { formatDevProjectDate, getTechColor } from "../../lib/utils/utils";
-import { getTagsFromString } from "../../lib/utils/tags";
+import { formatDevProjectDate } from "../../lib/utils";
 import Image from "next/image";
 import { useLocale } from "next-intl";
 import Link from "next/link";
-import type { DevProject } from "~/types/portfolio";
+import { getTagsFromString, getTechColor } from "~/content/dev-contents";
+import type { DevProject } from "~/types/DevProjct";
 
 interface ProjectCardProps {
   project: DevProject;

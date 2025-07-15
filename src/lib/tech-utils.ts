@@ -4,7 +4,7 @@ import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 
-const techPostsDirectory = path.join(process.cwd(), "src/tech-posts");
+const techPostsDirectory = path.join(process.cwd(), "src/content/tech-posts");
 
 interface TechPostMeta {
   title: string;
@@ -229,31 +229,4 @@ export function getAllTechPostGroups(preferredLocale = "en"): TechPostGroup[] {
     }
     return a.lastUpdated > b.lastUpdated ? -1 : 1;
   });
-}
-
-export function getAllTechPosts(preferredLocale = "en") {
-  const groups = getAllTechPostGroups(preferredLocale);
-  return groups.map((group) => ({
-    slug: group.slug,
-    title: group.title,
-    description: group.description,
-    productDescription: group.productDescription,
-    heroImage: group.heroImage,
-    gallery: group.gallery,
-    liveUrl: group.liveUrl,
-    githubUrl: group.githubUrl,
-    techs: group.techs,
-    tags: group.tags,
-    lastUpdated: group.lastUpdated,
-    readingTime: group.readingTime,
-    priority: group.priority,
-    en_url: group.locales.en ? `/en/tech/${group.slug}` : undefined,
-    fr_url: group.locales.fr ? `/fr/tech/${group.slug}` : undefined,
-  }));
-}
-
-// This function will be used for static generation
-export function generateTechStaticParams() {
-  const slugs = getAllTechPostSlugs();
-  return slugs.map((slug) => ({ slug }));
 }

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import { motion } from "framer-motion";
 import { FiCalendar, FiClock, FiArrowUpRight, FiGlobe } from "react-icons/fi";
-import type { BlogPost } from "~/types/portfolio";
+import type { BlogPost } from "~/types/BlogPost";
 
 export function BlogPostCard({ post }: { post: BlogPost }) {
   const t = useTranslations("BlogPage");

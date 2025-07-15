@@ -1,4 +1,5 @@
 export const API_CONTENT_URL = "https://common.homeserver-ericp.fr";
+export const EMAIL = "ericphlpp@proton.me";
 
 /**
  * Get the user's age based on birth date
@@ -23,31 +24,6 @@ export const getMyAge = () => {
 export const getCurrentYear = () => {
   const today = new Date();
   return today.getFullYear();
-};
-
-const TECH_COLOR: Record<string, string> = {
-  Python: "#4f8ebd",
-  TypeScript: "#3178c6",
-  Golang: "#00ADD8",
-  JavaScript: "#f7e02a",
-  Redis: "#dc382d",
-  React: "#61dafb",
-  Proxmox: "#e57100",
-  Docker: "#2496ed",
-  TrueNAS: "#0072c6",
-  Grafana: "#f46800",
-  Prometheus: "#e6522c",
-  Rust: "#dea584",
-  Julia: "#a270ba",
-  PHP: "#777bb3",
-  Symfony: "#000000",
-  NextJs: "#000000",
-  Tailwind: "#38bdf8",
-};
-
-export const getTechColor = (tech: string) => {
-  if (tech in TECH_COLOR) return TECH_COLOR[tech];
-  return "bg-gray-300";
 };
 
 const EN_MONTHS = [

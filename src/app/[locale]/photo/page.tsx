@@ -1,7 +1,6 @@
 "use client";
 
 import { Suspense } from "react";
-import { PortfolioProvider } from "~/lib/portfolio-context";
 import LoadingSpinner from "~/components/common/loading-spinner";
 import PhotoPortfolio from "~/components/photo-portfolio";
 
@@ -10,10 +9,10 @@ export default function PhotoPage() {
   const secondColor = "#feca57";
 
   return (
-    <PortfolioProvider>
+    <div>
       <Suspense fallback={<LoadingSpinner />}>
         <PhotoPortfolio firstColor={firstColor} secondColor={secondColor} />
       </Suspense>
-    </PortfolioProvider>
+    </div>
   );
 }

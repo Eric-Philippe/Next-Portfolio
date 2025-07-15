@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { ParticlesDesign } from "../common/particles";
 import { useTranslations } from "next-intl";
-import { getMyAge } from "~/lib/utils/utils";
+import { getMyAge } from "~/lib/utils";
 
 const DEV_COLOR_PALETTE = {
   first: "#9867f0",

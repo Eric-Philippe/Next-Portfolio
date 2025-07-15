@@ -1,9 +1,10 @@
 import { Suspense } from "react";
-import { PortfolioProvider } from "~/lib/portfolio-context";
+import fs from "fs";
+import path from "path";
 import LoadingSpinner from "~/components/common/loading-spinner";
 import { Header } from "~/components/common/header";
 import DevPortfolio from "~/components/dev-portfolio";
-import { fetchProjects } from "~/lib/data/projects";
+import type { DevProject } from "~/types/DevProjct";
 
 interface Props {
   params: Promise<{
@@ -16,11 +17,15 @@ export default async function TechPage({ params }: Props) {
   const firstColor = "#9967ef";
   const secondColor = "#ed4f51";
 
-  // Fetch data server-side
-  const [apiProjects] = await Promise.all([fetchProjects()]);
+  const file = fs.readFileSync(
+    path.join(process.cwd(), "src/content/", "dev-index.json"),
+    "utf-8",
+  );
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const apiProjects: DevProject[] = JSON.parse(file);
 
   return (
-    <PortfolioProvider>
+    <div>
       <Header firstColor={firstColor} secondColor={secondColor} />
       <Suspense fallback={<LoadingSpinner />}>
         <DevPortfolio
@@ -28,6 +33,6 @@ export default async function TechPage({ params }: Props) {
           locale={resolvedParams.locale}
         />
       </Suspense>
-    </PortfolioProvider>
+    </div>
   );
 }

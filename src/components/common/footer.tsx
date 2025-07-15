@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { FaGithub, FaInstagram, FaLinkedin, FaTimes } from "react-icons/fa";
 import { useTranslations } from "next-intl";
-import LINKS from "../../lib/utils/links";
-import { getCurrentYear } from "~/lib/utils/utils";
-import { EMAIL } from "~/lib/data/data";
+import { getCurrentYear } from "~/lib/utils";
+import { EMAIL } from "~/lib/utils";
+import LINKS from "~/content/URLs";
 
 export default function Footer() {
   const [mentionLegalOpen, setMentionLegalOpen] = useState(false);

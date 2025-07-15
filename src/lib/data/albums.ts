@@ -1,5 +1,5 @@
-import type { AlbumData } from "~/types/portfolio";
-import { API_CONTENT_URL } from "../utils/utils";
+import type { AlbumData } from "~/types/AlbumData";
+import { API_CONTENT_URL } from "../utils";
 
 interface ApiAlbum {
   slug: string;
