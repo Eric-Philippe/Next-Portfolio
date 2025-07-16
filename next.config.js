@@ -12,7 +12,10 @@ const config = {
   outputFileTracingExcludes: {
     "/[locale]/tech/[slug]": ["./.next/cache/**/*"],
     "/[locale]/blog/[slug]": ["./.next/cache/**/*"],
+    "/[locale]/photo/[slug]": ["./.next/cache/**/*"],
     "/[locale]/blog": ["./.next/cache/**/*"],
+    "/[locale]/photo": ["./.next/cache/**/*"],
+    "/[locale]/tech": ["./.next/cache/**/*"],
   },
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   images: {
