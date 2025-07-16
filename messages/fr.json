@@ -130,9 +130,9 @@
       "moodboardDesign": "Moodboard"
     },
     "PhotoGallery": {
-      "photoAlbumTitleFirst": "Gallerie",
-      "photoAlbumTitleSecond": "Photo",
-      "photoAlbumDescription": "Collections soigneusement sélectionnées de moments, d'émotions et d'histoires capturées à travers l'objectif"
+      "photoGalleryTitleFirst": "Galerie",
+      "photoGalleryTitleSecond": "Photo",
+      "photoGalleryDescription": "Collections soigneusement sélectionnées de moments, d'émotions et d'histoires capturées à travers l'objectif"
     },
     "Contact": {
       "title": "Réserver une séance",

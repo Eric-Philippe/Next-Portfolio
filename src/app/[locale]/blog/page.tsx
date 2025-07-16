@@ -1,5 +1,5 @@
 import BlogPageClient from "./page-client";
-import { getPostsMetadata } from "~/lib/blog-utils";
+import { getAllPosts } from "~/lib/blog-utils";
 
 interface Props {
   params: Promise<{
@@ -9,7 +9,7 @@ interface Props {
 
 export default async function BlogPage({ params }: Props) {
   const { locale } = await params;
-  const posts = getPostsMetadata(locale);
+  const posts = getAllPosts(locale);
 
   return <BlogPageClient posts={posts} />;
 }

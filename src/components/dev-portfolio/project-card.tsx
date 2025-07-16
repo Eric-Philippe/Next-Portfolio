@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FaPlus } from "react-icons/fa";
-import { formatDevProjectDate } from "../../lib/utils";
+import { formatDateFromString } from "../../lib/utils";
 import Image from "next/image";
 import { useLocale } from "next-intl";
 import Link from "next/link";
@@ -85,7 +85,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
         {/* Date */}
         <div className="mb-4 text-sm font-medium text-white/70">
-          {formatDevProjectDate(project.date, locale)}
+          {formatDateFromString(project.date, locale)}
         </div>
 
         {/* Tags */}

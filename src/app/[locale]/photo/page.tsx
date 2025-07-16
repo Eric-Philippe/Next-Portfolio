@@ -1,22 +1,15 @@
-"use client";
+import { getAllPhotoGalleries } from "~/lib/photo-utils";
+import PhotoGalleriesPageClient from "./page-client";
 
-import { Suspense } from "react";
-import LoadingSpinner from "~/components/common/loading-spinner";
-import PhotoPortfolio from "~/components/photo-portfolio";
-import {
-  PHOTO_PORTFOLIO_FIRST_COLOR,
-  PHOTO_PORTFOLIO_SECOND_COLOR,
-} from "~/content/photo-contents";
+interface Props {
+  params: Promise<{
+    locale: string;
+  }>;
+}
 
-export default function PhotoPage() {
-  return (
-    <div>
-      <Suspense fallback={<LoadingSpinner />}>
-        <PhotoPortfolio
-          firstColor={PHOTO_PORTFOLIO_FIRST_COLOR}
-          secondColor={PHOTO_PORTFOLIO_SECOND_COLOR}
-        />
-      </Suspense>
-    </div>
-  );
+export default async function PhotoGalleriesPage({ params }: Props) {
+  const { locale } = await params;
+  const galleries = getAllPhotoGalleries(locale);
+
+  return <PhotoGalleriesPageClient galleries={galleries} />;
 }

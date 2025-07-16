@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
+import { LOCALES } from "~/lib/utils";
 
-const locales = ["en", "fr"];
 const baseUrl = "https://ericphilippe.com";
 
 const staticRoutes = [
@@ -23,7 +23,7 @@ const blogPosts: BlogPost[] = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const sitemapEntries: MetadataRoute.Sitemap = [];
 
-  locales.forEach((locale) => {
+  LOCALES.forEach((locale) => {
     // Add static routes for each locale
     staticRoutes.forEach((route) => {
       sitemapEntries.push({

@@ -1,13 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { AlbumData } from "~/types/AlbumData";
+import { useLocale } from "next-intl";
+import { formatDateFromDate } from "~/lib/utils";
+import type { GalleryData } from "~/types/GalleryData";
 
-interface AlbumCardProps {
-  album: AlbumData;
+interface Props {
+  gallery: GalleryData;
   index: number;
   viewMode: "grid" | "masonry";
-  hoveredAlbum: string | null;
+  hoveredGallery: string | null;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
   onClick?: () => void;
@@ -26,20 +28,22 @@ const itemVariants = {
   },
 };
 
-export default function AlbumCard({
-  album,
+export default function GalleryCard({
+  gallery,
   index,
   viewMode,
-  hoveredAlbum,
+  hoveredGallery,
   onMouseEnter,
   onMouseLeave,
   onClick,
-}: AlbumCardProps) {
-  const isHovered = hoveredAlbum === album.slug;
+}: Props) {
+  const locale = useLocale();
+
+  const isHovered = hoveredGallery === gallery.slug;
 
   return (
     <motion.div
-      key={album.slug}
+      key={gallery.slug}
       variants={itemVariants}
       exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
       className={`group br-6 relative cursor-pointer break-inside-avoid ${
@@ -62,7 +66,7 @@ export default function AlbumCard({
         }}
       >
         {/* Featured Badge */}
-        {album.featured && (
+        {gallery.featured && (
           <div className="absolute top-10 right-4 z-10">
             <div className="border border-orange-400/50 bg-orange-400/20 px-2 py-1 text-xs font-medium text-orange-400 backdrop-blur-sm">
               Featured
@@ -70,16 +74,16 @@ export default function AlbumCard({
           </div>
         )}
 
-        {/* Album Preview */}
+        {/* gallery Preview */}
         <div className="relative h-full w-full overflow-hidden">
           {/* Background fallback */}
           <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-900 to-black" />
 
-          {/* Album Image */}
+          {/* gallery Image */}
           <div
             className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
             style={{
-              backgroundImage: `url(${album.previewImgOne})`,
+              backgroundImage: `url(${gallery.previewUrl})`,
             }}
           />
 
@@ -88,12 +92,12 @@ export default function AlbumCard({
 
           {/* Camera settings overlay */}
           <div className="absolute top-4 left-4 z-10 font-mono text-xs text-white/40">
-            {album.camera.replace("Canon EOS ", "")}
+            {gallery.gear ?? "No gear info"}
           </div>
 
           {/* Photo count indicator */}
           <div className="absolute top-4 right-4 z-10 font-mono text-xs text-white/40">
-            {album.photos.length} photos
+            {gallery.photos.length} photos
           </div>
 
           {/* Hover overlay */}
@@ -117,13 +121,13 @@ export default function AlbumCard({
             transition={{ duration: 0.3 }}
           >
             <div className="mb-2 text-xs font-medium tracking-wider text-orange-400 uppercase">
-              {album.category} • {album.date}
+              {gallery.category} • {formatDateFromDate(gallery.date, locale)}
             </div>
             <h3 className="mb-2 text-xl font-light text-white">
-              {album.title}
+              {gallery.title}
             </h3>
             <p className="line-clamp-2 text-sm text-white/80">
-              {album.description}
+              {gallery.description}
             </p>
           </motion.div>
         </div>
@@ -133,13 +137,13 @@ export default function AlbumCard({
           <div className="flex items-center justify-between">
             <div>
               <div className="text-sm font-medium text-white">
-                {album.shortTitle}
+                {gallery.title}
               </div>
-              <div className="text-xs text-white/60">{album.category}</div>
+              <div className="text-xs text-white/60">{gallery.category}</div>
             </div>
             <div className="text-right">
               <div className="text-xs font-medium text-orange-400">
-                {album.date}
+                {formatDateFromDate(gallery.date, locale)}
               </div>
             </div>
           </div>

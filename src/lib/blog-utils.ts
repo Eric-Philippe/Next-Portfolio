@@ -4,7 +4,7 @@ import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 import type { BlogPost } from "~/types/BlogPost";
-import { BLOG_POSTS_DIR_PATH } from "./utils";
+import { BLOG_POSTS_DIR_PATH, LOCALES } from "./utils";
 
 const postsDirectory = path.join(process.cwd(), BLOG_POSTS_DIR_PATH);
 
@@ -38,9 +38,8 @@ interface BlogPostGroup {
 export function getAllPostSlugs(): string[] {
   try {
     const slugs = new Set<string>();
-    const locales = ["en", "fr"]; // Add more locales as needed
 
-    for (const locale of locales) {
+    for (const locale of LOCALES) {
       const localeDir = path.join(postsDirectory, locale);
       if (fs.existsSync(localeDir)) {
         const fileNames = fs.readdirSync(localeDir);
@@ -71,8 +70,7 @@ export function getPostBySlug(
     }
 
     // Otherwise, try to find in any available locale (prioritize 'en')
-    const locales = ["en", "fr"];
-    for (const loc of locales) {
+    for (const loc of LOCALES) {
       const post = getPostForLocale(slug, loc);
       if (post) return post;
     }
@@ -128,7 +126,6 @@ export function getAllPostGroups(preferredLocale = "en"): BlogPostGroup[] {
   const groups: BlogPostGroup[] = [];
 
   for (const slug of slugs) {
-    const locales = ["en", "fr"];
     const postGroup: BlogPostGroup = {
       slug,
       locales: {},
@@ -142,7 +139,7 @@ export function getAllPostGroups(preferredLocale = "en"): BlogPostGroup[] {
     let primaryPost: BlogPostWithContent | null = null;
 
     // Get posts for all available locales
-    for (const locale of locales) {
+    for (const locale of LOCALES) {
       const post = getPostForLocale(slug, locale);
       if (post) {
         postGroup.locales[locale] = post;
@@ -184,10 +181,6 @@ export function getAllPosts(preferredLocale = "en"): BlogPost[] {
     en_url: group.locales.en ? `/en/blog/${group.slug}` : undefined,
     fr_url: group.locales.fr ? `/fr/blog/${group.slug}` : undefined,
   }));
-}
-
-export function getPostsMetadata(preferredLocale = "en"): BlogPost[] {
-  return getAllPosts(preferredLocale);
 }
 
 // This function will be used for static generation

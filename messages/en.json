@@ -130,9 +130,9 @@
       "moodboardDesign": "Moodboard"
     },
     "PhotoGallery": {
-      "photoAlbumTitleFirst": "Photo",
-      "photoAlbumTitleSecond": "Gallery",
-      "photoAlbumDescription": "Curated collections of moments, emotions, and stories captured through the lens"
+      "photoGalleryTitleFirst": "Photo",
+      "photoGalleryTitleSecond": "Gallery",
+      "photoGalleryDescription": "Curated collections of moments, emotions, and stories captured through the lens"
     },
     "Contact": {
       "title": "Book a Session",

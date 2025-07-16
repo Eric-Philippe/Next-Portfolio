@@ -1,2 +1,2 @@
 export { default } from "./photo-portfolio";
-export { default as AlbumCard } from "./album-card";
+export { default as GalleryCard } from "./gallery-card";

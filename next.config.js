@@ -49,7 +49,7 @@ const config = {
       },
       {
         protocol: "https",
-        hostname: "static-00.iconduck.com",
+        hostname: "upload.wikimedia.org",
         port: "",
         pathname: "/**",
       },

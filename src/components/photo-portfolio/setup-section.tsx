@@ -312,7 +312,7 @@ export default function SetupSection() {
               label: "Adobe Lightroom",
               value: t("photoEditing"),
               iconURL:
-                "https://static-00.iconduck.com/assets.00/adobe-lightroom-icon-512x512-r5i43yti.png",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Adobe_Photoshop_Lightroom_CC_logo.svg/512px-Adobe_Photoshop_Lightroom_CC_logo.svg.png?20200616120137",
             },
             {
               label: "Adobe Photoshop",

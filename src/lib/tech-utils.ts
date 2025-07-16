@@ -3,7 +3,11 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
-import { DEV_PROJECT_MDX_CONTENT_MARKER, TECH_POSTS_DIR_PATH } from "./utils";
+import {
+  DEV_PROJECT_MDX_CONTENT_MARKER,
+  LOCALES,
+  TECH_POSTS_DIR_PATH,
+} from "./utils";
 
 const techPostsDirectory = path.join(process.cwd(), TECH_POSTS_DIR_PATH);
 
@@ -44,9 +48,8 @@ export interface TechPostWithContent {
 export function getAllTechPostSlugs(): string[] {
   try {
     const slugs = new Set<string>();
-    const locales = ["en", "fr"];
 
-    for (const locale of locales) {
+    for (const locale of LOCALES) {
       const localeDir = path.join(techPostsDirectory, locale);
       if (fs.existsSync(localeDir)) {
         const fileNames = fs.readdirSync(localeDir);
@@ -77,8 +80,7 @@ export function getTechPostBySlug(
     }
 
     // Otherwise, try to find in any available locale (prioritize 'en')
-    const locales = ["en", "fr"];
-    for (const loc of locales) {
+    for (const loc of LOCALES) {
       const post = getTechPostForLocale(slug, loc);
       if (post) return post;
     }
