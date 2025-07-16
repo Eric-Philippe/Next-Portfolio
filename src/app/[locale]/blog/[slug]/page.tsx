@@ -1,8 +1,4 @@
-import {
-  getAllPostSlugs,
-  getPostBySlug,
-  getPostsMetadata,
-} from "~/lib/blog-utils";
+import { getAllPostSlugs, getPostBySlug, getAllPosts } from "~/lib/blog-utils";
 import BlogPostPageClient from "./page-client";
 
 // Generate static params for all blog posts
@@ -37,7 +33,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   // If still not found in MDX, try fallback posts
   if (!post) {
-    const fallbackPosts = getPostsMetadata("en");
+    const fallbackPosts = getAllPosts("en");
     const fallbackPost = fallbackPosts.find(
       (p) => p.slug === resolvedParams.slug,
     );
