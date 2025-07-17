@@ -1,11 +1,10 @@
 // ===================================================================
 // ============================= CONSTANTS ===========================
 // ===================================================================
-// @deprecated
-export const API_CONTENT_URL = "https://common.homeserver-ericp.fr";
 export const EMAIL = "ericphlpp@proton.me";
 export const DEV_PROJECT_MDX_CONTENT_MARKER = "<!--tech-->";
-export const CONTENT_DIR_PATH = "src/content";
+
+const CONTENT_DIR_PATH = "src/content";
 export const TECH_POSTS_DIR_PATH = `${CONTENT_DIR_PATH}/tech-posts`;
 export const BLOG_POSTS_DIR_PATH = `${CONTENT_DIR_PATH}/blog-posts`;
 export const PHOTO_GALLERY_DIR_PATH = `${CONTENT_DIR_PATH}/photo-gallery`;

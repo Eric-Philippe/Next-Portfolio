@@ -8,6 +8,7 @@ import { FiSearch, FiEdit3 } from "react-icons/fi";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import type { BlogPost } from "~/types/BlogPost";
+import Footer from "~/components/common/footer";
 
 interface Props {
   posts: BlogPost[];
@@ -305,6 +306,8 @@ export default function BlogPageClient({ posts }: Props) {
           </motion.div>
         </div>
       </div>
+
+      <Footer theme="light" />
     </div>
   );
 }

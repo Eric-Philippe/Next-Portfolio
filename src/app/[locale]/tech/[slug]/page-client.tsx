@@ -22,6 +22,7 @@ import { useTranslations } from "next-intl";
 import BookmarkButton from "~/components/common/bookmarkButton";
 import ShareButton from "~/components/common/shareButton";
 import { getGithubDevContentUrl, getTechColor } from "~/content/dev-contents";
+import Footer from "~/components/common/footer";
 
 interface Props {
   params: Promise<{
@@ -545,6 +546,8 @@ export default function TechPostPageClient({ params, post }: Props) {
           />
         )}
       </div>
+
+      <Footer />
     </div>
   );
 }

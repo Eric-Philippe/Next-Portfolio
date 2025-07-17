@@ -22,6 +22,7 @@ import {
   FiGrid,
   FiCamera,
 } from "react-icons/fi";
+import Footer from "~/components/common/footer";
 
 interface Props {
   params: Promise<{
@@ -278,6 +279,8 @@ export default function PhotoGalleryPageClient({ params, gallery }: Props) {
           title={gallery.title}
         />
       </div>
+
+      <Footer />
     </div>
   );
 }

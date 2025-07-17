@@ -7,7 +7,7 @@ import type { GalleryData } from "../types/GalleryData";
 
 const photoGalleryDirectory = path.join(process.cwd(), PHOTO_GALLERY_DIR_PATH);
 
-export type GalleryMetadata = Omit<GalleryData, "photos" | "slug">;
+type GalleryMetadata = Omit<GalleryData, "photos" | "slug">;
 export type PhotoGallery = GalleryData & {
   content: string;
   locale: string;
@@ -36,7 +36,7 @@ export function getAllPhotoGallerySlugs(): string[] {
   }
 }
 
-export function getPhotoGalleryForLocale(
+function getPhotoGalleryForLocale(
   slug: string,
   locale: string,
 ): PhotoGallery | null {

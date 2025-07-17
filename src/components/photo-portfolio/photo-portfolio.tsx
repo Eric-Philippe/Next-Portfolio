@@ -3,6 +3,7 @@ import GalleriesSection from "./galleries-section";
 import SetupSection from "./setup-section";
 import ContactSection from "./contact-section";
 import type { GalleryData } from "~/types/GalleryData";
+import Footer from "../common/footer";
 
 interface PhotoPortfolioProps {
   firstColor?: string;
@@ -24,6 +25,8 @@ export default function PhotoPortfolio({
         <GalleriesSection galleries={galleries} />
         <ContactSection />
       </>
+
+      <Footer />
     </div>
   );
 }
