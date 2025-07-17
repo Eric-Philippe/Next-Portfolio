@@ -57,7 +57,7 @@ export default function TechPostPageClient({ params, post }: Props) {
               The project you&apos;re looking for doesn&apos;t exist.
             </p>
             <Link
-              href={`/${resolvedParams.locale}/tech`}
+              href={`/${resolvedParams.locale}/tech#projects`}
               className="inline-flex items-center gap-2 rounded-xl bg-purple-600 px-6 py-3 text-white transition-colors hover:bg-purple-700"
             >
               <FiArrowLeft className="h-4 w-4" />
@@ -134,7 +134,7 @@ export default function TechPostPageClient({ params, post }: Props) {
             transition={{ duration: 0.5 }}
           >
             <Link
-              href={`/${resolvedParams.locale}/tech`}
+              href={`/${resolvedParams.locale}/tech#projects`}
               className="inline-flex items-center gap-2 text-slate-400 transition-colors hover:text-white"
             >
               <FiArrowLeft className="h-4 w-4" />
@@ -483,7 +483,7 @@ export default function TechPostPageClient({ params, post }: Props) {
             transition={{ duration: 0.6, delay: 0.5 }}
           >
             <Link
-              href={`/${resolvedParams.locale}/tech`}
+              href={`/${resolvedParams.locale}/tech#projects`}
               className="flex items-center gap-2 rounded-xl bg-slate-700 px-6 py-3 transition-colors hover:bg-slate-600"
             >
               <FiArrowLeft className="h-4 w-4" />

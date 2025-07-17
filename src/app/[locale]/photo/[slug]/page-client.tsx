@@ -82,7 +82,7 @@ export default function PhotoGalleryPageClient({ params, gallery }: Props) {
                 been moved.
               </p>
               <Link
-                href={`/${resolvedParams.locale}/photo`}
+                href={`/${resolvedParams.locale}/photo#galleries`}
                 className="inline-flex items-center gap-2 rounded-xl bg-purple-600 px-6 py-3 text-white transition-colors hover:bg-purple-700"
               >
                 <FiArrowLeft className="h-4 w-4" />
@@ -188,7 +188,7 @@ export default function PhotoGalleryPageClient({ params, gallery }: Props) {
               <div className="flex items-center justify-between gap-2 sm:gap-4">
                 {/* Back Button */}
                 <Link
-                  href={`/${resolvedParams.locale}/photo`}
+                  href={`/${resolvedParams.locale}/photo#galleries`}
                   className="flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-sm text-slate-200 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white/20 hover:text-white hover:shadow-lg sm:px-4"
                 >
                   <FiArrowLeft className="h-4 w-4" />

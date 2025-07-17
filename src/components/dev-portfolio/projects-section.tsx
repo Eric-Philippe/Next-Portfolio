@@ -87,7 +87,7 @@ export default function ProjectsSection({
   const hasMoreProjects = filteredProjects.length > INITIAL_PROJECTS_COUNT;
 
   return (
-    <section className="mb-5 scroll-mt-8 lg:scroll-mt-0">
+    <section className="mb-5 scroll-mt-8 lg:scroll-mt-0" id="projects">
       <div className="overflow-hidden px-0 lg:px-4">
         <div
           className="relative z-0 py-12 lg:rounded-3xl lg:py-24"
