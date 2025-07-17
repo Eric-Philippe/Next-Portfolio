@@ -264,7 +264,7 @@ export default function PhotoHead({
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <button
-              onClick={() => scrollToSection("setup")}
+              onClick={() => scrollToSection("galleries")}
               className="group relative overflow-hidden rounded-lg px-8 py-3 font-light tracking-wider transition-all duration-300"
               style={{
                 background: `linear-gradient(135deg, ${firstColor}, ${secondColor})`,

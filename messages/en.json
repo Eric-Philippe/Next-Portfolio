@@ -132,7 +132,12 @@
     "PhotoGallery": {
       "photoGalleryTitleFirst": "Photo",
       "photoGalleryTitleSecond": "Gallery",
-      "photoGalleryDescription": "Curated collections of moments, emotions, and stories captured through the lens"
+      "photoGalleryDescription": "Curated collections of moments, emotions, and stories captured through the lens",
+      "all": "All",
+      "grid": "Grid",
+      "featured": "Featured",
+      "date": "Date",
+      "Category": "Category"
     },
     "Contact": {
       "title": "Book a Session",
@@ -142,6 +147,15 @@
       "emailPlaceholder": "Your Email",
       "contentPlaceholder": "Tell me about your project...",
       "sendInquiry": "Send Inquiry"
+    },
+    "Details": {
+      "backToGalleries": "Back to Galleries",
+      "back": "Back",
+      "story": "Story",
+      "carousel": "Carousel",
+      "grid": "Grid",
+      "lightboxNavigationInstructions1": "Press ESC to close • Arrow keys to navigate",
+      "lightboxNavigationInstructions2": "Click to zoom • R to rotate • +/- to zoom"
     }
   },
   "BlogPage": {
@@ -169,6 +183,7 @@
     "welcome": "Welcome to my",
     "universe": "Universe",
     "subtitle": "Choose your path to explore my work and projects",
+    "available": "Available for new projects",
     "portfolio": {
       "tech": {
         "title": "Tech Portfolio",

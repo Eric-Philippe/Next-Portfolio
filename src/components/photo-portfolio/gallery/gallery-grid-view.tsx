@@ -5,8 +5,8 @@ import { useState } from "react";
 import { FiGrid, FiList } from "react-icons/fi";
 import Image from "next/image";
 import type { PhotoGallery } from "~/lib/photo-utils";
-import { formatDateFromDate } from "~/lib/utils";
-import { useLocale } from "next-intl";
+import { formatDateFromDate, getPhotoGalleryCategory } from "~/lib/utils";
+import { useLocale, useTranslations } from "next-intl";
 
 interface Props {
   gallery: PhotoGallery;
@@ -15,6 +15,7 @@ interface Props {
 
 export default function GalleryGridView({ gallery, onImageClick }: Props) {
   const locale = useLocale();
+  const t = useTranslations("PhotoPortfolio.Details");
   const [layout, setLayout] = useState<"masonry" | "grid">("grid"); // Default to grid
 
   const containerVariants = {
@@ -75,7 +76,7 @@ export default function GalleryGridView({ gallery, onImageClick }: Props) {
               <span className="flex items-center gap-2">📷 {gallery.gear}</span>
             )}
             <span className="rounded-full bg-purple-900/30 px-3 py-1 text-purple-300">
-              {gallery.category}
+              {getPhotoGalleryCategory(gallery.category, locale)}
             </span>
           </div>
         </motion.header>
@@ -108,7 +109,7 @@ export default function GalleryGridView({ gallery, onImageClick }: Props) {
               }`}
             >
               <FiGrid className="h-4 w-4" />
-              Grid
+              {t("grid")}
             </button>
           </div>
         </motion.div>

@@ -11,7 +11,7 @@ import {
 } from "react-icons/fi";
 import Image from "next/image";
 import type { PhotoGallery } from "~/lib/photo-utils";
-import { formatDateFromDate } from "~/lib/utils";
+import { formatDateFromDate, getPhotoGalleryCategory } from "~/lib/utils";
 import { useLocale } from "next-intl";
 
 interface Props {
@@ -95,7 +95,7 @@ export default function GalleryCarouselView({ gallery, onImageClick }: Props) {
       tabIndex={0}
       style={{ userSelect: "none" }}
     >
-      <div className="mx-auto max-w-7xl px-3 py-6 md:px-6 md:py-12">
+      <div className="mx-auto mt-2 max-w-7xl px-3 py-6 md:px-6 md:py-12">
         {/* Gallery Header */}
         <motion.header
           className="mb-6 text-center md:mb-12"
@@ -118,7 +118,7 @@ export default function GalleryCarouselView({ gallery, onImageClick }: Props) {
               <span className="flex items-center gap-2">📷 {gallery.gear}</span>
             )}
             <span className="rounded-full bg-purple-900/30 px-2 py-1 text-purple-300 md:px-3">
-              {gallery.category}
+              {getPhotoGalleryCategory(gallery.category, locale)}
             </span>
           </div>
         </motion.header>

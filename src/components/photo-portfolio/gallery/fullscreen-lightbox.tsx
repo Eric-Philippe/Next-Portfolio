@@ -13,6 +13,7 @@ import {
   FiRotateCw,
 } from "react-icons/fi";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 interface Props {
   isOpen: boolean;
@@ -29,6 +30,8 @@ export default function FullscreenLightbox({
   onClose,
   title,
 }: Props) {
+  const t = useTranslations("PhotoPortfolio.Details");
+
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [imageDirection, setImageDirection] = useState(0);
   const [zoom, setZoom] = useState(1);
@@ -432,8 +435,8 @@ export default function FullscreenLightbox({
 
         {/* Instructions - Hidden on mobile, shown on desktop only */}
         <div className="absolute right-2 bottom-16 hidden text-right text-xs text-white/70 md:right-6 md:bottom-6 md:block md:text-sm">
-          <p>Press ESC to close • Arrow keys to navigate</p>
-          <p>Click to zoom • R to rotate • +/- to zoom</p>
+          <p>{t("lightboxNavigationInstructions1")}</p>
+          <p>{t("lightboxNavigationInstructions2")}</p>
         </div>
 
         {/* Mobile Bottom Actions */}

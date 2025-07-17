@@ -25,7 +25,7 @@ const TECH_COLOR: Record<string, string> = {
 
   // BACKEND LANGUAGES
   Python: "#4f8ebd",
-  Go: "#00ADD8",
+  Golang: "#00ADD8",
   Rust: "#dea584",
   CSharp: "#239120",
   Julia: "#a270ba",
@@ -36,6 +36,7 @@ const TECH_COLOR: Record<string, string> = {
   MySQL: "#4479a1",
   Redis: "#dc382d",
   Prisma: "#2d3748",
+  SQLite: "#003b57",
 
   // DEVOPS & INFRASTRUCTURE
   Proxmox: "#e57100",
@@ -43,6 +44,10 @@ const TECH_COLOR: Record<string, string> = {
   TrueNAS: "#0072c6",
   Grafana: "#f46800",
   Prometheus: "#e6522c",
+
+  // OTHERS
+  GoogleAPI: "#4285f4",
+  UML: "#f0f0f0",
 };
 
 export const WEBDEV: Tags = {

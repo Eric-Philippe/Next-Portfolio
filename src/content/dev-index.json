@@ -73,7 +73,7 @@
       "title": "Kairos - Bot Rappel",
       "shortDesc": "Kairos est un bot Discord international permettant aux utilisateurs dans le monde entier de se lancer des rappels pour des événements importants, des tâches et des échéances. Il permet également de logger ses activités afin de mieux gérer son temps."
     },
-    "techs": ["TypeScript"],
+    "techs": ["TypeScript", "MySQL", "UML"],
     "link": "/kairos",
     "date": "2024/01",
     "tags": ["Bot"],
@@ -137,7 +137,7 @@
       "title": "Cril - Bot IUT Toulouse",
       "shortDesc": "Un bot discord pour le département des langues et des relations internationales de l'IUT de Toulouse. Le bot permet une gestion précise et simplifiée de l'intendance, des activités en ligne, et des informations pour les étudiants."
     },
-    "techs": ["TypeScript"],
+    "techs": ["TypeScript", "PostgreSQL", "GoogleAPI"],
     "link": "/cril",
     "date": "2024/05",
     "tags": ["Bot"],
@@ -153,7 +153,7 @@
       "title": "Jaguar - Bot Webex",
       "shortDesc": "Jaguar bot est un chat bot sur Webex pour mon équipe dans mon entreprise afin de gérer automatiquement la gestion de la boîte mail de support, en fournissant un accès rapide aux informations et en automatisant les tâches."
     },
-    "techs": ["JavaScript"],
+    "techs": ["JavaScript", "SQLite"],
     "link": "/jaguarwebex",
     "date": "2024/08",
     "tags": ["Bot"],
@@ -201,7 +201,7 @@
       "title": "Range tes morts",
       "shortDesc": "Range tes morts est une application légère web pour vous déplacer dans votre cimetière local comme Google Maps ! Dessinez, intégrez puis renseignez les emplacements du contenu de votre cimetière."
     },
-    "techs": ["Go", "React", "TypeScript"],
+    "techs": ["Golang", "React", "TypeScript", "SQLite"],
     "link": "/rangetesmorts",
     "date": "2024/12",
     "tags": ["WebDev"],
@@ -233,7 +233,7 @@
       "title": "Glitch&Books",
       "shortDesc": "Gestionnaire de votre bibliothèque en ligne. Enregistrez, triez, et explorez vos livres en détails avec une interface utilisateur intuitive et des statistiques, et bientôt des recommandations."
     },
-    "techs": ["TypeScript", "Bootstrap"],
+    "techs": ["React", "TypeScript", "Bootstrap"],
     "link": "/glitchandbooks",
     "date": "2024/03",
     "tags": ["WebDev", "DevOps"],

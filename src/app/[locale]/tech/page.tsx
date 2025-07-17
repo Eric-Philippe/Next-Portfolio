@@ -9,6 +9,7 @@ import {
   DEV_PORTFOLIO_FIRST_COLOR,
   DEV_PORTFOLIO_SECOND_COLOR,
 } from "~/content/dev-contents";
+import { TECH_DATA_DIR_PATH } from "~/lib/utils";
 
 interface Props {
   params: Promise<{
@@ -20,7 +21,7 @@ export default async function TechPage({ params }: Props) {
   const resolvedParams = await params;
 
   const file = fs.readFileSync(
-    path.join(process.cwd(), "src/content/", "dev-index.json"),
+    path.join(process.cwd(), TECH_DATA_DIR_PATH),
     "utf-8",
   );
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

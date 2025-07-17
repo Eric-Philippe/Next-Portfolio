@@ -3,9 +3,10 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useMemo } from "react";
 import GalleryCard from "./gallery-card";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import type { GalleryCategory, GalleryData } from "~/types/GalleryData";
 import Link from "next/link";
+import { getPhotoGalleryCategory } from "~/lib/utils";
 
 interface Props {
   galleries: GalleryData[];
@@ -21,6 +22,7 @@ export default function GalleriesSection({ galleries }: Props) {
   >("all");
   const [hoveredGallery, setHoveredGallery] = useState<string | null>(null);
 
+  const locale = useLocale();
   const t = useTranslations("PhotoPortfolio.PhotoGallery");
 
   // Get unique categories
@@ -156,7 +158,9 @@ export default function GalleriesSection({ galleries }: Props) {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    {category === "all" ? "All" : category}
+                    {category === "all"
+                      ? t("all")
+                      : getPhotoGalleryCategory(category, locale)}
                     {isActive && (
                       <motion.div
                         className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-orange-400 to-pink-400"
@@ -187,13 +191,13 @@ export default function GalleriesSection({ galleries }: Props) {
                   style={{ backdropFilter: "blur(10px)" }}
                 >
                   <option value="featured" className="bg-gray-900">
-                    Featured
+                    {t("featured")}
                   </option>
                   <option value="date" className="bg-gray-900">
-                    Date
+                    {t("date")}
                   </option>
                   <option value="category" className="bg-gray-900">
-                    Category
+                    {t("Category")}
                   </option>
                 </select>
               </div>
@@ -213,7 +217,7 @@ export default function GalleriesSection({ galleries }: Props) {
                     }`}
                     onClick={() => setViewMode(mode as "grid" | "masonry")}
                   >
-                    {mode === "masonry" ? "Masonry" : "Grid"}
+                    {mode === "masonry" ? "Masonry" : t("grid")}
                   </button>
                 ))}
               </div>
@@ -292,7 +296,7 @@ export default function GalleriesSection({ galleries }: Props) {
                   {galleries.filter((gallery) => gallery.featured).length}
                 </div>
                 <div className="text-xs tracking-wider text-white/60 uppercase">
-                  Featured
+                  {t("featured")}
                 </div>
               </div>
             </div>

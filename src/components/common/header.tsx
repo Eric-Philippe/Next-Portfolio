@@ -62,9 +62,9 @@ export function Header({
   const pathname = usePathname();
 
   // Determine current page based on pathname
-  const isOnTech = pathname === "/tech";
-  const isOnPhoto = pathname === "/photo";
-  const isOnBlog = pathname.includes("/blog");
+  const isOnTech = pathname.startsWith("/tech");
+  const isOnPhoto = pathname.startsWith("/photo");
+  const isOnBlog = pathname.startsWith("/blog");
 
   return (
     <>

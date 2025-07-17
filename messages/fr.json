@@ -132,7 +132,12 @@
     "PhotoGallery": {
       "photoGalleryTitleFirst": "Galerie",
       "photoGalleryTitleSecond": "Photo",
-      "photoGalleryDescription": "Collections soigneusement sélectionnées de moments, d'émotions et d'histoires capturées à travers l'objectif"
+      "photoGalleryDescription": "Collections soigneusement sélectionnées de moments, d'émotions et d'histoires capturées à travers l'objectif",
+      "all": "Tout",
+      "grid": "Grille",
+      "featured": "Mis en avant",
+      "date": "Date",
+      "Category": "Catégorie"
     },
     "Contact": {
       "title": "Réserver une séance",
@@ -142,6 +147,15 @@
       "emailPlaceholder": "Votre email",
       "contentPlaceholder": "Parlez-moi de votre projet...",
       "sendInquiry": "Envoyer la demande"
+    },
+    "Details": {
+      "backToGalleries": "Retour aux galeries",
+      "back": "Retour",
+      "story": "Histoire",
+      "carousel": "Carrousel",
+      "grid": "Grille",
+      "lightboxNavigationInstructions1": "Appuyez sur Échap pour fermer • Flèches pour naviguer",
+      "lightboxNavigationInstructions2": "Cliquez pour zoomer • R pour faire pivoter • +/- pour zoomer"
     }
   },
   "BlogPage": {
@@ -169,6 +183,8 @@
     "welcome": "Bienvenue dans mon",
     "universe": "Univers",
     "subtitle": "Choisissez votre chemin pour explorer mon travail et mes projets",
+    "available": "Disponible pour de nouveaux projets",
+
     "portfolio": {
       "tech": {
         "title": "Portfolio Tech",

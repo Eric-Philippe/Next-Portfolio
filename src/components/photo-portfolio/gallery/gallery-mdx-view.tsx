@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import { createMdxComponents } from "~/components/blog/mdx-components";
 import type { PhotoGallery } from "~/lib/photo-utils";
 import Image from "next/image";
-import { formatDateFromDate } from "~/lib/utils";
+import { formatDateFromDate, getPhotoGalleryCategory } from "~/lib/utils";
 import { useLocale } from "next-intl";
 
 interface Props {
@@ -382,7 +382,7 @@ export default function GalleryMdxView({ gallery, onImageClick }: Props) {
               <span className="flex items-center gap-2">📷 {gallery.gear}</span>
             )}
             <span className="rounded-full bg-purple-900/30 px-3 py-1 text-purple-300">
-              {gallery.category}
+              {getPhotoGalleryCategory(gallery.category, locale)}
             </span>
           </div>
         </motion.header>

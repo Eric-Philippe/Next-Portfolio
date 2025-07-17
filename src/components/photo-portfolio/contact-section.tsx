@@ -86,7 +86,7 @@ export default function ContactSection() {
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10">
                   <span className="text-sm text-white">📍</span>
                 </div>
-                <span className="text-gray-300">Based in South France</span>
+                <span className="text-gray-300">Occitanie</span>
               </div>
             </div>
           </motion.div>

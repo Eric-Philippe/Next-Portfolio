@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
 import {
   ArrowRight,
   Github,
@@ -14,6 +14,7 @@ import {
 import { Link } from "~/i18n/navigation";
 import { LanguageSwitcher } from "~/components/common/language-switcher";
 import URLS from "~/content/URLs";
+import { getRandomYearDisplay } from "~/lib/utils";
 
 interface LinkCardProps {
   href: string;
@@ -124,6 +125,46 @@ function LinkCard({
   );
 }
 
+interface StatusBadgeProps {
+  text: string;
+}
+
+function StatusBadge({ text }: StatusBadgeProps) {
+  const getStatusConfig = () => {
+    return {
+      color: "bg-green-500",
+      glow: "shadow-green-500/50",
+      gradient: "from-green-500/20 to-emerald-500/20",
+    };
+  };
+
+  const { color, glow } = getStatusConfig();
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+      className="mx-auto flex w-fit items-center gap-3 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-sm"
+    >
+      {/* Status indicator dot */}
+      <div className="relative">
+        <div className={`h-3 w-3 rounded-full ${color} shadow-lg ${glow}`} />
+        {/* Animated pulse ring */}
+        <div
+          className={`absolute inset-0 h-3 w-3 animate-pulse rounded-full ${color} opacity-75`}
+        />
+        <div
+          className={`absolute -inset-1 h-5 w-5 animate-ping rounded-full ${color} opacity-20`}
+        />
+      </div>
+
+      {/* Status text */}
+      <span className="text-sm font-medium text-white/90">{text}</span>
+    </motion.div>
+  );
+}
+
 export function LinkTree() {
   const t = useTranslations("LinkTree");
 
@@ -175,6 +216,12 @@ export function LinkTree() {
     },
   ];
 
+  // Fix hydration error: only set random year display on client
+  const [yearDisplay, setYearDisplay] = useState<string | null>(null);
+  useEffect(() => {
+    setYearDisplay(getRandomYearDisplay());
+  }, []);
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900/30 to-slate-900">
       {/* Background Effects */}
@@ -189,13 +236,19 @@ export function LinkTree() {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 py-12">
         {/* Header */}
-        <div className="mb-16 flex items-center justify-between">
+        <div className="mb-16 flex cursor-pointer items-center justify-between">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
+            onClick={() => {
+              setYearDisplay(getRandomYearDisplay());
+            }}
           >
             <h1 className="text-2xl font-bold text-white">Eric Philippe</h1>
+            <span className="curosor-alias mt-1 block text-sm text-white/70">
+              {yearDisplay ?? ""}
+            </span>
           </motion.div>
 
           <motion.div
@@ -227,6 +280,11 @@ export function LinkTree() {
             {t("subtitle")}
           </p>
         </motion.div>
+
+        {/* Status Badge */}
+        <div className="mb-12 text-center">
+          <StatusBadge text={t("available")} />
+        </div>
 
         {/* Portfolio Links */}
         <motion.div

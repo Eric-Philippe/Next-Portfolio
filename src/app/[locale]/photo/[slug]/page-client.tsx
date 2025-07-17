@@ -23,6 +23,7 @@ import {
   FiCamera,
 } from "react-icons/fi";
 import Footer from "~/components/common/footer";
+import { useTranslations } from "next-intl";
 
 interface Props {
   params: Promise<{
@@ -36,6 +37,8 @@ type ViewMode = "mdx" | "carousel" | "grid";
 
 export default function PhotoGalleryPageClient({ params, gallery }: Props) {
   const resolvedParams = use(params);
+  const t = useTranslations("PhotoPortfolio.Details");
+
   const [viewMode, setViewMode] = useState<ViewMode>("mdx");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -83,7 +86,7 @@ export default function PhotoGalleryPageClient({ params, gallery }: Props) {
                 className="inline-flex items-center gap-2 rounded-xl bg-purple-600 px-6 py-3 text-white transition-colors hover:bg-purple-700"
               >
                 <FiArrowLeft className="h-4 w-4" />
-                Back to Gallery
+                {t("backToGalleries")}
               </Link>
             </motion.div>
           </div>
@@ -173,11 +176,6 @@ export default function PhotoGalleryPageClient({ params, gallery }: Props) {
 
   return (
     <div>
-      <Header
-        firstColor={PHOTO_PORTFOLIO_FIRST_COLOR}
-        secondColor={PHOTO_PORTFOLIO_SECOND_COLOR}
-      />
-
       {/* Navigation Bar */}
       <div className="sticky top-0 z-40 bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 py-4">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -194,8 +192,10 @@ export default function PhotoGalleryPageClient({ params, gallery }: Props) {
                   className="flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-sm text-slate-200 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white/20 hover:text-white hover:shadow-lg sm:px-4"
                 >
                   <FiArrowLeft className="h-4 w-4" />
-                  <span className="hidden sm:inline">Back to Galleries</span>
-                  <span className="sm:hidden">Back</span>
+                  <span className="hidden sm:inline">
+                    {t("backToGalleries")}
+                  </span>
+                  <span className="sm:hidden">{t("back")}</span>
                 </Link>
 
                 {/* View Mode Selector */}
@@ -212,19 +212,19 @@ export default function PhotoGalleryPageClient({ params, gallery }: Props) {
                     <ViewModeButton
                       mode="mdx"
                       icon={FiFileText}
-                      label="Story"
+                      label={t("story")}
                       isActive={viewMode === "mdx"}
                     />
                     <ViewModeButton
                       mode="carousel"
                       icon={FiImage}
-                      label="Carousel"
+                      label={t("carousel")}
                       isActive={viewMode === "carousel"}
                     />
                     <ViewModeButton
                       mode="grid"
                       icon={FiGrid}
-                      label="Grid"
+                      label={t("grid")}
                       isActive={viewMode === "grid"}
                     />
                   </div>

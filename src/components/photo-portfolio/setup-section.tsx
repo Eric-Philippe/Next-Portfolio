@@ -196,18 +196,12 @@ export default function SetupSection() {
             </div>
 
             {/* Active Category Items */}
-            <motion.div
-              key={activeCategory}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="space-y-6"
-            >
+            <div key={activeCategory} className="space-y-6">
               {equipment[activeCategory]?.items.map((item, itemIndex) => (
                 <motion.div
                   key={item.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ x: -20 }}
+                  animate={{ x: 0 }}
                   transition={{ delay: itemIndex * 0.1 }}
                   className="group relative border border-gray-200 bg-white/60 p-6 backdrop-blur-sm transition-all duration-300 hover:border-gray-300 hover:bg-white/80"
                 >
@@ -229,7 +223,7 @@ export default function SetupSection() {
                   </div>
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
           </motion.div>
 
           {/* 3D Model Showcase */}

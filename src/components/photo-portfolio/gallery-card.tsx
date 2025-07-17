@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { getPhotoGalleryCategory } from "~/lib/utils";
 import { formatDateFromDate } from "~/lib/utils";
 import type { GalleryData } from "~/types/GalleryData";
 
@@ -38,6 +39,7 @@ export default function GalleryCard({
   onClick,
 }: Props) {
   const locale = useLocale();
+  const t = useTranslations("PhotoPortfolio.PhotoGallery");
 
   const isHovered = hoveredGallery === gallery.slug;
 
@@ -69,7 +71,7 @@ export default function GalleryCard({
         {gallery.featured && (
           <div className="absolute top-10 right-4 z-10">
             <div className="border border-orange-400/50 bg-orange-400/20 px-2 py-1 text-xs font-medium text-orange-400 backdrop-blur-sm">
-              Featured
+              {t("featured")}
             </div>
           </div>
         )}
@@ -121,7 +123,8 @@ export default function GalleryCard({
             transition={{ duration: 0.3 }}
           >
             <div className="mb-2 text-xs font-medium tracking-wider text-orange-400 uppercase">
-              {gallery.category} • {formatDateFromDate(gallery.date, locale)}
+              {getPhotoGalleryCategory(gallery.category, locale)} •{" "}
+              {formatDateFromDate(gallery.date, locale)}
             </div>
             <h3 className="mb-2 text-xl font-light text-white">
               {gallery.title}
