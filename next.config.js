@@ -8,7 +8,7 @@ import createMDX from "@next/mdx";
 
 /** @type {import("next").NextConfig} */
 const config = {
-  // Add any route here that should exclude the huge .next/cache directory
+  // Any route here that should exclude the huge .next/cache directory
   outputFileTracingExcludes: {
     "/[locale]/tech/[slug]": ["./.next/cache/**/*"],
     "/[locale]/blog/[slug]": ["./.next/cache/**/*"],
@@ -53,18 +53,6 @@ const config = {
       {
         protocol: "https",
         hostname: "upload.wikimedia.org",
-        port: "",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "live.staticflickr.com",
-        port: "",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
         port: "",
         pathname: "/**",
       },
