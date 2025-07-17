@@ -78,7 +78,7 @@ export default function ContactSection() {
             </a>
           </div>
         </div>
-        <ContactForm />
+        <ContactForm origin="DEV" />
       </section>
 
       <Footer />

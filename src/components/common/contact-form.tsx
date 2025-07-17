@@ -8,6 +8,7 @@ import {
   FaCheckCircle,
   FaExclamationTriangle,
 } from "react-icons/fa";
+import { sendEmail } from "~/lib/mailer";
 
 const SENTENCES = [
   "Let's get started",
@@ -23,7 +24,11 @@ interface FormData {
   message: string;
 }
 
-export default function ContactForm() {
+interface Props {
+  origin: "DEV" | "PHOTO" | "BLOG";
+}
+
+export default function ContactForm({ origin }: Props) {
   const [selectedSentence, setSelectedSentence] = useState(SENTENCES[0]);
   const [emailSent, setEmailSent] = useState<boolean | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -49,8 +54,7 @@ export default function ContactForm() {
     setEmailSent(null);
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await sendEmail(data.email, data.message, data.name, origin);
       setEmailSent(true);
       reset(); // Clear form on success
       console.log("Form data:", data);
@@ -69,7 +73,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="w-full max-w-2xl lg:w-2/3 xl:w-1/2">
+    <div className="w-full">
       <div
         className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-6 shadow-lg backdrop-blur-md transition-all duration-500 hover:bg-white/20 hover:shadow-2xl lg:p-8"
         style={{
