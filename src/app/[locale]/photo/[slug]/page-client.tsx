@@ -124,16 +124,23 @@ export default function PhotoGalleryPageClient({ params, gallery }: Props) {
         />
       )}
 
+      {/* Inactive glass background */}
+      {!isActive && (
+        <div className="absolute inset-0 rounded-lg bg-slate-700/30 backdrop-blur-sm transition-all duration-300 hover:bg-slate-600/40" />
+      )}
+
       {/* Content */}
       <div className="relative z-10 flex items-center gap-1.5 sm:gap-2">
         <Icon
           className={`h-4 w-4 transition-all duration-300 ${
-            isActive ? "text-white" : "text-slate-400"
+            isActive ? "text-white drop-shadow-sm" : "text-slate-300"
           } ${isTransitioning ? "animate-pulse" : ""}`}
         />
         <span
           className={`hidden transition-all duration-300 sm:block ${
-            isActive ? "text-white" : "text-slate-400"
+            isActive
+              ? "font-medium text-white drop-shadow-sm"
+              : "text-slate-300"
           } ${isTransitioning ? "animate-pulse" : ""}`}
         >
           {label}
@@ -143,7 +150,7 @@ export default function PhotoGalleryPageClient({ params, gallery }: Props) {
       {/* Mobile indicator */}
       {isActive && (
         <motion.div
-          className="absolute -bottom-1 left-1/2 h-0.5 w-6 -translate-x-1/2 rounded-full bg-white sm:hidden"
+          className="absolute -bottom-1 left-1/2 h-0.5 w-6 -translate-x-1/2 rounded-full bg-white drop-shadow-sm sm:hidden"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
@@ -154,7 +161,7 @@ export default function PhotoGalleryPageClient({ params, gallery }: Props) {
       {/* Loading overlay */}
       {isTransitioning && isActive && (
         <motion.div
-          className="absolute inset-0 rounded-lg bg-black/20"
+          className="absolute inset-0 rounded-lg bg-black/5"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -171,90 +178,106 @@ export default function PhotoGalleryPageClient({ params, gallery }: Props) {
       />
 
       {/* Navigation Bar */}
-      <div className="sticky top-0 z-40 border-b border-slate-800 bg-slate-900/80 backdrop-blur-md">
-        <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 sm:py-4">
-          <div className="flex items-center justify-between gap-2 sm:gap-4">
-            {/* Back Button */}
-            <Link
-              href={`/${resolvedParams.locale}/photo`}
-              className="flex items-center gap-2 rounded-lg bg-slate-800/50 px-3 py-2 text-sm text-slate-400 transition-all duration-300 hover:scale-105 hover:bg-slate-700/50 hover:text-white sm:px-4"
-            >
-              <FiArrowLeft className="h-4 w-4" />
-              <span className="hidden sm:inline">Back to Galleries</span>
-              <span className="sm:hidden">Back</span>
-            </Link>
+      <div className="sticky top-0 z-40 bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 py-4">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          {/* Glass Navigation Container */}
+          <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-md before:absolute before:top-0 before:right-0 before:left-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/25 before:to-transparent after:absolute after:top-0 after:left-0 after:h-full after:w-px after:bg-gradient-to-b after:from-white/25 after:via-transparent after:to-white/10">
+            {/* Inner glass shadow effects */}
+            <div className="pointer-events-none absolute inset-0 rounded-2xl shadow-[inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(255,255,255,0.03),inset_0_0_8px_4px_rgba(255,255,255,0.1)]"></div>
 
-            {/* View Mode Selector */}
-            <motion.div
-              className="relative flex items-center gap-0.5 rounded-xl border border-slate-700/50 bg-slate-800/30 p-1 shadow-lg backdrop-blur-sm sm:gap-2"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <ViewModeButton
-                mode="mdx"
-                icon={FiFileText}
-                label="Story"
-                isActive={viewMode === "mdx"}
-              />
-              <ViewModeButton
-                mode="carousel"
-                icon={FiImage}
-                label="Carousel"
-                isActive={viewMode === "carousel"}
-              />
-              <ViewModeButton
-                mode="grid"
-                icon={FiGrid}
-                label="Grid"
-                isActive={viewMode === "grid"}
-              />
-            </motion.div>
+            <div className="relative px-4 py-3 sm:px-6 sm:py-4">
+              <div className="flex items-center justify-between gap-2 sm:gap-4">
+                {/* Back Button */}
+                <Link
+                  href={`/${resolvedParams.locale}/photo`}
+                  className="flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-sm text-slate-200 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white/20 hover:text-white hover:shadow-lg sm:px-4"
+                >
+                  <FiArrowLeft className="h-4 w-4" />
+                  <span className="hidden sm:inline">Back to Galleries</span>
+                  <span className="sm:hidden">Back</span>
+                </Link>
+
+                {/* View Mode Selector */}
+                <motion.div
+                  className="relative overflow-hidden rounded-lg border border-slate-600/60 bg-slate-800/80 p-1 shadow-[0_4px_16px_rgba(0,0,0,0.3)] backdrop-blur-sm before:absolute before:top-0 before:right-0 before:left-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-slate-400/30 before:to-transparent after:absolute after:top-0 after:left-0 after:h-full after:w-px after:bg-gradient-to-b after:from-slate-400/30 after:via-transparent after:to-slate-600/20"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* Inner shadow effects for toolbar look */}
+                  <div className="pointer-events-none absolute inset-0 rounded-lg shadow-[inset_0_1px_0_rgba(255,255,255,0.1),inset_0_-1px_0_rgba(0,0,0,0.2),inset_0_0_4px_2px_rgba(0,0,0,0.1)]"></div>
+
+                  <div className="relative flex items-center gap-0.5 sm:gap-2">
+                    <ViewModeButton
+                      mode="mdx"
+                      icon={FiFileText}
+                      label="Story"
+                      isActive={viewMode === "mdx"}
+                    />
+                    <ViewModeButton
+                      mode="carousel"
+                      icon={FiImage}
+                      label="Carousel"
+                      isActive={viewMode === "carousel"}
+                    />
+                    <ViewModeButton
+                      mode="grid"
+                      icon={FiGrid}
+                      label="Grid"
+                      isActive={viewMode === "grid"}
+                    />
+                  </div>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </div>
+
+        {/* View Content */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={viewMode}
+            initial={{ opacity: 0, y: 20, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.98 }}
+            transition={{
+              duration: 0.4,
+              type: "spring",
+              stiffness: 300,
+              damping: 30,
+            }}
+            className="relative"
+          >
+            {viewMode === "mdx" && (
+              <GalleryMdxView
+                gallery={gallery}
+                onImageClick={handleImageClick}
+              />
+            )}
+            {viewMode === "carousel" && (
+              <GalleryCarouselView
+                gallery={gallery}
+                onImageClick={handleImageClick}
+              />
+            )}
+            {viewMode === "grid" && (
+              <GalleryGridView
+                gallery={gallery}
+                onImageClick={handleImageClick}
+              />
+            )}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Fullscreen Lightbox */}
+        <FullscreenLightbox
+          isOpen={lightboxOpen}
+          images={gallery.photos}
+          initialIndex={lightboxIndex}
+          onClose={() => setLightboxOpen(false)}
+          title={gallery.title}
+        />
       </div>
-
-      {/* View Content */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={viewMode}
-          initial={{ opacity: 0, y: 20, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -20, scale: 0.98 }}
-          transition={{
-            duration: 0.4,
-            type: "spring",
-            stiffness: 300,
-            damping: 30,
-          }}
-          className="relative"
-        >
-          {viewMode === "mdx" && (
-            <GalleryMdxView gallery={gallery} onImageClick={handleImageClick} />
-          )}
-          {viewMode === "carousel" && (
-            <GalleryCarouselView
-              gallery={gallery}
-              onImageClick={handleImageClick}
-            />
-          )}
-          {viewMode === "grid" && (
-            <GalleryGridView
-              gallery={gallery}
-              onImageClick={handleImageClick}
-            />
-          )}
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Fullscreen Lightbox */}
-      <FullscreenLightbox
-        isOpen={lightboxOpen}
-        images={gallery.photos}
-        initialIndex={lightboxIndex}
-        onClose={() => setLightboxOpen(false)}
-        title={gallery.title}
-      />
     </div>
   );
 }

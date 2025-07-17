@@ -15,7 +15,7 @@ interface Props {
 
 export default function GalleryGridView({ gallery, onImageClick }: Props) {
   const locale = useLocale();
-  const [layout, setLayout] = useState<"masonry" | "grid">("masonry");
+  const [layout, setLayout] = useState<"masonry" | "grid">("grid"); // Default to grid
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -80,9 +80,9 @@ export default function GalleryGridView({ gallery, onImageClick }: Props) {
           </div>
         </motion.header>
 
-        {/* Layout Toggle */}
+        {/* Layout Toggle - Hidden on mobile */}
         <motion.div
-          className="mb-8 flex justify-center"
+          className="mb-8 hidden justify-center md:flex"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -118,11 +118,55 @@ export default function GalleryGridView({ gallery, onImageClick }: Props) {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className={
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:hidden lg:grid-cols-3 xl:grid-cols-4"
+        >
+          {/* Mobile Grid - Always square */}
+          {gallery.photos.map((photo, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              className="group relative aspect-square overflow-hidden rounded-xl bg-slate-800/30"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Image
+                src={photo}
+                alt={`${gallery.title} - Image ${index + 1}`}
+                fill
+                className="cursor-pointer object-cover transition-transform duration-500 group-hover:scale-110"
+                onClick={() => onImageClick(photo, index)}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
+
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+              {/* Image Number */}
+              <div className="absolute bottom-3 left-3 rounded-full bg-black/70 px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                {index + 1}
+              </div>
+
+              {/* Hover Effect */}
+              <motion.div
+                className="absolute inset-0 bg-purple-600/20"
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Desktop Grid with Layout Options */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className={`hidden md:grid ${
             layout === "masonry"
-              ? "grid auto-rows-[200px] grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-              : "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-          }
+              ? "auto-rows-[200px] grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+              : "grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          }`}
         >
           {gallery.photos.map((photo, index) => {
             const imageSize = layout === "masonry" ? getImageSize(index) : null;

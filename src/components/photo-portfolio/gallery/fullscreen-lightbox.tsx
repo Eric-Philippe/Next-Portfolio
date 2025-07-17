@@ -37,6 +37,12 @@ export default function FullscreenLightbox({
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [imagePosition, setImagePosition] = useState({ x: 0, y: 0 });
 
+  // Swipe detection constants
+  const swipeConfidenceThreshold = 10000;
+  const swipePower = (offset: number, velocity: number) => {
+    return Math.abs(offset) * velocity;
+  };
+
   // Reset states when opening or changing images
   useEffect(() => {
     if (isOpen) {
@@ -225,66 +231,89 @@ export default function FullscreenLightbox({
         }}
       >
         {/* Header Controls */}
-        <div className="absolute top-0 right-0 left-0 z-10 flex items-center justify-between p-6">
-          <div className="flex items-center gap-4">
-            <h2 className="text-lg font-medium text-white">
+        <div className="absolute top-0 right-0 left-0 z-10 p-3 md:p-6">
+          {/* Title */}
+          <div className="mb-2 md:mb-0">
+            <h2 className="text-sm font-medium text-white md:text-lg">
               {title}{" "}
               {images.length > 1 && `(${currentIndex + 1} / ${images.length})`}
             </h2>
           </div>
 
-          <div className="flex items-center gap-2">
-            {/* Zoom Controls */}
-            <button
-              onClick={zoomOut}
-              className="rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70"
-              disabled={zoom <= 0.5}
-            >
-              <FiZoomOut className="h-5 w-5" />
-            </button>
+          {/* Controls - Mobile Layout */}
+          <div className="flex items-center justify-between md:justify-end">
+            {/* Mobile Controls - Left Side */}
+            <div className="flex items-center gap-1 md:hidden">
+              <button
+                onClick={zoomOut}
+                className="rounded-full bg-black/50 p-1.5 text-white transition-colors hover:bg-black/70"
+                disabled={zoom <= 0.5}
+              >
+                <FiZoomOut className="h-4 w-4" />
+              </button>
+              <button
+                onClick={zoomIn}
+                className="rounded-full bg-black/50 p-1.5 text-white transition-colors hover:bg-black/70"
+                disabled={zoom >= 4}
+              >
+                <FiZoomIn className="h-4 w-4" />
+              </button>
+            </div>
 
-            <span className="px-2 text-sm text-white">
-              {Math.round(zoom * 100)}%
-            </span>
+            {/* Desktop Controls */}
+            <div className="mr-2 hidden items-center gap-2 md:flex">
+              {/* Zoom Controls */}
+              <button
+                onClick={zoomOut}
+                className="rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70"
+                disabled={zoom <= 0.5}
+              >
+                <FiZoomOut className="h-5 w-5" />
+              </button>
 
-            <button
-              onClick={zoomIn}
-              className="rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70"
-              disabled={zoom >= 4}
-            >
-              <FiZoomIn className="h-5 w-5" />
-            </button>
+              <span className="px-2 text-sm text-white">
+                {Math.round(zoom * 100)}%
+              </span>
 
-            {/* Rotate */}
-            <button
-              onClick={rotate}
-              className="rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70"
-            >
-              <FiRotateCw className="h-5 w-5" />
-            </button>
+              <button
+                onClick={zoomIn}
+                className="rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70"
+                disabled={zoom >= 4}
+              >
+                <FiZoomIn className="h-5 w-5" />
+              </button>
 
-            {/* Download */}
-            <button
-              onClick={downloadImage}
-              className="rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70"
-            >
-              <FiDownload className="h-5 w-5" />
-            </button>
+              {/* Rotate */}
+              <button
+                onClick={rotate}
+                className="rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70"
+              >
+                <FiRotateCw className="h-5 w-5" />
+              </button>
 
-            {/* Share */}
-            <button
-              onClick={shareImage}
-              className="rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70"
-            >
-              <FiShare2 className="h-5 w-5" />
-            </button>
+              {/* Download */}
+              <button
+                onClick={downloadImage}
+                className="rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70"
+              >
+                <FiDownload className="h-5 w-5" />
+              </button>
 
-            {/* Close */}
+              {/* Share */}
+              <button
+                onClick={shareImage}
+                className="rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70"
+              >
+                <FiShare2 className="h-5 w-5" />
+              </button>
+            </div>
+
+            {/* Close Button - Always Visible */}
             <button
               onClick={onClose}
-              className="rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70"
+              className="rounded-full bg-black/50 p-1.5 text-white transition-colors hover:bg-black/70 md:p-2"
             >
-              <FiX className="h-6 w-6" />
+              <FiX className="h-5 w-5" />
             </button>
           </div>
         </div>
@@ -294,22 +323,22 @@ export default function FullscreenLightbox({
           <>
             <button
               onClick={prevImage}
-              className="absolute top-1/2 left-6 -translate-y-1/2 rounded-full bg-black/50 p-4 text-white transition-all hover:scale-110 hover:bg-black/70"
+              className="absolute top-1/2 left-2 z-20 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white transition-all hover:scale-110 hover:bg-black/70 md:left-6 md:p-4"
             >
-              <FiChevronLeft className="h-8 w-8" />
+              <FiChevronLeft className="h-6 w-6 md:h-8 md:w-8" />
             </button>
 
             <button
               onClick={nextImage}
-              className="absolute top-1/2 right-6 -translate-y-1/2 rounded-full bg-black/50 p-4 text-white transition-all hover:scale-110 hover:bg-black/70"
+              className="absolute top-1/2 right-2 z-20 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white transition-all hover:scale-110 hover:bg-black/70 md:right-6 md:p-4"
             >
-              <FiChevronRight className="h-8 w-8" />
+              <FiChevronRight className="h-6 w-6 md:h-8 md:w-8" />
             </button>
           </>
         )}
 
         {/* Image Container */}
-        <div className="relative h-full w-full overflow-hidden">
+        <div className="relative h-full w-full overflow-hidden px-2 py-20 md:px-6 md:py-24">
           <AnimatePresence initial={false} custom={imageDirection}>
             <motion.div
               key={currentIndex}
@@ -323,6 +352,18 @@ export default function FullscreenLightbox({
                 opacity: { duration: 0.2 },
               }}
               className="absolute inset-0 flex items-center justify-center"
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.1}
+              onDragEnd={(e, { offset, velocity }) => {
+                const swipe = swipePower(offset.x, velocity.x);
+
+                if (swipe < -swipeConfidenceThreshold) {
+                  nextImage();
+                } else if (swipe > swipeConfidenceThreshold) {
+                  prevImage();
+                }
+              }}
             >
               <div
                 className={`relative max-h-full max-w-full ${
@@ -348,7 +389,7 @@ export default function FullscreenLightbox({
                   alt={`${title ?? "Image"} ${currentIndex + 1}`}
                   width={1920}
                   height={1080}
-                  className="max-h-[calc(100vh-8rem)] max-w-[calc(100vw-8rem)] object-contain"
+                  className="max-h-full max-w-full object-contain"
                   priority
                   unoptimized // For external images
                   draggable={false}
@@ -360,8 +401,8 @@ export default function FullscreenLightbox({
 
         {/* Thumbnail Strip */}
         {images.length > 1 && (
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
-            <div className="flex gap-2 rounded-full bg-black/50 p-2 backdrop-blur-sm">
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 md:bottom-6">
+            <div className="flex gap-1 rounded-full bg-black/50 p-1 backdrop-blur-sm md:gap-2 md:p-2">
               {images.map((image, index) => (
                 <button
                   key={index}
@@ -370,7 +411,7 @@ export default function FullscreenLightbox({
                     setCurrentIndex(index);
                     resetImageState();
                   }}
-                  className={`relative h-12 w-16 overflow-hidden rounded transition-all ${
+                  className={`relative h-8 w-10 overflow-hidden rounded transition-all md:h-12 md:w-16 ${
                     index === currentIndex
                       ? "ring-2 ring-white"
                       : "opacity-70 hover:opacity-100"
@@ -389,10 +430,34 @@ export default function FullscreenLightbox({
           </div>
         )}
 
-        {/* Instructions */}
-        <div className="absolute right-6 bottom-6 text-right text-sm text-white/70">
+        {/* Instructions - Hidden on mobile, shown on desktop only */}
+        <div className="absolute right-2 bottom-16 hidden text-right text-xs text-white/70 md:right-6 md:bottom-6 md:block md:text-sm">
           <p>Press ESC to close • Arrow keys to navigate</p>
           <p>Click to zoom • R to rotate • +/- to zoom</p>
+        </div>
+
+        {/* Mobile Bottom Actions */}
+        <div className="absolute bottom-14 left-1/2 -translate-x-1/2 md:hidden">
+          <div className="flex items-center gap-1 rounded-full bg-black/50 p-1 backdrop-blur-sm">
+            <button
+              onClick={rotate}
+              className="rounded-full bg-black/50 p-1.5 text-white transition-colors hover:bg-black/70"
+            >
+              <FiRotateCw className="h-4 w-4" />
+            </button>
+            <button
+              onClick={downloadImage}
+              className="rounded-full bg-black/50 p-1.5 text-white transition-colors hover:bg-black/70"
+            >
+              <FiDownload className="h-4 w-4" />
+            </button>
+            <button
+              onClick={shareImage}
+              className="rounded-full bg-black/50 p-1.5 text-white transition-colors hover:bg-black/70"
+            >
+              <FiShare2 className="h-4 w-4" />
+            </button>
+          </div>
         </div>
       </motion.div>
     </AnimatePresence>
