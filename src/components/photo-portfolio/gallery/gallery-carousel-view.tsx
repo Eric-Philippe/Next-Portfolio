@@ -90,7 +90,7 @@ export default function GalleryCarouselView({ gallery, onImageClick }: Props) {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800"
+      className="bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800"
       onKeyDown={handleKeyDown}
       tabIndex={0}
       style={{ userSelect: "none" }}

@@ -402,7 +402,7 @@ export default function FullscreenLightbox({
         {/* Thumbnail Strip */}
         {images.length > 1 && (
           <div className="absolute bottom-2 left-1/2 -translate-x-1/2 md:bottom-6">
-            <div className="flex gap-1 rounded-full bg-black/50 p-1 backdrop-blur-sm md:gap-2 md:p-2">
+            <div className="flex gap-1 rounded-full bg-black/50 p-1 backdrop-blur-sm md:gap-2 md:p-4">
               {images.map((image, index) => (
                 <button
                   key={index}
