@@ -41,16 +41,19 @@ export default function GalleryGridView({ gallery, onImageClick }: Props) {
     },
   };
 
-  // Calculate dynamic grid sizes for masonry layout
-  const getImageSize = (index: number) => {
-    const sizes = [
-      { aspect: "aspect-[4/3]", span: "col-span-1 row-span-1" },
-      { aspect: "aspect-[3/4]", span: "col-span-1 row-span-2" },
-      { aspect: "aspect-[16/9]", span: "col-span-2 row-span-1" },
-      { aspect: "aspect-square", span: "col-span-1 row-span-1" },
-      { aspect: "aspect-[4/5]", span: "col-span-1 row-span-1" },
+  // Calculate dynamic heights for masonry layout
+  const getImageHeight = (index: number) => {
+    const heights = [
+      "h-48", // 192px
+      "h-56", // 224px
+      "h-40", // 160px
+      "h-52", // 208px
+      "h-44", // 176px
+      "h-60", // 240px
+      "h-36", // 144px
+      "h-64", // 256px
     ];
-    return sizes[index % sizes.length]!;
+    return heights[index % heights.length]!;
   };
 
   return (
@@ -159,28 +162,71 @@ export default function GalleryGridView({ gallery, onImageClick }: Props) {
         </motion.div>
 
         {/* Desktop Grid with Layout Options */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className={`hidden md:grid ${
-            layout === "masonry"
-              ? "auto-rows-[200px] grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-              : "grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-          }`}
-        >
-          {gallery.photos.map((photo, index) => {
-            const imageSize = layout === "masonry" ? getImageSize(index) : null;
+        {layout === "masonry" ? (
+          // Masonry Layout using CSS Columns
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="hidden md:block"
+          >
+            <div
+              className="columns-1 gap-4 sm:columns-2 md:columns-3 lg:columns-4"
+              style={{ columnFill: "balance" }}
+            >
+              {gallery.photos.map((photo, index) => {
+                const imageHeight = getImageHeight(index);
 
-            return (
+                return (
+                  <motion.div
+                    key={index}
+                    variants={itemVariants}
+                    className={`group relative mb-4 break-inside-avoid overflow-hidden rounded-xl bg-slate-800/30 ${imageHeight}`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Image
+                      src={photo}
+                      alt={`${gallery.title} - Image ${index + 1}`}
+                      fill
+                      className="cursor-pointer object-cover transition-transform duration-500 group-hover:scale-110"
+                      onClick={() => onImageClick(photo, index)}
+                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    />
+
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+                    {/* Image Number */}
+                    <div className="absolute bottom-3 left-3 rounded-full bg-black/70 px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                      {index + 1}
+                    </div>
+
+                    {/* Hover Effect */}
+                    <motion.div
+                      className="absolute inset-0 bg-purple-600/20"
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
+        ) : (
+          // Regular Grid Layout
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="hidden grid-cols-1 gap-6 sm:grid-cols-2 md:grid lg:grid-cols-3 xl:grid-cols-4"
+          >
+            {gallery.photos.map((photo, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className={`group relative overflow-hidden rounded-xl bg-slate-800/30 ${
-                  layout === "masonry"
-                    ? `${imageSize?.span} ${imageSize?.aspect}`
-                    : "aspect-square"
-                }`}
+                className="group relative aspect-square overflow-hidden rounded-xl bg-slate-800/30"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -190,11 +236,7 @@ export default function GalleryGridView({ gallery, onImageClick }: Props) {
                   fill
                   className="cursor-pointer object-cover transition-transform duration-500 group-hover:scale-110"
                   onClick={() => onImageClick(photo, index)}
-                  sizes={
-                    layout === "masonry"
-                      ? "(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                      : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                  }
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                 />
 
                 {/* Overlay */}
@@ -213,9 +255,9 @@ export default function GalleryGridView({ gallery, onImageClick }: Props) {
                   transition={{ duration: 0.3 }}
                 />
               </motion.div>
-            );
-          })}
-        </motion.div>
+            ))}
+          </motion.div>
+        )}
 
         {/* Gallery Stats */}
         <motion.div

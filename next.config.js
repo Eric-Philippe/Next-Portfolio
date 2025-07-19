@@ -46,6 +46,12 @@ const config = {
       },
       {
         protocol: "https",
+        hostname: "live.staticflickr.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "skillicons.dev",
         port: "",
         pathname: "/icons/**",
