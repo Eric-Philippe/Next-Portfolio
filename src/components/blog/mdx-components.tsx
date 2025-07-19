@@ -258,6 +258,18 @@ export const createMdxComponents = (theme: Theme = "light") => {
       </motion.ul>
     ),
 
+    ol: ({ children }: { children: React.ReactNode }) => (
+      <motion.ol
+        className="mb-6 list-none space-y-3"
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+      >
+        {children}
+      </motion.ol>
+    ),
+
     li: ({ children }: { children: React.ReactNode }) => (
       <li className={`flex items-start gap-3 ${colors.text.secondary}`}>
         <div className="mt-3 h-2 w-2 flex-shrink-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />

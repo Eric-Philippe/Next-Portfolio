@@ -5,6 +5,29 @@ import { createMdxComponents } from "./mdx-components";
 
 type Theme = "light" | "dark";
 
+interface NumberedListItemProps {
+  children: React.ReactNode;
+  index: number;
+  theme?: Theme;
+}
+
+const NumberedListItem: React.FC<NumberedListItemProps> = ({
+  children,
+  index,
+  theme = "light",
+}) => {
+  const textColor = theme === "dark" ? "text-slate-300" : "text-slate-700";
+
+  return (
+    <li className={`flex items-start gap-3 ${textColor}`}>
+      <div className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-xs font-medium text-white">
+        {index}
+      </div>
+      <span className="leading-relaxed">{children}</span>
+    </li>
+  );
+};
+
 interface MDXContentProps {
   content?: string;
   serializedContent?: unknown;
@@ -58,6 +81,7 @@ function parseMarkdownToReact(
   let codeBlockContent: string[] = [];
   let codeBlockLanguage = "";
   let listItems: string[] = [];
+  let isNumberedList = false;
   let elementKey = 0;
 
   const flushParagraph = () => {
@@ -76,16 +100,29 @@ function parseMarkdownToReact(
 
   const flushList = () => {
     if (listItems.length > 0) {
-      elements.push(
-        <mdxComponents.ul key={elementKey++}>
-          {listItems.map((item, index) => (
-            <mdxComponents.li key={index}>
-              {parseInlineElements(item, mdxComponents)}
-            </mdxComponents.li>
-          ))}
-        </mdxComponents.ul>,
-      );
+      if (isNumberedList) {
+        elements.push(
+          <mdxComponents.ol key={elementKey++}>
+            {listItems.map((item, index) => (
+              <NumberedListItem key={index} index={index + 1} theme={theme}>
+                {parseInlineElements(item, mdxComponents)}
+              </NumberedListItem>
+            ))}
+          </mdxComponents.ol>,
+        );
+      } else {
+        elements.push(
+          <mdxComponents.ul key={elementKey++}>
+            {listItems.map((item, index) => (
+              <mdxComponents.li key={index}>
+                {parseInlineElements(item, mdxComponents)}
+              </mdxComponents.li>
+            ))}
+          </mdxComponents.ul>,
+        );
+      }
       listItems = [];
+      isNumberedList = false;
     }
   };
 
@@ -167,11 +204,25 @@ function parseMarkdownToReact(
         </mdxComponents.blockquote>,
       );
       continue;
-    } // Handle list items
+    } // Handle list items (both unordered and numbered)
     const listMatch = /^[\*\-] /.exec(line);
+    const numberedListMatch = /^\d+\.\s/.exec(line);
+
     if (listMatch) {
       flushParagraph();
+      if (listItems.length === 0) {
+        isNumberedList = false;
+      }
       listItems.push(line.slice(2));
+      continue;
+    }
+
+    if (numberedListMatch) {
+      flushParagraph();
+      if (listItems.length === 0) {
+        isNumberedList = true;
+      }
+      listItems.push(line.slice(numberedListMatch[0].length));
       continue;
     }
 
@@ -254,7 +305,7 @@ function parseInlineElements(
     }
 
     // Handle italic text
-    const italicRegex = /\*(.*?)\*/;
+    const italicRegex = /\_(.*?)\_/;
     const italicMatch = italicRegex.exec(remaining);
     if (italicMatch && italicMatch.index === 0) {
       elements.push(<em key={elementKey++}>{italicMatch[1]}</em>);
@@ -262,8 +313,21 @@ function parseInlineElements(
       continue;
     }
 
+    // Handle strikethrough text
+    const strikethroughRegex = /~~(.*?)~~/;
+    const strikethroughMatch = strikethroughRegex.exec(remaining);
+    if (strikethroughMatch && strikethroughMatch.index === 0) {
+      elements.push(
+        <span key={elementKey++} className="line-through">
+          {strikethroughMatch[1]}
+        </span>,
+      );
+      remaining = remaining.slice(strikethroughMatch[0].length);
+      continue;
+    }
+
     // Find next special character or end of string
-    const nextSpecial = remaining.search(/[`*!\[]/);
+    const nextSpecial = remaining.search(/[`*!\[~]/);
     if (nextSpecial === -1) {
       // No more special characters, add remaining text
       if (remaining.trim()) {
