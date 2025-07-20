@@ -1,5 +1,5 @@
 ---
-title: "Comment j'ai construit un laptop de diagnostic auto pour 114€"
+title: "Comment j'ai construit un ordinateur de diagnostic auto pour 114€"
 description: "Découvrez comment j'ai construit un ordinateur fonctionnel pour le diagnostic automobile en utilisant deux ordinateurs cassés, un peu d'ingéniosité, et un outil de diagnostic."
 date: "2025-07-18"
 tags: ["DIY", "Laptops", "Automobile", "Diagnostic"]
@@ -7,7 +7,7 @@ author: "Éric Philippe"
 published: true
 ---
 
-# L'aventure de la construction d'un laptop de diagnostic à partir de pièces cassées
+# L'aventure de la construction d'un ordinateur de diagnostic à partir de pièces cassées
 
 Parfois, les meilleurs projets commencent par un simple besoin familial. Un proche, qui fait de la mécanique automobile, avait besoin d'un moyen fiable pour diagnostiquer les problèmes automobiles. Les outils de diagnostic professionnels sont chers, et les laptops qui les accompagnent ? Encore plus. C'est là que j'ai pensé : "Ça ne doit pas être difficile d'en construire un moi-même ?"
 
@@ -15,10 +15,10 @@ Spoiler alert : plus difficile que prévu, mais définitivement une expérience 
 
 ## La chasse aux pré-requis
 
-Avant de plonger dans un projet, je commence toujours par des exigences claires. Pour ce laptop de diagnostic automobile, les besoins étaient simples mais spécifiques :
+Avant de plonger dans un projet, je commence toujours par des exigences claires. Pour cet ordinateur de diagnostic automobile, les besoins étaient simples mais spécifiques :
 
 - **Compatibilité Windows 10** (la plupart des logiciels de diagnostic sont pointilleux là-dessus)
-- **Portable et léger** (personne ne veut traîner un laptop gaming de 17 pouces dans un garage)
+- **Portable et léger** (personne ne veut traîner un ordinateur gaming de 17 pouces dans un garage)
 - **Démarrage rapide** (je ne veux pas avoir à faire attendre 10 minutes pour un diagnostic)
 - **Autonomie décente** (ça serait triste s'il meurt en plein diagnostic)
 - **Spécifications solides** : Intel i3 ou mieux, 8Go de RAM, stockage SSD
@@ -54,13 +54,13 @@ J'en ai trouvé un sur eBay pour 40€ – clavier cassé (parfait !), SSD et ba
 
 ## La construction frankenstein
 
-Quand le deuxième laptop est arrivé, j'avais une situation intéressante : deux laptops cassés qui, ensemble, avaient tout ce dont j'avais besoin. Il était temps de commencer une chirurgie de laptop.
+Quand le deuxième ordinateur portable est arrivé, j'avais une situation intéressante : deux ordinateurs cassés qui, ensemble, avaient tout ce dont j'avais besoin. Il était temps de commencer une chirurgie de l'ordinateur.
 
 J'ai commencé le processus de transplantation :
 
-- Nettoyer le deuxième laptop en profondeur
+- Nettoyer le deuxième ordinateur en profondeur
 - Échanger le nouveau clavier AZERTY
-- Déplacer le SSD et la RAM du premier laptop
+- Déplacer le SSD et la RAM du premier ordinateur
 - Croiser les doigts et l'allumer
 
 ![First Boot](https://snapfilething.homeserver-ericp.fr/uploads/pxl_20250718_154417864_1752952743_f32d147d_.jpg)
@@ -69,7 +69,7 @@ Windows 10 s'est installé parfaitement ! Mais bien sûr, il y avait un autre re
 
 ## Le cauchemar du trackpad
 
-Tout fonctionnait sauf le trackpad et les boutons du touchpad. Complètement non réactifs. J'ai passé des heures à plonger dans l'enfer des pilotes – mise à jour, réinstallation, même flashage du BIOS de 2017 à 2023. Rien.
+Tout fonctionnait sauf le trackpad et le trackpoint. Complètement non réactifs. J'ai passé des heures à plonger dans l'enfer des pilotes – mise à jour, réinstallation, même flashage du BIOS de 2017 à 2023. Rien.
 
 La solution nécessitait plus de chirurgie. Je devais récupérer le trackpad du laptop donneur, ce qui signifiait le démonter complètement. Et bien sûr, le trackpad était situé à l'endroit le plus pénible possible – sous la carte mère.
 
@@ -81,13 +81,13 @@ Sortir le trackpad était comme effectuer une microchirurgie. Mais quand je l'ai
 
 J'ai alors essayé de l'installer proprement sur le receveur et ... j'ai endommagé le connecteur FFC (Flexible Flat Cable). J'ai tout de même réassemblé avant de tester correctement.
 
-Le touchpad a fonctionné exactement 5 minutes avant de mourir. Pire, le laptop ne démarrait même plus. Je pensais l'avoir complètement tué et j'entendais son chant du cygne.
+Le touchpad a fonctionné exactement 5 minutes avant de mourir. Pire, l'ordinateur ne démarrait même plus. Je pensais l'avoir complètement tué et j'entendais son chant du cygne.
 
 ## Le sauvetage
 
 Après avoir pris une pause (et remis en question mes choix de vie), j'ai fait une découverte cruciale en bidouillant le trackpad cassé : le câble FFC était amovible ! Je pouvais simplement échanger le câble du trackpad donneur avec celui qui fonctionnait.
 
-Un démontage de plus plus tard, tout fonctionnait parfaitement. Le trackpad, les boutons du touchpad, tout. Il s'avère que le trackpad et les boutons du touchpad sont interconnectés – réparer l'un c'est réparer les deux.
+Un démontage de plus plus tard, tout fonctionnait parfaitement. Le trackpad, et le track point, tout. Il s'avère que le trackpad et le track point sont interconnectés – réparer l'un c'est réparer les deux.
 
 ## Les touches finales
 
@@ -103,11 +103,11 @@ Avec le matériel enfin stable, j'ai terminé la construction :
 
 ## Le moment de vérité
 
-Tout avait l'air parfait. Etait venu le moment de tester l'outil de diagnostic. Je l'ai branché sur le laptop et... rien. Aucune détection.
+Tout avait l'air parfait. Etait venu le moment de tester l'outil de diagnostic. Je l'ai branché sur l'ordinateur et... rien. Aucune détection.
 
-Après avoir presque déchiré l'outil de diagnostic (et l'avoir presque cassé), je me suis rendu compte de mon erreur : ces outils doivent être connectés À LA FOIS au laptop ET au port OBD d'une voiture pour fonctionner correctement.
+Après avoir presque déchiré l'outil de diagnostic (et l'avoir presque cassé), je me suis rendu compte de mon erreur : ces outils doivent être connectés À LA FOIS à l'ordinateur ET au port OBD d'une voiture pour fonctionner correctement.
 
-Imaginez-moi à 22h, en pyjama, me diriger vers ma voiture avec un laptop. Me battre avec le couvercle plastique ~~à la con~~ du port OBD de ma Renault. Et finalement faire la connexion et voir ce magnifique message "Appareil Connecté".
+Imaginez-moi à 22h, en pyjama, me diriger vers ma voiture avec un ordinateur. Me battre avec le couvercle plastique ~~à la con~~ du port OBD de ma Renault. Et finalement faire la connexion et voir ce magnifique message "Appareil Connecté".
 
 ![It worked](https://snapfilething.homeserver-ericp.fr/uploads/pxl_20250718_193356012_1752952744_7a678342_.jpg)
 
@@ -123,7 +123,7 @@ Après toutes ces histoires, la sueur, et les quasi-désastres, j'avais enfin un
 - **3 secondes de démarrage** (du bouton d'alimentation au bureau)
 - **3,5 heures d'autonomie** (largement suffisant pour le travail sur le terrain)
 - **Clavier et trackpad entièrement fonctionnels**
-- **Héritage Frankenstein** d'un laptop donneur et d'un receveur
+- **Héritage Frankenstein** d'un ordinateur donneur et d'un receveur
 
 ## La configuration logicielle
 
@@ -139,12 +139,12 @@ J'ai gardé l'environnement logiciel propre et adapté à l'usage :
 
 **Coût total** : 114€ (60€ + 40€ + 14€) plus 35€ pour l'outil de diagnostic.
 
-Ce qui a commencé comme un simple projet "acheter un laptop pas cher" s'est transformé en une expérience de la réparation de laptops, la compatibilité des composants, et la valeur de la persévérance. J'ai gagné en confiance en moi concernant le dépannage matériel, et fini avec une configuration de diagnostic parfaitement fonctionnelle.
+Ce qui a commencé comme un simple projet "acheter un ordinateur pas cher" s'est transformé en une expérience de la réparation de laptops, la compatibilité des composants, et la valeur de la persévérance. J'ai gagné en confiance en moi concernant le dépannage matériel, et fini avec une configuration de diagnostic parfaitement fonctionnelle.
 
 ## Leçons tirées
 
 1. **Toujours tester avant de réassembler** – cette période de fonctionnement de 5 minutes me l'a appris à la dure
-2. **Rechercher les interdépendances des composants** – les trackpads et boutons de touchpad ne sont pas toujours des systèmes séparés
+2. **Rechercher les interdépendances des composants** – le trackpad et le trackpoint ne sont pas toujours des systèmes séparés
 3. **Ne pas paniquer quand les choses cassent** – parfois la solution est plus simple qu'on ne le pense
 4. **Budgéter pour l'inattendu** – même les projets "simples" peuvent nécessiter des solutions créatives
 
