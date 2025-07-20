@@ -1,8 +1,241 @@
 ---
-title: "J'ai créé et hébergé mon propre défi similaire à Advent of Code"
-description: "Lorsque le personnel de mon école a demandé de l'aide pour un concours de codage pour les élèves, j'ai décidé de créer ma propre version d'Advent of Code. Cet article détaille le processus et les technologies utilisées."
+title: "J'ai créé et hébergé mon propre défi type Advent of Code"
+description: "Quand le personnel de mon école m’a demandé de l’aide pour organiser un concours de code, j’ai décidé de créer ma propre version d’Advent of Code. Voici comment je m’y suis pris et les technos que j’ai utilisées."
 date: "2025-06-14"
-tags: ["Challenge", "Web Development", "AdventOfCode", "Technology"]
+tags: ["Challenge", "Développement Web", "AdventOfCode", "Technologie"]
 author: "Éric Philippe"
 published: true
 ---
+
+# Créer mon propre Advent of Code : d’un simple appel à l'aide à une plateforme complète en un mois
+
+Parfois, les meilleurs projets commencent avec le stress de quelqu’un d’autre. Imaginez : je suis en 4e année d’informatique sur le campus Ynov de Toulouse, tranquille, quand des membres du personnel viennent me voir avec cette tête si particulière.
+
+> “Hey Éric, on a besoin d’aide pour un concours de programmation destiné aux étudiants de 2e année. À la base, c’était national, mais maintenant chaque campus doit se débrouiller. Ah, et il nous reste un mois. Sans pression.”
+
+Mon cerveau a réagi au quart de tour : “Je pourrais recréer Advent of Code, non ? Non ?”
+
+Spoiler : bien plus compliqué que prévu… mais ça valait totalement la folie qui a suivi.
+
+## C’est quoi Advent of Code déjà ?
+
+Pour ceux qui n’ont pas encore plongé dans l’univers d’Advent of Code : c’est un calendrier de l’Avent pour développeurs. Chaque jour de décembre, un nouveau puzzle de programmation débarque. Au début ça va, puis très vite tu remets en question tes choix de vie.
+
+Le concept malin ? Chaque participant a des données d’entrée uniques, donc pas moyen de tricher en copiant un camarade. Et chaque problème vient avec une histoire qui se développe jour après jour, ce qui rend l’assistance d’une IA bien moins efficace, vu que ChatGPT galère vite à suivre le contexte narratif.
+
+Après deux années à y participer (et à adorer chaque minute de frustration), je me suis dit : “Ça ne peut pas être si compliqué de faire ma propre version ?”
+
+Ahem.
+
+## Les “simples” besoins
+
+Les attentes du staff semblaient assez basiques :
+
+- Une plateforme où les étudiants pourraient résoudre des énigmes
+- Des entrées uniques pour chaque participant (pas de triche !)
+- Un système de scores en temps réel avec classement
+- De quoi les occuper pendant une journée entière
+- Et, bien sûr, **un mois pour tout faire**
+
+Avec le recul, j’aurais dû leur recommander une plateforme existante. Mais où est le fun là-dedans ?
+
+## Le POC (Proof of Concept) et la claque de la réalité
+
+Je sors mon fidèle laptop et je commence un prototype en Python. L’idée tenait la route : un système pour générer des entrées uniques et valider automatiquement les réponses. Python, parfait pour ça, avec toutes ses libraries.
+
+Mais très vite, je me rends compte que ce n’est pas juste une histoire de puzzles. Il me fallait :
+
+- Une vraie gestion des utilisateurs
+- Des interfaces d’admin pour le staff
+- Un système de gestion des compétitions
+- Un scoring en temps réel
+- Un outil pour créer/déployer les énigmes
+
+Et tout ça devait être **simple à utiliser**, même pour des étudiants qui voulaient juste résoudre des problèmes sans galérer avec la plateforme.
+
+## Le choix de la stack
+
+Je décide de séparer le projet en trois blocs principaux :
+
+### Frontend : l’expérience côté étudiant
+
+React avec Vite. Rapide, efficace, et je pouvais construire une interface moderne (pas un truc des années 2000, coucou les plateformes scolaires classiques). Pour le style : Tailwind CSS. Propre et rapide à intégrer.
+
+### Backend : les gros muscles
+
+C’est là que je tente quelque chose de nouveau : Go. J’étais curieux, et c’était l’occasion parfaite. Go + Gin = performances, surtout si des centaines d’étudiants se connectent et demandent des entrées uniques en même temps.
+
+### Gestion des puzzles : la sauce secrète
+
+Petit moment “eureka” : je me souvenais que les fichiers `.docx` ou `.xlsx` sont en fait des `.zip` avec du XML dedans. L’idée a mûri : et si je créais mon propre format `.alghive`, un `.zip` contenant du XML pour les métadonnées, et des scripts Python pour la génération d’inputs et la validation ?
+
+Résultat : les puzzles peuvent être créés avec des outils familiers, et le système les traite automatiquement. Bingo.
+
+## Le marathon de développement
+
+### Base de données d’abord
+
+PostgreSQL en base principale, Redis pour le cache. J’ai commencé par le schéma, vu que le panneau d’admin allait être un gros morceau – rôles, groupes d’étudiants, compétitions, etc.
+
+Le schéma de départ a plutôt bien tenu la route, même si j’ai dû faire évoluer la gestion des compétitions plusieurs fois.
+
+### Développement de l’API en Go
+
+Le serveur web en Go a été une vraie satisfaction. Swagger m’a sauvé la vie pour documenter l’API. Authentification, users, CRUD, tout s’est construit couche par couche.
+
+### Le calvaire du panneau d’administration
+
+Pas sexy, mais indispensable. Des composants React à la chaîne : gestion des users, campus, compétitions, déploiement de puzzles... Le royaume du CRUD.
+
+Au bout d’un moment, j’ai réalisé que mon projet était un repository monolithique avec des dossiers `Frontend/` et `Backend/`. Ça devenait ingérable. Il était temps de structurer un peu tout ça.
+
+## Le plot twist : multi-campus
+
+Juste quand je commençais à prendre mon rythme, le campus de Montpellier m’appelle: ils veulent aussi organiser leur propre événement, et certains étudiants veulent contribuer à la création des puzzles.
+
+Et là, mon “petit projet scolaire” devient un système multi-campus, collaboratif, avec déploiement automatique. C’est là que j’ai décidé d’assumer l’ambition et de créer un vrai écosystème.
+
+J’ai tout déplacé dans une organisation GitHub et séparé le monolithe, et en ai profité pour introduire de nouveaux services :
+
+- **HiveCraft** : une lib Python pour créer les puzzles (disponible sur PyPI)
+- **HiveCraft CLI** : des outils en ligne de commande pour gérer ses énigmes
+- **BeeHive** : un éditeur graphique (Non terminé)
+- **GitHub Actions** : compilation et déploiement automatisés des puzzles
+
+Le thème des abeilles est arrivé tout seul… et j’ai décidé de le garder. 🐝
+
+## Le rush sur l’interface
+
+À deux semaines de l’échéance, j’avais un backend solide et un panneau d’admin fonctionnel… mais rien côté étudiant. Bon.
+
+Et en fait, c’est là que le fun est revenu. Après des semaines à coder de l’admin, construire une interface sympa et moderne pour les étudiants m’a remotivé. Je voulais quelque chose de plus propre et agréable à utiliser – loin des plateformes institutionnelles tristes qu’on connaît tous.
+
+## L’explosion de l’écosystème
+
+Au fil de l’eau, j’ai compris qu’il me fallait des services annexes :
+
+### BeeAPI
+
+Un service Go à part pour l’exécution des puzzles, la génération des entrées, la validation. Séparé du serveur principal, plus performant et plus sécurisé. Et surtout, facile à scaler si besoin.
+
+### BeeHub
+
+Quand les étudiants de Montpellier ont voulu créer et tester des puzzles à plusieurs, j’ai codé une app web dédiée. Backend Flask, frontend React. C’est devenu leur QG de création.
+
+## Le sprint final
+
+À deux semaines de la deadline, le campus de Lyon débarque aussi. Là, j’ai compris que j’avais sans le vouloir bâti un projet qui dépassait largement le cadre initial.
+
+L’architecture finale gérait :
+
+- Trois campus différents
+- Des compétitions distinctes
+- Un système de déploiement temps réel
+- Une création collaborative de puzzles
+- Un scoring automatique avec leaderboard
+
+### Créer un puzzle, concrètement
+
+Chaque compétition durait 6h, avec 16 puzzles max par étudiant (donc 32 parties, difficulté croissante). Et grâce au format `.alghive`, ajouter un puzzle était aussi simple qu’un upload de fichier.
+
+## Déploiement & Docker
+
+Dès le début, j’ai pensé au déploiement. Chaque service dans un conteneur Docker, avec des `docker-compose` différents pour le dev, le staging, et la prod. Je pouvais tester et mettre à jour sans crainte de casser la plateforme en live.
+
+## Sécurité & monitoring de dernière minute
+
+Juste avant le jour J, un éclair de lucidité : et si tout plantait et que je ne savais pas pourquoi ?
+
+J'ai décidé d'installer en express Grafana et Prometheus: Monitoring CPU, mémoire, réponses API, connexions DB – je voulais tout voir.
+
+Côté sécurité j'en ai profité pour implémenter une limitation de requêtes sur les endpoints sensibles, une validation des entrées, vérification de l’auth. Mieux vaut prévenir que guérir.
+
+## Le jour J (et la galère des 429)
+
+Le jour de la compétition arrive. Tout roule. Les étudiants se connectent, je surveille mes dashboards de près.
+
+Puis… BAM. 5 minutes après le lancement.
+
+> “On n’arrive plus à se connecter !”
+
+Des erreurs, des requêtes refusées. Les `429 Too Many Requests` explosent sur ma dashboard Grafana.
+
+Le problème ? Ma propre protection contre le DDOS.
+
+Tous les étudiants étaient connectés sur le même réseau Wi-Fi… donc même IP. Et j’avais oublié ce détail. Résultat : ma limite de requêtes par IP bloquait tout le monde.
+
+Imaginez-moi, en SSH sur le serveur en prod, pendant une compétition en live, en train de modifier mes règles de rate limiting dans l’urgence pendant que 100 étudiants attendent. Pas idéal.
+
+Heureusement, Grafana m’a permis de tout visualiser et ajuster rapidement. En 15 minutes, le problème était résolu.
+
+Moralité : il faut tester dans des conditions réalistes. Les compétiteurs cliquent **bien plus vite** que des utilisateurs normaux.
+
+## Le succès
+
+Après cette crise express, tout s’est bien déroulé. Les étudiants ont codé, résolu des puzzles, se sont affrontés sur le leaderboard. L’infra a tenu, les puzzles ont généré leurs entrées sans bug.
+
+Voir les étudiants utiliser une plateforme que j’avais bâtie de zéro… ça valait toutes les nuits blanches.
+
+Si je devais le refaire, je corrigerais ce problème avec un captcha sur la page de login, ou un système d’empreinte navigateur pour limiter les requêtes par utilisateur réel.
+
+## Ce que j’ai appris
+
+1. **Le scope explose vite** – “juste une plateforme simple” est devenu un écosystème complet
+2. **Séparer les services, c’est vital** – ça m’aurait évité bien des maux de tête
+3. **Une bonne doc, c’est la vie** – Swagger m’a sauvé
+4. **Choisir Go, super idée** – les perfs étaient au rendez-vous
+5. **UX > fonctionnalités** – les étudiants veulent une expérience fluide avant tout
+6. **Monitoring obligatoire** – sans Grafana, j’étais dans le flou
+7. **Tester dans les vraies conditions** – les compétitions, c’est pas du trafic “normal”
+8. **Toujours un plan B** – et être capable de réagir vite
+
+## Quelques chiffres
+
+Côté développement :
+
+- 1 mois de dev
+- 200+ heures de code (soit ~47h/semaine, ~7h/jour avec les week-ends)
+- 11 services différents
+- 70K+ lignes de code (merci TypeScript…)
+- 572 Mo d’images Docker, dépendances et DB comprises
+
+Côté événement :
+
+- 100+ étudiants participants sur 3 campus
+- 1449 puzzles résolus
+- 2992 soumissions (oui, certains ont spammé les mauvaises réponses…)
+- 19 minutes en moyenne pour résoudre une énigme
+
+## Bilan
+
+Franchement, ce projet m’a appris **bien plus en un mois** que certains semestres entiers. J’ai pu mettre en pratique plein de technos que je voulais tester : Go, microservices, monitoring temps réel, Docker… tout y est passé.
+
+Mais au-delà des technos, j’ai surtout compris ce que ça impliquait **d’héberger un vrai concours à grande échelle** : gestion d’infrastructure, UX, sécurité, monitoring. Travailler en direct avec les étudiants et les voir apprécier l'expérience, c’était génial.
+
+## Et maintenant ?
+
+Ce qui était censé être un petit service pour mon école est devenu quelque chose de bien plus gros. Mon but maintenant : faire d’**AlgoHive** une référence, pour les campus comme pour les entreprises qui veulent organiser des concours de code.
+
+Tout l’écosystème, les libraries, les outils de création, la doc : je veux que tout soit dispo et facile à utiliser, sans devoir tout recoder à la main comme je l’ai fait.
+
+Il reste un boulot monstrueux, évidemment. Améliorer la sécurité, la stabilité, l’ergonomie. Je veux ajouter des catalogues de puzzles, de vraies stats, des outils collaboratifs… peut-être même une marketplace d’énigmes.
+
+## La suite
+
+Pour ma dernière année d’études, je veux en faire un vrai projet d’équipe. M’entourer de profils qualifiés : experts sécurité, UI/UX, créateurs de puzzles. J’ai réussi à faire ça tout seul, mais ça peut être 10x mieux avec les bonnes personnes.
+
+On prévoit plus d’événements dans les campus de Toulouse, peut-être ailleurs en France. L’objectif : créer un **réseau d’événements de prog compétitive** que les étudiants attendent avec impatience.
+
+Je veux aussi bâtir une vraie communauté autour du projet : une doc claire, des tutos, un forum, et pourquoi pas des ateliers pour les campus qui veulent se lancer.
+
+## En conclusion
+
+Est-ce que je referais ce projet ? **Sans hésiter**. Mais avec un scope mieux défini et des délais plus réalistes.
+
+Cette expérience m’a prouvé que les meilleurs apprentissages naissent souvent d’un “oui” un peu fou. Les défis techniques, la gestion de projet, et l’impact direct sur des centaines de personnes… aucune salle de classe ne m’aurait appris ça.
+
+La plateforme AlgoHive est et restera **open-source**, prête à l’emploi pour celles et ceux qui veulent se lancer dans leur propre compétition de programmation. Que vous soyez une école, une entreprise ou juste un·e passionné·e de puzzles… tout est là.
+
+J’espère que ce post vous aura donné un bon aperçu du parcours, et peut-être l’envie de lancer **votre propre projet (presque) impossible**.
+
+_Pour accéder à tout l’écosystème AlgoHive, rendez-vous sur GitHub. Docs, guides de déploiement, tout y est. Attention, créer des puzzles est hautement addictif._

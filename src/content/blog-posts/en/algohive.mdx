@@ -1,8 +1,237 @@
 ---
-title: "I've made and hosted my own Advent of Code like challenge"
+title: "I made and hosted my own Advent of Code like challenge"
 description: "When staff at my school called for help with a coding competition for students, I decided to create my own version of Advent of Code. This post details the process and the technologies used."
 date: "2025-06-14"
 tags: ["Challenge", "Web Development", "AdventOfCode", "Technology"]
 author: "Éric Philippe"
 published: true
 ---
+
+# Building My Own Advent of Code: From "Can You Help?" to Full Platform in One Month
+
+Sometimes the best projects start with someone else's panic. Picture this: I'm in my 4th year of Computer Science at Ynov campus in Toulouse, just minding my own business, when some staff members approach me with that particular look of desperation.
+
+"Hey Éric, we need help with a coding competition for second-year students. It was supposed to be national, but now each campus has to organize their own event. Oh, and we have one month. No pressure."
+
+My brain immediately went: "I could recreate Advent of Code, right? Right?"
+
+Spoiler alert: way more complicated than expected, but absolutely worth the madness that followed.
+
+## What's Advent of Code Anyway?
+
+For those who haven't fallen down this particular rabbit hole yet, Advent of Code is like Christmas for programmers. Every December, you get daily coding puzzles that start simple and progressively make you question your life choices. Each puzzle has two parts: the first is usually manageable, then the second part hits you with a plot twist that makes you realize you've been thinking about the problem all wrong.
+
+The genius part? Everyone gets their own unique input data, so you can't just copy solutions from your classmates. Plus, there's this engaging story that evolves through the month, making AI assistance less helpful since ChatGPT tends to get lost in the narrative context.
+
+After participating for two years straight (and loving every frustrating minute), I thought: "How hard could it be to build my own version?"
+
+Ahem.
+
+## The "Simple" Requirements
+
+The staff's needs seemed straightforward enough:
+
+- A platform where students could solve coding challenges
+- Unique inputs for each participant (no cheating!)
+- Real-time scoring and leaderboards
+- Something that would keep students busy for a whole day
+- And oh yeah, did I mention we had **one month**?
+
+Looking back, I should have just recommended they use an existing platform. But where's the fun in that?
+
+## The Proof of Concept Reality Check
+
+I fired up my trusty laptop and started prototyping in Python. The core concept was solid: create a system that could generate unique puzzle inputs and validate solutions automatically. Python was perfect for this since I could leverage its extensive libraries for puzzle generation and validation.
+
+But as I started sketching out the architecture, I realized this wasn't just about puzzles. I needed:
+
+- A full user management system
+- Admin panels for staff
+- Competition management
+- Real-time scoring
+- A puzzle creation and deployment system
+
+Oh, and it all had to be user-friendly enough for students who just wanted to solve problems, not fight with the platform.
+
+## The Tech Stack Decision
+
+I knew I needed to split this beast into three main parts:
+
+### Frontend: The Student Experience
+
+React with Vite was my go-to choice. I'd used it before, it's fast, and I could create a modern interface that wouldn't look like it came from 2005 (looking at you, typical school platforms). Tailwind CSS would handle the styling because I wanted something that looked professional without spending weeks on CSS.
+
+### Backend: The Heavy Lifting
+
+Here's where I got a bit adventurous. I'd been curious about Go, and this seemed like the perfect opportunity to dive deep. Go with Gin framework promised the performance I'd need when hundreds of students hit the server simultaneously, all demanding unique puzzle inputs.
+
+### Puzzle Management: The Secret Sauce
+
+This is where things got interesting. Remember how .docx and .xlsx files are actually just zip files containing XML? That discovery had been bouncing around my head for weeks.
+
+It clicked: I could create a custom file format (.alghive) that was essentially a zip containing XML metadata and Python scripts for input generation and solution validation. Students and staff could create puzzles using familiar tools, and the system could process them automatically.
+
+## The Development Marathon
+
+### Database First
+
+I started with PostgreSQL for the main database and Redis for caching. I designed the schema first because I knew the admin panel would be a massive undertaking – user roles, permissions, school groups, competitions, the works.
+
+The initial database design held up surprisingly well, though the competition structure went through several iterations as requirements evolved.
+
+### API Development with Go
+
+Building the web server in Go was actually a joy. I used Swagger for API documentation, which turned out to be a lifesaver when things got complex. CRUD operations, authentication, user management – layer by layer, the backend took shape.
+
+### The Admin Panel Grind
+
+This was the least glamorous but most critical part. React component after React component: user management, school administration, competition setup, puzzle deployment. It was CRUD operations all the way down.
+
+About halfway through, I realized I was working in a single repository with "Frontend/" and "Backend/" folders, and it was becoming unwieldy. Time for some architecture improvements.
+
+## The Plot Twist: Going Multi-Campus
+
+Just as I was hitting my stride, Montpellier campus reached out. They also needed a competition platform, and some of their students wanted to contribute puzzles.
+
+Suddenly, my "simple school project" needed to handle multiple campuses, collaborative puzzle creation, and a more sophisticated deployment pipeline. This is when I decided to embrace the complexity and create a proper ecosystem.
+
+I moved everything to a GitHub organization and split the monolith:
+
+- **HiveCraft**: A proper Python library for puzzle creation (published to PyPI)
+- **HiveCraft CLI**: Command-line tools for puzzle development
+- **BeeHive**: A planned GUI for puzzle creation (still working on this one)
+- **GitHub Actions**: Automated puzzle compilation and deployment
+
+The "bee" theme just happened naturally, and honestly, I ran with it. Sometimes branding just clicks. 🐝
+
+## The User Interface Challenge
+
+Two weeks before the deadline, I had a robust backend and admin system but almost no student-facing interface. Time to pivot hard.
+
+This was actually where the project became fun again. After weeks of admin panels, designing something students would actually enjoy using felt refreshing. I wanted to create something modern and intuitive – a stark contrast to the typical institutional platforms we all know and tolerate.
+
+## The Ecosystem Explosion
+
+As I was building the main platform, I realized I needed supporting services:
+
+### BeeAPI
+
+A separate Go service for handling puzzle execution, input generation, and solution validation. Keeping this separate from the main server improved both performance and security. (Plus, it let me scale independently if needed.)
+
+### BeeHub
+
+When Montpellier students needed a way to create and test puzzles collaboratively, I built them a dedicated web application. Python with Flask for the backend, React for the frontend – it became their puzzle creation headquarters.
+
+## The Final Sprint
+
+Two weeks out, Lyon campus joined the party. At this point, I realized I'd accidentally built something that could scale beyond my initial scope.
+
+The final architecture handled:
+
+- Three different campuses
+- Individual competition management
+- Real-time puzzle deployment
+- Collaborative puzzle creation
+- Automatic scoring and leaderboards
+
+### The Puzzle Creation Process
+
+Each competition would run for 6 hours, with an estimated maximum of 16 puzzles per student (32 total parts, with increasing difficulty). The beauty of the system was that adding new puzzles was as simple as uploading a .alghive file.
+
+## Deployment and Docker
+
+Throughout development, I kept deployment in mind. Docker containers for everything, with separate compose files for development, staging, and production. This let me test changes safely and deploy updates without breaking the live competitions.
+
+## Last-Minute Security and Monitoring
+
+Just before the competition, I realized I needed proper monitoring and security measures. You know that feeling when you're about to go live with something and suddenly think "Wait, what if everything breaks and I have no idea why?"
+
+I quickly set up Grafana and Prometheus for real-time monitoring. CPU usage, memory consumption, API response times, database connections – I wanted to see everything that could possibly go wrong before it actually went wrong. This turned out to be one of my smartest decisions.
+
+I also implemented some basic security measures: rate limiting on API endpoints, input validation, and proper authentication checks. Better safe than sorry when you're about to have hundreds of students hammering your servers.
+
+## The Moment of Truth (And The Rate Limit Crisis)
+
+Competition day arrived, and at first, everything seemed perfect. Students logged in. I was watching the Grafana dashboards like a hawk, feeling pretty proud of myself.
+
+Then, literally 5 minutes in, chaos struck.
+
+Students started complaining they couldn't log in. The API was rejecting their requests, but not consistently – some submissions went through, others didn't. My heart sank as I watched the error rates (a famous 429 Too Many Requests) spike on my monitoring dashboard.
+
+The culprit? My own rate limiting system.
+
+In my wisdom, I'd implemented rate limiting to prevent abuse, but I hadn't accounted that all the students were connecting from the same IP address, as they were all on the same Wi-Fi network.
+
+Picture this: me, frantically SSH'd into the production server during a live competition, trying to adjust rate limiting rules while hundreds of students are waiting. Not exactly the smooth operation I'd envisioned.
+
+The Grafana dashboards that I'd set up "just in case" suddenly became my lifeline. I could see exactly which endpoints were being hammered, which users were hitting limits, and how the system was performing under load. Within about 15 minutes, I'd identified the problem, adjusted the rate limits, and got everything back to normal.
+
+I definitely learned the importance of realistic load testing. Note to self: competitive programmers click buttons WAY more frequently than normal users.
+
+After that crisis, the rest of the competition ran smoothly. Students solved puzzles, competed fiercely, and the leaderboards updated in real-time. The infrastructure held up perfectly under load, and the puzzle system generated unique inputs flawlessly.
+
+It was the perfect opportunity for me to learn how to implement a robust rate limiting system. If I had to do it again, I would have overcome the issue by implementing a captcha system for the login endpoint, or a browser fingerprinting system to limit the number of requests per user.
+
+Anyway, watching students engage with something I'd built from scratch was incredibly rewarding. They were solving problems, competing with each other, and having fun – exactly what we'd hoped for.
+
+## What I Learned
+
+1. **Scope creep is real** – what started as "just build a simple platform" became a full ecosystem
+2. **Separation of concerns matters** – splitting services early would have saved headaches later
+3. **Good documentation is crucial** – Swagger saved my sanity when the API got complex
+4. **Performance planning pays off** – choosing Go for the heavy lifting was the right call
+5. **User experience trumps features** – students cared more about smooth interaction than complex features
+6. **Monitoring is not optional** – Grafana and Prometheus saved the day when things went sideways
+7. **Rate limiting needs realistic testing** – competitive programmers behave very differently than normal users
+8. **Always have a backup plan** – and make sure you can fix things quickly during live events
+
+## The Numbers
+
+A quick breakdown of some of the platform stats:
+
+- 1 month of development
+- 200+ hours of coding (Which is around 47h per week, or almost 7h per day including weekends)
+- 11 services in the ecosystem
+- More than 70K lines of code across the entire platform (TypeScript is the main culprit here...)
+- 572MB with all the Docker images and dependencies including the databases.
+
+And some of the event stats:
+
+- More than 100 students participated across three campuses simultaneously
+- 1449 puzzles solved in total
+- 2992 submissions received (yes, some students submitted the same wrong solution multiple times...)
+- About 19 minutes average time to solve a puzzle
+
+## Reflection
+
+Overall, the event was a massive success, and honestly, I learned more in one month than I had in entire semesters. I was able to put into practice so many concepts and technologies I'd been wanting to explore – Go for high-performance backends, microservices architecture, real-time monitoring, Docker orchestration – the whole nine yards.
+
+But beyond the technical skills, I gained invaluable insights into what it takes to host a large-scale online competition. The infrastructure challenges, user experience considerations, security concerns, and the absolute criticality of proper monitoring. Working closely with students during the competition was incredibly rewarding – seeing them engage with the platform, get excited about solving puzzles, and compete with each other made all those sleepless nights worth it.
+
+## What's Next: Building a Movement
+
+What started as a quick favor for my school has evolved into something much bigger. I want to make AlgoHive a reference platform for schools and even businesses wanting to host their own coding competitions.
+
+I want to give everyone the complete toolkit: the entire ecosystem, libraries, creation tools, comprehensive documentation, and ongoing support. The goal is to make it as easy as possible for anyone to create engaging puzzles and run their own competitions, without having to rebuild everything from scratch like I did.
+
+There's still a mountain of work ahead. The platform needs to be more robust, more secure, and more user-friendly. I'm planning features like puzzle catalogs, better analytics, improved collaboration tools, and maybe even a marketplace for custom puzzles. The possibilities are genuinely exciting.
+
+## The Road Ahead
+
+For my final student year, I'm planning to turn this into a proper team effort. I'll be bringing in qualified people who actually know what they're doing – security experts, UI/UX designers, puzzle creation specialists. Because let's be honest, while I managed to pull this off, there's so much room for improvement with the right expertise.
+
+We're planning to host more events across all the Toulouse campuses, and potentially expand to other cities in France. The dream is to create a network of competitive programming events that students actually look forward to, rather than just another academic obligation.
+
+I also want to build a proper community around the project. Documentation that doesn't assume you're a mind reader, tutorials for puzzle creation, forums for troubleshooting, and maybe even workshops for schools wanting to get started.
+
+## Final Thoughts
+
+Would I do it again? Absolutely. But next time, I'd definitely start with more realistic timelines and clearer scope boundaries.
+
+This project taught me that sometimes the best learning comes from saying "yes" to something that seems just slightly impossible. The combination of technical challenges, project management, and seeing your work directly impact hundreds of people created a learning experience no classroom could replicate.
+
+The AlgoHive platform is now open-source and ready for anyone brave enough to host their own competition. Whether you're a school looking to engage students, a company wanting to assess technical skills, or just someone who loves competitive programming, the tools are there.
+
+I hope this post gives you a good overview of the process I went through to create my own coding competition platform, and maybe inspires you to tackle your own "impossible" project. If you have questions, want to contribute, or are planning something similar, feel free to reach out through my social media or GitHub. I'd love to help or hear about your experience!
+
+_The entire AlgoHive ecosystem is available on GitHub, complete with documentation and deployment guides. Fair warning: it's addictive once you start creating puzzles._
