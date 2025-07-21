@@ -51,11 +51,15 @@ But as I started sketching out the architecture, I realized this wasn't just abo
 - Real-time scoring
 - A puzzle creation and deployment system
 
+![Admin structure](https://raw.githubusercontent.com/AlgoHive-Coding-Puzzles/Documentation/refs/heads/main/docs/AlgoHivePermissions.drawio.png)
+
 Oh, and it all had to be user-friendly enough for students who just wanted to solve problems, not fight with the platform.
 
 ## The Tech Stack Decision
 
 I knew I needed to split this beast into three main parts:
+
+![First Draft Architecture](https://snapfilething.homeserver-ericp.fr/uploads/three_1753080737_37578eb9_.png)
 
 ### Frontend: The Student Experience
 
@@ -71,6 +75,8 @@ This is where things got interesting. Remember how .docx and .xlsx files are act
 
 It clicked: I could create a custom file format (.alghive) that was essentially a zip containing XML metadata and Python scripts for input generation and solution validation. Students and staff could create puzzles using familiar tools, and the system could process them automatically.
 
+![Puzzle Creation](https://snapfilething.homeserver-ericp.fr/uploads/alghive_1753084257_8143805a_.png)
+
 ## The Development Marathon
 
 ### Database First
@@ -78,6 +84,8 @@ It clicked: I could create a custom file format (.alghive) that was essentially 
 I started with PostgreSQL for the main database and Redis for caching. I designed the schema first because I knew the admin panel would be a massive undertaking – user roles, permissions, school groups, competitions, the works.
 
 The initial database design held up surprisingly well, though the competition structure went through several iterations as requirements evolved.
+
+![First Draft Database Schema](https://github.com/AlgoHive-Coding-Puzzles/AlgoHive-Infra/blob/main/database/MCD.jpg?raw=true)
 
 ### API Development with Go
 
@@ -87,7 +95,11 @@ Building the web server in Go was actually a joy. I used Swagger for API documen
 
 This was the least glamorous but most critical part. React component after React component: user management, school administration, competition setup, puzzle deployment. It was CRUD operations all the way down.
 
-About halfway through, I realized I was working in a single repository with "Frontend/" and "Backend/" folders, and it was becoming unwieldy. Time for some architecture improvements.
+![Admin Panel](https://snapfilething.homeserver-ericp.fr/uploads/backoffice_1753081591_d606c05a_.png)
+
+> Don't mind the test data, I was just trying to get the UI right while having a Rocket League match in the background...
+
+About halfway through, I realized I was working in a single repository with "Frontend" and "Backend" folders, and it was becoming unwieldy. Time for some architecture improvements.
 
 ## The Plot Twist: Going Multi-Campus
 
@@ -104,11 +116,16 @@ I moved everything to a GitHub organization and split the monolith:
 
 The "bee" theme just happened naturally, and honestly, I ran with it. Sometimes branding just clicks. 🐝
 
+![Repositories](https://snapfilething.homeserver-ericp.fr/uploads/repositories_1753081591_5086491e_.png)
+
 ## The User Interface Challenge
 
 Two weeks before the deadline, I had a robust backend and admin system but almost no student-facing interface. Time to pivot hard.
 
 This was actually where the project became fun again. After weeks of admin panels, designing something students would actually enjoy using felt refreshing. I wanted to create something modern and intuitive – a stark contrast to the typical institutional platforms we all know and tolerate.
+The goal was to make it responsive, so students could participate from any device, whether it was a laptop, a small screen laptop, or even a phone.
+
+![Mockups](https://snapfilething.homeserver-ericp.fr/uploads/phonemockups_1753081753_3979232a_.png)
 
 ## The Ecosystem Explosion
 
@@ -118,9 +135,17 @@ As I was building the main platform, I realized I needed supporting services:
 
 A separate Go service for handling puzzle execution, input generation, and solution validation. Keeping this separate from the main server improved both performance and security. (Plus, it let me scale independently if needed.)
 
+The main server would then just proxy requests to the BeeAPI, allowing for load distribution across multiple BeeAPI instances if necessary.
+
+![BeeAPI Architecture](https://snapfilething.homeserver-ericp.fr/uploads/beeapi_1753083210_46711f65_.png)
+
 ### BeeHub
 
 When Montpellier students needed a way to create and test puzzles collaboratively, I built them a dedicated web application. Python with Flask for the backend, React for the frontend – it became their puzzle creation headquarters.
+
+The app connects directly to the BeeAPI to manage different puzzle catalogs across all environments. The whole thing is protected by an API key system and isolated to only expose what the service needs to see.
+
+![BeeHub](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-07-21_at_09-26-38_excalidraw_1753082808_ee9b37be_.png)
 
 ## The Final Sprint
 
@@ -134,13 +159,22 @@ The final architecture handled:
 - Collaborative puzzle creation
 - Automatic scoring and leaderboards
 
+> Finally, a good excuse to use WebSockets and REST APIs.
+
 ### The Puzzle Creation Process
 
 Each competition would run for 6 hours, with an estimated maximum of 16 puzzles per student (32 total parts, with increasing difficulty). The beauty of the system was that adding new puzzles was as simple as uploading a .alghive file.
 
+This was my chance to challenge myself with puzzle creation. I experimented with ideas, game mechanics, and learned how to craft engaging puzzles that actually made sense.
+For example, I created a puzzle where students had to implement Conway's Game of Life!
+
+![Conway](https://snapfilething.homeserver-ericp.fr/uploads/gameoflife_1753081591_071ddbd0_.png)
+
 ## Deployment and Docker
 
 Throughout development, I kept deployment in mind. Docker containers for everything, with separate compose files for development, staging, and production. This let me test changes safely and deploy updates without breaking the live competitions.
+
+![Docker packages](https://snapfilething.homeserver-ericp.fr/uploads/packages_1753083609_831e7be7_.png)
 
 ## Last-Minute Security and Monitoring
 
@@ -148,7 +182,13 @@ Just before the competition, I realized I needed proper monitoring and security 
 
 I quickly set up Grafana and Prometheus for real-time monitoring. CPU usage, memory consumption, API response times, database connections – I wanted to see everything that could possibly go wrong before it actually went wrong. This turned out to be one of my smartest decisions.
 
+![Grafana Dashboard](https://snapfilething.homeserver-ericp.fr/uploads/grafana_1753082247_833cc66a_.png)
+
 I also implemented some basic security measures: rate limiting on API endpoints, input validation, and proper authentication checks. Better safe than sorry when you're about to have hundreds of students hammering your servers.
+
+At this point, I had a solid platform ready to go. The admin panel was functional, the student interface was polished, and the backend services were humming along nicely.
+
+![Final Architecture](https://raw.githubusercontent.com/AlgoHive-Coding-Puzzles/Documentation/refs/heads/main/docs/AlgoHiveArchi.drawio.png)
 
 ## The Moment of Truth (And The Rate Limit Crisis)
 

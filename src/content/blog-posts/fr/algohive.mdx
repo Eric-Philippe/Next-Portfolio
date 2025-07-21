@@ -51,11 +51,15 @@ Mais très vite, je me rends compte que ce n’est pas juste une histoire de puz
 - Un scoring en temps réel
 - Un outil pour créer/déployer les énigmes
 
+![Admin structure](https://raw.githubusercontent.com/AlgoHive-Coding-Puzzles/Documentation/refs/heads/main/docs/AlgoHivePermissions.drawio.png)
+
 Et tout ça devait être **simple à utiliser**, même pour des étudiants qui voulaient juste résoudre des problèmes sans galérer avec la plateforme.
 
 ## Le choix de la stack
 
 Je décide de séparer le projet en trois blocs principaux :
+
+![First Draft Architecture](https://snapfilething.homeserver-ericp.fr/uploads/three_1753080737_37578eb9_.png)
 
 ### Frontend : l’expérience côté étudiant
 
@@ -71,6 +75,8 @@ Petit moment “eureka” : je me souvenais que les fichiers `.docx` ou `.xlsx` 
 
 Résultat : les puzzles peuvent être créés avec des outils familiers, et le système les traite automatiquement. Bingo.
 
+![Puzzle Creation](https://snapfilething.homeserver-ericp.fr/uploads/alghive_1753084257_8143805a_.png)
+
 ## Le marathon de développement
 
 ### Base de données d’abord
@@ -79,6 +85,8 @@ PostgreSQL en base principale, Redis pour le cache. J’ai commencé par le sch�
 
 Le schéma de départ a plutôt bien tenu la route, même si j’ai dû faire évoluer la gestion des compétitions plusieurs fois.
 
+![First Draft Database Schema](https://github.com/AlgoHive-Coding-Puzzles/AlgoHive-Infra/blob/main/database/MCD.jpg?raw=true)
+
 ### Développement de l’API en Go
 
 Le serveur web en Go a été une vraie satisfaction. Swagger m’a sauvé la vie pour documenter l’API. Authentification, users, CRUD, tout s’est construit couche par couche.
@@ -86,6 +94,10 @@ Le serveur web en Go a été une vraie satisfaction. Swagger m’a sauvé la vie
 ### Le calvaire du panneau d’administration
 
 Pas sexy, mais indispensable. Des composants React à la chaîne : gestion des users, campus, compétitions, déploiement de puzzles... Le royaume du CRUD.
+
+![Admin Panel](https://snapfilething.homeserver-ericp.fr/uploads/backoffice_1753081591_d606c05a_.png)
+
+> Ne faites pas attention aux données de test, j'essayais juste d'obtenir l'interface utilisateur correcte tout en ayant un match de Rocket League en arrière-plan...
 
 Au bout d’un moment, j’ai réalisé que mon projet était un repository monolithique avec des dossiers `Frontend/` et `Backend/`. Ça devenait ingérable. Il était temps de structurer un peu tout ça.
 
@@ -104,11 +116,16 @@ J’ai tout déplacé dans une organisation GitHub et séparé le monolithe, et 
 
 Le thème des abeilles est arrivé tout seul… et j’ai décidé de le garder. 🐝
 
+![Repositories](https://snapfilething.homeserver-ericp.fr/uploads/repositories_1753081591_5086491e_.png)
+
 ## Le rush sur l’interface
 
 À deux semaines de l’échéance, j’avais un backend solide et un panneau d’admin fonctionnel… mais rien côté étudiant. Bon.
 
 Et en fait, c’est là que le fun est revenu. Après des semaines à coder de l’admin, construire une interface sympa et moderne pour les étudiants m’a remotivé. Je voulais quelque chose de plus propre et agréable à utiliser – loin des plateformes institutionnelles tristes qu’on connaît tous.
+Le tout en gardant en tête de faire quelque chose de responsive pour que les étudiants puissent participer depuis n'importe quel appareil.
+
+![Mockups](https://snapfilething.homeserver-ericp.fr/uploads/phonemockups_1753081753_3979232a_.png)
 
 ## L’explosion de l’écosystème
 
@@ -118,9 +135,16 @@ Au fil de l’eau, j’ai compris qu’il me fallait des services annexes :
 
 Un service Go à part pour l’exécution des puzzles, la génération des entrées, la validation. Séparé du serveur principal, plus performant et plus sécurisé. Et surtout, facile à scaler si besoin.
 
+Le serveur principal n'a alors qu'à servir de proxie pour les requêtes pour les énigmes, tout en permettant de pouvoir distribuer la charge entre plusieurs instances BeeAPI si besoin.
+
+![BeeAPI Architecture](https://snapfilething.homeserver-ericp.fr/uploads/beeapi_1753083210_46711f65_.png)
+
 ### BeeHub
 
 Quand les étudiants de Montpellier ont voulu créer et tester des puzzles à plusieurs, j’ai codé une app web dédiée. Backend Flask, frontend React. C’est devenu leur QG de création.
+L'application se met en relation directe avec les BeeAPI pour pouvoir gérer les différents catalogues de puzzles, sous tous les environnements. Le tout protégé d'une part par un système d'API Key, et d'une autre part par une isolation en ne gardant accessible que ce que le service doit voir.
+
+![BeeHub](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-07-21_at_09-26-38_excalidraw_1753082808_ee9b37be_.png)
 
 ## Le sprint final
 
@@ -134,13 +158,22 @@ L’architecture finale gérait :
 - Une création collaborative de puzzles
 - Un scoring automatique avec leaderboard
 
+> Enfin une bonne excuse pour faire usage de WebSockets et de l’API REST.
+
 ### Créer un puzzle, concrètement
 
 Chaque compétition durait 6h, avec 16 puzzles max par étudiant (donc 32 parties, difficulté croissante). Et grâce au format `.alghive`, ajouter un puzzle était aussi simple qu’un upload de fichier.
 
+Cela a été pour moi une occasion de me challenger sur la création de puzzles. J’ai pu tester des idées, des mécaniques de jeu, et surtout, j’ai appris à créer des énigmes qui tiennent la route.
+Ca m'a permis par exemple de faire une énigme où les étudiants devaient implémenter le jeu de la vie de Conway !
+
+![Conway](https://snapfilething.homeserver-ericp.fr/uploads/gameoflife_1753081591_071ddbd0_.png)
+
 ## Déploiement & Docker
 
 Dès le début, j’ai pensé au déploiement. Chaque service dans un conteneur Docker, avec des `docker-compose` différents pour le dev, le staging, et la prod. Je pouvais tester et mettre à jour sans crainte de casser la plateforme en live.
+
+![Docker packages](https://snapfilething.homeserver-ericp.fr/uploads/packages_1753083609_831e7be7_.png)
 
 ## Sécurité & monitoring de dernière minute
 
@@ -148,7 +181,13 @@ Juste avant le jour J, un éclair de lucidité : et si tout plantait et que je n
 
 J'ai décidé d'installer en express Grafana et Prometheus: Monitoring CPU, mémoire, réponses API, connexions DB – je voulais tout voir.
 
+![Grafana Dashboard](https://snapfilething.homeserver-ericp.fr/uploads/grafana_1753082247_833cc66a_.png)
+
 Côté sécurité j'en ai profité pour implémenter une limitation de requêtes sur les endpoints sensibles, une validation des entrées, vérification de l’auth. Mieux vaut prévenir que guérir.
+
+A ce moment-là, j’avais une plateforme prête à l’emploi. Le panneau d’admin était fonctionnel, l’interface étudiant était peaufinée, et les services backend tournaient comme une horloge.
+
+![Final Architecture](https://raw.githubusercontent.com/AlgoHive-Coding-Puzzles/Documentation/refs/heads/main/docs/AlgoHiveArchi.drawio.png)
 
 ## Le jour J (et la galère des 429)
 
