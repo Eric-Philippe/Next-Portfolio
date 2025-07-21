@@ -1,9 +1,15 @@
 "use client";
 
 import { Header } from "~/components/common/header";
-import { useState, use } from "react";
-import { FiArrowLeft, FiClock, FiCalendar, FiTag } from "react-icons/fi";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { useState, use, useEffect, useRef } from "react";
+import {
+  FiArrowLeft,
+  FiClock,
+  FiCalendar,
+  FiTag,
+  FiArrowUp,
+} from "react-icons/fi";
+import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { MDXContent } from "~/components/blog/mdx-content";
@@ -12,6 +18,7 @@ import BookmarkButton from "~/components/common/bookmarkButton";
 import ShareButton from "~/components/common/shareButton";
 import { useTranslations } from "next-intl";
 import Footer from "~/components/common/footer";
+import URLS from "~/content/URLs";
 
 interface Props {
   params: Promise<{
@@ -25,8 +32,42 @@ export default function BlogPostPageClient({ params, post }: Props) {
   const resolvedParams = use(params);
   const t = useTranslations("BlogPage");
   const [shareMenuOpen, setShareMenuOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const contentRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+
+  // Handle scroll behavior for scroll-to-top button
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const contentElement = contentRef.current;
+
+      if (contentElement) {
+        const contentTop = contentElement.offsetTop;
+        const isInContent = currentScrollY >= contentTop - 100; // Show when approaching content
+
+        // Determine scroll direction
+        const scrollingUp = currentScrollY < lastScrollY;
+
+        // Show button only when in content area AND scrolling up
+        setShowScrollTop(isInContent && scrollingUp);
+
+        setLastScrollY(currentScrollY);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   // If no post provided, show a fallback
   if (!post) {
@@ -194,7 +235,7 @@ export default function BlogPostPageClient({ params, post }: Props) {
                 <BookmarkButton slug={post.slug} domain="blog" />
 
                 <ShareButton
-                  link={`/${resolvedParams.locale}/blog/${post.slug}`}
+                  link={`${URLS.WEBSITE}/${resolvedParams.locale}/blog/${post.slug}`}
                   title={post.title}
                   darkMode={false}
                 />
@@ -204,6 +245,7 @@ export default function BlogPostPageClient({ params, post }: Props) {
 
           {/* Article Content */}
           <motion.div
+            ref={contentRef}
             className="mb-16"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -255,6 +297,49 @@ export default function BlogPostPageClient({ params, post }: Props) {
             onClick={() => setShareMenuOpen(false)}
           />
         )}
+
+        {/* Scroll to Top Button */}
+        <AnimatePresence>
+          {showScrollTop && (
+            <motion.button
+              onClick={scrollToTop}
+              className="fixed right-6 bottom-6 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 backdrop-blur-md transition-all hover:scale-110 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none md:right-8 md:bottom-8"
+              style={{
+                background: "rgba(255, 255, 255, 0.9)",
+                boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
+              }}
+              initial={{
+                opacity: 0,
+                scale: 0.8,
+                y: 20,
+              }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                transition: {
+                  duration: 0.3,
+                  ease: "easeOut",
+                },
+              }}
+              exit={{
+                opacity: 0,
+                scale: 0.8,
+                y: 20,
+                transition: {
+                  duration: 0.2,
+                },
+              }}
+              whileHover={{
+                scale: 1.1,
+                boxShadow: "0 12px 40px rgba(0, 0, 0, 0.15)",
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FiArrowUp className="h-5 w-5 text-slate-700" />
+            </motion.button>
+          )}
+        </AnimatePresence>
       </div>
 
       <Footer theme="light" />

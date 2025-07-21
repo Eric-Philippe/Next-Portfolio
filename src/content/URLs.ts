@@ -1,4 +1,5 @@
 const URLS = {
+  WEBSITE: "https://ericphlpp.com",
   CV_DL:
     "https://www.dropbox.com/scl/fi/bxdr0pg95xa6wc0umuua9/Eric-PHILIPPE-CV.pdf?rlkey=f14hshjyp2xh5d3pyw189auob&dl=1",
   GITHUB: "https://github.com/Eric-Philippe",
