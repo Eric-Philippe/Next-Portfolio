@@ -11,7 +11,7 @@ published: true
 
 Sometimes the best projects start with someone else's panic. Picture this: I'm in my 4th year of Computer Science at Ynov campus in Toulouse, just minding my own business, when some staff members approach me with that particular look of desperation.
 
-"Hey Éric, we need help with a coding competition for second-year students. It was supposed to be national, but now each campus has to organize their own event. Oh, and we have one month. No pressure."
+> "Hey Éric, we're searching ideas for a coding competition for second-year students. It was supposed to be national, but now each campus has to organize their own event. Oh, and we have one month. No pressure."
 
 My brain immediately went: "I could recreate Advent of Code, right? Right?"
 
@@ -107,7 +107,7 @@ Just as I was hitting my stride, Montpellier campus reached out. They also neede
 
 Suddenly, my "simple school project" needed to handle multiple campuses, collaborative puzzle creation, and a more sophisticated deployment pipeline. This is when I decided to embrace the complexity and create a proper ecosystem.
 
-I moved everything to a GitHub organization and split the monolith:
+I moved everything to a GitHub organization and split the monolith, and took the opportunity to create a proper ecosystem around the main project:
 
 - **HiveCraft**: A proper Python library for puzzle creation (published to PyPI)
 - **HiveCraft CLI**: Command-line tools for puzzle development
@@ -170,6 +170,12 @@ For example, I created a puzzle where students had to implement Conway's Game of
 
 ![Conway](https://snapfilething.homeserver-ericp.fr/uploads/gameoflife_1753081591_071ddbd0_.png)
 
+I also implemented a system to prevent AI abuse. I made sure that each puzzle's instructions contained transparent prompts that moved around the text, preventing students from simply copying and pasting the instructions into an AI.
+
+![AI](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-07-21_at_11-38-29_prompt_injection_avertie_1753090717_666fcdbb_.png)
+
+> Solid solution to calm the enthusiasm of students who are professionals at "Copy-Paste AI".
+
 ## Deployment and Docker
 
 Throughout development, I kept deployment in mind. Docker containers for everything, with separate compose files for development, staging, and production. This let me test changes safely and deploy updates without breaking the live competitions.
@@ -201,6 +207,8 @@ Students started complaining they couldn't log in. The API was rejecting their r
 The culprit? My own rate limiting system.
 
 In my wisdom, I'd implemented rate limiting to prevent abuse, but I hadn't accounted that all the students were connecting from the same IP address, as they were all on the same Wi-Fi network.
+
+![Too Many Requests](https://snapfilething.homeserver-ericp.fr/uploads/toomanyrequests_1753089657_3f433cfb_.png)
 
 Picture this: me, frantically SSH'd into the production server during a live competition, trying to adjust rate limiting rules while hundreds of students are waiting. Not exactly the smooth operation I'd envisioned.
 
@@ -262,6 +270,8 @@ For my final student year, I'm planning to turn this into a proper team effort. 
 
 We're planning to host more events across all the Toulouse campuses, and potentially expand to other cities in France. The dream is to create a network of competitive programming events that students actually look forward to, rather than just another academic obligation.
 
+![Roadmap](https://snapfilething.homeserver-ericp.fr/uploads/roadmap_1753091299_eee2c82f_.png)
+
 I also want to build a proper community around the project. Documentation that doesn't assume you're a mind reader, tutorials for puzzle creation, forums for troubleshooting, and maybe even workshops for schools wanting to get started.
 
 ## Final Thoughts
@@ -271,6 +281,8 @@ Would I do it again? Absolutely. But next time, I'd definitely start with more r
 This project taught me that sometimes the best learning comes from saying "yes" to something that seems just slightly impossible. The combination of technical challenges, project management, and seeing your work directly impact hundreds of people created a learning experience no classroom could replicate.
 
 The AlgoHive platform is now open-source and ready for anyone brave enough to host their own competition. Whether you're a school looking to engage students, a company wanting to assess technical skills, or just someone who loves competitive programming, the tools are there.
+
+![AlgoHive on GitHub](https://snapfilething.homeserver-ericp.fr/uploads/algohivegit_1753089763_08f45791_.png)
 
 I hope this post gives you a good overview of the process I went through to create my own coding competition platform, and maybe inspires you to tackle your own "impossible" project. If you have questions, want to contribute, or are planning something similar, feel free to reach out through my social media or GitHub. I'd love to help or hear about your experience!
 

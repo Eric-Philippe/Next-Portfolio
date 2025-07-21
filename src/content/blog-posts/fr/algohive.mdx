@@ -11,7 +11,7 @@ published: true
 
 Parfois, les meilleurs projets commencent avec le stress de quelqu’un d’autre. Imaginez : je suis en 4e année d’informatique sur le campus Ynov de Toulouse, tranquille, quand des membres du personnel viennent me voir avec cette tête si particulière.
 
-> “Hey Éric, on a besoin d’aide pour un concours de programmation destiné aux étudiants de 2e année. À la base, c’était national, mais maintenant chaque campus doit se débrouiller. Ah, et il nous reste un mois. Sans pression.”
+> “Hey Éric, on cherche une idée pour un concours de programmation destiné aux étudiants de 2e année. À la base, c’était national, mais maintenant chaque campus doit se débrouiller. Ah, et il nous reste un mois. Sans pression.”
 
 Mon cerveau a réagi au quart de tour : “Je pourrais recréer Advent of Code, non ? Non ?”
 
@@ -169,6 +169,12 @@ Ca m'a permis par exemple de faire une énigme où les étudiants devaient impl�
 
 ![Conway](https://snapfilething.homeserver-ericp.fr/uploads/gameoflife_1753081591_071ddbd0_.png)
 
+J'ai aussi pu implémenter un système de prévention à l'utilisation abusive de l'IA. J'ai fais en sorte que, dans les consignes de chaque puzzle, il y ait des prompts transparents, se déplacant dans le texte, pour éviter que les étudiants ne puissent simplement copier-coller les instructions dans une IA.
+
+![IA](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-07-21_at_11-38-29_prompt_injection_avertie_1753090717_666fcdbb_.png)
+
+> Solide solution pour calmer les ardeurs des étudiants professionnels du "Copier-Coller IA".
+
 ## Déploiement & Docker
 
 Dès le début, j’ai pensé au déploiement. Chaque service dans un conteneur Docker, avec des `docker-compose` différents pour le dev, le staging, et la prod. Je pouvais tester et mettre à jour sans crainte de casser la plateforme en live.
@@ -193,7 +199,7 @@ A ce moment-là, j’avais une plateforme prête à l’emploi. Le panneau d’a
 
 Le jour de la compétition arrive. Tout roule. Les étudiants se connectent, je surveille mes dashboards de près.
 
-Puis… BAM. 5 minutes après le lancement.
+Puis… BIM. 5 minutes après le lancement.
 
 > “On n’arrive plus à se connecter !”
 
@@ -202,6 +208,8 @@ Des erreurs, des requêtes refusées. Les `429 Too Many Requests` explosent sur 
 Le problème ? Ma propre protection contre le DDOS.
 
 Tous les étudiants étaient connectés sur le même réseau Wi-Fi… donc même IP. Et j’avais oublié ce détail. Résultat : ma limite de requêtes par IP bloquait tout le monde.
+
+![Too Many Requests](https://snapfilething.homeserver-ericp.fr/uploads/toomanyrequests_1753089657_3f433cfb_.png)
 
 Imaginez-moi, en SSH sur le serveur en prod, pendant une compétition en live, en train de modifier mes règles de rate limiting dans l’urgence pendant que 100 étudiants attendent. Pas idéal.
 
@@ -216,6 +224,10 @@ Après cette crise express, tout s’est bien déroulé. Les étudiants ont cod�
 Voir les étudiants utiliser une plateforme que j’avais bâtie de zéro… ça valait toutes les nuits blanches.
 
 Si je devais le refaire, je corrigerais ce problème avec un captcha sur la page de login, ou un système d’empreinte navigateur pour limiter les requêtes par utilisateur réel.
+
+Juste après la compétition, j'ai également pris la casquette de graphiste pour créer des visuels pour compiler les résultats des trois campus. J'en ai également profité pour faire un second visuel rassemblant les quelques statistiques du développement de la plateforme.
+
+![Statistics](https://snapfilething.homeserver-ericp.fr/uploads/visuals_1753088834_cd4bb3dd_.png)
 
 ## Ce que j’ai appris
 
@@ -265,6 +277,8 @@ Pour ma dernière année d’études, je veux en faire un vrai projet d’équip
 
 On prévoit plus d’événements dans les campus de Toulouse, peut-être ailleurs en France. L’objectif : créer un **réseau d’événements de prog compétitive** que les étudiants attendent avec impatience.
 
+![Roadmap](https://snapfilething.homeserver-ericp.fr/uploads/roadmap_1753091299_eee2c82f_.png)
+
 Je veux aussi bâtir une vraie communauté autour du projet : une doc claire, des tutos, un forum, et pourquoi pas des ateliers pour les campus qui veulent se lancer.
 
 ## En conclusion
@@ -274,6 +288,8 @@ Est-ce que je referais ce projet ? **Sans hésiter**. Mais avec un scope mieux d
 Cette expérience m’a prouvé que les meilleurs apprentissages naissent souvent d’un “oui” un peu fou. Les défis techniques, la gestion de projet, et l’impact direct sur des centaines de personnes… aucune salle de classe ne m’aurait appris ça.
 
 La plateforme AlgoHive est et restera **open-source**, prête à l’emploi pour celles et ceux qui veulent se lancer dans leur propre compétition de programmation. Que vous soyez une école, une entreprise ou juste un·e passionné·e de puzzles… tout est là.
+
+![AlgoHive on GitHub](https://snapfilething.homeserver-ericp.fr/uploads/algohivegit_1753089763_08f45791_.png)
 
 J’espère que ce post vous aura donné un bon aperçu du parcours, et peut-être l’envie de lancer **votre propre projet (presque) impossible**.
 
