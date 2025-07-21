@@ -6,3 +6,159 @@ tags: ["AdventOfCode", "Technology", "Programming", "Challenges"]
 author: "Éric Philippe"
 published: true
 ---
+
+# One Day, One Language: My Advent of Code 2022 Adventure
+
+Sometimes the best challenges start with casual conversations. Picture this: I'm hanging out with a friend when they casually mention this thing called [Advent of Code](https://adventofcode.com/2022). "It's like Christmas for programmers," they said. "Every day from December 1st to 25th, you get a new coding puzzle to solve."
+
+My brain immediately went: "I could make this more interesting, right? Right?"
+
+Spoiler alert: way more complicated than expected, but absolutely worth the coding marathon that followed.
+
+## What's Advent of Code Anyway?
+
+For those who haven't fallen down this particular rabbit hole yet, Advent of Code is basically a month-long programming festival. Every December, Eric Wastl releases daily coding challenges that start simple and progressively make you question your life choices. Each puzzle has two parts: the first is usually manageable, then the second part hits you with a plot twist that makes you realize you've been thinking about the problem all wrong.
+
+![AoC](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-07-21_at_15-25-44_advent_of_code_2022_1753104350_9adaa2ee_.png)
+
+The genius part? You can solve it in any programming language you want. Most people pick their favorite language and stick with it for the whole month.
+
+But where's the fun in that?
+
+## The "Simple" Idea That Wasn't
+
+After hearing about Advent of Code, my brain decided to be clever: "What if I used a different programming language every single day?"
+
+It seemed like the perfect opportunity to:
+
+- Learn new languages
+- Improve my skills across different paradigms
+- Have fun while challenging myself
+- Show off a little (let's be honest here)
+
+How hard could it be to learn 25 programming languages in 25 days while solving increasingly difficult puzzles?
+
+_Narrator voice: It was very hard._
+
+## The Planning Phase
+
+I started by listing languages I knew well, mixed with others I'd heard about but never touched. My logic was brilliantly flawed: "The first challenges are supposed to be easy, so I'll start with unfamiliar languages and save the ones I know for the hard stuff at the end."
+
+The problem? I only planned for maybe the first ten languages. I had no idea how I'd handle the remaining fifteen days. Classic programmer move: solve today's problem, worry about tomorrow's problems tomorrow.
+
+But wait, there's more! I also decided it would be "fun" (Why ??) to implement everything using TDD (Test-Driven Development). For those unfamiliar, TDD means writing tests before writing the code that makes them pass. It's a great practice for ensuring your code works as expected.
+
+![TDD](https://snapfilething.homeserver-ericp.fr/uploads/tdd_1753104566_74609228_.jpeg)
+
+Combining TDD with learning new languages daily? Pure genius, right? Right?
+
+## The First Half: False Confidence
+
+The first ten days went surprisingly well. I grabbed languages I knew – Python, JavaScript, Java – implemented simple unit tests, and wrote code that made them pass. The early puzzles were indeed easier, and I was feeling pretty good about myself.
+
+![First part](https://snapfilething.homeserver-ericp.fr/uploads/firstpart_1753104637_71a27a9a_.png)
+
+I even started sharing my daily progress on Reddit's official Advent of Code community. The response was encouraging! People were actually interested in my "one language per day" experiment. The community there is incredible – you'll find everything from elegant solutions to complete shenanigans like solving puzzles in the fewest lines possible or using completely obscure languages.
+
+![Reddit Comments](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-07-21_at_15-32-34_advent_of_code_1753104763_f5cdc713_.png)
+
+This was perfect timing because I was starting to run out of familiar languages. The Reddit community became my lifeline for discovering new languages and quick-start guides.
+
+## The Second Half: Reality Check
+
+Then December 15th hit, and everything changed.
+
+Not only were the challenges getting significantly harder, but I was now dealing with languages like F#, Q, D, C, and R. My daily routine became this beautiful mess:
+
+1. Check the day's challenge
+2. Spend 1+ hours installing and setting up whatever language I'd chosen
+3. Figure out how to implement unit tests in said language
+4. Actually solve the puzzle (the easy part, believe it or not)
+5. Share the solution on Reddit
+6. Repeat tomorrow with a completely different ecosystem
+
+![Timeline](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-07-21_at_15-21-26_excalidraw_1753104105_146fa0d4_.png)
+
+I was spending more time on language setup than actual problem-solving!
+
+> I made such a mess of my system that I ended up completely reinstalling it multiple times. Good times.
+
+At some point, looking at my list of languages, I realized I was accidentally working my way through the alphabet. F#, then G (Go), then... wait, was I really going to attempt the entire alphabet?
+
+## The WSL Horror Story
+
+Let me take a moment to appreciate how much chaos I created in my development environment. Picture this: every day, I'm installing new compilers, interpreters, package managers, and development tools. Some languages required specific versions of dependencies. Others had conflicting requirements.
+
+My poor WSL (Windows Subsystem for Linux) installation was like a digital hoarder's basement – layers upon layers of half-configured development environments, each leaving traces of its existence. By day 20, I wasn't even sure what was still working.
+
+![Broken WSL](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-07-21_at_15-41-23_excalidraw_1753105290_4985aba2_.png)
+
+The breaking point came when I tried to install some obscure language that required a specific version of a library that conflicted with something I'd installed for a previous day's language. The whole system became so unstable that I just... started over. Twice.
+
+## Beating the Final Boss
+
+The last few challenges were genuinely difficult. We're talking complex algorithms, data structures, and problems that make you stare at your screen wondering if you've forgotten how to code entirely.
+
+My strategy evolved: I'd first solve each puzzle in Python (my comfort zone) to understand the problem and validate my approach. Then I'd attempt to port the solution to whatever new language I was learning that day.
+
+This wasn't cheating – it was survival. The alternative was spending entire days stuck on both unfamiliar syntax AND complex algorithmic challenges simultaneously.
+
+When December 25th finally arrived and I posted my final solution, the sense of accomplishment was incredible. I'd actually done it – 25 days, 25 languages, 50 puzzle parts solved.
+
+## The Unexpected Recognition
+
+The best part? The community noticed. I ended up being selected as one of the 10 best repositories of the year on the Advent of Code subreddit. For my first year participating, that felt incredible!
+
+![Reddit](https://github.com/Eric-Philippe/Advent-Of-Code-2022/blob/master/img%20%F0%9F%96%BC%EF%B8%8F/aoc_2.png?raw=true)
+
+I was also proud of maintaining a perfect commit streak – every single day in December had at least one commit to my solutions repository. There's something satisfying about that green contribution graph.
+
+## What I Actually Learned
+
+Beyond the obvious ("don't install 25 different programming environments in one month"), this experiment taught me some valuable lessons:
+
+### Language Diversity is Beautiful
+
+Each language has its own philosophy and strengths. Some excel at mathematical operations, others at text processing. Some prioritize safety, others performance. Some make you write novels, others let you express complex ideas in a few lines.
+
+![Diversity](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-07-21_at_15-23-25_eric-philippe_advent-of-code-2022_this_is_a_multi-language_repository_for_my_solutions_to_the_advent_of_code_2022_puzzles_1753104230_b80da656_.png)
+
+### Setup Time is Real Time
+
+The most frustrating part wasn't the coding – it was the environment setup. Every language has its own ecosystem, package managers, testing frameworks, and quirks. Budget time for this, especially if you're exploring unfamiliar territory.
+
+### Community Matters
+
+The Advent of Code community on Reddit was invaluable. Not just for discovering new languages, but for motivation, debugging help, and celebrating small victories. Programming can be isolating; community makes it fun.
+
+### TDD + Learning = Complicated
+
+Trying to learn new syntax while also implementing proper testing practices was... ambitious. Both are valuable skills, but combining them created unnecessary cognitive load. Pick one learning objective at a time.
+
+## The Languages That Surprised Me
+
+Some languages I thought would be difficult turned out to be delightful (looking at you, Rust). Others I expected to be simple nearly broke my brain (I'm looking at you, Haskell).
+
+The functional programming languages pushed me to think differently about problem-solving. Languages with unique paradigms forced me to completely restructure my approach to certain problems.
+
+## Would I Do It Again?
+
+Absolutely, but with modifications. The "one language per day" constraint was both the challenge's strength and its weakness. It forced rapid exploration but prevented deep understanding.
+
+For future Advent of Code events, I might try:
+
+- Actually planning all 25 languages in advance (revolutionary, I know)
+
+...
+
+## Final Thoughts
+
+Advent of Code 2022 was more than just a coding challenge, it was a month-long exploration of programming languages, paradigms, and my own limits. I discovered languages I want to explore further, reinforced my appreciation for good tooling, and gained confidence in my ability to pick up new technologies quickly.
+
+Most importantly, it reminded me why I love programming in the first place. Every language is someone's attempt to make expressing ideas in code better, faster, or more elegant. Experiencing that diversity firsthand was genuinely inspiring.
+
+If you're considering participating in Advent of Code, I highly recommend it. Maybe don't go as overboard as I did with the language switching, but definitely embrace the challenge. The community is welcoming, the problems are well-crafted, and you'll learn more than you expect.
+
+And who knows? You might just find your new favorite programming language along the way.
+
+_Thinking about trying Advent of Code yourself? Feel free to reach out – I'd love to hear about your own adventures in daily coding challenges._

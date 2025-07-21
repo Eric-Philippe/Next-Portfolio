@@ -42,7 +42,7 @@
       "shortDesc": "Suivez mon parcours de création d'un home lab avec des services auto-hébergés, de l'automatisation, et plus encore. Comment j'ai acheté un serveur, configuré Proxmox, et créé un home lab avec Docker, Nextcloud, Jellyfin, et Home Assistant."
     },
     "techs": ["Proxmox", "Docker", "TrueNAS", "Grafana", "Prometheus"],
-    "link": "/blog/homelab",
+    "link": "https://github.com/Eric-Philippe/HomeServerConfig",
     "date": "2024/09",
     "tags": ["WebDev", "DevOps", "Other"],
     "priority": 300
