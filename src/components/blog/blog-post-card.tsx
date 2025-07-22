@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
+import { Link } from "~/i18n/navigation";
 import { motion } from "framer-motion";
 import { FiCalendar, FiClock, FiArrowUpRight, FiGlobe } from "react-icons/fi";
 import type { BlogPost } from "~/types/BlogPost";
@@ -9,6 +9,20 @@ import type { BlogPost } from "~/types/BlogPost";
 export function BlogPostCard({ post }: { post: BlogPost }) {
   const t = useTranslations("BlogPage");
   const locale = useLocale();
+
+  // Determine the correct URL based on current locale and availability
+  const getCorrectUrl = () => {
+    if (locale === "fr" && post.fr_url) {
+      return post.fr_url.replace(/^\/fr/, "");
+    } else if (locale === "en" && post.en_url) {
+      return post.en_url.replace(/^\/en/, "");
+    } else if (post.fr_url && locale === "fr") {
+      return post.fr_url.replace(/^\/fr/, "");
+    } else if (post.en_url) {
+      return post.en_url.replace(/^\/en/, "");
+    }
+    return `/blog/${post.slug}`;
+  };
 
   return (
     <motion.div
@@ -81,7 +95,7 @@ export function BlogPostCard({ post }: { post: BlogPost }) {
         {/* Actions */}
         <div className="flex items-center justify-between border-t border-slate-200/50 pt-4">
           <Link
-            href={`/blog/${post.slug}`}
+            href={getCorrectUrl()}
             className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 transition-colors duration-200 hover:text-blue-700"
           >
             {t("readMore")}
@@ -93,7 +107,8 @@ export function BlogPostCard({ post }: { post: BlogPost }) {
             <div className="flex gap-1">
               {post.en_url && (
                 <Link
-                  href={post.en_url}
+                  href={post.en_url.replace(/^\/en/, "")}
+                  locale="en"
                   className="flex h-7 w-7 items-center justify-center rounded-md bg-slate-100/70 text-sm transition-all duration-200 hover:scale-110 hover:bg-slate-200/70"
                   title="Available in English"
                 >
@@ -102,7 +117,8 @@ export function BlogPostCard({ post }: { post: BlogPost }) {
               )}
               {post.fr_url && (
                 <Link
-                  href={post.fr_url}
+                  href={post.fr_url.replace(/^\/fr/, "")}
+                  locale="fr"
                   className="flex h-7 w-7 items-center justify-center rounded-md bg-slate-100/70 text-sm transition-all duration-200 hover:scale-110 hover:bg-slate-200/70"
                   title="Available in French"
                 >

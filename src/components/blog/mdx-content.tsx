@@ -45,7 +45,12 @@ function useMDXComponent(code: string, theme: Theme = "light") {
 
       // Return a component that renders the parsed content
       const MDXComponent = () => (
-        <div className="prose prose-lg max-w-none">{content}</div>
+        <div
+          className="prose prose-lg max-w-none"
+          key={`mdx-${theme}-${code.length}`}
+        >
+          {content}
+        </div>
       );
 
       MDXComponent.displayName = "MDXComponent";
@@ -386,5 +391,9 @@ export function MDXContent({
     );
   }
 
-  return <MDXComponent />;
+  return (
+    <div key={`mdx-content-${theme}-${content?.length ?? 0}`}>
+      <MDXComponent />
+    </div>
+  );
 }

@@ -161,9 +161,9 @@ export const createMdxComponents = (theme: Theme = "light") => {
       <motion.h1
         className={`mt-12 mb-8 text-4xl font-light tracking-tight ${colors.text.primary} md:text-5xl`}
         initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
+        key={`h1-${theme}`}
       >
         {children}
       </motion.h1>
@@ -173,9 +173,9 @@ export const createMdxComponents = (theme: Theme = "light") => {
       <motion.h2
         className={`mt-12 mb-6 text-3xl font-light tracking-tight ${colors.text.primary} md:text-4xl`}
         initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
+        key={`h2-${theme}`}
       >
         {children}
       </motion.h2>
@@ -185,9 +185,9 @@ export const createMdxComponents = (theme: Theme = "light") => {
       <motion.h3
         className={`mt-8 mb-4 text-2xl font-medium ${colors.text.primary}`}
         initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
+        key={`h3-${theme}`}
       >
         {children}
       </motion.h3>
@@ -197,9 +197,9 @@ export const createMdxComponents = (theme: Theme = "light") => {
       <motion.p
         className={`mb-6 text-lg leading-relaxed ${colors.text.secondary}`}
         initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        viewport={{ once: true }}
+        key={`p-${theme}`}
       >
         {children}
       </motion.p>
@@ -209,9 +209,9 @@ export const createMdxComponents = (theme: Theme = "light") => {
       <motion.div
         className="relative my-8"
         initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
+        animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
+        key={`blockquote-${theme}`}
       >
         <div
           className={`rounded-2xl border ${colors.blockquote.border} ${colors.blockquote.background} p-6 backdrop-blur-md`}
@@ -250,9 +250,9 @@ export const createMdxComponents = (theme: Theme = "light") => {
       <motion.ul
         className="mb-6 list-none space-y-2"
         initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        viewport={{ once: true }}
+        key={`ul-${theme}`}
       >
         {children}
       </motion.ul>
@@ -262,9 +262,9 @@ export const createMdxComponents = (theme: Theme = "light") => {
       <motion.ol
         className="mb-6 list-none space-y-3"
         initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        viewport={{ once: true }}
+        key={`ol-${theme}`}
       >
         {children}
       </motion.ol>
