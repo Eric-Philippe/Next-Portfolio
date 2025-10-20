@@ -260,97 +260,108 @@ function parseInlineElements(
   const elements: React.ReactNode[] = [];
   let remaining = text;
   let elementKey = 0;
+
   while (remaining.length > 0) {
-    // Handle images
+    // Find all possible matches and their positions
     const imageRegex = /!\[([^\]]*)\]\(([^)]+)\)/;
-    const imageMatch = imageRegex.exec(remaining);
-    if (imageMatch && imageMatch.index === 0) {
-      elements.push(
-        <mdxComponents.img
-          key={elementKey++}
-          src={imageMatch[2]}
-          alt={imageMatch[1]}
-        />,
-      );
-      remaining = remaining.slice(imageMatch[0].length);
-      continue;
-    }
-
-    // Handle links
     const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/;
-    const linkMatch = linkRegex.exec(remaining);
-    if (linkMatch && linkMatch.index === 0) {
-      elements.push(
-        <mdxComponents.a key={elementKey++} href={linkMatch[2]}>
-          {linkMatch[1]}
-        </mdxComponents.a>,
-      );
-      remaining = remaining.slice(linkMatch[0].length);
-      continue;
-    } // Handle inline code
     const codeRegex = /`([^`]+)`/;
-    const codeMatch = codeRegex.exec(remaining);
-    if (codeMatch && codeMatch.index === 0) {
-      elements.push(
-        <mdxComponents.code key={elementKey++}>
-          {String(codeMatch[1])}
-        </mdxComponents.code>,
-      );
-      remaining = remaining.slice(codeMatch[0].length);
-      continue;
-    }
-
-    // Handle bold text
     const boldRegex = /\*\*(.*?)\*\*/;
-    const boldMatch = boldRegex.exec(remaining);
-    if (boldMatch && boldMatch.index === 0) {
-      elements.push(<strong key={elementKey++}>{boldMatch[1]}</strong>);
-      remaining = remaining.slice(boldMatch[0].length);
-      continue;
-    }
-
-    // Handle italic text
     const italicRegex = /\_(.*?)\_/;
-    const italicMatch = italicRegex.exec(remaining);
-    if (italicMatch && italicMatch.index === 0) {
-      elements.push(<em key={elementKey++}>{italicMatch[1]}</em>);
-      remaining = remaining.slice(italicMatch[0].length);
-      continue;
-    }
-
-    // Handle strikethrough text
     const strikethroughRegex = /~~(.*?)~~/;
-    const strikethroughMatch = strikethroughRegex.exec(remaining);
-    if (strikethroughMatch && strikethroughMatch.index === 0) {
-      elements.push(
-        <span key={elementKey++} className="line-through">
-          {strikethroughMatch[1]}
-        </span>,
-      );
-      remaining = remaining.slice(strikethroughMatch[0].length);
-      continue;
-    }
 
-    // Find next special character or end of string
-    const nextSpecial = remaining.search(/[`*!\[~]/);
-    if (nextSpecial === -1) {
-      // No more special characters, add remaining text
+    const imageMatch = imageRegex.exec(remaining);
+    const linkMatch = linkRegex.exec(remaining);
+    const codeMatch = codeRegex.exec(remaining);
+    const boldMatch = boldRegex.exec(remaining);
+    const italicMatch = italicRegex.exec(remaining);
+    const strikethroughMatch = strikethroughRegex.exec(remaining);
+
+    // Find the earliest match
+    const matches = [
+      { match: imageMatch, type: "image" },
+      { match: linkMatch, type: "link" },
+      { match: codeMatch, type: "code" },
+      { match: boldMatch, type: "bold" },
+      { match: italicMatch, type: "italic" },
+      { match: strikethroughMatch, type: "strikethrough" },
+    ].filter((m) => m.match !== null) as Array<{
+      match: RegExpExecArray;
+      type: string;
+    }>;
+
+    if (matches.length === 0) {
+      // No more special formatting, add remaining text
       if (remaining.trim()) {
         elements.push(remaining);
       }
       break;
-    } else if (nextSpecial > 0) {
-      // Add text before next special character
-      const textPart = remaining.slice(0, nextSpecial);
-      if (textPart.trim()) {
-        elements.push(textPart);
-      }
-      remaining = remaining.slice(nextSpecial);
-    } else {
-      // Special character at start but no match, add the character and continue
-      elements.push(remaining[0]);
-      remaining = remaining.slice(1);
     }
+
+    // Sort by index to find the earliest match
+    matches.sort((a, b) => a.match.index - b.match.index);
+    const earliest = matches[0];
+
+    if (!earliest) {
+      // No matches found (shouldn't happen due to check above, but TypeScript safety)
+      if (remaining.trim()) {
+        elements.push(remaining);
+      }
+      break;
+    }
+
+    // Add any text before the match
+    if (earliest.match.index > 0) {
+      const textBefore = remaining.slice(0, earliest.match.index);
+      if (textBefore) {
+        elements.push(textBefore);
+      }
+    }
+
+    // Process the match based on type
+    switch (earliest.type) {
+      case "image":
+        elements.push(
+          <mdxComponents.img
+            key={elementKey++}
+            src={earliest.match[2]}
+            alt={earliest.match[1]}
+          />,
+        );
+        break;
+      case "link":
+        elements.push(
+          <mdxComponents.a key={elementKey++} href={earliest.match[2]}>
+            {earliest.match[1]}
+          </mdxComponents.a>,
+        );
+        break;
+      case "code":
+        elements.push(
+          <mdxComponents.code key={elementKey++}>
+            {String(earliest.match[1])}
+          </mdxComponents.code>,
+        );
+        break;
+      case "bold":
+        elements.push(<strong key={elementKey++}>{earliest.match[1]}</strong>);
+        break;
+      case "italic":
+        elements.push(<em key={elementKey++}>{earliest.match[1]}</em>);
+        break;
+      case "strikethrough":
+        elements.push(
+          <span key={elementKey++} className="line-through">
+            {earliest.match[1]}
+          </span>,
+        );
+        break;
+    }
+
+    // Move past the matched text
+    remaining = remaining.slice(
+      earliest.match.index + earliest.match[0].length,
+    );
   }
 
   return elements;

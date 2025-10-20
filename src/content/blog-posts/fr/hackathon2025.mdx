@@ -1,0 +1,226 @@
+---
+title: "Hackathon 2025 : Comment j'ai organisé un événement pour 100+ étudiants en deux semaines"
+description: "L'histoire complète de l'organisation du Hackathon 2025, y compris la planification, l'exécution et les leçons apprises."
+date: "2025-10-24"
+tags: ["Hackathon", "Ynov", "Planification d'événements", "Gestion de projet"]
+author: "Éric Philippe"
+published: true
+---
+
+# Hackathon 2025 : comment j'ai organisé un événement pour 100+ étudiants en deux semaines
+
+Parfois, les meilleures opportunités se présentent sous la forme d'un défi complètement fou. Imaginez la scène : l'équipe pédagogique de mon école, Ynov Toulouse, vient me voir avec une proposition simple en apparence.
+
+> "Éric, ça te dirait d'organiser un hackathon pour nos étudiants de 4ème année ?"
+
+Spoiler : ce n'était pas si simple.
+
+Le "petit" détail qu'ils avaient omis : j'avais **moins de deux semaines** pour tout mettre en place. Pour **cinq filières différentes** (Développement, Cloud & Infra, IA/Data, IoT et Systèmes Embarqués). Et, cerise sur le gâteau, **sans connaître le nombre exact de participants**.
+
+Un défi impossible ? Peut-être. Mais j'ai dit oui.
+
+_Pour un récit similaire, consultez mon aventure sur la création d'une plateforme de défis de code :_ [J'ai créé et hébergé mon propre défi type Advent of Code](https://www.ericphlpp.com/fr/blog/algohive)
+
+## Un thème fédérateur et des objectifs clairs
+
+La première question à se poser : pourquoi ce hackathon ? Pour l'édition 2025, nous voulions mettre l'accent sur la pratique, la collaboration interdisciplinaire et l'accessibilité. Après de longues réflexions, le thème choisi fut... le baby-foot. Un sujet fédérateur, suffisamment ouvert pour laisser libre cours à l'imagination : automatisation, gestion de tournois, analyse de données, expérience utilisateur, etc.
+
+Les objectifs concrets étaient :
+
+- Permettre à des équipes pluridisciplinaires de prototyper une solution en 48 heures.
+- Offrir des ressources (matériel, templates, documentation) pour accélérer le démarrage.
+- Créer un cadre de notation transparent et simple.
+- Favoriser des échanges rapides entre participants et intervenants.
+
+## Préparer l'événement : l'art de réduire l'imprévu
+
+Avec un délai si court et une incertitude sur le nombre de participants, la préparation était la clé du succès. J'ai mis l'accent sur trois piliers : **clarté, répétabilité et autonomie**.
+
+- **Clarté** : Un cahier des charges pour chaque filière et une grille de notation expliquée à l'avance. Les équipes savaient exactement ce qu'on attendait d'elles.
+- **Répétabilité** : Un dépôt GitHub template rempli de ressources (starter-kit, README, exemples) pour que chaque équipe puisse "forker" et commencer en quelques minutes.
+- **Autonomie** : Un serveur Discord et une page Moodle pour la documentation et les FAQs, afin que les participants obtiennent des réponses sans attendre un intervenant.
+
+Le serveur Discord a été mis en place pour fluidifier la communication. Je voulais à tout prix éviter qu'une équipe soit bloquée en attendant qu'un intervenant passe dans sa salle. Grâce à Discord, les étudiants pouvaient poser leurs questions, recevoir de l'aide quasi instantanément et partager les réponses avec les autres.
+
+![Discord](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-10-20_at_13.47.24_1760960864_b5815abf_.png)
+
+### La notation : simple et transparente
+
+La grille de notation, sur 100 points, a été conçue pour valoriser le travail d'équipe et l'impact du projet :
+
+- Une note d'équipe sur 60 (fonctionnalité, innovation, présentation).
+- Une note "filière" pour le respect du cahier des charges technique.
+- Une note individuelle pour récompenser l'engagement personnel.
+
+Chaque équipe disposait de 15 minutes pour présenter son projet à un jury. L'idée n'était pas d'avoir une soutenance ultra-technique, mais d'apprendre à "vendre" un projet : son impact, sa valeur ajoutée et les contraintes rencontrées.
+
+![Grades](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-10-20_at_14.08.29_1760962122_2fbd24b8_.png)
+
+Pour une transparence totale, les étudiants avaient accès à un tableur Excel interactif avec la grille de notation complète, leur permettant de se préparer au mieux.
+
+### YLab : la logistique du matériel réinventée
+
+Il fallait un moyen de gérer le prêt de matériel aux équipes tout en gardant une trace des emprunts. Un tableur partagé ? Trop risqué avec plus de 100 étudiants. Une simple liste papier ? Trop fastidieux.
+
+J'ai donc développé en un week-end une plateforme interne baptisée **YLab**. Elle introduisait une mécanique de "budget" pour emprunter du matériel (Raspberry Pi, cartes programmables, etc.). Chaque demande devait être justifiée et était tracée, ce qui évitait les pertes et simplifiait la logistique.
+
+![Ylab](https://snapfilething.homeserver-ericp.fr/uploads/ylab_1760960272_ba77962e_.png)
+
+Développée avec Go pour le backend et React pour le frontend, YLab a été conçue pour être simple et intuitive. Le système de budget a permis aux équipes de gérer leurs ressources efficacement tout en personnalisant leur expérience.
+
+## Monter les équipes : une astuce simple et efficace
+
+Ne pas connaître la liste des participants à l'avance complique la formation d'équipes équilibrées. La solution ? Très "low-tech" : j'ai imprimé 150 étiquettes représentant les profils et les numéros d'équipe. Le matin de l'événement, chaque étudiant récupérait une étiquette avec sa filière et son numéro, ce qui permettait de former les groupes rapidement et d'ajuster les effectifs en direct.
+
+Cette méthode s'est avérée rapide, visuelle et flexible. On a pu créer des équipes mixtes tout en gardant une équipe "tampon" pour absorber les imprévus.
+
+![Etiquettes](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-10-20_at_13.50.25_1760961038_92ebc3eb_.png)
+
+## Le matériel et le POC (Proof of Concept)
+
+Pour rassurer tout le monde sur la faisabilité technique, j'ai réalisé un POC en deux soirées : un Arduino avec un capteur RFID, relié à un Raspberry Pi qui envoyait en temps réel (via WebSocket) les badges scannés vers une interface web simple en vanilla JS. Ce POC a servi de démonstration et d'exemple pour les équipes souhaitant intégrer de l'IoT.
+
+![POC](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-10-20_at_13.57.30_1760961471_17f5f62b_.png)
+
+Une petite mélodie se déclenchait lorsque le bon badge était scanné, ajoutant une touche ludique et interactive au projet.
+
+```cpp
+#include <MFRC522.h>
+#include <MFRC522Extended.h>
+#include <SPI.h>
+
+// Pin definitions
+#define SS_PIN 53
+#define RST_PIN 49     // Reset pin
+#define BUZZER_PIN 6  // Buzzer pin
+
+// Card UIDs
+#define HAPPY_CARD_UID "6A3C5473"
+#define UNHAPPY_CARD_UID "40547CA6"
+
+...
+
+  // Play appropriate sound based on card type
+  if(cardUID == HAPPY_CARD_UID) {
+    happyBeep();
+    Serial.println("Happy card detected!");
+  } else if(cardUID == UNHAPPY_CARD_UID) {
+    unhappyBeep();
+    Serial.println("Unhappy card detected!");
+  } else {
+    // Default beep for unknown cards
+    tone(BUZZER_PIN, 500, 200);
+    delay(250);
+    Serial.println("Unknown card detected!");
+  }
+
+  // Flush any pending serial data to prevent corruption
+  Serial.flush();
+
+  // Print UID to Serial with clear delimiters
+  Serial.print("Card UID: ");
+  for(byte i = 0; i < rfid.uid.size; i++){
+    if(rfid.uid.uidByte[i] < 0x10) Serial.print("0");
+    Serial.print(rfid.uid.uidByte[i], HEX);
+    if(i < rfid.uid.size - 1) Serial.print(":");
+  }
+
+  ...
+```
+
+### BabyfootSentimentsGPT
+
+Je tenais à offrir aux développeurs et data scientists un item supplémentaire dans le shop. Le dataset des parties de baby-foot contenait des "retours" des joueurs sur leur expérience.
+J'ai donc créé ma propre "IA" finement entraînée pour déterminer le sentiment derrière chaque retour:
+
+```json
+{
+  "comment": "Le baby-foot était super fun et bien organisé !",
+  "sentiment": "positif",
+  "confidence": 0.95
+}
+```
+
+Chaque équipe pouvait soit déployer cette API via un conteneur Docker, soit utiliser une version hébergée que j'avais mise en place. Les étudiants pouvaient ainsi "payer" une clé API dans YLab pour accéder au service et analyser les commentaires de leurs utilisateurs.
+Le code de l'API est resté dans une "boîte noire" pour que les participants soient obligés soit à le déployer, soit à utiliser la version hébergée, favorisant ainsi l'apprentissage par la pratique.
+
+![API](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-10-19_at_18.59.22_1760893227_f6637359_.png)
+
+## Le jour J : le calme avant la tempête
+
+Le jour J est arrivé. Les étudiants ont été accueillis et ont récupéré leurs étiquettes d'équipe. Bien sûr, le nombre de participants ne correspondait pas aux prévisions, mais le système d'étiquettes a permis de s'adapter rapidement et de suivre les effectifs en temps réel.
+
+### Apprendre à s'adresser à plus de 100 étudiants
+
+Parler devant plus de 100 personnes avec un micro, ce n'est pas mon habitat naturel. J'ai dû apprendre sur le tas à parler clairement, à articuler et à gérer mon stress. Habitué à être dans les coulisses, je me suis retrouvé propulsé sur le devant de la scène. Heureusement, la présentation s'est déroulée sans accroc et les étudiants se sont montrés étonnamment réceptifs.
+
+Après le brief, les équipes se sont regroupées et ont commencé à travailler. C'est à ce moment que j'ai découvert les joies de la répétition : passer d'une équipe à l'autre pour expliquer les mêmes consignes, encore et encore. Un bel exercice de patience !
+
+### YLab Drive : le service de livraison personnel
+
+Chaque équipe avait accès à YLab pour emprunter du matériel. Pour fluidifier le processus, j'ai décidé de gérer moi-même la livraison des premières commandes. Avec 12 équipes réparties dans 7 salles, j'ai fait quelques allers-retours. Cela a permis à tout le monde de démarrer sereinement pendant que je m'occupais de la logistique.
+
+### Les aléas du matériel
+
+Le matériel mis à disposition venait de l'école. L'inventaire confirmait son existence, mais pas son état de fonctionnement. Forcément, plusieurs équipes sont tombées sur du matériel défectueux. J'ai dû gérer ces situations en trouvant des solutions de rechange. Un défi supplémentaire, surtout que les Raspberry Pi n'avaient ni écran, ni clavier, et que le Wi-Fi du campus rendait les connexions SSH compliquées. J'aurais aimé pouvoir proposer plus de matériel, et de meilleure qualité.
+
+### Fin de la première journée
+
+Le reste de la journée s'est déroulé sans problème. Les étudiants ont bien avancé, et un rapide coup d'œil aux dépôts GitHub confirmait que certains avaient déjà des prototypes fonctionnels. C'était encourageant de voir de tels progrès en si peu de temps.
+
+## La deuxième journée : sprint final et présentations
+
+Le matin, j'ai organisé l'ordre de passage pour les présentations de l'après-midi, en donnant la priorité aux équipes ayant des impératifs. L'un des avantages de notre grille de notation était que les équipes pouvaient continuer à travailler sur leur projet même après leur passage.
+
+Cette journée m'a aussi donné le temps d'échanger avec les étudiants, de recueillir leurs premiers retours, de discuter de leurs avancées et de leurs difficultés. C'était très enrichissant. Pour beaucoup, c'était leur premier hackathon, et leur enthousiasme était communicatif.
+
+Des imprimantes 3D étaient également à disposition, et plusieurs équipes en ont profité pour prototyper des pièces sur mesure, ajoutant une dimension tangible à leurs projets.
+
+Voyant que leur budget sur YLab était large, les étudiants ont commencé à commander des articles plus "ludiques" comme des balles de baby-foot ou des gourdes, gardant ainsi un souvenir de l'événement.
+
+![Shop](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-10-20_at_14.13.02_1760962393_be2c0cf3_.png)
+
+Avec le recul, je me rends compte à quel point le travail en amont a permis de rendre l'expérience fluide. Très peu d'imprévus, une organisation rodée, et des étudiants qui ont pu se concentrer sur l'essentiel : leurs projets.
+
+### Les présentations orales
+
+L'oral visait à initier les étudiants à l'art de présenter un projet. Chaque équipe avait 15 minutes pour "vendre" sa solution en mettant en avant son impact, son innovation et sa valeur ajoutée.
+
+Cependant, beaucoup d'équipes, peu habituées à ce format, sont tombées dans le piège de la présentation purement technique. C'est un point à améliorer pour les futurs événements : mieux préparer les étudiants à cet exercice.
+
+### Notations et retours : l'heure du bilan
+
+Dès le lendemain, je me suis plongé dans la notation des projets. Je voulais que les retours soient aussi frais que possible. La moyenne générale de 15,75/20 fut une excellente surprise pour une première édition, et plusieurs projets se sont démarqués par leur originalité et leur qualité.
+
+Pour aller plus loin, j'ai créé un petit script en Python pour analyser les notes et générer des statistiques. Une conclusion amusante en est ressortie : plus de 75 % du top 20 était composé d'étudiants arrivés cette année. Une belle preuve que la motivation et une perspective nouvelle peuvent faire des merveilles.
+
+![Gardes](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-10-20_at_15.01.21_1760965340_72a83643_.png)
+
+Les retours des étudiants ont été extrêmement positifs. Ils ont salué l'organisation, les ressources et l'ambiance générale. Les quelques critiques concernaient la durée de l'événement, jugée trop courte, son positionnement en début d'année et les soucis de matériel. Des points qui, pour la plupart, ne dépendaient pas directement de l'organisation, mais que je garde en tête pour trouver des solutions pour les prochaines éditions.
+
+![Feedbacks](https://snapfilething.homeserver-ericp.fr/uploads/feedbacks_1760965433_44fd8145_.png)
+
+## Chiffres clés
+
+- **100+** étudiants
+- **12** équipes réparties dans **7** salles
+- **48** heures de hackathon
+- Plus de **90** commandes effectuées via YLab
+
+## Leçons apprises et perspectives
+
+1.  **La préparation est reine** : Anticiper les problèmes permet de rester serein le jour J.
+2.  **L'automatisation est votre meilleure amie** : Des outils comme YLab et les templates GitHub ont fait gagner un temps précieux.
+3.  **La communication est essentielle** : Le serveur Discord actif a évité bien des frustrations.
+4.  **Le matériel doit être fiable** : Pour les prochaines éditions, un audit complet du matériel serait préférable.
+5.  **Former à la présentation** : La technique seule ne suffit pas, les soft skills sont tout aussi cruciales.
+
+> La rédaction de ce bilan m'a permis de me rendre compte à quel point une organisation minutieuse et des outils adaptés ont rendu l'expérience simplement fluide, malgré toutes les contraintes.
+
+Cette opportunité m'a énormément appris sur la gestion d'événements à cette échelle. Il m'était encore inconcevable il y a quelques jours que je sois capable d'animer, présenter un événement pour plus de 100 personnes, gérer la logistique et assurer le bon déroulement de chaque étape.
+
+Si vous organisez un hackathon ou que vous voulez contribuer à YLab, [contactez-moi](https://www.ericphlpp.com/fr) j'adorerai échanger sur ces sujets.
+
+---
+
+_Merci aux intervenants, aux équipes et à l'école pour leur confiance. Organiser cet événement a été une sacrée aventure !_
