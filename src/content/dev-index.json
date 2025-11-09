@@ -64,22 +64,6 @@
     "priority": 850
   },
   {
-    "slug": "kairos-bot-reminder",
-    "en": {
-      "title": "Kairos - Bot Reminder",
-      "shortDesc": "Kairos is an international Discord bot that allows users worldwide to set reminders for important events, tasks, and deadlines. It also enables activity logging to better manage time."
-    },
-    "fr": {
-      "title": "Kairos - Bot Rappel",
-      "shortDesc": "Kairos est un bot Discord international permettant aux utilisateurs dans le monde entier de se lancer des rappels pour des événements importants, des tâches et des échéances. Il permet également de logger ses activités afin de mieux gérer son temps."
-    },
-    "techs": ["TypeScript", "MySQL", "UML"],
-    "link": "/kairos",
-    "date": "2024/01",
-    "tags": ["Bot"],
-    "priority": 650
-  },
-  {
     "slug": "julia-markdown-joy",
     "en": {
       "title": "Julia Markdown Joy",
@@ -190,6 +174,22 @@
     "date": "2024/02",
     "tags": ["WebDev", "DevOps"],
     "priority": 250
+  },
+  {
+    "slug": "chronosreminder",
+    "en": {
+      "title": "Chronos Reminder",
+      "shortDesc": "Chronos is your next intelligent reminder assistant. Create, manage, and organize reminders across Discord and multiple platforms with timezone support."
+    },
+    "fr": {
+      "title": "Chronos Reminder",
+      "shortDesc": "Chronos est votre prochain assistant de rappels intelligent. Créez, gérez et organisez des rappels sur Discord et sur plusieurs plateformes, avec prise en charge des fuseaux horaires."
+    },
+    "techs": ["Go", "React", "ShadCn", "TypeScript"],
+    "link": "https://chronosrmd.com",
+    "date": "2025/11",
+    "tags": ["WebDev", "DevOps", "Bot"],
+    "priority": 150
   },
   {
     "slug": "range-tes-morts",
