@@ -106,9 +106,9 @@ const CHALLENGES: Tags = {
   secGradientColor: "#f59e0b",
 };
 
-const MOBILES: Tags = {
-  name: "Mobiles",
-  type: "Mobiles",
+const MOBILE: Tags = {
+  name: "Mobile",
+  type: "Mobile",
   emoji: "📱",
   color: "rgb(14, 165, 233)",
   fadedColor: "rgba(14, 165, 233, 0.2)",
@@ -126,7 +126,7 @@ const OTHER: Tags = {
   secGradientColor: "#8b5cf6",
 };
 
-export const ALL_TAGS: Tags[] = [WEBDEV, DEVOPS, BOT, TOOLS, CHALLENGES, MOBILES, OTHER];
+export const ALL_TAGS: Tags[] = [WEBDEV, DEVOPS, BOT, TOOLS, CHALLENGES, MOBILE, OTHER];
 
 export const getTagsFromString = (tagType: DevProjectTags): Tags => {
   switch (tagType) {
@@ -140,8 +140,8 @@ export const getTagsFromString = (tagType: DevProjectTags): Tags => {
       return TOOLS;
     case "Challenges":
       return CHALLENGES;
-    case "Mobiles":
-      return MOBILES;
+    case "Mobile":
+      return MOBILE;
     case "Other":
       return OTHER;
     default:
