@@ -45,6 +45,22 @@
     "link": "https://github.com/Eric-Philippe/HomeServerConfig",
     "date": "2024/09",
     "tags": ["WebDev", "DevOps", "Other"],
+    "priority": 250
+  },
+    {
+    "slug": "whats-a-book",
+    "en": {
+      "title": "What's a Book ?",
+      "shortDesc": "A web application application for a fictive bookstore, with a full frontoffice for customers allowing them to browse, search, and filter books, and a backoffice for administrators to manage the bookstore."
+    },
+    "fr": {
+      "title": "What's a Book ?",
+      "shortDesc": "Une application web pour une librairie fictive, avec une implémentation complète du frontoffice pour les clients leur permettant de parcourir, rechercher et filtrer les livres, et un backoffice pour les administrateurs afin de gérer la librairie."
+    },
+    "techs": ["Symfony", "PHP", "Twig", "Bootstrap"],
+    "link": "/whatsabook",
+    "date": "2024/02",
+    "tags": ["WebDev", "DevOps"],
     "priority": 300
   },
   {
@@ -137,9 +153,9 @@
       "title": "Jaguar - Bot Webex",
       "shortDesc": "Jaguar bot est un chat bot sur Webex pour mon équipe dans mon entreprise afin de gérer automatiquement la gestion de la boîte mail de support, en fournissant un accès rapide aux informations et en automatisant les tâches."
     },
-    "techs": ["JavaScript", "SQLite"],
+    "techs": ["JavaScript", "PostgreSQL"],
     "link": "/jaguarwebex",
-    "date": "2024/08",
+    "date": "2025/08",
     "tags": ["Bot"],
     "priority": 975
   },
@@ -160,22 +176,6 @@
     "priority": 525
   },
   {
-    "slug": "whats-a-book",
-    "en": {
-      "title": "What's a Book ?",
-      "shortDesc": "A web application application for a fictive bookstore, with a full frontoffice for customers allowing them to browse, search, and filter books, and a backoffice for administrators to manage the bookstore."
-    },
-    "fr": {
-      "title": "What's a Book ?",
-      "shortDesc": "Une application web pour une librairie fictive, avec une implémentation complète du frontoffice pour les clients leur permettant de parcourir, rechercher et filtrer les livres, et un backoffice pour les administrateurs afin de gérer la librairie."
-    },
-    "techs": ["Symfony", "PHP", "Twig", "Bootstrap"],
-    "link": "/whatsabook",
-    "date": "2024/02",
-    "tags": ["WebDev", "DevOps"],
-    "priority": 250
-  },
-  {
     "slug": "chronosreminder",
     "en": {
       "title": "Chronos Reminder",
@@ -185,7 +185,7 @@
       "title": "Chronos Reminder",
       "shortDesc": "Chronos est votre prochain assistant de rappels intelligent. Créez, gérez et organisez des rappels sur Discord et sur plusieurs plateformes, avec prise en charge des fuseaux horaires."
     },
-    "techs": ["Go", "React", "ShadCn", "TypeScript"],
+    "techs": ["Golang", "React", "Redis", "TypeScript", "Docker"],
     "link": "https://chronosrmd.com",
     "date": "2025/11",
     "tags": ["WebDev", "DevOps", "Bot"],
@@ -270,5 +270,38 @@
     "date": "2025/06",
     "tags": ["DevOps", "Tools", "WebDev"],
     "priority": 400
+  },
+  {
+    "slug": "YLab",
+    "en": {
+      "title": "YLab",
+      "shortDesc": "YLab is a shop for event like Hackathons or Conventions to rent material like computers, network equipment, furniture, and more."
+    },
+    "fr": {
+      "title": "YLab",
+      "shortDesc": "YLab est une boutique pour des événements comme les hackathons ou les conventions pour louer du matériel comme des ordinateurs, du matériel réseau, des meubles, et plus encore."
+    },
+    "techs": ["Golang", "React", "TypeScript", "Docker"],
+    "link": "/blog/hackathon2025",
+    "date": "2025/10",
+    "tags": ["WebDev", "DevOps"],
+    "priority": 375
+
+  },
+  {
+    "slug": "EHub",
+    "en": {
+      "title": "EHub",
+      "shortDesc": "EHub is a ongoing project to create as many services on as many platforms as possible to create an ecosystem of interconnected services for personal and professional use."
+    },
+    "fr": {
+      "title": "EHub",
+      "shortDesc": "EHub est un projet en cours visant à créer autant de services que possible sur autant de plateformes que possible afin de créer un écosystème de services interconnectés pour un usage personnel et professionnel."
+    },
+    "techs": ["Kotlin", "Mobile", "SpringBoot", "Docker", "UIUX"],
+    "link": "https://github.com/Eric-Philippe/E-Hub-Mobile",
+    "date": "2025/09",
+    "tags": ["Mobile", "WebDev", "DevOps"],
+    "priority": 310
   }
 ]

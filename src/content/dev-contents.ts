@@ -30,6 +30,10 @@ const TECH_COLOR: Record<string, string> = {
   CSharp: "#239120",
   Julia: "#a270ba",
   Java: "#f89820",
+  Kotlin: "#563d7c",
+
+  // BACKEND FRAMEWORKS
+  SpringBoot: "#6db33f",
 
   // DATABASES
   PostgreSQL: "#336791",
@@ -47,7 +51,9 @@ const TECH_COLOR: Record<string, string> = {
 
   // OTHERS
   GoogleAPI: "#4285f4",
+  Mobile: "#5ac8fa",
   UML: "#f0f0f0",
+  UIUX: "#f0f0f0",
 };
 
 export const WEBDEV: Tags = {
@@ -100,6 +106,16 @@ const CHALLENGES: Tags = {
   secGradientColor: "#f59e0b",
 };
 
+const MOBILES: Tags = {
+  name: "Mobiles",
+  type: "Mobiles",
+  emoji: "📱",
+  color: "rgb(14, 165, 233)",
+  fadedColor: "rgba(14, 165, 233, 0.2)",
+  secColor: "#7dd3fc",
+  secGradientColor: "#0ea5e9",
+};
+
 const OTHER: Tags = {
   name: "Other",
   type: "Other",
@@ -110,7 +126,7 @@ const OTHER: Tags = {
   secGradientColor: "#8b5cf6",
 };
 
-export const ALL_TAGS: Tags[] = [WEBDEV, DEVOPS, BOT, TOOLS, CHALLENGES, OTHER];
+export const ALL_TAGS: Tags[] = [WEBDEV, DEVOPS, BOT, TOOLS, CHALLENGES, MOBILES, OTHER];
 
 export const getTagsFromString = (tagType: DevProjectTags): Tags => {
   switch (tagType) {
@@ -124,6 +140,8 @@ export const getTagsFromString = (tagType: DevProjectTags): Tags => {
       return TOOLS;
     case "Challenges":
       return CHALLENGES;
+    case "Mobiles":
+      return MOBILES;
     case "Other":
       return OTHER;
     default:

@@ -23,6 +23,7 @@ export type DevProjectTags =
   | "Tools"
   | "Challenges"
   | "DevOps"
+  | "Mobiles"
   | "Other";
 
 export type Tags = {
