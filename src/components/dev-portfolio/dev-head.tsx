@@ -1,10 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { Suspense, useState, useRef, useEffect, useCallback } from "react";
 import { ParticlesDesign } from "../common/particles";
 import { useTranslations } from "next-intl";
 import { getMyAge } from "~/lib/utils";
+import dynamic from "next/dynamic";
+import type { Application, SPEObject } from "@splinetool/runtime";
+import type { SplineEvent } from "@splinetool/runtime";
+import { useSounds } from "~/hooks/use-sounds";
+
+const Spline = dynamic(() => import("@splinetool/react-spline"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-full w-full items-center justify-center">
+      <div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />
+    </div>
+  ),
+});
 
 const DEV_COLOR_PALETTE = {
   first: "#9867f0",
@@ -23,6 +36,9 @@ const itemVariants = {
 export default function DevHead() {
   const [isOpen, setIsOpen] = useState(false);
   const t = useTranslations("DevPortfolio");
+  const splineRef = useRef<Application | null>(null);
+  const currentHoveredKeyRef = useRef<string | null>(null);
+  const { playPressSound, playReleaseSound } = useSounds();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -30,6 +46,113 @@ export default function DevHead() {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  const handleMouseHover = useCallback(
+    (e: SplineEvent) => {
+      const splineApp = splineRef.current;
+      if (!splineApp) return;
+
+      const targetName = e.target.name;
+
+      // Check if this is a key (not the base/platform/keyboard body)
+      const isKey =
+        targetName &&
+        targetName !== "body" &&
+        targetName !== "platform" &&
+        targetName !== "Keyboard" &&
+        targetName !== "keyboard";
+
+      // Only play sound when entering a NEW key (debounce)
+      if (isKey && currentHoveredKeyRef.current !== targetName) {
+        playPressSound();
+        currentHoveredKeyRef.current = targetName;
+      } else if (!isKey && currentHoveredKeyRef.current) {
+        // Mouse left a key and is now on the base/platform
+        playReleaseSound();
+        currentHoveredKeyRef.current = null;
+      }
+    },
+    [playPressSound, playReleaseSound],
+  );
+
+  const handleSplineInteractions = useCallback(() => {
+    const splineApp = splineRef.current;
+    if (!splineApp) return;
+
+    const isInputFocused = () => {
+      const activeElement = document.activeElement;
+      return (
+        activeElement &&
+        (activeElement.tagName === "INPUT" ||
+          activeElement.tagName === "TEXTAREA" ||
+          (activeElement as HTMLElement).isContentEditable)
+      );
+    };
+
+    splineApp.addEventListener("keyUp", () => {
+      if (!splineApp || isInputFocused()) return;
+      playReleaseSound();
+    });
+
+    splineApp.addEventListener("keyDown", (e: SplineEvent) => {
+      if (!splineApp || isInputFocused()) return;
+      if (
+        e.target.name &&
+        e.target.name !== "body" &&
+        e.target.name !== "platform"
+      ) {
+        playPressSound();
+      }
+    });
+
+    splineApp.addEventListener("mouseHover", handleMouseHover);
+  }, [playPressSound, playReleaseSound, handleMouseHover]);
+
+  const onSplineLoad = useCallback(
+    (splineApp: Application) => {
+      splineRef.current = splineApp;
+
+      // Try to find the keyboard object and animate it
+      // The object name depends on what's in your .spline file
+      const keyboard =
+        splineApp.findObjectByName("Keyboard") ??
+        splineApp.findObjectByName("keyboard") ??
+        splineApp.getAllObjects()[0];
+
+      if (keyboard) {
+        const baseRotationY = keyboard.rotation.y;
+        const amplitude = (30 * Math.PI) / 180; // 30 degrees in radians
+        const duration = 8000; // 8 seconds for full cycle
+        const startTime = Date.now();
+
+        const animate = () => {
+          const elapsed = Date.now() - startTime;
+          const progress = (elapsed % duration) / duration;
+          // Smooth sine wave oscillation
+          const oscillation = Math.sin(progress * Math.PI * 2);
+          keyboard.rotation.y = baseRotationY + oscillation * amplitude;
+
+          requestAnimationFrame(animate);
+        };
+
+        animate();
+      }
+
+      // Zoom out the camera - smaller on mobile, larger on desktop
+      const camera = splineApp.findObjectByName("Camera");
+      if (camera) {
+        const isMobile = window.innerWidth < 1024;
+        const scale = isMobile ? 4.0 : 1.9;
+        camera.scale.x = scale;
+        camera.scale.y = scale;
+        camera.scale.z = scale;
+      }
+
+      // Set up interactive event listeners
+      handleSplineInteractions();
+    },
+    [handleSplineInteractions],
+  );
 
   return (
     <div className="relative">
@@ -80,15 +203,15 @@ export default function DevHead() {
       </div>
 
       {/* Main hero content */}
-      <div className="relative z-20 flex items-center px-6 py-16 lg:py-20">
-        <div className="mx-auto text-center">
-          {/* DevPortfolio badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative mb-6 inline-flex items-center justify-center bg-transparent px-6 py-2"
-          >
+      <div className="relative z-20 px-6 py-16 lg:py-20">
+        {/* DevPortfolio badge - centered at top */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative mb-8 flex justify-center"
+        >
+          <div className="relative inline-flex items-center justify-center bg-transparent px-6 py-2">
             <div className="absolute inset-0 rounded-full border border-purple-500/30 bg-gradient-to-r from-purple-500/10 to-red-500/10 backdrop-blur-sm" />
             <span
               className="relative z-10 text-sm font-semibold lg:text-base"
@@ -101,47 +224,73 @@ export default function DevHead() {
             >
               DevPortfolio
             </span>
-          </motion.div>
+          </div>
+        </motion.div>
 
-          {/* Main title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mx-auto mt-6 max-w-4xl text-3xl leading-tight font-bold tracking-tight lg:text-6xl"
-          >
-            <span
-              style={{
-                background: `linear-gradient(to right, ${DEV_COLOR_PALETTE.third}, #000000, #000000)`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
+        {/* Main content: Title left, 3D model right */}
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+          {/* Text content - left side */}
+          <div className="flex-1 text-center lg:text-left">
+            {/* Main title */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="max-w-4xl text-3xl leading-tight font-bold tracking-tight lg:text-6xl"
             >
-              Éric PHILIPPE - {t("title-1")}
-            </span>{" "}
-            <span
-              style={{
-                background: `linear-gradient(to right, #000000, #000000, #000000, ${DEV_COLOR_PALETTE.third})`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              {t("title-2")}
-            </span>
-          </motion.h1>
+              <span
+                style={{
+                  background: `linear-gradient(to right, ${DEV_COLOR_PALETTE.third}, #000000, #000000)`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                Éric PHILIPPE - {t("title-1")}
+              </span>{" "}
+              <span
+                style={{
+                  background: `linear-gradient(to right, #000000, #000000, #000000, ${DEV_COLOR_PALETTE.third})`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                {t("title-2")}
+              </span>
+            </motion.h1>
 
-          {/* Description */}
+            {/* Description */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="mt-6 max-w-3xl leading-normal font-light text-gray-600 lg:text-xl"
+            >
+              {t("about", {
+                years: getMyAge(),
+              })}
+            </motion.div>
+          </div>
+
+          {/* 3D Keyboard Model - right side */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mx-auto mt-6 max-w-3xl leading-normal font-light text-gray-600 lg:text-xl"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.6 }}
+            className="relative flex-shrink-0"
           >
-            {t("about", {
-              years: getMyAge(),
-            })}
+            <Suspense
+              fallback={
+                <div className="flex h-[300px] w-[400px] items-center justify-center lg:h-[450px] lg:w-[600px]">
+                  <div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />
+                </div>
+              }
+            >
+              <div className="h-[350px] w-[400px] lg:h-[550px] lg:w-[700px]">
+                <Spline scene="/assets/keyboard.spline" onLoad={onSplineLoad} />
+              </div>
+            </Suspense>
           </motion.div>
         </div>
       </div>
