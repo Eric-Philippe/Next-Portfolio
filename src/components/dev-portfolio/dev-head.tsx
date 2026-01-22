@@ -11,8 +11,7 @@ import type { SplineEvent } from "@splinetool/runtime";
 import { useSounds } from "~/hooks/use-sounds";
 
 const Spline = dynamic(
-  () =>
-    import("@splinetool/react-spline").then((mod) => ({ default: mod.Spline })),
+  () => import("@splinetool/react-spline/dist/react-spline.js"),
   {
     ssr: false,
     loading: () => (
