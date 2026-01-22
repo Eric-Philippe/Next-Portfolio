@@ -5,22 +5,12 @@ import { Suspense, useState, useRef, useCallback } from "react";
 import { ParticlesDesign } from "../common/particles";
 import { useTranslations } from "next-intl";
 import { getMyAge } from "~/lib/utils";
-import dynamic from "next/dynamic";
 import type { Application } from "@splinetool/runtime";
 import type { SplineEvent } from "@splinetool/runtime";
 import { useSounds } from "~/hooks/use-sounds";
+import React from "react";
 
-const Spline = dynamic(
-  () => import("@splinetool/react-spline/dist/react-spline.js"),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="flex h-full w-full items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />
-      </div>
-    ),
-  },
-);
+const Spline = React.lazy(() => import("@splinetool/react-spline"));
 
 const DEV_COLOR_PALETTE = {
   first: "#9867f0",
