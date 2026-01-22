@@ -10,14 +10,17 @@ import type { Application } from "@splinetool/runtime";
 import type { SplineEvent } from "@splinetool/runtime";
 import { useSounds } from "~/hooks/use-sounds";
 
-const Spline = dynamic(() => import("@splinetool/react-spline"), {
-  ssr: false,
-  loading: () => (
-    <div className="flex h-full w-full items-center justify-center">
-      <div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />
-    </div>
-  ),
-});
+const Spline = dynamic(
+  () => import("@splinetool/react-spline").then((mod) => mod.default),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex h-full w-full items-center justify-center">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />
+      </div>
+    ),
+  },
+);
 
 const DEV_COLOR_PALETTE = {
   first: "#9867f0",
