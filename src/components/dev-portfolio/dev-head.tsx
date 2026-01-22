@@ -1,12 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Suspense, useState, useRef, useEffect, useCallback } from "react";
+import { Suspense, useState, useRef, useCallback } from "react";
 import { ParticlesDesign } from "../common/particles";
 import { useTranslations } from "next-intl";
 import { getMyAge } from "~/lib/utils";
 import dynamic from "next/dynamic";
-import type { Application, SPEObject } from "@splinetool/runtime";
+import type { Application } from "@splinetool/runtime";
 import type { SplineEvent } from "@splinetool/runtime";
 import { useSounds } from "~/hooks/use-sounds";
 
