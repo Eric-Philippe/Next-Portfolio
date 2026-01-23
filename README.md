@@ -1,8 +1,8 @@
 <div style="display: flex; align-items: center;">
     <img src="./img/icon.png" style="width: 50px; height: 50px; margin-right: 10px;">
-    <h1>Eric Philippe - Dev & Photo Portfolio | Blog</h1>
+    <h1>Eric Philippe - Dev, Photo, 3D Printing Portfolio | Blog</h1>
 </div>
-
+    
 This is my personal portfolio and blog, showcasing my work in web development and photography. The site is built with Next.js, leveraging its powerful features for a seamless user experience.
 
 [Check out my portfolio](https://ericphilippe.com)
@@ -11,6 +11,7 @@ This is my personal portfolio and blog, showcasing my work in web development an
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [About the Project](#about-the-project)
 - [Technologies](#technologies)
 - [Continuous Integration](#continuous-integration)
