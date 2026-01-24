@@ -36,7 +36,7 @@ export default function DevHead() {
   // Function to calculate responsive camera scale
   const getCameraScale = useCallback(() => {
     const width = window.innerWidth;
-    
+
     if (width < 640) {
       return 4.5; // Small mobile (xs)
     } else if (width < 768) {
