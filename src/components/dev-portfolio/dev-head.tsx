@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Suspense, useState, useRef, useCallback } from "react";
+import { Suspense, useState, useRef, useCallback, useEffect } from "react";
 import { ParticlesDesign } from "../common/particles";
 import { useTranslations } from "next-intl";
 import { getMyAge } from "~/lib/utils";
@@ -32,6 +32,44 @@ export default function DevHead() {
   const splineRef = useRef<Application | null>(null);
   const currentHoveredKeyRef = useRef<string | null>(null);
   const { playPressSound, playReleaseSound } = useSounds();
+
+  // Function to calculate responsive camera scale
+  const getCameraScale = useCallback(() => {
+    const width = window.innerWidth;
+    
+    if (width < 640) {
+      return 4.5; // Small mobile (xs)
+    } else if (width < 768) {
+      return 4.0; // Mobile (sm)
+    } else if (width < 1024) {
+      return 3.2; // Tablet (md)
+    } else if (width < 1280) {
+      return 2.4; // Small desktop (lg)
+    } else if (width < 1536) {
+      return 2.0; // Desktop (xl)
+    } else {
+      return 1.8; // Large desktop (2xl+)
+    }
+  }, []);
+
+  // Update camera scale dynamically on window resize
+  useEffect(() => {
+    const updateCameraScale = () => {
+      const splineApp = splineRef.current;
+      if (!splineApp) return;
+
+      const camera = splineApp.findObjectByName("Camera");
+      if (camera) {
+        const scale = getCameraScale();
+        camera.scale.x = scale;
+        camera.scale.y = scale;
+        camera.scale.z = scale;
+      }
+    };
+
+    window.addEventListener("resize", updateCameraScale);
+    return () => window.removeEventListener("resize", updateCameraScale);
+  }, [getCameraScale]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -106,7 +144,6 @@ export default function DevHead() {
       splineRef.current = splineApp;
 
       // Try to find the keyboard object and animate it
-      // The object name depends on what's in your .spline file
       const keyboard =
         splineApp.findObjectByName("Keyboard") ??
         splineApp.findObjectByName("keyboard") ??
@@ -131,11 +168,10 @@ export default function DevHead() {
         animate();
       }
 
-      // Zoom out the camera - smaller on mobile, larger on desktop
+      // Zoom out the camera - responsive scaling based on viewport width
       const camera = splineApp.findObjectByName("Camera");
       if (camera) {
-        const isMobile = window.innerWidth < 1024;
-        const scale = isMobile ? 4.0 : 1.9;
+        const scale = getCameraScale();
         camera.scale.x = scale;
         camera.scale.y = scale;
         camera.scale.z = scale;
@@ -144,7 +180,7 @@ export default function DevHead() {
       // Set up interactive event listeners
       handleSplineInteractions();
     },
-    [handleSplineInteractions],
+    [handleSplineInteractions, getCameraScale],
   );
 
   return (

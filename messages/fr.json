@@ -2,7 +2,10 @@
   "Header": {
     "tech": "Tech",
     "photo": "Photo",
-    "blog": "Blog"
+    "blog": "Blog",
+    "3dprinting": "Impression 3D",
+    "currentWorld": "Actuellement sur",
+    "discoverWorlds": "Découvrir mes univers"
   },
   "DevPortfolio": {
     "title-1": "Développeur",
