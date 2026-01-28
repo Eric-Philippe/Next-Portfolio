@@ -18,7 +18,7 @@ interface PhotoHeadProps {
   secondColor?: string;
 }
 
-export default function PhotoHead({
+export function PhotoHead({
   firstColor = PHOTO_COLOR_PALETTE.primary,
   secondColor = PHOTO_COLOR_PALETTE.secondary,
 }: PhotoHeadProps) {

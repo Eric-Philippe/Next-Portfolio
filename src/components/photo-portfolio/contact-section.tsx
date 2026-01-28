@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { EMAIL } from "~/lib/utils";
 import ContactForm from "../common/contact-form";
 
-export default function ContactSection() {
+export function ContactSection() {
   const t = useTranslations("PhotoPortfolio.Contact");
 
   return (

@@ -7,6 +7,61 @@
     "currentWorld": "Actuellement sur",
     "discoverWorlds": "Découvrir mes univers"
   },
+  "printing": {
+    "meta": {
+      "title": "Portfolio Impression 3D",
+      "description": "Découvrez mes projets d'impression 3D, des conceptions fonctionnelles aux créations artistiques"
+    },
+    "title": "Impression 3D",
+    "subtitle": "Donner vie aux idées, couche par couche. Explorer l'intersection du design, de l'ingénierie et de la créativité à travers la fabrication additive.",
+    "workbench": {
+      "title": "L'Établi",
+      "subtitle": "Outils, machines et matériaux qui alimentent mon parcours en impression 3D",
+      "software": "Logiciels",
+      "materials": "Matériaux"
+    },
+    "printers": {
+      "x1carbon": {
+        "description": "Imprimante phare haute vitesse et haute précision pour les projets exigeants",
+        "feature1": "Multi-matériaux",
+        "feature2": "Scan Lidar"
+      },
+      "h2c": {
+        "description": "Cheval de bataille fermé pour des impressions fiables et de qualité",
+        "feature1": "Chambre fermée",
+        "feature2": "Compatible AMS"
+      },
+      "a1mini": {
+        "description": "Imprimante compacte parfaite pour les prototypes rapides et les petites pièces",
+        "feature1": "Design compact",
+        "feature2": "Installation rapide"
+      }
+    },
+    "workspace": {
+      "title": "L'Atelier",
+      "description": "Là où les idées deviennent réalité. Un espace dédié au design, à l'impression et au post-traitement"
+    },
+    "makerworld": {
+      "title": "Plus sur Makerworld",
+      "description": "Découvrez d'autres impressions, téléchargez des modèles et explorez la collection complète de mes travaux d'impression 3D",
+      "cta": "Visiter Mon Profil"
+    },
+    "projects": {
+      "title": "Projets",
+      "subtitle": "Une collection d'impressions fonctionnelles, de designs créatifs et d'expériences d'ingénierie",
+      "empty": "Projets à venir. Revenez pour les mises à jour."
+    },
+    "project": {
+      "back": "Retour Impression 3D",
+      "printer": "Imprimante",
+      "materials": "Matériaux",
+      "printTime": "Temps d'impression",
+      "filament": "Filament utilisé",
+      "download": "Télécharger le modèle 3D",
+      "viewOnMakerworld": "Voir sur Makerworld",
+      "gallery": "Galerie"
+    }
+  },
   "DevPortfolio": {
     "title-1": "Développeur",
     "title-2": "FullStack",
@@ -196,6 +251,10 @@
       "photo": {
         "title": "Photographie",
         "description": "Explorez mon travail photographique créatif et mes histoires visuelles"
+      },
+      "3dprinting": {
+        "title": "Impression 3D",
+        "description": "Découvrez mes projets et créations en impression 3D"
       },
       "blog": {
         "title": "Blog",

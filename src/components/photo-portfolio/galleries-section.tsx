@@ -12,7 +12,7 @@ interface Props {
   galleries: GalleryData[];
 }
 
-export default function GalleriesSection({ galleries }: Props) {
+export function GalleriesSection({ galleries }: Props) {
   const [viewMode, setViewMode] = useState<"grid" | "masonry">("masonry");
   const [sortBy, setSortBy] = useState<"date" | "featured" | "category">(
     "featured",

@@ -41,7 +41,7 @@ function RotatingCanon800d() {
   );
 }
 
-export default function SetupSection() {
+export function SetupSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeCategory, setActiveCategory] = useState(0);
   const [isMobile, setIsMobile] = useState(false);

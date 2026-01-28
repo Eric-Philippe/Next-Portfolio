@@ -8,6 +8,7 @@ const staticRoutes = [
   "/blog",
   "/photo",
   "/tech",
+  "/3dprinting",
 ];
 
 interface BlogPost {

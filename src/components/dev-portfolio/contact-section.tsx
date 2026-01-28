@@ -7,7 +7,7 @@ import Footer from "../common/footer";
 import ContactForm from "../common/contact-form";
 import { useTranslations } from "next-intl";
 
-export default function ContactSection() {
+export function ContactSection() {
   const [isHovered, setIsHovered] = useState(false);
   const t = useTranslations("DevPortfolio.Contact");
 

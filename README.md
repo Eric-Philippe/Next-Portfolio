@@ -3,11 +3,13 @@
     <h1>Eric Philippe - Dev, Photo, 3D Printing Portfolio | Blog</h1>
 </div>
     
-This is my personal portfolio and blog, showcasing my work in web development and photography. The site is built with Next.js, leveraging its powerful features for a seamless user experience.
+This is my personal portfolio and blog, showcasing my work in web development, photography, and 3D printing. The site is built with Next.js, leveraging its powerful features for a seamless user experience.
 
-[Check out my portfolio](https://ericphilippe.com)
+[Check out my portfolio](https://ericphlpp.com)
 
 ![Portfolio Screenshot](./img/hero.png)
+
+> As of February 2026, the portfolio saw a massive cleanup and added the 3D printing section, showcasing my projects and designs in the 3D printing space !
 
 ## Table of Contents
 

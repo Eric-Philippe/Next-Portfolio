@@ -11,7 +11,6 @@ import Image from "next/image";
 import { LanguageSwitcher } from "./language-switcher";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "~/i18n/navigation";
-import type { ReactNode } from "react";
 import { useState, useRef, useEffect } from "react";
 
 interface HeaderProps {
@@ -46,7 +45,6 @@ function WorldsNavigation({
   const t = useTranslations("Header");
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const pathname = usePathname();
 
   const worlds: World[] = [
     {
@@ -67,7 +65,7 @@ function WorldsNavigation({
       key: "3dprinting",
       href: "/3dprinting",
       icon: FaCube,
-      color: "#ff6b6b",
+      color: "#ab5323",
       labelKey: "3dprinting",
     },
     {
@@ -80,7 +78,7 @@ function WorldsNavigation({
   ];
 
   const currentWorldData =
-    worlds.find((w) => w.key === currentWorld) || worlds[0]!;
+    worlds.find((w) => w.key === currentWorld) ?? worlds[0]!;
   const isDarkMode = currentWorld === "photo";
 
   useEffect(() => {

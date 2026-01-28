@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
-export default function SkillsSection() {
+export function SkillsSection() {
   const t = useTranslations("DevPortfolio.Skills");
 
   const technicalSkills = [

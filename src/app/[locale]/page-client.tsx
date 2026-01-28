@@ -15,6 +15,7 @@ import { Link } from "~/i18n/navigation";
 import { LanguageSwitcher } from "~/components/common/language-switcher";
 import URLS from "~/content/URLs";
 import { getRandomYearDisplay } from "~/lib/utils";
+import { FaCube } from "react-icons/fa";
 
 interface LinkCardProps {
   href: string;
@@ -165,7 +166,7 @@ function StatusBadge({ text }: StatusBadgeProps) {
   );
 }
 
-export function LinkTree() {
+export default function HomePageClient() {
   const t = useTranslations("LinkTree");
 
   const portfolioLinks = [
@@ -186,6 +187,17 @@ export function LinkTree() {
       delay: 0.2,
     },
     {
+      href: "/3dprinting",
+      title: t("portfolio.3dprinting.title"),
+      description: t("portfolio.3dprinting.description"),
+      icon: <FaCube className="h-6 w-6 text-amber-400" />,
+      gradient: "bg-gradient-to-br from-purple-500/20 to-indigo-500/20",
+      delay: 0.3,
+    },
+  ];
+
+  const externalLinks = [
+    {
       href: "/blog",
       title: t("portfolio.blog.title"),
       description: t("portfolio.blog.description"),
@@ -193,9 +205,6 @@ export function LinkTree() {
       gradient: "bg-gradient-to-br from-green-500/20 to-teal-500/20",
       delay: 0.3,
     },
-  ];
-
-  const externalLinks = [
     {
       href: URLS.GITHUB,
       title: t("external.github.title"),
@@ -305,9 +314,9 @@ export function LinkTree() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mx-auto max-w-2xl"
+          className="mx-auto mb-12 max-w-4xl"
         >
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-3">
             {externalLinks.map((link) => (
               <LinkCard key={link.href} {...link} />
             ))}

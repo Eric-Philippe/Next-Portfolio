@@ -11,7 +11,7 @@ interface ProjectsSectionProps {
   locale: string;
 }
 
-export default function ProjectsSection({
+export function ProjectsSection({
   devProjects,
   locale: _locale,
 }: ProjectsSectionProps) {

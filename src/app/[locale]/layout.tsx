@@ -7,7 +7,7 @@ import "~/styles/globals.css";
 export const metadata: Metadata = {
   title: "Eric Philippe - Portfolio",
   description:
-    "Full Stack Developer & Photographer Portfolio - Modern web development and creative photography",
+    "Developer, Photographer, Maker with 3D Printing and blogging about technology and programming.",
   icons: [{ rel: "icon", url: "/favicon.svg" }],
 };
 

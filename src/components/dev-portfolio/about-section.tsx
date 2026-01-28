@@ -17,7 +17,7 @@ import { getMyAge } from "~/lib/utils";
 import { EMAIL } from "~/lib/utils";
 import URLS from "~/content/URLs";
 
-export default function AboutSection() {
+export function AboutSection() {
   const [isHovered, setIsHovered] = useState(false);
   const t = useTranslations("DevPortfolio.About");
 
@@ -293,7 +293,7 @@ export default function AboutSection() {
                         {/* CV Preview */}
                         <div className="relative mb-6">
                           <Image
-                            src="/CV.png"
+                            src="/images/dev/CV.png"
                             alt="CV Preview"
                             width={300}
                             height={400}

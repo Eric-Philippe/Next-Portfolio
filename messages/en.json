@@ -7,6 +7,61 @@
     "currentWorld": "Currently in",
     "discoverWorlds": "Discover my worlds"
   },
+  "printing": {
+    "meta": {
+      "title": "3D Printing Portfolio",
+      "description": "Explore my 3D printing projects, from functional designs to creative builds"
+    },
+    "title": "3D Printing",
+    "subtitle": "Bringing ideas to life, layer by layer. Exploring the intersection of design, engineering, and creativity through additive manufacturing.",
+    "workbench": {
+      "title": "The Workbench",
+      "subtitle": "Tools, machines, and materials that power my 3D printing journey",
+      "software": "Software",
+      "materials": "Materials"
+    },
+    "printers": {
+      "x1carbon": {
+        "description": "High-speed, high-precision flagship printer for demanding projects",
+        "feature1": "Multi-material",
+        "feature2": "Lidar scanning"
+      },
+      "h2c": {
+        "description": "Enclosed workhorse for reliable, quality prints",
+        "feature1": "Enclosed chamber",
+        "feature2": "AMS compatible"
+      },
+      "a1mini": {
+        "description": "Compact printer perfect for quick prototypes and small parts",
+        "feature1": "Compact design",
+        "feature2": "Fast setup"
+      }
+    },
+    "workspace": {
+      "title": "The Workshop",
+      "description": "Where ideas become reality. A dedicated space for design, printing, and post-processing"
+    },
+    "makerworld": {
+      "title": "More on Makerworld",
+      "description": "Discover additional prints, download models, and explore the full collection of my 3D printing work",
+      "cta": "Visit My Profile"
+    },
+    "projects": {
+      "title": "Projects",
+      "subtitle": "A collection of functional prints, creative designs, and engineering experiments",
+      "empty": "Projects coming soon. Check back for updates."
+    },
+    "project": {
+      "back": "Back to 3D Printing",
+      "printer": "Printer",
+      "materials": "Materials",
+      "printTime": "Print Time",
+      "filament": "Filament Used",
+      "download": "Download 3D Model",
+      "viewOnMakerworld": "View on Makerworld",
+      "gallery": "Gallery"
+    }
+  },
   "DevPortfolio": {
     "title-1": "Software",
     "title-2": "Engineer",
@@ -195,6 +250,10 @@
       "photo": {
         "title": "Photography",
         "description": "Explore my creative photography work and visual stories"
+      },
+      "3dprinting": {
+        "title": "3D Printing",
+        "description": "Check out my 3D printing projects and designs"
       },
       "blog": {
         "title": "Blog",

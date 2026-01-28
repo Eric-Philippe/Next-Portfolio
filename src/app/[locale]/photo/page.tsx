@@ -1,5 +1,5 @@
-import { getAllPhotoGalleries } from "~/lib/photo-utils";
 import PhotoGalleriesPageClient from "./page-client";
+import { getAllPhotoGalleries } from "~/lib/photo-utils";
 
 interface Props {
   params: Promise<{

@@ -26,7 +26,7 @@ const itemVariants = {
   closed: { opacity: 0, y: 20 },
 };
 
-export default function DevHead() {
+export function DevHead() {
   const [isOpen, setIsOpen] = useState(false);
   const t = useTranslations("DevPortfolio");
   const splineRef = useRef<Application | null>(null);
@@ -317,7 +317,7 @@ export default function DevHead() {
               }
             >
               <div className="h-[350px] w-[400px] lg:h-[550px] lg:w-[700px]">
-                <Spline scene="/assets/keyboard.spline" onLoad={onSplineLoad} />
+                <Spline scene="/spline/keyboard.spline" onLoad={onSplineLoad} />
               </div>
             </Suspense>
           </motion.div>
