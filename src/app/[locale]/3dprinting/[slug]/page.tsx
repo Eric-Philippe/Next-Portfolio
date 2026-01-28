@@ -1,7 +1,5 @@
 /**
  * 3D Printing Project Detail Page
- * Individual project page with hero image, details, and content
- * Premium glassmorphism design consistent with portfolio
  */
 
 import type { Metadata } from "next";
@@ -14,6 +12,10 @@ import {
   getPrintingPostBySlug,
   getAllPrintingSlugs,
 } from "~/lib/printing-utils";
+import {
+  THREE_D_PRINTING_PORTFOLIO_FIRST_COLOR,
+  THREE_D_PRINTING_PORTFOLIO_SECOND_COLOR,
+} from "~/content/3dprinting-content";
 
 // Page props interface
 interface ProjectPageProps {
@@ -79,7 +81,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <>
-      <Header />
+      <Header
+        firstColor={THREE_D_PRINTING_PORTFOLIO_FIRST_COLOR}
+        secondColor={THREE_D_PRINTING_PORTFOLIO_SECOND_COLOR}
+      />
 
       <main className="min-h-screen bg-slate-950">
         {/* Hero Section */}
@@ -217,9 +222,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <section className="px-6 py-16">
           <div className="mx-auto max-w-4xl">
             {/* MDX Content */}
-            <article className="prose prose-invert prose-lg prose-slate prose-headings:font-serif prose-headings:font-light prose-headings:text-white/90 prose-p:text-slate-300/80 prose-p:font-light prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white/90 prose-code:text-cyan-300 prose-code:bg-slate-800/50 prose-code:px-2 prose-code:py-0.5 prose-code:rounded-lg prose-pre:bg-slate-800/50 prose-pre:border prose-pre:border-white/10 prose-pre:rounded-[1rem] max-w-none">
-              <MDXRemote source={project.content} />
-            </article>
+            <article className="prose prose-invert prose-lg prose-slate prose-headings:font-serif prose-headings:font-light prose-headings:text-white/90 prose-p:text-slate-300/80 prose-p:font-light prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white/90 prose-code:text-cyan-300 prose-code:bg-slate-800/50 prose-code:px-2 prose-code:py-0.5 prose-code:rounded-lg prose-pre:bg-slate-800/50 prose-pre:border prose-pre:border-white/10 prose-pre:rounded-[1rem] max-w-none"></article>
 
             {/* Download button if available */}
             {project.downloadUrl && (

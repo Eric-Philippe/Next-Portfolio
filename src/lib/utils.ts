@@ -96,8 +96,6 @@ const formatSingleDate = (date: string, months: string[]) => {
 export const formatDateFromString = (date: string, locale: string) => {
   const months = locale === "fr" ? FR_MONTHS : EN_MONTHS;
 
-  console.log(date);
-
   // Handle date ranges (e.g., "2023/05 - 2024/03")
   if (date.includes(" - ")) {
     const [startDate, endDate] = date.split(" - ");
