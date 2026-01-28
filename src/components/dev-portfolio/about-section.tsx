@@ -39,7 +39,7 @@ export function AboutSection() {
       description: t("ynov.description"),
       color1: "#f9ce22",
       color2: "#ed4e50",
-      percentage: 53,
+      percentage: 80,
       icon: MdSchool,
     },
     {
@@ -49,7 +49,7 @@ export function AboutSection() {
       description: t("adp.description"),
       color1: "#ffac1d",
       color2: "#ed4e50",
-      percentage: 75,
+      percentage: 80,
       icon: MdWork,
     },
     {
