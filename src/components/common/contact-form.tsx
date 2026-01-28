@@ -25,7 +25,7 @@ interface FormData {
 }
 
 interface Props {
-  origin: "DEV" | "PHOTO" | "BLOG";
+  origin: "DEV" | "PHOTO" | "BLOG" | "3DPRINT";
 }
 
 export default function ContactForm({ origin }: Props) {

@@ -9,3 +9,4 @@ export { PrintingProjectCard } from "./project-card";
 export { ProjectsSection } from "./projects-section";
 export { FilamentBandeau } from "./filament-bandeau";
 export { MakerworldSection } from "./makerworld-section";
+export { ContactSection } from "./contact-section";

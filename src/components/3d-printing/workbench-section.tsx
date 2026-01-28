@@ -40,34 +40,6 @@ interface PrinterHotspot {
   position: { x: number; y: number };
 }
 
-const printerHotspots: PrinterHotspot[] = [
-  {
-    id: "printer-1",
-    name: "Bambu Lab X1 Carbon",
-    description: "High-speed CoreXY printer with multi-color capability",
-    specs: ["500mm/s max speed", "0.05mm layer height", "AMS multi-color"],
-    position: { x: 28, y: 33 },
-  },
-  {
-    id: "printer-2",
-    name: "Bambu Lab H2C",
-    description: "Enclosed high-performance multi-material printer",
-    specs: [
-      "6 colors simultaneously",
-      "325 mm³ print volume",
-      "1000mm/s max speed",
-    ],
-    position: { x: 53, y: 50 },
-  },
-  {
-    id: "printer-3",
-    name: "Bambu Lab A1 Mini",
-    description: "Compact printer for quick prototyping and small parts",
-    specs: ["250mm/s max speed", "0.1mm layer height", "Heated bed"],
-    position: { x: 82, y: 75 },
-  },
-];
-
 // Animation variants for staggered children
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -236,6 +208,42 @@ export function WorkspaceSection() {
   const [stats, setStats] = useState<PrinterStats | null>(null);
   const [statsLoading, setStatsLoading] = useState(true);
 
+  const printerHotspots: PrinterHotspot[] = [
+    {
+      id: "printer-1",
+      name: t("printers.x1carbon.name"),
+      description: t("printers.x1carbon.description"),
+      specs: [
+        t("printers.x1carbon.spec1"),
+        t("printers.x1carbon.spec2"),
+        t("printers.x1carbon.spec3"),
+      ],
+      position: { x: 28, y: 33 },
+    },
+    {
+      id: "printer-2",
+      name: t("printers.h2c.name"),
+      description: t("printers.h2c.description"),
+      specs: [
+        t("printers.h2c.spec1"),
+        t("printers.h2c.spec2"),
+        t("printers.h2c.spec3"),
+      ],
+      position: { x: 53, y: 50 },
+    },
+    {
+      id: "printer-3",
+      name: t("printers.a1mini.name"),
+      description: t("printers.a1mini.description"),
+      specs: [
+        t("printers.a1mini.spec1"),
+        t("printers.a1mini.spec2"),
+        t("printers.a1mini.spec3"),
+      ],
+      position: { x: 82, y: 75 },
+    },
+  ];
+
   useEffect(() => {
     async function fetchStats() {
       try {
@@ -385,7 +393,7 @@ export function WorkspaceSection() {
 
                 <div className="relative z-10 flex h-full flex-col">
                   <h3 className="mb-4 font-serif text-lg text-amber-50">
-                    Print Stats
+                    {t("workbench.statsTitle")}
                   </h3>
 
                   {statsLoading ? (
@@ -414,7 +422,7 @@ export function WorkspaceSection() {
                           {stats.print_count.toLocaleString()}
                         </motion.div>
                         <p className="text-xs tracking-wider text-stone-500 uppercase">
-                          Prints Completed
+                          {t("workbench.statsPrints")}
                         </p>
                       </div>
 
@@ -433,13 +441,13 @@ export function WorkspaceSection() {
                           {stats.total_print_time_hours.toLocaleString()}
                         </motion.div>
                         <p className="text-xs tracking-wider text-stone-500 uppercase">
-                          Hours Printing
+                          {t("workbench.statsHours")}
                         </p>
                       </div>
                     </div>
                   ) : (
                     <div className="flex flex-1 items-center justify-center text-sm text-stone-500">
-                      Stats unavailable
+                      {t("workbench.statsUnavailable")}
                     </div>
                   )}
                 </div>

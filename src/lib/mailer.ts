@@ -8,7 +8,7 @@ export const sendEmail = async (
   email: string,
   message: string,
   name: string,
-  origin: "DEV" | "PHOTO" | "BLOG",
+  origin: "DEV" | "PHOTO" | "BLOG" | "3DPRINT",
 ) => {
   try {
     const response = await emailjs.send(

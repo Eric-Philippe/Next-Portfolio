@@ -18,21 +18,37 @@
       "title": "L'Établi",
       "subtitle": "Outils, machines et matériaux qui alimentent mon parcours en impression 3D",
       "software": "Logiciels",
-      "materials": "Matériaux"
+      "materials": "Matériaux",
+      "statsTitle": "Statistiques d'impression",
+      "statsPrints": "Impressions terminées",
+      "statsHours": "Heures d'impression",
+      "statsUnavailable": "Statistiques indisponibles"
     },
     "printers": {
       "x1carbon": {
-        "description": "Imprimante phare haute vitesse et haute précision pour les projets exigeants",
+        "name": "Bambu Lab X1 Carbon",
+        "description": "Imprimante CoreXY ultra-rapide avec gestion multi-couleurs",
+        "spec1": "500mm/s vitesse max",
+        "spec2": "0,05mm hauteur de couche",
+        "spec3": "AMS multi-couleur",
         "feature1": "Multi-matériaux",
         "feature2": "Scan Lidar"
       },
       "h2c": {
-        "description": "Cheval de bataille fermé pour des impressions fiables et de qualité",
+        "name": "Bambu Lab H2C",
+        "description": "Imprimante fermée haute performance multi-matériaux",
+        "spec1": "6 couleurs simultanées",
+        "spec2": "325 mm³ volume d'impression",
+        "spec3": "1000mm/s vitesse max",
         "feature1": "Chambre fermée",
         "feature2": "Compatible AMS"
       },
       "a1mini": {
-        "description": "Imprimante compacte parfaite pour les prototypes rapides et les petites pièces",
+        "name": "Bambu Lab A1 Mini",
+        "description": "Imprimante compacte pour prototypage rapide et petites pièces",
+        "spec1": "250mm/s vitesse max",
+        "spec2": "0,1mm hauteur de couche",
+        "spec3": "Lit chauffant",
         "feature1": "Design compact",
         "feature2": "Installation rapide"
       }
@@ -60,6 +76,18 @@
       "download": "Télécharger le modèle 3D",
       "viewOnMakerworld": "Voir sur Makerworld",
       "gallery": "Galerie"
+    },
+    "contact": {
+      "title": "Créons Ensemble",
+      "subtitle": "Vous avez un projet en tête ? Besoin d'une impression personnalisée ? Discutons de comment donner vie à vos idées.",
+      "descriptionTitle": "Services d'Impression 3D Personnalisés",
+      "description": "Que vous ayez besoin d'un prototype fonctionnel, d'une pièce sur mesure ou d'un design créatif, je suis là pour transformer votre vision en réalité, couche après couche.",
+      "service1Title": "Conception Sur Mesure",
+      "service1Desc": "Du concept au modèle 3D",
+      "service2Title": "Prototypage",
+      "service2Desc": "Itération et tests rapides",
+      "service3Title": "Impressions Finales",
+      "service3Desc": "Pièces de haute qualité"
     }
   },
   "DevPortfolio": {

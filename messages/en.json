@@ -18,21 +18,37 @@
       "title": "The Workbench",
       "subtitle": "Tools, machines, and materials that power my 3D printing journey",
       "software": "Software",
-      "materials": "Materials"
+      "materials": "Materials",
+      "statsTitle": "Print Stats",
+      "statsPrints": "Prints Completed",
+      "statsHours": "Hours Printing",
+      "statsUnavailable": "Stats unavailable"
     },
     "printers": {
       "x1carbon": {
-        "description": "High-speed, high-precision flagship printer for demanding projects",
+        "name": "Bambu Lab X1 Carbon",
+        "description": "High-speed CoreXY printer with multi-color capability",
+        "spec1": "500mm/s max speed",
+        "spec2": "0.05mm layer height",
+        "spec3": "AMS multi-color",
         "feature1": "Multi-material",
         "feature2": "Lidar scanning"
       },
       "h2c": {
-        "description": "Enclosed workhorse for reliable, quality prints",
+        "name": "Bambu Lab H2C",
+        "description": "Enclosed high-performance multi-material printer",
+        "spec1": "6 colors simultaneously",
+        "spec2": "325 mm³ print volume",
+        "spec3": "1000mm/s max speed",
         "feature1": "Enclosed chamber",
         "feature2": "AMS compatible"
       },
       "a1mini": {
-        "description": "Compact printer perfect for quick prototypes and small parts",
+        "name": "Bambu Lab A1 Mini",
+        "description": "Compact printer for quick prototyping and small parts",
+        "spec1": "250mm/s max speed",
+        "spec2": "0.1mm layer height",
+        "spec3": "Heated bed",
         "feature1": "Compact design",
         "feature2": "Fast setup"
       }
@@ -60,6 +76,18 @@
       "download": "Download 3D Model",
       "viewOnMakerworld": "View on Makerworld",
       "gallery": "Gallery"
+    },
+    "contact": {
+      "title": "Let's Create Together",
+      "subtitle": "Have a project in mind? Need a custom print? Let's discuss how I can bring your ideas to life.",
+      "descriptionTitle": "Custom 3D Printing Services",
+      "description": "Whether you need a functional prototype, a custom part, or a creative design, I'm here to help turn your vision into reality layer by layer.",
+      "service1Title": "Custom Design",
+      "service1Desc": "From concept to 3D model",
+      "service2Title": "Prototyping",
+      "service2Desc": "Rapid iteration and testing",
+      "service3Title": "Production Prints",
+      "service3Desc": "High-quality final pieces"
     }
   },
   "DevPortfolio": {

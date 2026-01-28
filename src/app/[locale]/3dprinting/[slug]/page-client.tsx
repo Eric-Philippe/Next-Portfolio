@@ -12,6 +12,7 @@ import type { PrintingPostWithContent } from "~/lib/printing-utils";
 import { FiArrowLeft } from "react-icons/fi";
 import { useTranslations } from "next-intl";
 import { MDXContent } from "~/components/blog/mdx-content";
+import Footer from "~/components/common/footer";
 
 // Page props interface
 interface Props {
@@ -127,7 +128,7 @@ export default function PrintingProjectPageClient({ params, project }: Props) {
             <div className="mx-auto max-w-4xl">
               <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 backdrop-blur-xl md:p-12">
                 {/* Date */}
-                <time className="text-sm font-light tracking-wide text-cyan-400/70 uppercase">
+                <time className="text-sm font-light tracking-wide text-amber-400/70 uppercase">
                   {new Date(project.date).toLocaleDateString(
                     resolvedParams.locale,
                     {
@@ -203,7 +204,7 @@ export default function PrintingProjectPageClient({ params, project }: Props) {
         <section className="px-6 py-16">
           <div className="mx-auto max-w-4xl">
             {/* MDX Content */}
-            <article className="prose prose-invert prose-lg prose-slate prose-headings:font-serif prose-headings:font-light prose-headings:text-white/90 prose-p:text-slate-300/80 prose-p:font-light prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white/90 prose-code:text-cyan-300 prose-code:bg-slate-800/50 prose-code:px-2 prose-code:py-0.5 prose-code:rounded-lg prose-pre:bg-slate-800/50 prose-pre:border prose-pre:border-white/10 prose-pre:rounded-[1rem] max-w-none">
+            <article className="prose prose-invert prose-lg prose-slate prose-headings:font-serif prose-headings:font-light prose-headings:text-white/90 prose-p:text-slate-300/80 prose-p:font-light prose-a:text-amber-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white/90 prose-code:text-amber-300 prose-code:bg-slate-800/50 prose-code:px-2 prose-code:py-0.5 prose-code:rounded-lg prose-pre:bg-slate-800/50 prose-pre:border prose-pre:border-white/10 prose-pre:rounded-[1rem] max-w-none">
               <div className="prose prose-lg max-w-none text-slate-300">
                 <MDXContent content={project.content} theme="dark" />
               </div>
@@ -216,7 +217,7 @@ export default function PrintingProjectPageClient({ params, project }: Props) {
                   href={project.downloadUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-gradient-to-r from-cyan-500/20 to-violet-500/20 px-6 py-3 font-light text-white/90 transition-all duration-300 hover:from-cyan-500/30 hover:to-violet-500/30"
+                  className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-gradient-to-r from-amber-500/20 to-slate-500/20 px-6 py-3 font-light text-white/90 transition-all duration-300 hover:from-amber-500/30 hover:to-slate-500/30"
                 >
                   <svg
                     className="h-5 w-5"
@@ -243,7 +244,7 @@ export default function PrintingProjectPageClient({ params, project }: Props) {
                   href={project.makerworldUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-cyan-400/70 transition-colors hover:text-cyan-400"
+                  className="inline-flex items-center gap-2 text-amber-400/70 transition-colors hover:text-amber-400"
                 >
                   <span>{t("project.viewOnMakerworld")}</span>
                   <svg
@@ -267,7 +268,7 @@ export default function PrintingProjectPageClient({ params, project }: Props) {
 
         {/* Image Gallery if additional images exist */}
         {project.images && project.images.length > 0 && (
-          <section className="bg-slate-900/50 px-6 py-16">
+          <section className="bg-gray-900/50 px-6 py-16">
             <div className="mx-auto max-w-6xl">
               <h2 className="mb-8 text-center font-serif text-2xl font-light text-white/90">
                 {t("project.gallery")}
@@ -291,6 +292,8 @@ export default function PrintingProjectPageClient({ params, project }: Props) {
             </div>
           </section>
         )}
+
+        <Footer />
       </main>
     </>
   );
