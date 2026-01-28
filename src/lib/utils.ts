@@ -10,7 +10,7 @@ export const TECH_DATA_DIR_PATH = `${CONTENT_DIR_PATH}/dev-index.json`;
 export const TECH_POSTS_DIR_PATH = `${CONTENT_DIR_PATH}/tech-posts`;
 export const BLOG_POSTS_DIR_PATH = `${CONTENT_DIR_PATH}/blog-posts`;
 export const PHOTO_GALLERY_DIR_PATH = `${CONTENT_DIR_PATH}/photo-gallery`;
-export const PRINTING_POSTS_DIR_PATH = `${CONTENT_DIR_PATH}/3Dprinting`;
+export const PRINTING_POSTS_DIR_PATH = `${CONTENT_DIR_PATH}/3dprinting`;
 
 export const LOCALES = ["en", "fr"];
 
