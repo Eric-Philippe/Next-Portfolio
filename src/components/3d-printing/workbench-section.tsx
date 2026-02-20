@@ -8,14 +8,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useState, useEffect } from "react";
-
-// Stats data interface
-interface PrinterStats {
-  print_count: number;
-  total_print_time_hours: number;
-  fetched_at: string;
-}
+import { useState } from "react";
 
 // Software tools
 const software = [
@@ -205,8 +198,6 @@ function HotspotMarker({
 export function WorkspaceSection() {
   const t = useTranslations("printing");
   const [activeHotspot, setActiveHotspot] = useState<string | null>(null);
-  const [stats, setStats] = useState<PrinterStats | null>(null);
-  const [statsLoading, setStatsLoading] = useState(true);
 
   const printerHotspots: PrinterHotspot[] = [
     {
@@ -243,45 +234,6 @@ export function WorkspaceSection() {
       position: { x: 82, y: 75 },
     },
   ];
-
-  useEffect(() => {
-    async function fetchStats() {
-      try {
-        if (localStorage.getItem("printerStats")) {
-          const cachedStats = JSON.parse(
-            localStorage.getItem("printerStats") ?? "",
-          ) as PrinterStats;
-
-          if (cachedStats.fetched_at) {
-            const fetchedAt = new Date(cachedStats.fetched_at);
-            const now = new Date();
-            const diffHours =
-              (now.getTime() - fetchedAt.getTime()) / (1000 * 60 * 60); // in hours
-
-            // Use cached stats if fetched within the last 4 hours
-            if (diffHours < 4) {
-              setStats(cachedStats);
-              setStatsLoading(false);
-              return;
-            }
-          }
-        }
-
-        const response = await fetch(
-          "https://makerworld-stats.homeserver-ericp.fr/stats?username=ericp_",
-        );
-        const data = (await response.json()) as PrinterStats;
-        data.fetched_at = new Date().toISOString();
-        setStats(data);
-        localStorage.setItem("printerStats", JSON.stringify(data));
-      } catch (error) {
-        console.error("Failed to fetch printer stats:", error);
-      } finally {
-        setStatsLoading(false);
-      }
-    }
-    void fetchStats();
-  }, []);
 
   return (
     <section className="relative">
@@ -395,20 +347,6 @@ export function WorkspaceSection() {
                   <h3 className="mb-4 font-serif text-lg text-amber-50">
                     {t("workbench.statsTitle")}
                   </h3>
-
-                  {statsLoading ? (
-                    <div className="flex flex-1 items-center justify-center">
-                      <motion.div
-                        className="h-8 w-8 rounded-full border-2 border-amber-500/30 border-t-amber-500"
-                        animate={{ rotate: 360 }}
-                        transition={{
-                          duration: 1,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                      />
-                    </div>
-                  ) : stats ? (
                     <div className="flex flex-1 flex-col justify-center space-y-6">
                       {/* Print Count */}
                       <div className="text-center">
@@ -419,7 +357,7 @@ export function WorkspaceSection() {
                           transition={{ duration: 0.5, delay: 0.2 }}
                           className="mb-1 font-serif text-3xl font-light text-amber-400"
                         >
-                          {stats != null && stats.print_count != null ? stats.print_count.toLocaleString() : "0"}
+                          197
                         </motion.div>
                         <p className="text-xs tracking-wider text-stone-500 uppercase">
                           {t("workbench.statsPrints")}
@@ -438,18 +376,13 @@ export function WorkspaceSection() {
                           transition={{ duration: 0.5, delay: 0.3 }}
                           className="mb-1 font-serif text-3xl font-light text-amber-400"
                         >
-                          {stats != null && stats.total_print_time_hours != null ? stats.total_print_time_hours.toLocaleString() : "0"}
+                          1050
                         </motion.div>
                         <p className="text-xs tracking-wider text-stone-500 uppercase">
                           {t("workbench.statsHours")}
                         </p>
                       </div>
                     </div>
-                  ) : (
-                    <div className="flex flex-1 items-center justify-center text-sm text-stone-500">
-                      {t("workbench.statsUnavailable")}
-                    </div>
-                  )}
                 </div>
               </div>
             </motion.div>
