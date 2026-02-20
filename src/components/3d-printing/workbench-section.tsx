@@ -419,7 +419,7 @@ export function WorkspaceSection() {
                           transition={{ duration: 0.5, delay: 0.2 }}
                           className="mb-1 font-serif text-3xl font-light text-amber-400"
                         >
-                          {stats.print_count.toLocaleString()}
+                          {stats != null && stats.print_count != null ? stats.print_count.toLocaleString() : "0"}
                         </motion.div>
                         <p className="text-xs tracking-wider text-stone-500 uppercase">
                           {t("workbench.statsPrints")}
@@ -438,7 +438,7 @@ export function WorkspaceSection() {
                           transition={{ duration: 0.5, delay: 0.3 }}
                           className="mb-1 font-serif text-3xl font-light text-amber-400"
                         >
-                          {stats.total_print_time_hours.toLocaleString()}
+                          {stats != null && stats.total_print_time_hours != null ? stats.total_print_time_hours.toLocaleString() : "0"}
                         </motion.div>
                         <p className="text-xs tracking-wider text-stone-500 uppercase">
                           {t("workbench.statsHours")}
