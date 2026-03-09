@@ -1,0 +1,132 @@
+---
+title: "Un problème de batterie devenu un cauchemar de plastique"
+description: "Comment un changement de batterie tout à fait basique a conduit à une série de problèmes inattendus, transformant une simple réparation en un véritable cauchemar de plastique."
+date: "2026-03-07"
+tags: ["DIY", "Laptop", "Impression 3D", "Modélisation"]
+author: "Éric Philippe"
+published: true
+---
+
+# D'un entretien de routine, à une ingénierie plastique
+
+Parfois, les meilleurs apprentissages viennent des défis les plus inattendus. Une proche est venue me voir avec son ordinateur portable pour un problème de batterie.
+Plus aucune autonomie, rien. Et au passage, on m'a signalé que le chassis de l'ordinateur était fissuré, à cause d'une charnière de plus en plus résistante. Mais ça, à ce moment-là, ça ne semblait être qu'un détail, n'est-ce pas ?
+
+Spoiler alert : finalement la batterie était le détail dans toute cette histoire...
+
+## Les prémices, le remplacement de la batterie
+
+Bon, jusque-là, rien de très compliqué à l'horizon : prendre la référence de la machine, puis trouver une batterie compatible.
+
+C'est donc ce que j'ai fait, et j'ai commandé la batterie. En attendant sa livraison, j'ai démonté l'ordinateur pour essayer de comprendre l'origine de cette fissure déjà bien entamée.
+Et là, je me suis vraiment rendu compte de l'état du chassis : les dommages étaient déjà bien trop avancés. À chaque ouverture de l'ordinateur, une partie du plastique se détachait, ce qui devenait rapidement problématique pour la partie "portable" de l'ordinateur...
+
+## L'escalade du problème, la réparation du chassis
+
+Une fois la batterie remplacée, ce qui n'avait été qu'une formalité, le vrai sujet devenait impossible à ignorer : la fissure du chassis.
+Il fallait prendre une décision. L'ordinateur était sur ma table d'opération, et il était clair que le plastique ne tiendrait plus très longtemps.
+C'est là que, dans un bel excès de confiance, j'ai décidé de tenter une réparation maison du chassis : découper la partie fissurée et la remplacer par une pièce imprimée en 3D. Après tout, aucune raison que ce soit trop compliqué, n'est-ce pas ?
+
+Vous ai-je dit que je faisais de la modélisation 3D depuis, quoi, 1 mois ? LARGE.
+
+![FirstCad](https://snapfilething.homeserver-ericp.fr/uploads/cad_1773045536_47377ef2_.jpg)
+
+Passer un coup de scie sur un ordinateur portable est un acte profondément contre-intuitif, mais il me fallait une découpe propre si je voulais avoir la moindre chance de faire tenir une pièce imprimée en 3D.
+La zone concernée n'était pas anodine : c'était le coin du chassis qui maintenait à la fois la charnière de l'écran, l'autre face du chassis et un connecteur menant vers une prise USB.
+Les inserts de vis dans le plastique étaient déjà endommagés, et la fissure commençait à se propager. Bref, il fallait agir vite.
+
+Le terrain étant prêt, j'ai commencé à prendre des mesures. Beaucoup de mesures. Il y avait deux grands sujets à traiter : d'abord la structure principale de la pièce, puis le positionnement des trous destinés aux inserts de vis.
+Le premier essai s'est révélé plutôt concluant. Je savais dès le départ que ce serait un processus itératif, donc j'ai naturellement appelé ce premier fichier "V1.stl". D'après vous, combien de versions a-t-il fallu pour que la pièce devienne enfin fonctionnelle ?
+Je suis donc passé à l'impression. La base tenait bien ; il restait surtout à aligner correctement les trous pour les inserts. Après une V2, puis une V3, les trous étaient au moins de la bonne taille et à peu près dans la bonne zone. Il était trop tard pour lancer une V4, alors j'ai laissé le patient sur la table d'opération pour la nuit.
+
+![SecondCad](https://snapfilething.homeserver-ericp.fr/uploads/firsttry_1773045537_dfb08b2e_.jpg)
+
+![FirstPrint](https://snapfilething.homeserver-ericp.fr/uploads/print_1773045540_99c5309c_.jpg)
+
+## Le lendemain, la modélisation 3D de précision
+
+Le lendemain, rebelote : mesures de précision au pied à coulisse, V5, puis V6... À la sixième itération, la base était idéale et les trous prêts à recevoir les vis du chassis, mais un nouveau problème est apparu.
+Une pièce qui s'adapte parfaitement à son emplacement, c'est très bien. En revanche, si elle est fixée à la charnière, elle est censée se comporter comme une vraie partie du chassis et supporter les efforts exercés par cette charnière, pas partir avec l'écran à chaque ouverture de l'ordinateur...
+Le premier vrai blocage était donc là : comment solidariser la pièce sans qu'elle cède ? Je savais que je travaillais avec du plastique, et ce matériau a vite ses limites, surtout sur des pièces fines soumises à des forces très concentrées.
+
+## Comment rendre la nouvelle pièce solidaire au chassis ?
+
+Sur une plateforme déjà très dense, les options étaient forcément limitées. La V7 est arrivée avec une tentative pour mieux caler la pièce contre le chassis.
+Mais entre la colle qui n'a pas tenu et le plastique trop fin qui a cassé à la première ouverture de l'ordinateur, il est vite devenu clair que la V7 n'était pas la bonne solution.
+
+C'est à ce moment-là que j'ai commencé à regretter d'avoir découpé le chassis. J'aurais peut-être mieux fait de ne rien toucher et de laisser la fissure s'étendre ; au moins, je n'aurais pas eu à gérer ce problème de fixation de la pièce...
+
+Autre problème : j'avais commencé à utiliser mes inserts métalliques sur les prototypes pour tester l'ensemble, alors que je n'en avais qu'un nombre très limité et que je ne pouvais pas me permettre de les gaspiller sur des versions vouées à l'échec.
+(Le fer à insert, que j'avais acheté "au cas où" et appris à utiliser sur le tas, s'est avéré être un outil indispensable pour ce projet.)
+
+![Inserts](https://snapfilething.homeserver-ericp.fr/uploads/inserts_1773045538_ff75a19f_.jpg)
+
+Mais il fallait continuer. J'étais déjà trop avancé pour faire marche arrière, et j'avais investi trop de temps dans la modélisation pour abandonner là. Il fallait donc trouver un moyen de fixer cette pièce solidement au chassis.
+
+## La solution, les vis et les inserts métalliques
+
+L'idée suivante était de conserver mon support existant, mais d'ajouter à l'autre extrémité de la pièce une extension avec un trou destiné à un insert. Cela impliquait un nouveau perçage dans le chassis, mais en échange je pouvais espérer une fixation plus solide et une meilleure répartition des forces.
+
+Après une V8 dont le pas de vis se retrouvait beaucoup trop loin du trou percé dans le chassis, j'ai lancé une V9 avec l'insert enfin placé au bon endroit. Sauf qu'à ce stade, je me suis rendu compte d'un autre souci : la pièce subissait naturellement une force de flexion.
+C'est comme ça qu'on est arrivés à la V10, avec un écart plus grand entre les deux points de fixation et une pièce plus épaisse pour mieux résister à cette flexion.
+Les supports étaient plus larges, la pièce plus massive, et sur le papier, tout semblait enfin solide.
+
+![New Try](https://snapfilething.homeserver-ericp.fr/uploads/help_1773046492_e74bc995_.jpg)
+
+Jusqu'au moment où j'ai essayé d'ouvrir l'ordinateur, avec les 7 inserts dans la pièce, le tout fixé au chassis...
+
+## Détresse
+
+La pièce a cassé nette, sans le moindre espoir de "ça aurait pu tenir". Rien.
+
+Détresse. Dans le doute, je me suis dit qu'une vis supplémentaire pour solidariser le tout serait peut-être la bonne approche.
+Et donc, encore un trou dans le chassis, toujours avec la même angoisse, puis une V11 avec un insert de plus.
+
+Et là...
+Toujours aucun miracle.
+
+Deux trous dans le chassis, le coin scié, 11 versions de la pièce, et toujours aucune solution viable pour faire tenir l'ensemble.
+Je n'avais plus vraiment d'idées. J'ai donc commencé à chercher sur internet, à fouiller les forums, et j'ai fini par découvrir que c'était malheureusement un défaut bien connu sur ces ordinateurs : la charnière devient de plus en plus résistante, pendant que le plastique du chassis devient de plus en plus fragile. Un cercle vicieux qui mène inévitablement à la fissure, puis à la casse.
+Le plus ironique dans l'histoire, c'est que cet ordinateur avait été vendu pour sa capacité à pivoter à 360 degrés, et qu'il finissait justement par devenir inutilisable à cause de cette même caractéristique...
+
+Et c'est là qu'une dernière piste est apparue : prendre le problème dans l'autre sens. Au lieu d'essayer de faire un "plâtre" toujours plus solide, il fallait peut-être s'attaquer à la vraie cause. Les dégâts sur le chassis n'étaient que les symptômes d'un problème plus profond : une charnière de plus en plus dure, qui transmettait des efforts de plus en plus importants au plastique.
+J'ai donc commencé à regarder comment accéder à cette fameuse charnière, qui contenait elle-même le câble d'écran. La moindre pression en trop, la moindre contrainte mal placée, et c'était potentiellement la fin de l'écran, donc de l'ordinateur.
+Aucune pression, donc.
+
+Mais à ce stade, c'était aussi la seule solution pour garder cet ordinateur portable... portable.
+
+## Conclusion
+
+À force de trifouiller la charnière dans tous les sens, j'ai fini par retirer le cache et accéder à la pièce elle-même. Elle était quasiment bloquée par la rouille et les dépôts de poussière accumulés avec le temps.
+Il ne me restait plus qu'à desserrer les vis de cette charnière, un peu au hasard il faut bien l'admettre, parce qu'à ce stade je n'avais pas beaucoup d'autres options. Et à ma grande surprise, la charnière s'est mise à reprendre du jeu et à devenir de plus en plus facile à faire pivoter, jusqu'à retrouver une résistance bien plus normale, comparable à celle d'autres ordinateurs portables que j'ai pu manipuler.
+
+Je suis alors reparti sur mon logiciel de modélisation 3D pour tirer parti de cette contrainte en moins et concevoir une V12. Les trous existaient déjà, autant les exploiter ; et cette fois, avec tout ce que les versions précédentes m'avaient appris, la pièce avait enfin une vraie chance de tenir.
+
+Une impression de 20 minutes qui m'a paru durer une éternité, et la pièce était là, prête à être installée.
+
+Chaque insert, chaque vis, chaque point de fixation était là. Et cette fois, la pièce tenait en place sans contrainte parasite, sans force de flexion, parfaitement intégrée au chassis, exactement comme un vrai support de charnière devait le faire.
+
+Incroyable.
+
+Après 12 versions, des dizaines d'heures de modélisation, de mesures, d'impressions, de découpages, de perçages, et de tentatives de fixation, j'avais réussi à réparer ce qui semblait être une réparation impossible.
+
+![Last Cad](https://snapfilething.homeserver-ericp.fr/uploads/finalcad_1773046133_200f8c05_.png)
+
+Il a bien fallu donner un dernier coup de scie pour que l'autre côté du capot puisse se refermer, mais au moins l'ordinateur était de nouveau fonctionnel, et surtout, de nouveau portable.
+
+L'imprimante encore chaude, j'en ai profité pour modéliser et réimprimer les 4 pieds en silicone de l'ordinateur, qui s'étaient tous décollés puis avaient fini par tomber. Tant qu'à faire, autant lui rendre aussi la capacité de se poser correctement sur une surface sans glisser.
+
+![Pads](https://snapfilething.homeserver-ericp.fr/uploads/pads_1773045540_601a2d36_.jpg)
+
+Avec un nouveau jeu de vis, une charnière qui ne menaçait plus de briser le chassis à chaque ouverture, et un ordinateur qui retrouvait enfin sa portabilité, c'était une victoire totale.
+
+Ce projet m'a appris énormément sur la modélisation 3D, et surtout sur la patience et la persévérance nécessaires pour mener à bien un projet de réparation aussi complexe.
+
+![Sélection naturelle](https://snapfilething.homeserver-ericp.fr/uploads/iterations_1773045539_bd8b2036_.jpg)
+
+J'ai également pu mettre en pratique le développement itératif, en apprenant de chaque échec pour améliorer la pièce à chaque version, jusqu'à parvenir à une solution qui fonctionne réellement.
+Il y a quelque chose de très satisfaisant à observer l'évolution d'une pièce à travers toutes ses itérations, puis à constater comment chaque modification a fini par contribuer à la solution finale.
+
+Cette aventure n'aurait probablement jamais pris une telle ampleur si je m'étais attaqué au problème de la charnière dès le départ. Mais parfois, il faut justement passer par des chemins détournés pour trouver la bonne solution, et c'est souvent là que se cachent les meilleurs apprentissages.
+
+_Vous avez un projet similaire en tête ? N'hésitez pas à me contacter – j'adorerais entendre parler de vos aventures matérielles ou aider au dépannage si vous êtes coincé dans une situation similaire._
