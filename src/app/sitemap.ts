@@ -18,7 +18,6 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   // { slug: 'my-first-post', lastModified: new Date() },
-  // { slug: 'another-great-article', lastModified: new Date() },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
