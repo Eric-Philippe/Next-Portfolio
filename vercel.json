@@ -1,0 +1,11 @@
+{
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "nodeVersion": "20.x",
+  "functions": {
+    "api/**": {
+      "memory": 3008,
+      "maxDuration": 30
+    }
+  }
+}

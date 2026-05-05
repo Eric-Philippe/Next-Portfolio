@@ -9,6 +9,7 @@ import type { NextConfig } from "next";
 
 /** @type {NextConfig} */
 const config: NextConfig = {
+  output: "standalone",
   // Any route here that should exclude the huge .next/cache directory
   outputFileTracingExcludes: {
     "/[locale]/tech/[slug]": ["./.next/cache/**/*"],
