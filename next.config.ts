@@ -5,9 +5,10 @@
 import "./src/env.js";
 import createNextIntlPlugin from "next-intl/plugin";
 import createMDX from "@next/mdx";
+import type { NextConfig } from "next";
 
-/** @type {import("next").NextConfig} */
-const config = {
+/** @type {NextConfig} */
+const config: NextConfig = {
   // Any route here that should exclude the huge .next/cache directory
   outputFileTracingExcludes: {
     "/[locale]/tech/[slug]": ["./.next/cache/**/*"],
@@ -21,48 +22,41 @@ const config = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
+        protocol: "https" as const,
         hostname: "github.com",
-        port: "",
         pathname: "/**",
       },
       {
-        protocol: "https",
+        protocol: "https" as const,
         hostname: "eric-p.gitbook.io",
-        port: "",
         pathname: "/**",
       },
       {
-        protocol: "https",
+        protocol: "https" as const,
         hostname: "avatars.githubusercontent.com",
-        port: "",
         pathname: "/**",
       },
       {
-        protocol: "https",
+        protocol: "https" as const,
         hostname: "snapfilething.homeserver-ericp.fr",
-        port: "",
         pathname: "/uploads/**",
       },
       {
-        protocol: "https",
+        protocol: "https" as const,
         hostname: "live.staticflickr.com",
-        port: "",
         pathname: "/**",
       },
       {
-        protocol: "https",
+        protocol: "https" as const,
         hostname: "skillicons.dev",
-        port: "",
         pathname: "/icons/**",
       },
       {
-        protocol: "https",
+        protocol: "https" as const,
         hostname: "upload.wikimedia.org",
-        port: "",
         pathname: "/**",
       },
-    ],
+    ] as const,
     dangerouslyAllowSVG: true,
   },
 };
