@@ -357,7 +357,7 @@ export function WorkspaceSection() {
                           transition={{ duration: 0.5, delay: 0.2 }}
                           className="mb-1 font-serif text-3xl font-light text-amber-400"
                         >
-                          197
+                          297
                         </motion.div>
                         <p className="text-xs tracking-wider text-stone-500 uppercase">
                           {t("workbench.statsPrints")}
@@ -376,7 +376,7 @@ export function WorkspaceSection() {
                           transition={{ duration: 0.5, delay: 0.3 }}
                           className="mb-1 font-serif text-3xl font-light text-amber-400"
                         >
-                          1050
+                          1550
                         </motion.div>
                         <p className="text-xs tracking-wider text-stone-500 uppercase">
                           {t("workbench.statsHours")}
