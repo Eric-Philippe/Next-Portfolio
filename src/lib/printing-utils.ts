@@ -8,7 +8,10 @@ import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 import { LOCALES, PRINTING_POSTS_DIR_PATH } from "./utils";
-import type { PrintingPostMeta, PrintingPostWithContent } from "./printing-utils.types";
+import type {
+  PrintingPostMeta,
+  PrintingPostWithContent,
+} from "./printing-utils.types";
 
 // Re-export types for backward compatibility
 export type { PrintingPostMeta, PrintingPostWithContent };
