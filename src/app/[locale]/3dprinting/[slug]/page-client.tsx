@@ -8,7 +8,7 @@ import {
   THREE_D_PRINTING_PORTFOLIO_SECOND_COLOR,
 } from "~/content/3dprinting-content";
 import { use } from "react";
-import type { PrintingPostWithContent } from "~/lib/printing-utils";
+import type { PrintingPostWithContent } from "~/lib/printing-utils.types";
 import { FiArrowLeft } from "react-icons/fi";
 import { useTranslations } from "next-intl";
 import { MDXContent } from "~/components/blog/mdx-content";

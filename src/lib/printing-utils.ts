@@ -8,47 +8,12 @@ import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 import { LOCALES, PRINTING_POSTS_DIR_PATH } from "./utils";
+import type { PrintingPostMeta, PrintingPostWithContent } from "./printing-utils.types";
+
+// Re-export types for backward compatibility
+export type { PrintingPostMeta, PrintingPostWithContent };
 
 const printingDirectory = path.join(process.cwd(), PRINTING_POSTS_DIR_PATH);
-
-interface PrintingPostMeta {
-  title: string;
-  description: string;
-  date: string;
-  heroImage: string;
-  images?: string[];
-  printer: string;
-  materials: string[];
-  printTime?: string;
-  filamentUsed?: string;
-  downloadUrl?: string;
-  makerworldUrl?: string;
-  featured?: boolean;
-  tags?: string[];
-  published?: boolean;
-}
-
-export interface PrintingPostWithContent {
-  slug: string;
-  title: string;
-  description: string;
-  date: string;
-  heroImage: string;
-  images?: string[];
-  printer: string;
-  materials: string[];
-  printTime?: string;
-  filamentUsed?: string;
-  downloadUrl?: string;
-  makerworldUrl?: string;
-  featured?: boolean;
-  tags: string[];
-  lastUpdated: Date;
-  readingTime: number;
-  content: string;
-  meta: PrintingPostMeta;
-  locale: string;
-}
 
 /**
  * Get all 3D printing project slugs across all locales

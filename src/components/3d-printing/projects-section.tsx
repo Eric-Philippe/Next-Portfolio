@@ -9,7 +9,7 @@
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { PrintingProjectCard } from "./project-card";
-import type { PrintingPostWithContent } from "~/lib/printing-utils";
+import type { PrintingPostWithContent } from "~/lib/printing-utils.types";
 
 interface ProjectsSectionProps {
   projects: PrintingPostWithContent[];

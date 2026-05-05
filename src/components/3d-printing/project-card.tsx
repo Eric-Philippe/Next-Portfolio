@@ -6,7 +6,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import type { PrintingPostWithContent } from "~/lib/printing-utils";
+import type { PrintingPostWithContent } from "~/lib/printing-utils.types";
 
 interface PrintingProjectCardProps {
   project: PrintingPostWithContent;

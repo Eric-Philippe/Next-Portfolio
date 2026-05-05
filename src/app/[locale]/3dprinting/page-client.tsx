@@ -9,7 +9,7 @@ import {
   ProjectsSection,
   ContactSection,
 } from "~/components/3d-printing";
-import { type PrintingPostWithContent } from "~/lib/printing-utils";
+import { type PrintingPostWithContent } from "~/lib/printing-utils.types";
 import {
   THREE_D_PRINTING_PORTFOLIO_FIRST_COLOR,
   THREE_D_PRINTING_PORTFOLIO_SECOND_COLOR,
