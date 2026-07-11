@@ -1,0 +1,195 @@
+---
+title: "Filaventory"
+description: "A self-hosted filament inventory system for 3D printing enthusiasts, with IoT/RFID smart scale integration."
+productDescription: "Filaventory is a self-hosted platform to take control of your 3D printing filament collection. Track every spool, organise them into physical racks, manage print projects and wishlists, and let a smart RFID scale update weights automatically: all from a sleek Electron desktop app or a React Native mobile companion. No cloud, no subscription, just your data on your server."
+heroImage: "https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2026-07-11_at_17.33.16_1783784107_34296ccd_.png"
+gallery:
+  [
+    "https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2026-07-11_at_17.33.16_1783784107_34296ccd_.png",
+    "https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2026-07-11_at_17.33.55_1783784108_a4153bb1_.png",
+    "https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2026-07-11_at_17.33.37_1783784107_1144b280_.png",
+  ]
+liveUrl: "https://github.com/Eric-Philippe/Filaventory"
+githubUrl: "https://github.com/Eric-Philippe/Filaventory"
+techs:
+  - "Golang"
+  - "PostgreSQL"
+  - "React"
+  - "TypeScript"
+  - "Electron"
+  - "Docker"
+tags:
+  - "Self-Hosted"
+  - "3D Printing"
+  - "IoT"
+  - "Inventory"
+  - "Open Source"
+date: "2026-05-08"
+featured: true
+priority: 3
+published: true
+---
+
+## The Filament Addiction Problem
+
+Every 3D printing enthusiast knows the feeling: you open a drawer, find three half-used spools of the same grey PLA, and have absolutely no idea which one still has enough material for your next print. You might also have a wishlist of exotic filaments mentally scattered across browser tabs, a vague recollection that the blue PETG is almost empty, and a print queue that lives on a sticky note.
+
+That's where Filaventory was born.
+
+### What is Filaventory?
+
+Filaventory is a **fully self-hosted filament inventory management system** designed around the real workflows of 3D printing enthusiasts. It gives you a single, structured place to:
+
+- **Track every spool**: brand, material, colour, weight, temperature profiles, and notes
+- **Organise spools into physical racks**: mirror your actual storage in the app
+- **Manage a print queue**: drag-and-drop priority ordering linked to your filament requirements
+- **Keep a wishlist**: never forget that filament you saw at a trade show
+- **Estimate usage and cost**: built-in calculator before you hit print
+- **Let your scale do the work**: RFID tags + smart scales automatically push weight updates into the app via a keyless API endpoint
+
+### Why Self-Hosted?
+
+Data ownership matters. Filaventory runs entirely on your own infrastructure: a Raspberry Pi, a home server, a VPS, or a Docker host on your NAS. There's no cloud account to create, no subscription tier, and no one else with access to your collection data. The entire stack is MIT licensed and open to contributions.
+
+### The Ecosystem
+
+Filaventory isn't a single app: it's a small ecosystem:
+
+- **Server**: a Go REST API backed by PostgreSQL, the source of truth for all data
+- **Studio**: a cross-platform Electron desktop client (macOS, Windows, Linux) for day-to-day use
+- **IoT devices**: any RFID reader + scale can push data directly to the API using just an API key, with no user session required
+
+<!--tech-->
+
+### Server: Go + Chi
+
+The backend is a lightweight **Go** API built with the [Chi](https://github.com/go-chi/chi) router. It was chosen for its minimal footprint, excellent standard library compatibility, and the ability to produce a single, statically-linked binary that fits in a small Docker image.
+
+The API surface covers the full domain: brands, filaments, spools, racks, preferences, wishlist, projects, tags, account management, and the RFID/IoT endpoints.
+
+### Two Authentication Models
+
+One of the more interesting design decisions is the **dual auth system**:
+
+1. **JWT Bearer tokens**: used by Studio for all standard user operations. Tokens are issued on login and validated by the `Auth` middleware on every protected route.
+
+2. **API Keys**: used exclusively by IoT devices (scales, RFID readers). A user can generate (and regenerate) an API key from their account settings. The key is sent as an `X-API-Key` header. This means a smart scale never needs a user session; it just holds a single key that grants write access to that user's spool weights.
+
+```go
+// JWT-protected routes
+r.Group(func(r chi.Router) {
+    r.Use(authmw.Auth(cfg.JWTSecret))
+    r.Post("/rfid/assign", rfidH.Assign)
+    r.Delete("/rfid/assign", rfidH.Unassign)
+})
+
+// API-key routes: for IoT devices
+r.Group(func(r chi.Router) {
+    r.Use(authmw.APIKey(pool))
+    r.Patch("/rfid/weight", rfidH.UpdateWeightByRFID)
+    r.Post("/rfid/ingest", rfidH.Ingest)
+})
+```
+
+### The RFID / IoT Integration
+
+This is where Filaventory goes beyond a simple spreadsheet replacement. The vision is a **smart scale with an RFID reader** that sits next to your filament storage:
+
+1. You place a spool on the scale. The RFID reader reads the tag.
+2. The scale weighs the spool and strips the known empty-spool weight.
+3. It POSTs to `PATCH /api/rfid/weight` with the tag and the remaining grams.
+4. Filaventory updates the spool in the database instantly.
+
+The `ingest` endpoint goes even further: if the RFID tag is unknown, it can **create a new spool** record automatically (given a filament ID), so unboxing a new spool and placing it on the scale is enough to register it.
+
+```go
+// Ingest: create or update by RFID tag
+// POST /api/rfid/ingest  (X-API-Key auth)
+{
+  "rfid_tag": "E2000017221101652310BF49",
+  "weight_remaining_grams": 987.5,
+  "id_filament": "uuid-of-the-filament-type"
+}
+```
+
+The spool model captures the full picture:
+
+```go
+type Spool struct {
+    IDSpool              int64     `json:"id_spool"`
+    IDUser               string    `json:"id_user"`
+    IDFilament           string    `json:"id_filament"`
+    IsSpooled            bool      `json:"is_spooled"`
+    IsDry                bool      `json:"is_dry"`
+    WeightRemainingGrams float64   `json:"weight_remaining_grams"`
+    RFIDTag              *string   `json:"rfid_tag,omitempty"`
+    IDRack               *int64    `json:"id_rack,omitempty"`
+    Notes                *string   `json:"notes,omitempty"`
+    AcquiredAt           time.Time `json:"acquired_at"`
+    Filament             *Filament `json:"filament,omitempty"`
+    Rack                 *RackRef  `json:"rack,omitempty"`
+}
+```
+
+### Studio: Electron + React
+
+The desktop client is built with **Electron** wrapping a **React + TypeScript** SPA. The stack uses:
+
+- **@tanstack/react-query**: server state, caching, and background refetching
+- **@dnd-kit**: drag-and-drop for the print queue reordering
+- **framer-motion**: UI animations
+- **react-router-dom**: client-side navigation
+
+Pre-built binaries are published as GitHub Release assets for macOS (`.dmg`/`.zip`), Windows (`.exe` NSIS installer), and Linux (`.AppImage`/`.deb`). On first launch it asks for your server URL: after that it's just a login screen.
+
+### Database: PostgreSQL 16
+
+PostgreSQL 16 is the backing store, accessed via `pgx/v5` with a connection pool. The schema is initialised by `scripts/init.sql` on first container startup. Schema evolutions that are safe on existing databases are applied as `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` statements directly in `main.go` on server boot: no migration framework overhead for a project of this scale.
+
+## Self-Hosting
+
+### Prerequisites
+
+- Docker and Docker Compose (that's it)
+
+### One-command setup
+
+```bash
+git clone https://github.com/Eric-Philippe/Filaventory.git
+cd Filaventory
+cp .env.example .env
+```
+
+Edit `.env`:
+
+```env
+POSTGRES_USER=filaventory
+POSTGRES_PASSWORD=your_strong_password
+POSTGRES_DB=filaventory
+JWT_SECRET=your_64_char_hex_secret   # openssl rand -hex 32
+PORT=8080
+```
+
+```bash
+docker compose -f docker-compose.prod.yml up -d
+```
+
+That starts two containers: PostgreSQL 16 (with a persistent volume) and the Go server: and wires them together. The database schema bootstraps automatically.
+
+### Verify
+
+```bash
+curl http://localhost:8080/api/health
+# {"status":"ok"}
+```
+
+The full interactive API reference is available at `http://localhost:8080/swagger/`.
+
+### Updating
+
+```bash
+docker compose -f docker-compose.prod.yml pull
+docker compose -f docker-compose.prod.yml up -d
+```
+
+All endpoints under `/api/` except auth and health require a `Bearer` JWT. The RFID weight and ingest endpoints accept an `X-API-Key` header instead, designed for headless IoT devices.

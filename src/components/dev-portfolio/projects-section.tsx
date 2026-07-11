@@ -4,7 +4,7 @@ import { useState } from "react";
 import ProjectCard from "./project-card";
 import { useTranslations } from "next-intl";
 import type { DevProject, DevProjectTags } from "~/types/DevProjct";
-import { ALL_TAGS, getEmojiFromTag } from "~/content/dev-contents";
+import { ALL_TAGS, getIconFromTag } from "~/content/dev-contents";
 
 interface ProjectsSectionProps {
   devProjects: DevProject[];
@@ -283,15 +283,18 @@ export function ProjectsSection({
                             ></div>
 
                             <div className="relative flex items-center space-x-1.5">
-                              <span
-                                className={`text-sm ${
-                                  isSelected
-                                    ? "scale-110 opacity-100"
-                                    : "opacity-80"
-                                } transition-all duration-300 group-hover:scale-110 group-hover:opacity-100`}
-                              >
-                                {getEmojiFromTag(tag)}
-                              </span>
+                              {(() => {
+                                const Icon = getIconFromTag(tag);
+                                return (
+                                  <Icon
+                                    className={`text-sm ${
+                                      isSelected
+                                        ? "scale-110 opacity-100"
+                                        : "opacity-80"
+                                    } transition-all duration-300 group-hover:scale-110 group-hover:opacity-100`}
+                                  />
+                                );
+                              })()}
                               <span
                                 className={`leading-none font-medium ${
                                   isSelected ? "opacity-100" : "opacity-90"
@@ -369,10 +372,10 @@ export function ProjectsSection({
                       style={{
                         background: showAllProjects
                           ? "linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(248, 113, 113, 0.1) 100%)"
-                          : "linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(147, 197, 253, 0.1) 100%)",
+                          : "linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%)",
                         borderColor: showAllProjects
                           ? "rgba(239, 68, 68, 0.4)"
-                          : "rgba(59, 130, 246, 0.4)",
+                          : "rgba(255, 255, 255, 0.2)",
                         backdropFilter: "blur(20px)",
                       }}
                     >
@@ -382,7 +385,7 @@ export function ProjectsSection({
                         style={{
                           background: showAllProjects
                             ? "rgba(239, 68, 68, 0.1)"
-                            : "rgba(59, 130, 246, 0.1)",
+                            : "rgba(255, 255, 255, 0.05)",
                         }}
                       ></div>
 
@@ -392,9 +395,6 @@ export function ProjectsSection({
                       </div>
 
                       <div className="relative flex items-center space-x-3">
-                        <span className="text-lg transition-transform duration-300 group-hover:scale-110">
-                          {showAllProjects ? "🔼" : "🔽"}
-                        </span>
                         <span className="font-semibold tracking-wide">
                           {showAllProjects
                             ? t("seeLess")

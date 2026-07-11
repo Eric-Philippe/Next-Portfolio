@@ -102,7 +102,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                     borderColor: `${tagInfo.secColor}40`,
                   }}
                 >
-                  <span className="mr-1">{tagInfo.emoji}</span>
+                  <tagInfo.icon className="mr-1 inline" />
                   {tagInfo.name}
                 </span>
               );

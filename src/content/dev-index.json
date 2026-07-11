@@ -47,7 +47,7 @@
     "tags": ["WebDev", "DevOps", "Other"],
     "priority": 250
   },
-    {
+  {
     "slug": "whats-a-book",
     "en": {
       "title": "What's a Book ?",
@@ -179,16 +179,16 @@
     "slug": "chronosreminder",
     "en": {
       "title": "Chronos Reminder",
-      "shortDesc": "Chronos is your next intelligent reminder assistant. Create, manage, and organize reminders across Discord and multiple platforms with timezone support."
+      "shortDesc": "Chronos is your next intelligent reminder assistant. Create, manage, and organize reminders across Discord and multiple platforms with timezone support. Website, mobile app, and Discord bot."
     },
     "fr": {
       "title": "Chronos Reminder",
-      "shortDesc": "Chronos est votre prochain assistant de rappels intelligent. Créez, gérez et organisez des rappels sur Discord et sur plusieurs plateformes, avec prise en charge des fuseaux horaires."
+      "shortDesc": "Chronos est votre prochain assistant de rappels intelligent. Créez, gérez et organisez des rappels sur Discord et sur plusieurs plateformes, avec prise en charge des fuseaux horaires. Site web, application mobile et bot Discord."
     },
-    "techs": ["Golang", "React", "Redis", "TypeScript", "Docker"],
+    "techs": ["Golang", "React", "Redis", "TypeScript", "Docker", "Kotlin"],
     "link": "https://chronosrmd.com",
-    "date": "2025/11",
-    "tags": ["WebDev", "DevOps", "Bot"],
+    "date": "2026/06",
+    "tags": ["WebDev", "DevOps", "Bot", "Mobile"],
     "priority": 150
   },
   {
@@ -221,7 +221,7 @@
     "link": "/yboard",
     "date": "2025/06",
     "tags": ["WebDev"],
-    "priority": 450
+    "priority": 310
   },
   {
     "slug": "glitch-and-books",
@@ -269,7 +269,30 @@
     "link": "/snapfilething",
     "date": "2025/06",
     "tags": ["DevOps", "Tools", "WebDev"],
-    "priority": 400
+    "priority": 375
+  },
+  {
+    "slug": "filaventory",
+    "en": {
+      "title": "Filaventory",
+      "shortDesc": "A self-hosted filament inventory system for 3D printing enthusiasts. Go REST API, Electron desktop client, React Native mobile companion, and IoT/RFID integration for automatic weight tracking."
+    },
+    "fr": {
+      "title": "Filaventory",
+      "shortDesc": "Un système de gestion d'inventaire de filaments auto-hébergé pour les passionnés d'impression 3D. API REST Go, client bureau Electron, application mobile React Native, et intégration IoT/RFID pour le suivi automatique du poids."
+    },
+    "techs": [
+      "Golang",
+      "PostgreSQL",
+      "React",
+      "TypeScript",
+      "Electron",
+      "Docker"
+    ],
+    "link": "/filaventory",
+    "date": "2026/05",
+    "tags": ["Tools", "DevOps", "Mobile"],
+    "priority": 380
   },
   {
     "slug": "YLab",
@@ -285,8 +308,7 @@
     "link": "/blog/hackathon2025",
     "date": "2025/10",
     "tags": ["WebDev", "DevOps"],
-    "priority": 375
-
+    "priority": 400
   },
   {
     "slug": "EHub",
@@ -302,6 +324,6 @@
     "link": "https://github.com/Eric-Philippe/E-Hub-Mobile",
     "date": "2025/09",
     "tags": ["Mobile", "WebDev", "DevOps"],
-    "priority": 310
+    "priority": 450
   }
 ]

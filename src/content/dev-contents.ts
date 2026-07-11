@@ -1,5 +1,14 @@
 import type { DevProjectTags, Tags } from "~/types/DevProjct";
 import URLS from "./URLs";
+import {
+  FaCode,
+  FaCog,
+  FaRobot,
+  FaWrench,
+  FaPuzzlePiece,
+  FaMobileAlt,
+  FaEllipsisH,
+} from "react-icons/fa";
 
 export const DEV_PORTFOLIO_FIRST_COLOR = "#9967ef";
 export const DEV_PORTFOLIO_SECOND_COLOR = "#ed4f51";
@@ -49,6 +58,9 @@ const TECH_COLOR: Record<string, string> = {
   Grafana: "#f46800",
   Prometheus: "#e6522c",
 
+  // DESKTOP
+  Electron: "#47848f",
+
   // OTHERS
   GoogleAPI: "#4285f4",
   Mobile: "#5ac8fa",
@@ -59,7 +71,7 @@ const TECH_COLOR: Record<string, string> = {
 export const WEBDEV: Tags = {
   name: "WebDev",
   type: "WebDev",
-  emoji: "💻",
+  icon: FaCode,
   color: "rgb(59, 130, 246)",
   fadedColor: "rgba(59, 130, 246, 0.2)",
   secColor: "#93c5fd",
@@ -69,7 +81,7 @@ export const WEBDEV: Tags = {
 export const DEVOPS: Tags = {
   name: "DevOps",
   type: "DevOps",
-  emoji: "⚙️",
+  icon: FaCog,
   color: "rgb(34, 197, 94)",
   fadedColor: "rgba(34, 197, 94, 0.2)",
   secColor: "#86efac",
@@ -79,7 +91,7 @@ export const DEVOPS: Tags = {
 const BOT: Tags = {
   name: "Bot",
   type: "Bot",
-  emoji: "🤖",
+  icon: FaRobot,
   color: "rgb(168, 85, 247)",
   fadedColor: "rgba(168, 85, 247, 0.2)",
   secColor: "#c084fc",
@@ -89,7 +101,7 @@ const BOT: Tags = {
 const TOOLS: Tags = {
   name: "Tools",
   type: "Tools",
-  emoji: "🛠️",
+  icon: FaWrench,
   color: "rgb(34, 197, 94)",
   fadedColor: "rgba(34, 197, 94, 0.2)",
   secColor: "#86efac",
@@ -99,7 +111,7 @@ const TOOLS: Tags = {
 const CHALLENGES: Tags = {
   name: "Challenges",
   type: "Challenges",
-  emoji: "🧩",
+  icon: FaPuzzlePiece,
   color: "rgb(249, 115, 22)",
   fadedColor: "rgba(249, 115, 22, 0.2)",
   secColor: "#fdba74",
@@ -109,7 +121,7 @@ const CHALLENGES: Tags = {
 const MOBILE: Tags = {
   name: "Mobile",
   type: "Mobile",
-  emoji: "📱",
+  icon: FaMobileAlt,
   color: "rgb(14, 165, 233)",
   fadedColor: "rgba(14, 165, 233, 0.2)",
   secColor: "#7dd3fc",
@@ -119,7 +131,7 @@ const MOBILE: Tags = {
 const OTHER: Tags = {
   name: "Other",
   type: "Other",
-  emoji: "✨",
+  icon: FaEllipsisH,
   color: "rgb(139, 92, 246)",
   fadedColor: "rgba(139, 92, 246, 0.2)",
   secColor: "#c4b5fd",
@@ -149,8 +161,8 @@ export const getTagsFromString = (tagType: DevProjectTags): Tags => {
   }
 };
 
-export const getEmojiFromTag = (tag: Tags): string => {
-  return tag.emoji;
+export const getIconFromTag = (tag: Tags) => {
+  return tag.icon;
 };
 
 export const getTechColor = (tech: string) => {

@@ -26,10 +26,12 @@ export type DevProjectTags =
   | "Mobile"
   | "Other";
 
+import type { IconType } from "react-icons";
+
 export type Tags = {
   name: string;
   type: DevProjectTags;
-  emoji: string;
+  icon: IconType;
   color: string;
   fadedColor: string;
   secColor: string;

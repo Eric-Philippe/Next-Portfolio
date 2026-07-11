@@ -87,7 +87,62 @@ function parseMarkdownToReact(
   let codeBlockLanguage = "";
   let listItems: string[] = [];
   let isNumberedList = false;
+  let tableLines: string[] = [];
   let elementKey = 0;
+
+  const splitTableRow = (row: string): string[] =>
+    row
+      .trim()
+      .replace(/^\|/, "")
+      .replace(/\|$/, "")
+      .split("|")
+      .map((cell) => cell.trim());
+
+  const isTableSeparator = (row: string): boolean =>
+    /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(row);
+
+  const flushTable = () => {
+    if (tableLines.length === 0) return;
+
+    // A valid table needs a header row and a separator row
+    if (tableLines.length >= 2 && isTableSeparator(tableLines[1] ?? "")) {
+      const headerCells = splitTableRow(tableLines[0] ?? "");
+      const bodyRows = tableLines.slice(2).map(splitTableRow);
+
+      elements.push(
+        <mdxComponents.table key={elementKey++}>
+          <mdxComponents.thead>
+            <mdxComponents.tr>
+              {headerCells.map((cell, i) => (
+                <mdxComponents.th key={i}>
+                  {parseInlineElements(cell, mdxComponents)}
+                </mdxComponents.th>
+              ))}
+            </mdxComponents.tr>
+          </mdxComponents.thead>
+          <mdxComponents.tbody>
+            {bodyRows.map((row, rowIndex) => (
+              <mdxComponents.tr key={rowIndex}>
+                {row.map((cell, cellIndex) => (
+                  <mdxComponents.td key={cellIndex}>
+                    {parseInlineElements(cell, mdxComponents)}
+                  </mdxComponents.td>
+                ))}
+              </mdxComponents.tr>
+            ))}
+          </mdxComponents.tbody>
+        </mdxComponents.table>,
+      );
+    } else {
+      // Not a real table: fall back to rendering the lines as a paragraph
+      elements.push(
+        <mdxComponents.p key={elementKey++}>
+          {parseInlineElements(tableLines.join("\n"), mdxComponents)}
+        </mdxComponents.p>,
+      );
+    }
+    tableLines = [];
+  };
 
   const flushParagraph = () => {
     if (currentParagraph.length > 0) {
@@ -136,6 +191,7 @@ function parseMarkdownToReact(
     if (line.startsWith("```")) {
       flushParagraph();
       flushList();
+      flushTable();
 
       if (!inCodeBlock) {
         inCodeBlock = true;
@@ -163,6 +219,17 @@ function parseMarkdownToReact(
     if (inCodeBlock) {
       codeBlockContent.push(line);
       continue;
+    }
+
+    // Handle tables (lines starting with |)
+    if (line.trimStart().startsWith("|")) {
+      flushParagraph();
+      flushList();
+      tableLines.push(line);
+      continue;
+    }
+    if (tableLines.length > 0) {
+      flushTable();
     }
 
     // Handle headers
@@ -248,6 +315,7 @@ function parseMarkdownToReact(
   // Flush remaining content
   flushParagraph();
   flushList();
+  flushTable();
 
   return elements;
 }

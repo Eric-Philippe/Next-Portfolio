@@ -293,6 +293,46 @@ export const createMdxComponents = (theme: Theme = "light") => {
         className="my-8 h-auto w-full rounded-xl shadow-lg"
       />
     ),
+
+    table: ({ children }: { children: React.ReactNode }) => (
+      <motion.div
+        className={`my-8 overflow-x-auto rounded-xl border ${colors.border}`}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        key={`table-${theme}`}
+      >
+        <table className="w-full border-collapse text-left text-sm">
+          {children}
+        </table>
+      </motion.div>
+    ),
+
+    thead: ({ children }: { children: React.ReactNode }) => (
+      <thead className={colors.background.secondary}>{children}</thead>
+    ),
+
+    tbody: ({ children }: { children: React.ReactNode }) => (
+      <tbody>{children}</tbody>
+    ),
+
+    tr: ({ children }: { children: React.ReactNode }) => (
+      <tr className={`border-b last:border-b-0 ${colors.border}`}>
+        {children}
+      </tr>
+    ),
+
+    th: ({ children }: { children: React.ReactNode }) => (
+      <th
+        className={`px-4 py-3 font-semibold whitespace-nowrap ${colors.text.primary}`}
+      >
+        {children}
+      </th>
+    ),
+
+    td: ({ children }: { children: React.ReactNode }) => (
+      <td className={`px-4 py-3 ${colors.text.secondary}`}>{children}</td>
+    ),
   };
 };
 

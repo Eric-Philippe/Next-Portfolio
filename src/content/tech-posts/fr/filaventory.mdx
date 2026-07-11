@@ -1,0 +1,196 @@
+---
+title: "Filaventory"
+description: "Un système d'inventaire de filaments auto-hébergé pour les passionnés d'impression 3D, avec intégration IoT/RFID via balance intelligente."
+productDescription: "Filaventory est une plateforme auto-hébergée pour reprendre le contrôle de votre collection de filaments 3D. Suivez chaque bobine, organisez-les dans des racks physiques, gérez vos projets d'impression et vos listes de souhaits, et laissez une balance RFID intelligente mettre les poids à jour automatiquement: depuis une application bureau Electron élégante ou un compagnon mobile React Native. Pas de cloud, pas d'abonnement, juste vos données sur votre serveur."
+heroImage: "https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2026-07-11_at_17.33.16_1783784107_34296ccd_.png"
+gallery:
+  [
+    "https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2026-07-11_at_17.33.16_1783784107_34296ccd_.png",
+    "https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2026-07-11_at_17.33.55_1783784108_a4153bb1_.png",
+    "https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2026-07-11_at_17.33.37_1783784107_1144b280_.png",
+  ]
+liveUrl: "https://github.com/Eric-Philippe/Filaventory"
+githubUrl: "https://github.com/Eric-Philippe/Filaventory"
+techs:
+  - "Golang"
+  - "PostgreSQL"
+  - "React"
+  - "TypeScript"
+  - "Electron"
+  - "Docker"
+tags:
+  - "Auto-hébergement"
+  - "Impression 3D"
+  - "IoT"
+  - "Inventaire"
+  - "Open Source"
+date: "2026-05-08"
+featured: true
+priority: 3
+published: true
+---
+
+## Le problème de l'addiction au filament
+
+Tout passionné d'impression 3D connaît la situation : vous ouvrez un tiroir, vous trouvez trois bobines de PLA gris à moitié entamées, et vous n'avez aucune idée laquelle contient encore assez de matière pour votre prochain projet. Votre liste de souhaits est éparpillée dans des onglets de navigateur, vous avez un vague souvenir que le PETG bleu est presque vide, et votre file d'impression tient sur un post-it.
+
+C'est de là qu'est né Filaventory.
+
+### Qu'est-ce que Filaventory ?
+
+Filaventory est un **système de gestion d'inventaire de filaments entièrement auto-hébergé**, conçu autour des workflows réels des passionnés d'impression 3D. Il offre un endroit unique et structuré pour :
+
+- **Suivre chaque bobine**: marque, matière, couleur, poids, profils de température et notes
+- **Organiser les bobines en racks physiques**: reproduire votre rangement réel dans l'application
+- **Gérer une file d'impression**: ordonnancement par glisser-déposer lié aux besoins en filaments
+- **Tenir une liste de souhaits**: ne plus jamais oublier ce filament repéré dans un salon
+- **Estimer la consommation et le coût**: calculateur intégré avant de lancer l'impression
+- **Laisser la balance faire le travail**: des tags RFID couplés à des balances intelligentes envoient automatiquement les mises à jour de poids dans l'application via un endpoint sans session
+
+### Pourquoi l'auto-hébergement ?
+
+La propriété des données, c'est important. Filaventory tourne entièrement sur votre propre infrastructure : un Raspberry Pi, un serveur maison, un VPS ou un hôte Docker sur votre NAS. Aucun compte cloud à créer, aucun abonnement, et personne d'autre n'a accès à vos données. L'ensemble de la pile est sous licence MIT et ouvert aux contributions.
+
+### L'écosystème
+
+Filaventory n'est pas une seule application: c'est un petit écosystème :
+
+- **Server**: une API REST Go adossée à PostgreSQL, source de vérité pour toutes les données
+- **Studio**: un client bureau Electron multiplateforme (macOS, Windows, Linux) pour un usage quotidien
+- **Appareils IoT**: n'importe quel lecteur RFID + balance peut envoyer des données directement à l'API avec une simple clé API, sans session utilisateur
+
+<!--tech-->
+
+### Serveur: Go + Chi
+
+Le backend est une API **Go** légère construite avec le routeur [Chi](https://github.com/go-chi/chi). Il a été choisi pour son empreinte minimale, son excellente compatibilité avec la bibliothèque standard, et sa capacité à produire un binaire statiquement lié qui tient dans une petite image Docker.
+
+La surface de l'API couvre tout le domaine : marques, filaments, bobines, racks, préférences, liste de souhaits, projets, tags, gestion de compte et les endpoints RFID/IoT.
+
+### Deux modèles d'authentification
+
+L'une des décisions de conception les plus intéressantes est le **système d'authentification dual** :
+
+1. **Tokens JWT Bearer**: utilisés par Studio pour toutes les opérations standard. Les tokens sont émis à la connexion et validés par le middleware `Auth` sur chaque route protégée.
+
+2. **Clés API**: utilisées exclusivement par les appareils IoT (balances, lecteurs RFID). Un utilisateur peut générer (et regénérer) une clé API depuis les paramètres de son compte. La clé est envoyée dans un header `X-API-Key`. Ainsi, une balance intelligente n'a jamais besoin de session utilisateur: elle conserve juste une clé unique qui lui accorde un accès en écriture aux poids des bobines de cet utilisateur.
+
+```go
+// Routes protégées par JWT
+r.Group(func(r chi.Router) {
+    r.Use(authmw.Auth(cfg.JWTSecret))
+    r.Post("/rfid/assign", rfidH.Assign)
+    r.Delete("/rfid/assign", rfidH.Unassign)
+})
+
+// Routes à clé API: pour les appareils IoT
+r.Group(func(r chi.Router) {
+    r.Use(authmw.APIKey(pool))
+    r.Patch("/rfid/weight", rfidH.UpdateWeightByRFID)
+    r.Post("/rfid/ingest", rfidH.Ingest)
+})
+```
+
+### L'intégration RFID / IoT
+
+C'est là que Filaventory dépasse le simple tableur amélioré. La vision est une **balance intelligente avec lecteur RFID** posée à côté de votre rangement de filaments :
+
+1. Vous posez une bobine sur la balance. Le lecteur RFID lit le tag.
+2. La balance pèse la bobine et soustrait le poids à vide connu.
+3. Elle envoie un `PATCH /api/rfid/weight` avec le tag et les grammes restants.
+4. Filaventory met instantanément à jour la bobine en base.
+5. Studio reflètent le nouveau poids à la prochaine synchronisation.
+
+L'endpoint `ingest` va encore plus loin: si le tag RFID est inconnu, il peut **créer automatiquement une nouvelle bobine** (à condition de fournir un ID de filament). Déballer une nouvelle bobine et la poser sur la balance suffit donc à l'enregistrer.
+
+```go
+// Ingest : créer ou mettre à jour par tag RFID
+// POST /api/rfid/ingest  (auth X-API-Key)
+{
+  "rfid_tag": "E2000017221101652310BF49",
+  "weight_remaining_grams": 987.5,
+  "id_filament": "uuid-du-type-de-filament"
+}
+```
+
+Le modèle de bobine capture l'image complète :
+
+```go
+type Spool struct {
+    IDSpool              int64     `json:"id_spool"`
+    IDUser               string    `json:"id_user"`
+    IDFilament           string    `json:"id_filament"`
+    IsSpooled            bool      `json:"is_spooled"`
+    IsDry                bool      `json:"is_dry"`
+    WeightRemainingGrams float64   `json:"weight_remaining_grams"`
+    RFIDTag              *string   `json:"rfid_tag,omitempty"`
+    IDRack               *int64    `json:"id_rack,omitempty"`
+    Notes                *string   `json:"notes,omitempty"`
+    AcquiredAt           time.Time `json:"acquired_at"`
+    Filament             *Filament `json:"filament,omitempty"`
+    Rack                 *RackRef  `json:"rack,omitempty"`
+}
+```
+
+### Studio: Electron + React
+
+Le client bureau est construit avec **Electron** encapsulant une SPA **React + TypeScript**. La pile utilise :
+
+- **@tanstack/react-query**: état serveur, cache et rechargement en arrière-plan
+- **@dnd-kit**: glisser-déposer pour le réordonnancement de la file d'impression
+- **framer-motion**: animations d'interface
+- **react-router-dom**: navigation côté client
+
+Des binaires pré-compilés sont publiés en tant qu'assets de GitHub Release pour macOS (`.dmg`/`.zip`), Windows (installeur `.exe` NSIS) et Linux (`.AppImage`/`.deb`). Au premier lancement, l'application demande l'URL du serveur: ensuite c'est juste un écran de connexion.
+
+### Base de données: PostgreSQL 16
+
+PostgreSQL 16 est le socle de stockage, accessible via `pgx/v5` avec un pool de connexions. Le schéma est initialisé par `scripts/init.sql` au premier démarrage du conteneur. Les évolutions de schéma compatibles avec les bases existantes sont appliquées sous forme de `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` directement dans `main.go` au démarrage du serveur: pas de framework de migration pour un projet de cette taille.
+
+## Auto-hébergement
+
+### Prérequis
+
+- Docker et Docker Compose (c'est tout)
+
+### Mise en place en une commande
+
+```bash
+git clone https://github.com/Eric-Philippe/Filaventory.git
+cd Filaventory
+cp .env.example .env
+```
+
+Éditez `.env` :
+
+```env
+POSTGRES_USER=filaventory
+POSTGRES_PASSWORD=votre_mot_de_passe
+POSTGRES_DB=filaventory
+JWT_SECRET=votre_secret_hex_64_chars   # openssl rand -hex 32
+PORT=8080
+```
+
+```bash
+docker compose -f docker-compose.prod.yml up -d
+```
+
+Cela démarre deux conteneurs: PostgreSQL 16 (avec un volume persistant) et le serveur Go: et les connecte entre eux. Le schéma de base de données s'initialise automatiquement.
+
+### Vérification
+
+```bash
+curl http://localhost:8080/api/health
+# {"status":"ok"}
+```
+
+La référence API interactive complète est disponible à l'adresse `http://localhost:8080/swagger/`.
+
+### Mise à jour
+
+```bash
+docker compose -f docker-compose.prod.yml pull
+docker compose -f docker-compose.prod.yml up -d
+```
+
+Tous les endpoints sous `/api/` sauf l'auth et le health nécessitent un `Bearer` JWT. Les endpoints RFID de mise à jour du poids et d'ingest acceptent un header `X-API-Key` à la place, conçu pour les appareils IoT headless.

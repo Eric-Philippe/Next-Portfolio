@@ -1,0 +1,195 @@
+---
+title: "Fabriquer une balance RFID connectée pour mes bobines de filament"
+description: "Comment je suis passé des kits débutants sur breadboard à une balance IoT fonctionnelle qui reconnaît une bobine, la pèse et la synchronise avec mon inventaire auto-hébergé."
+date: "2026-07-11"
+tags: ["IoT", "ESP32", "Impression 3D", "DIY", "Électronique"]
+author: "Éric Philippe"
+published: true
+---
+
+# De la zone de confort logicielle aux vapeurs de soudure
+
+Ce projet est la suite directe de [Filaventory](/tech/filaventory), mon système d'inventaire de filaments auto-hébergé. Sur le papier, Filaventory était complet : une API Go, un client bureau, un compagnon mobile, tout ce qu'il faut pour suivre ma collection grandissante (inquiétante ?) de bobines de filament.
+
+Mais il restait une étape que je faisais toujours à la main : peser les bobines et taper les chiffres. Et tout l'intérêt de l'API de Filaventory, c'était justement qu'un appareil IoT puisse le faire à ma place. Poser une bobine sur une balance, laisser un lecteur RFID la reconnaître, la peser, envoyer le tout au serveur. Entièrement automatique.
+
+Petit détail : toute mon expérience en IoT se résumait à des kits débutants et des breadboards. Aucune soudure. Jamais.
+
+Spoiler : l'électronique n'est pas ce qui a le plus cassé dans cette histoire.
+
+## Le plan
+
+Avant de commander quoi que ce soit, j'ai dessiné ce à quoi je voulais que le produit final ressemble, en piochant dans mes différentes inspirations :
+
+![Le plan](https://snapfilething.homeserver-ericp.fr/uploads/plans_1783786287_6ab918a8_.png)
+
+Après quelques recherches, voici la liste de courses :
+
+| Composant           | Specs                              | Notes                                |
+| ------------------- | ---------------------------------- | ------------------------------------ |
+| ESP32 DevKit        | 30 broches, 4 Mo de flash          | Puce ESP32-WROOM-32                  |
+| Lecteurs RFID RC522 | NFC 13,56 MHz, SPI                 | 2 nécessaires (support double tag)   |
+| HX711               | ADC 24 bits, ampli de cellule      | Les modules PCB verts font l'affaire |
+| Cellule de charge   | 5 kg ou 20 kg                      | Demi-pont 4 fils                     |
+| Écran OLED          | SSD1306 128×64, I²C, 0,96" ou 1,3" | Adresse I²C 0x3C                     |
+| KY-040              | Encodeur rotatif, 360°             | L'interface humaine                  |
+
+## Premier contact : le prototypage sur breadboard
+
+Cette partie, c'était la maison. Câbler des composants sur une breadboard, c'est le « hello world » de l'électronique, exactement ce pour quoi mes kits débutants m'avaient préparé. Après un peu de bidouille et un premier brouillon imprimé en 3D pour tenir le tout, premier test concluant :
+
+![Premier test concluant](https://snapfilething.homeserver-ericp.fr/uploads/testings_1783786289_55f3a91c_.jpg)
+
+Le lecteur RFID voyait un tag, l'écran affichait des choses, l'ESP32 parlait à mon Wi-Fi. Parfait. Il ne restait plus qu'à connecter la cellule de charge à la carte HX711.
+
+Ce qui demande de souder.
+
+## Le mur de la soudure
+
+Je savais que ce moment arriverait. Les fils de la cellule de charge devaient être soudés à la carte HX711, et cette fois, pas de contournement possible avec une breadboard.
+
+Me voilà donc, premier fer à souder en main, pas de flux, rien pour nettoyer la panne, et un niveau de confiance totalement déconnecté de mes compétences réelles. J'ai passé environ deux heures à essayer de faire tenir quatre points de soudure. Quatre points. Deux heures. L'étain qui fait des boules, qui refuse d'accrocher, qui colle au fer au lieu du pad... toutes les erreurs classiques de débutant, je les ai collectionnées.
+
+Quand les points ont enfin eu l'air « acceptables » (le mot est généreux), j'avais littéralement peur de toucher quoi que ce soit, comme si toute la carte ne tenait que par l'espoir.
+
+## Calibration : une bombe de WD40 et une balance de cuisine
+
+La cellule enfin connectée, il fallait la calibrer. La méthode propre implique des poids de référence certifiés. Ma méthode impliquait une bombe de WD40 et ma balance de cuisine comme source de vérité :
+
+![L'atelier](https://snapfilething.homeserver-ericp.fr/uploads/atelier_1783786284_c374db8d_.jpg)
+
+C'est là que j'ai découvert à quel point une cellule de charge est sensible. On s'appuie sur le bureau, la valeur bouge. On respire à côté, la valeur bouge. C'est honnêtement impressionnant, et légèrement exaspérant quand on essaie de déterminer si c'est la soudure ou le code qui est instable.
+
+Parce que oui, c'était le thème récurrent de la journée : écrire un firmware de plus en plus complet, le voir planter, remettre en question mon code, et finir par découvrir qu'un point de soudure avait lâché. Puis ressouder, reflasher, recommencer. Sans m'en rendre compte, cinq heures s'étaient évaporées, et mon bureau documentait la descente :
+
+![Le bureau en chantier](https://snapfilething.homeserver-ericp.fr/uploads/atelierwide_1783786285_8bc79530_.jpg)
+
+## Le câblage
+
+Pour référence future (la mienne, probablement, quand je rouvrirai inévitablement cette bête), voici les tables de câblage complètes :
+
+### Lecteur RFID RC522 n°1
+
+| Broche RC522 | Fonction       | Broche ESP32 |
+| ------------ | -------------- | ------------ |
+| VCC          | 3,3 V          | 3V3          |
+| GND          | Masse          | GND          |
+| SCK          | Horloge SPI    | GPIO 18      |
+| MOSI         | SPI master out | GPIO 23      |
+| MISO         | SPI master in  | GPIO 19      |
+| SDA / SS     | Chip select    | GPIO 5       |
+| RST          | Reset          | GPIO 27      |
+| IRQ          | (non utilisé)  |              |
+
+### Lecteur RFID RC522 n°2
+
+| Broche RC522 | Fonction       | Broche ESP32        |
+| ------------ | -------------- | ------------------- |
+| VCC          | 3,3 V          | 3V3                 |
+| GND          | Masse          | GND                 |
+| SCK          | Horloge SPI    | GPIO 18 (partagé)   |
+| MOSI         | SPI master out | GPIO 23 (partagé)   |
+| MISO         | SPI master in  | GPIO 19 (partagé)   |
+| SDA / SS     | Chip select    | GPIO 14 (différent) |
+| RST          | Reset          | GPIO 25 (différent) |
+| IRQ          | (non utilisé)  |                     |
+
+### Amplificateur HX711
+
+| Broche HX711 | Fonction     | Broche ESP32                    |
+| ------------ | ------------ | ------------------------------- |
+| VCC          | Alimentation | 3V3 (ou 5 V si supporté)        |
+| GND          | Masse        | GND                             |
+| DT (DOUT)    | Données      | GPIO 32                         |
+| SCK          | Horloge      | GPIO 33                         |
+| E+           | Excitation + | Fil rouge de la cellule         |
+| E−           | Excitation − | Fil noir de la cellule          |
+| A+           | Canal A +    | Fil vert ou blanc de la cellule |
+| A−           | Canal A −    | Fil blanc ou vert de la cellule |
+
+### Écran OLED SSD1306 (I²C)
+
+| Broche OLED | Fonction    | Broche ESP32 |
+| ----------- | ----------- | ------------ |
+| VCC         | 3,3 V       | 3V3          |
+| GND         | Masse       | GND          |
+| SDA         | Données I²C | GPIO 21      |
+| SCL         | Horloge I²C | GPIO 22      |
+
+### Budget de consommation
+
+| Composant                | Tension | Courant typique | Courant de pointe       |
+| ------------------------ | ------- | --------------- | ----------------------- |
+| ESP32 (repos, Wi-Fi off) | 3,3 V   | 50 mA           | 80 mA                   |
+| ESP32 (Wi-Fi TX)         | 3,3 V   | 160 mA          | 240 mA                  |
+| RC522 ×2                 | 3,3 V   | 50 mA chacun    | 200 mA total en lecture |
+| HX711 + cellule          | 3,3-5 V | 5 mA            | 15 mA                   |
+| OLED                     | 3,3 V   | 15 mA           | 25 mA                   |
+| Servo FS90R (repos)      | 5 V     | 100 mA          |                         |
+| Servo FS90R (en marche)  | 5 V     | 500 mA          | 900 mA (blocage)        |
+| **Total estimé**         |         | **~750 mA**     | **~1,5 A**              |
+
+Le firmware complet est disponible [dans ce gist](https://gist.github.com/Eric-Philippe/3dbf69c33a2b477f56961f78f2cc5d77).
+
+## Une leçon de logiciel, apprise à la dure via le matériel
+
+À un moment, mon écran OLED est devenu terriblement lent à se rafraîchir, sans que je comprenne pourquoi. Les lectures RFID fonctionnaient, le Wi-Fi fonctionnait, mais l'interface donnait l'impression de tourner sous l'eau.
+
+Le coupable : la routine de pesée. La lecture du HX711 était plantée en plein milieu de la boucle principale, bloquant tout le reste en attendant une mesure stable. Chaque rafraîchissement d'écran, chaque entrée utilisateur, tout attendait la balance.
+
+Venant du monde logiciel où je lance des tâches asynchrones sans y réfléchir, c'était une belle claque d'humilité : sur un microcontrôleur, **tout ce qui se trouve dans la boucle peut bloquer toute la boucle**. J'ai retravaillé le code pour que la pesée ne prenne plus tout en otage, et d'un coup, l'affichage était fluide.
+
+Et une fois ça corrigé... tout fonctionnait !!
+
+## La conception de la coque
+
+Il était temps de donner un vrai corps à ce tas de cartes et de câbles. J'ai mesuré chaque carte, chaque trou de fixation, prévu assez de dégagement pour les câbles, et modélisé une coque imprimée en 3D dans Fusion 360.
+
+Pendant que le premier brouillon s'imprimait, une idée s'est glissée dans ma tête : et si la balance avait une vraie interface physique ? Un encodeur rotatif comme contrôle principal pour les opérations locales : tarer la balance, sélectionner la marque de la bobine pour soustraire le poids de la bobine vide de la mesure, ce genre de choses.
+
+Donc, retour sur Fusion 360. J'ai mis à jour la coque avec un trou pour l'encodeur, et tant qu'à faire, modélisé une sorte de petit support, une coque autour de l'écran et de l'encodeur. Modélisé, tout imprimé, début du montage.
+
+J'ai mis les vis autour de la coque de l'écran... et entendu un _crac_ dramatique.
+
+## Le massacre des OLED
+
+Sans savoir d'où venait le bruit, j'ai quand même fini de monter la coque supérieure (l'optimisme est une drogue redoutable), et évidemment, l'écran OLED était mort.
+
+Pas de problème, ils venaient par pack de trois. Deuxième écran, même montage, même _crac_. C'est là que j'ai compris : je serrais trop les vis, et au lieu de plaquer correctement l'écran contre la coque, elles faisaient plier et fissuraient le verre.
+
+Fort de cette découverte, le troisième écran allait forcément survivre. Alors j'ai vissé délicatement, doucement, avec la précaution d'un démineur. Et ça a marché ! Mais ensuite j'ai vu qu'il restait un petit espace entre la coque de l'écran et la coque supérieure de la balance... Trop perfectionniste, j'ai donné un coup de tournevis en trop...
+
+_Crac._
+
+Trois écrans. J'avais tué les trois écrans.
+
+J'ai dû en commander trois autres, mettre le projet en pause une journée, et prendre plusieurs jours pour pleurer mon manque de délicatesse.
+
+## Le montage, pour de vrai cette fois
+
+À la réception des nouveaux écrans, j'ai tout monté correctement (vis à peine serrées, espace accepté, ego rangé), et la balance a enfin pris forme :
+
+![La balance de face](https://snapfilething.homeserver-ericp.fr/uploads/hero_1783786287_fd2e00dc_.jpg)
+
+![La balance de dos](https://snapfilething.homeserver-ericp.fr/uploads/back_1783786286_efa2c0d0_.jpg)
+
+![La balance de côté](https://snapfilething.homeserver-ericp.fr/uploads/side_1783786288_e6e7bca1_.jpg)
+
+On pose une bobine dessus, le lecteur RFID l'identifie, la cellule de charge la pèse, et le résultat atterrit dans [Filaventory](/tech/filaventory) sans que je tape le moindre chiffre. L'encodeur rotatif gère les opérations locales : le tarage, et la sélection du profil de bobine pour que le poids de la bobine vide soit correctement soustrait.
+
+## Ce que j'en retire
+
+Ce que je veux vraiment souligner avec ce projet, c'est l'expérience d'apprendre un domaine qui m'est réellement éloigné. Mon quotidien, c'est le logiciel : des abstractions, des boucles d'itération rapides, des boutons « annuler » partout. Le matériel, lui, est patient, physique, et complètement indifférent à votre niveau de confiance. Chaque erreur coûte du vrai temps, de vrais composants, et occasionnellement de vrais écrans OLED.
+
+Beaucoup d'essais, beaucoup d'erreurs, beaucoup d'apprentissage :
+
+- La soudure est une compétence, pas une case à cocher. La mienne est encore loin d'être idéale, mais elle existe maintenant
+- Les cellules de charge sont absurdement sensibles, et la calibration à la bombe de WD40 est une méthodologie d'ingénierie légitime (ne me citez pas là-dessus)
+- Sur un microcontrôleur, la boucle est sacrée ; bloquez-la et tout en souffre
+- Les vis ont une limite de serrage bien, bien inférieure à votre perfectionnisme
+
+Et au bout du compte, j'ai un produit final que je trouve aussi chouette visuellement que poli fonctionnellement. Une balance qui reconnaît mes bobines, les pèse, et maintient mon inventaire à jour toute seule.
+
+Alors oui, mes soudures ne sont toujours pas idéales. Mais j'en ressors avec plein de connaissances que je n'avais pas avant, et honnêtement, c'était tout l'intérêt.
+
+_Un projet similaire en tête ? N'hésitez pas à me contacter. J'adorerais entendre parler de vos aventures matérielles, ou vous aider à débloquer une situation comme celle-ci._

@@ -2,11 +2,30 @@
 
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import {
+  FaPaintBrush,
+  FaCog,
+  FaDatabase,
+  FaServer,
+  FaRobot,
+  FaCodeBranch,
+  FaGlobe,
+  FaComments,
+  FaChartBar,
+  FaBullseye,
+  FaStar,
+} from "react-icons/fa";
+import type { IconType } from "react-icons";
 
 export function SkillsSection() {
   const t = useTranslations("DevPortfolio.Skills");
 
-  const technicalSkills = [
+  const technicalSkills: {
+    title: string;
+    items: string[];
+    colors: string[];
+    icon: IconType;
+  }[] = [
     {
       title: "Frontend",
       items: [
@@ -14,8 +33,8 @@ export function SkillsSection() {
         "React, Next.js, Angular, Symfony",
         "SPA, SSR, SEO, Tailwind, Material, Bootstrap",
       ],
-      colors: ["#ff6b35", "#ff8a65"], // Orange tones
-      icon: "🎨",
+      colors: ["#ff6b35", "#ff8a65"],
+      icon: FaPaintBrush,
     },
     {
       title: "Backend",
@@ -24,8 +43,8 @@ export function SkillsSection() {
         "Express, NestJS, SpringBoot, FastAPI, Flask",
         "REST, Websocket, MQTT, Concurrency",
       ],
-      colors: ["#ef4444", "#f87171"], // Red tones
-      icon: "⚙️",
+      colors: ["#ef4444", "#f87171"],
+      icon: FaCog,
     },
     {
       title: "Database",
@@ -34,8 +53,8 @@ export function SkillsSection() {
         "ORM, PL/SQL, Migration, Forme Normale, MCD, MLD",
         "Datagrip, Oracle SQL Developer, MySQL Workbench",
       ],
-      colors: ["#60a5fa", "#93c5fd"], // Light blue tones
-      icon: "🗄️",
+      colors: ["#60a5fa", "#93c5fd"],
+      icon: FaDatabase,
     },
     {
       title: "Sys Admin",
@@ -44,8 +63,8 @@ export function SkillsSection() {
         "Docker, Kubernetes, Grafana, Proxmox, Ansible",
         "Linux, Windows, Debian, Ubuntu, Arch",
       ],
-      colors: ["#9ca3af", "#d1d5db"], // Gray tones
-      icon: "🖥️",
+      colors: ["#9ca3af", "#d1d5db"],
+      icon: FaServer,
     },
     {
       title: "Artificial Intelligence",
@@ -54,8 +73,8 @@ export function SkillsSection() {
         "Ollama, PyTorch, TensorFlow, LangChain",
         "Self-hosting, Confidentiality, Ethics",
       ],
-      colors: ["#f97316", "#fb923c"], // Orange-red gradient
-      icon: "🤖",
+      colors: ["#f97316", "#fb923c"],
+      icon: FaRobot,
     },
     {
       title: "Versioning",
@@ -64,41 +83,46 @@ export function SkillsSection() {
         "Gitflow, Github Flow",
         "Gitlab CI, Github Actions, Bitbucket Pipelines",
       ],
-      colors: ["#6b7280", "#9ca3af"], // Dark to light gray
-      icon: "📝",
+      colors: ["#6b7280", "#9ca3af"],
+      icon: FaCodeBranch,
     },
   ];
 
-  const softSkills = [
+  const softSkills: {
+    title: string;
+    items: string[];
+    colors: string[];
+    icon: IconType;
+  }[] = [
     {
       title: t("languages"),
       items: [t("french"), t("english"), t("spanish")],
-      colors: ["#ef4444", "#f87171", "#60a5fa"], // Red to light blue
-      icon: "🌍",
+      colors: ["#ef4444", "#f87171", "#60a5fa"],
+      icon: FaGlobe,
     },
     {
       title: t("communication"),
       items: [t("oralPresentation"), t("technicalWriting"), t("teamwork")],
-      colors: ["#ff6b35", "#60a5fa", "#9ca3af"], // Orange, light blue, gray
-      icon: "💬",
+      colors: ["#ff6b35", "#60a5fa", "#9ca3af"],
+      icon: FaComments,
     },
     {
       title: t("managementSkills"),
       items: [t("agileMethodologies"), t("projectManagement"), t("planning")],
-      colors: ["#f97316", "#ef4444", "#60a5fa"], // Orange, red, light blue
-      icon: "📊",
+      colors: ["#f97316", "#ef4444", "#60a5fa"],
+      icon: FaChartBar,
     },
     {
       title: t("ethicsAndIA"),
       items: [t("selfHosting"), t("isAsTool"), t("iaCritics")],
-      colors: ["#ff6b35", "#9ca3af", "#60a5fa"], // Orange, gray, light blue
-      icon: "🎯",
+      colors: ["#ff6b35", "#9ca3af", "#60a5fa"],
+      icon: FaBullseye,
     },
     {
       title: t("creativity"),
       items: [t("uiux"), t("photography"), t("blogWriting")],
-      colors: ["#ef4444", "#f97316", "#6b7280"], // Red, orange, gray
-      icon: "✨",
+      colors: ["#ef4444", "#f97316", "#6b7280"],
+      icon: FaStar,
     },
   ];
 
@@ -107,16 +131,30 @@ export function SkillsSection() {
       id="competences"
       className="relative mb-5 scroll-mt-8 overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-20 lg:scroll-mt-0"
     >
+      {/* Blueprint grid */}
+      <div
+        className="absolute inset-0 opacity-[0.35]"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px),
+            linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)
+          `,
+          backgroundSize: "80px 80px, 80px 80px, 20px 20px, 20px 20px",
+        }}
+      />
+
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 h-64 w-64 animate-pulse rounded-full bg-orange-500/10 blur-3xl"></div>
         <div className="absolute right-1/4 bottom-1/4 h-80 w-80 animate-pulse rounded-full bg-red-500/10 blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 h-96 w-96 animate-pulse rounded-full bg-blue-400/5 blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 h-96 w-96 animate-pulse rounded-full bg-gray-400/5 blur-3xl"></div>
       </div>
 
       <div className="relative z-10 container mx-auto px-4">
         <div className="grid grid-cols-12">
-          <div className="col-span-12 mb-8 lg:col-span-10 lg:col-start-2">
+          <div className="col-span-12 mb-8 md:col-span-10 md:col-start-2 lg:col-span-10 lg:col-start-2">
             <motion.h2
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -124,9 +162,7 @@ export function SkillsSection() {
               viewport={{ once: true }}
               className="mb-8 text-center text-5xl font-extrabold text-white"
             >
-              <span className="via-stale-400 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                {t("skills")}
-              </span>
+              {t("skills")}
             </motion.h2>
 
             {/* Technical Skills */}
@@ -135,12 +171,12 @@ export function SkillsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="mb-6 text-center text-2xl font-semibold text-blue-300"
+              className="mb-6 text-center text-2xl font-semibold text-gray-300"
             >
               {t("technics")}
             </motion.h4>
 
-            <div className="mb-12 flex flex-wrap justify-center">
+            <div className="flex flex-wrap justify-center">
               {technicalSkills.map((skill, index) => (
                 <motion.div
                   key={skill.title}
@@ -168,7 +204,7 @@ export function SkillsSection() {
                     {/* Content */}
                     <div className="relative z-10">
                       <div className="mb-4 flex items-center space-x-3">
-                        <span className="text-3xl">{skill.icon}</span>
+                        <skill.icon className="text-3xl text-white/80" />
                         <h3 className="text-xl font-bold text-white">
                           {skill.title}
                         </h3>
@@ -195,8 +231,10 @@ export function SkillsSection() {
                 </motion.div>
               ))}
             </div>
+          </div>
 
-            {/* Soft Skills */}
+          {/* Soft Skills — full width */}
+          <div className="col-span-12 mt-0">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -205,16 +243,14 @@ export function SkillsSection() {
               className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-md"
             >
               {/* Background Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-red-500/5 to-blue-400/10 opacity-50" />
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-red-500/5 to-gray-500/5 opacity-50" />
 
               <div className="relative z-10">
                 <h4 className="mb-8 text-center text-3xl font-bold text-white">
-                  <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                    Soft Skills
-                  </span>
+                  Soft Skills
                 </h4>
 
-                <div className="flex flex-wrap justify-center">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
                   {softSkills.map((skill, index) => (
                     <motion.div
                       key={skill.title}
@@ -222,19 +258,16 @@ export function SkillsSection() {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: index * 0.1 }}
                       viewport={{ once: true }}
-                      className="w-full p-3 md:w-1/2 lg:w-1/5"
                     >
                       <motion.div
-                        className="group relative h-full overflow-hidden rounded-xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm transition-all duration-300 hover:bg-white/20"
+                        className="group relative h-full rounded-xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm transition-all duration-300 hover:bg-white/20"
                         whileHover={{
                           scale: 1.05,
                           transition: { duration: 0.2 },
                         }}
                       >
                         <div className="text-center">
-                          <span className="mb-2 block text-2xl">
-                            {skill.icon}
-                          </span>
+                          <skill.icon className="mx-auto mb-2 text-2xl text-white/80" />
                           <h3 className="mb-3 text-lg font-semibold text-white">
                             {skill.title}
                           </h3>
