@@ -225,7 +225,7 @@ export default function TechPostPageClient({ params, post }: Props) {
                 <div className="relative flex-shrink-0">
                   <Image
                     src="https://avatars.githubusercontent.com/u/66321178?v=4"
-                    alt="Éric Philippe"
+                    alt="Éric WAHL"
                     className="h-12 w-12 rounded-full object-cover"
                     width={48}
                     height={48}
@@ -233,7 +233,7 @@ export default function TechPostPageClient({ params, post }: Props) {
                   <div className="absolute -right-1 -bottom-1 h-4 w-4 rounded-full border-2 border-white bg-green-500" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-medium text-white">Éric Philippe</h3>
+                  <h3 className="font-medium text-white">Éric WAHL</h3>
                   <p className="text-sm text-slate-400">
                     Full-Stack Developer & Designer
                   </p>

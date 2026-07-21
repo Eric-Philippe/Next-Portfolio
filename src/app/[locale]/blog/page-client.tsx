@@ -134,7 +134,7 @@ export default function BlogPageClient({ posts }: Props) {
                 >
                   <Image
                     src="https://avatars.githubusercontent.com/u/66321178?v=4"
-                    alt="Éric Philippe"
+                    alt="Éric WAHL"
                     className="h-full w-full object-cover"
                     width={96}
                     height={96}

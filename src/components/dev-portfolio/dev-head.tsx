@@ -275,7 +275,7 @@ export function DevHead() {
                   backgroundClip: "text",
                 }}
               >
-                Éric PHILIPPE - {t("title-1")}
+                Éric WAHL - {t("title-1")}
               </span>{" "}
               <span
                 style={{

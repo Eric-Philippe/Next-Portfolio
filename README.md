@@ -1,6 +1,6 @@
 <div style="display: flex; align-items: center;">
     <img src="./img/icon.png" style="width: 50px; height: 50px; margin-right: 10px;">
-    <h1>Eric Philippe - Dev, Photo, 3D Printing Portfolio | Blog</h1>
+    <h1>Eric WAHL - Dev, Photo, 3D Printing Portfolio | Blog</h1>
 </div>
     
 This is my personal portfolio and blog, showcasing my work in web development, photography, and 3D printing. The site is built with Next.js, leveraging its powerful features for a seamless user experience.
@@ -56,4 +56,4 @@ Making this project with Next.js was a way to leverage the power of Vercel's pla
 
 ## Author
 
-[Eric Philippe](https://ericphilippe.com) - Web Developer & Photographer
+[Eric WAHL](https://ericwhl.com) - Web Developer & Photographer

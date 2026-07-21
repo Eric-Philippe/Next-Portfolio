@@ -242,7 +242,7 @@ export function PhotoHead({
                 backgroundClip: "text",
               }}
             >
-              PHILIPPE
+              WAHL
             </span>
           </motion.h1>
 

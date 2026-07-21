@@ -5,7 +5,7 @@ import { routing } from "~/i18n/routing";
 import "~/styles/globals.css";
 
 export const metadata: Metadata = {
-  title: "Eric Philippe - Portfolio",
+  title: "Eric WAHL - Portfolio",
   description:
     "Developer, Photographer, Maker with 3D Printing and blogging about technology and programming.",
   icons: [{ rel: "icon", url: "/favicon.svg" }],

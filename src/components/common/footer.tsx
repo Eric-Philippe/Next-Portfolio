@@ -36,7 +36,7 @@ export default function Footer({ theme = "dark" }: FooterProps) {
                   isDark ? "text-white/90" : "text-gray-900"
                 }`}
               >
-                Éric Philippe
+                Éric WAHL
               </p>
               <p
                 className={`text-xs ${
@@ -181,7 +181,7 @@ export default function Footer({ theme = "dark" }: FooterProps) {
                   {t("legalModal.editor")}
                 </h3>
                 <p className="text-sm">
-                  Éric Philippe
+                  Éric WAHL
                   <br />
                   {EMAIL}
                 </p>

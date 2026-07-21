@@ -254,7 +254,7 @@ export default function HomePageClient() {
               setYearDisplay(getRandomYearDisplay());
             }}
           >
-            <h1 className="text-2xl font-bold text-white">Eric Philippe</h1>
+            <h1 className="text-2xl font-bold text-white">Eric WAHL</h1>
             <span className="curosor-alias mt-1 block text-sm text-white/70">
               {yearDisplay ?? ""}
             </span>

@@ -154,7 +154,7 @@ export function AboutSection() {
                       {/* Name and Title */}
                       <div className="relative z-10 text-center">
                         <h3 className="mb-2 text-2xl font-bold text-white">
-                          Éric PHILIPPE
+                          Éric WAHL
                         </h3>
                         <div className="mb-4 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 px-4 py-2">
                           <p className="text-lg font-medium text-blue-200">
@@ -368,7 +368,7 @@ export function AboutSection() {
                           <FaLinkedin className="mr-3 h-6 w-6 text-blue-400" />
                           <div>
                             <p className="font-semibold text-white">
-                              Éric PHILIPPE
+                              Éric WAHL
                             </p>
                             <p className="text-sm text-white/70">
                               10 Avril 2025
