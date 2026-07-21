@@ -22,11 +22,11 @@ This is my personal portfolio and blog, showcasing my work in web development, p
 
 ## About the Project
 
-This project is a complete rewrite of my [previous portfolio](https://github.com/Eric-Philippe/PortfolioArchive/tree/main) which was built with React Vite. The new version uses Next.js for better performance and a better SEO.
+This project is a complete rewrite of my [previous portfolio](https://github.com/Eric-Wahl/PortfolioArchive/tree/main) which was built with React Vite. The new version uses Next.js for better performance and a better SEO.
 
 This website was designed to be content driven, allowing me to easily update my projects and blog posts without needing to modify the codebase. The content is managed through a combination of Markdown files (`.mdx`) allowing me to write rich text content with images, code snippets, and more.
 
-The previous one came with another project, [Julia MarkdownJoy](https://github.com/Eric-Philippe/JuliaMarkdownJoy), which was a Markdown converter made with Julia, with the same approach as what MDX already does. My previous portfolio went with its own sub-project, including this one- [SnapFileThing](https://github.com/Eric-Philippe/SnapFileThing). An easy way for me to host my documents, photos, projects screenshots.
+The previous one came with another project, [Julia MarkdownJoy](https://github.com/Eric-Wahl/JuliaMarkdownJoy), which was a Markdown converter made with Julia, with the same approach as what MDX already does. My previous portfolio went with its own sub-project, including this one- [SnapFileThing](https://github.com/Eric-Wahl/SnapFileThing). An easy way for me to host my documents, photos, projects screenshots.
 
 > Before SnapFileThing, I've first started a POC written in Rust for serving all the content of the site and hosting the files, but I quickly realized that Next.js already provides a great solution for this. So I decided to stick with Next.js and use its built-in features for serving static content, also improving the performance and SEO of the site.
 

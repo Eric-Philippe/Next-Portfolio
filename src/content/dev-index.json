@@ -42,7 +42,7 @@
       "shortDesc": "Suivez mon parcours de création d'un home lab avec des services auto-hébergés, de l'automatisation, et plus encore. Comment j'ai acheté un serveur, configuré Proxmox, et créé un home lab avec Docker, Nextcloud, Jellyfin, et Home Assistant."
     },
     "techs": ["Proxmox", "Docker", "TrueNAS", "Grafana", "Prometheus"],
-    "link": "https://github.com/Eric-Philippe/HomeServerConfig",
+    "link": "https://github.com/Eric-Wahl/HomeServerConfig",
     "date": "2024/09",
     "tags": ["WebDev", "DevOps", "Other"],
     "priority": 250
@@ -74,7 +74,7 @@
       "shortDesc": "CrilStatsFusion est une boîte à outils complète tout-en-un pour l'analyse de données webscrappées."
     },
     "techs": ["Python", "Pandas", "Matplotlib", "Seaborn"],
-    "link": "https://github.com/Eric-Philippe/CrilStatsFusion-Analitics/blob/main/playbook.ipynb",
+    "link": "https://github.com/Eric-Wahl/CrilStatsFusion-Analitics/blob/main/playbook.ipynb",
     "date": "2024/07",
     "tags": ["Tools"],
     "priority": 850
@@ -90,7 +90,7 @@
       "shortDesc": "Outil versatile en Julia pour analyser des fichiers Markdown en JSON, extraire des champs spécifiques, et convertir le tout en HTML"
     },
     "techs": ["Julia"],
-    "link": "https://github.com/Eric-Philippe/JuliaMarkdownJoy",
+    "link": "https://github.com/Eric-Wahl/JuliaMarkdownJoy",
     "date": "2024/03",
     "tags": ["Tools"],
     "priority": 900
@@ -321,7 +321,7 @@
       "shortDesc": "EHub est un projet en cours visant à créer autant de services que possible sur autant de plateformes que possible afin de créer un écosystème de services interconnectés pour un usage personnel et professionnel."
     },
     "techs": ["Kotlin", "Mobile", "SpringBoot", "Docker", "UIUX"],
-    "link": "https://github.com/Eric-Philippe/E-Hub-Mobile",
+    "link": "https://github.com/Eric-Wahl/E-Hub-Mobile",
     "date": "2025/09",
     "tags": ["Mobile", "WebDev", "DevOps"],
     "priority": 450
