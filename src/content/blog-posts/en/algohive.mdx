@@ -59,7 +59,7 @@ Oh, and it all had to be user-friendly enough for students who just wanted to so
 
 I knew I needed to split this beast into three main parts:
 
-![First Draft Architecture](https://snapfilething.homeserver-ericp.fr/uploads/three_1753080737_37578eb9_.png)
+![First Draft Architecture](https://snapfilething.ericwlab.xyz/uploads/three_1753080737_37578eb9_.png)
 
 ### Frontend: The Student Experience
 
@@ -75,7 +75,7 @@ This is where things got interesting. Remember how .docx and .xlsx files are act
 
 It clicked: I could create a custom file format (.alghive) that was essentially a zip containing XML metadata and Python scripts for input generation and solution validation. Students and staff could create puzzles using familiar tools, and the system could process them automatically.
 
-![Puzzle Creation](https://snapfilething.homeserver-ericp.fr/uploads/alghive_1753084257_8143805a_.png)
+![Puzzle Creation](https://snapfilething.ericwlab.xyz/uploads/alghive_1753084257_8143805a_.png)
 
 ## The Development Marathon
 
@@ -95,7 +95,7 @@ Building the web server in Go was actually a joy. I used Swagger for API documen
 
 This was the least glamorous but most critical part. React component after React component: user management, school administration, competition setup, puzzle deployment. It was CRUD operations all the way down.
 
-![Admin Panel](https://snapfilething.homeserver-ericp.fr/uploads/backoffice_1753081591_d606c05a_.png)
+![Admin Panel](https://snapfilething.ericwlab.xyz/uploads/backoffice_1753081591_d606c05a_.png)
 
 > Don't mind the test data, I was just trying to get the UI right while having a Rocket League match in the background...
 
@@ -116,7 +116,7 @@ I moved everything to a GitHub organization and split the monolith, and took the
 
 The "bee" theme just happened naturally, and honestly, I ran with it. Sometimes branding just clicks. 🐝
 
-![Repositories](https://snapfilething.homeserver-ericp.fr/uploads/repositories_1753081591_5086491e_.png)
+![Repositories](https://snapfilething.ericwlab.xyz/uploads/repositories_1753081591_5086491e_.png)
 
 ## The User Interface Challenge
 
@@ -125,7 +125,7 @@ Two weeks before the deadline, I had a robust backend and admin system but almos
 This was actually where the project became fun again. After weeks of admin panels, designing something students would actually enjoy using felt refreshing. I wanted to create something modern and intuitive – a stark contrast to the typical institutional platforms we all know and tolerate.
 The goal was to make it responsive, so students could participate from any device, whether it was a laptop, a small screen laptop, or even a phone.
 
-![Mockups](https://snapfilething.homeserver-ericp.fr/uploads/phonemockups_1753081753_3979232a_.png)
+![Mockups](https://snapfilething.ericwlab.xyz/uploads/phonemockups_1753081753_3979232a_.png)
 
 ## The Ecosystem Explosion
 
@@ -137,7 +137,7 @@ A separate Go service for handling puzzle execution, input generation, and solut
 
 The main server would then just proxy requests to the BeeAPI, allowing for load distribution across multiple BeeAPI instances if necessary.
 
-![BeeAPI Architecture](https://snapfilething.homeserver-ericp.fr/uploads/beeapi_1753083210_46711f65_.png)
+![BeeAPI Architecture](https://snapfilething.ericwlab.xyz/uploads/beeapi_1753083210_46711f65_.png)
 
 ### BeeHub
 
@@ -145,7 +145,7 @@ When Montpellier students needed a way to create and test puzzles collaborativel
 
 The app connects directly to the BeeAPI to manage different puzzle catalogs across all environments. The whole thing is protected by an API key system and isolated to only expose what the service needs to see.
 
-![BeeHub](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-07-21_at_09-26-38_excalidraw_1753082808_ee9b37be_.png)
+![BeeHub](https://snapfilething.ericwlab.xyz/uploads/screenshot_2025-07-21_at_09-26-38_excalidraw_1753082808_ee9b37be_.png)
 
 ## The Final Sprint
 
@@ -168,11 +168,11 @@ Each competition would run for 6 hours, with an estimated maximum of 16 puzzles 
 This was my chance to challenge myself with puzzle creation. I experimented with ideas, game mechanics, and learned how to craft engaging puzzles that actually made sense.
 For example, I created a puzzle where students had to implement Conway's Game of Life!
 
-![Conway](https://snapfilething.homeserver-ericp.fr/uploads/gameoflife_1753081591_071ddbd0_.png)
+![Conway](https://snapfilething.ericwlab.xyz/uploads/gameoflife_1753081591_071ddbd0_.png)
 
 I also implemented a system to prevent AI abuse. I made sure that each puzzle's instructions contained transparent prompts that moved around the text, preventing students from simply copying and pasting the instructions into an AI.
 
-![AI](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-07-21_at_11-38-29_prompt_injection_avertie_1753090717_666fcdbb_.png)
+![AI](https://snapfilething.ericwlab.xyz/uploads/screenshot_2025-07-21_at_11-38-29_prompt_injection_avertie_1753090717_666fcdbb_.png)
 
 > Solid solution to calm the enthusiasm of students who are professionals at "Copy-Paste AI".
 
@@ -180,7 +180,7 @@ I also implemented a system to prevent AI abuse. I made sure that each puzzle's 
 
 Throughout development, I kept deployment in mind. Docker containers for everything, with separate compose files for development, staging, and production. This let me test changes safely and deploy updates without breaking the live competitions.
 
-![Docker packages](https://snapfilething.homeserver-ericp.fr/uploads/packages_1753083609_831e7be7_.png)
+![Docker packages](https://snapfilething.ericwlab.xyz/uploads/packages_1753083609_831e7be7_.png)
 
 ## Last-Minute Security and Monitoring
 
@@ -188,7 +188,7 @@ Just before the competition, I realized I needed proper monitoring and security 
 
 I quickly set up Grafana and Prometheus for real-time monitoring. CPU usage, memory consumption, API response times, database connections – I wanted to see everything that could possibly go wrong before it actually went wrong. This turned out to be one of my smartest decisions.
 
-![Grafana Dashboard](https://snapfilething.homeserver-ericp.fr/uploads/grafana_1753082247_833cc66a_.png)
+![Grafana Dashboard](https://snapfilething.ericwlab.xyz/uploads/grafana_1753082247_833cc66a_.png)
 
 I also implemented some basic security measures: rate limiting on API endpoints, input validation, and proper authentication checks. Better safe than sorry when you're about to have hundreds of students hammering your servers.
 
@@ -208,7 +208,7 @@ The culprit? My own rate limiting system.
 
 In my wisdom, I'd implemented rate limiting to prevent abuse, but I hadn't accounted that all the students were connecting from the same IP address, as they were all on the same Wi-Fi network.
 
-![Too Many Requests](https://snapfilething.homeserver-ericp.fr/uploads/toomanyrequests_1753089657_3f433cfb_.png)
+![Too Many Requests](https://snapfilething.ericwlab.xyz/uploads/toomanyrequests_1753089657_3f433cfb_.png)
 
 Picture this: me, frantically SSH'd into the production server during a live competition, trying to adjust rate limiting rules while hundreds of students are waiting. Not exactly the smooth operation I'd envisioned.
 
@@ -270,7 +270,7 @@ For my final student year, I'm planning to turn this into a proper team effort. 
 
 We're planning to host more events across all the Toulouse campuses, and potentially expand to other cities in France. The dream is to create a network of competitive programming events that students actually look forward to, rather than just another academic obligation.
 
-![Roadmap](https://snapfilething.homeserver-ericp.fr/uploads/roadmap_1753091299_eee2c82f_.png)
+![Roadmap](https://snapfilething.ericwlab.xyz/uploads/roadmap_1753091299_eee2c82f_.png)
 
 I also want to build a proper community around the project. Documentation that doesn't assume you're a mind reader, tutorials for puzzle creation, forums for troubleshooting, and maybe even workshops for schools wanting to get started.
 
@@ -282,7 +282,7 @@ This project taught me that sometimes the best learning comes from saying "yes" 
 
 The AlgoHive platform is now open-source and ready for anyone brave enough to host their own competition. Whether you're a school looking to engage students, a company wanting to assess technical skills, or just someone who loves competitive programming, the tools are there.
 
-![AlgoHive on GitHub](https://snapfilething.homeserver-ericp.fr/uploads/algohivegit_1753089763_08f45791_.png)
+![AlgoHive on GitHub](https://snapfilething.ericwlab.xyz/uploads/algohivegit_1753089763_08f45791_.png)
 
 I hope this post gives you a good overview of the process I went through to create my own coding competition platform, and maybe inspires you to tackle your own "impossible" project. If you have questions, want to contribute, or are planning something similar, feel free to reach out through my social media or GitHub. I'd love to help or hear about your experience!
 

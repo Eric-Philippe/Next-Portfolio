@@ -21,7 +21,7 @@ Spoiler alert: the electronics were not the part that broke the most.
 
 Before ordering anything, I sketched out what I wanted the final product to look like, pulling from various inspirations I had collected:
 
-![The plan](https://snapfilething.homeserver-ericp.fr/uploads/plans_1783786287_6ab918a8_.png)
+![The plan](https://snapfilething.ericwlab.xyz/uploads/plans_1783786287_6ab918a8_.png)
 
 After some research, I landed on this shopping list:
 
@@ -38,7 +38,7 @@ After some research, I landed on this shopping list:
 
 This part felt like home. Wiring components on a breadboard is basically the "hello world" of electronics, and it is exactly what those beginner kits had prepared me for. After some tinkering and a rough 3D printed draft to hold things together, I had a first successful test:
 
-![First successful testing](https://snapfilething.homeserver-ericp.fr/uploads/testings_1783786289_55f3a91c_.jpg)
+![First successful testing](https://snapfilething.ericwlab.xyz/uploads/testings_1783786289_55f3a91c_.jpg)
 
 The RFID reader could see a tag, the screen displayed things, the ESP32 talked to my Wi-Fi. Great. Now I just needed to connect the load cell to the HX711 board.
 
@@ -56,13 +56,13 @@ When the points finally looked "acceptable" (a generous word), I was genuinely s
 
 With the cell finally connected, I had to calibrate it. The proper way involves certified reference weights. My way involved a can of WD40 and my kitchen scale as the source of truth:
 
-![The workshop](https://snapfilething.homeserver-ericp.fr/uploads/atelier_1783786284_c374db8d_.jpg)
+![The workshop](https://snapfilething.ericwlab.xyz/uploads/atelier_1783786284_c374db8d_.jpg)
 
 That is when I discovered how sensitive a load cell actually is. Lean on the desk, the value moves. Breathe near it, the value moves. It is honestly impressive, and slightly maddening when you are trying to figure out whether your soldering or your code is the unstable part.
 
 Because yes, that was the recurring theme of the day: writing more and more complete firmware, watching it misbehave, questioning my code, and eventually finding out that a solder joint had let go. Then re-soldering, re-flashing, and repeating. Before I realized it, five hours had evaporated, and my desk was documenting the descent:
 
-![The messy desk](https://snapfilething.homeserver-ericp.fr/uploads/atelierwide_1783786285_8bc79530_.jpg)
+![The messy desk](https://snapfilething.ericwlab.xyz/uploads/atelierwide_1783786285_8bc79530_.jpg)
 
 ## The Wiring
 
@@ -169,11 +169,11 @@ I ordered another 3-pack, put the project on pause for a day, and took several m
 
 When the new screens arrived, I mounted everything correctly (screws barely snug, gap accepted, ego in check), and the scale finally came together:
 
-![Front of the scale](https://snapfilething.homeserver-ericp.fr/uploads/hero_1783786287_fd2e00dc_.jpg)
+![Front of the scale](https://snapfilething.ericwlab.xyz/uploads/hero_1783786287_fd2e00dc_.jpg)
 
-![Back of the scale](https://snapfilething.homeserver-ericp.fr/uploads/back_1783786286_efa2c0d0_.jpg)
+![Back of the scale](https://snapfilething.ericwlab.xyz/uploads/back_1783786286_efa2c0d0_.jpg)
 
-![Side of the scale](https://snapfilething.homeserver-ericp.fr/uploads/side_1783786288_e6e7bca1_.jpg)
+![Side of the scale](https://snapfilething.ericwlab.xyz/uploads/side_1783786288_e6e7bca1_.jpg)
 
 Place a spool on top, the RFID reader identifies it, the load cell weighs it, and the result lands in [Filaventory](/tech/filaventory) without me typing a single number. The rotary encoder handles the local operations: taring, and selecting the spool profile so the empty spool weight gets subtracted correctly.
 

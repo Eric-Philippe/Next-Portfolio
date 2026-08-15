@@ -59,7 +59,7 @@ Et tout ça devait être **simple à utiliser**, même pour des étudiants qui v
 
 Je décide de séparer le projet en trois blocs principaux :
 
-![First Draft Architecture](https://snapfilething.homeserver-ericp.fr/uploads/three_1753080737_37578eb9_.png)
+![First Draft Architecture](https://snapfilething.ericwlab.xyz/uploads/three_1753080737_37578eb9_.png)
 
 ### Frontend : l’expérience côté étudiant
 
@@ -75,7 +75,7 @@ Petit moment “eureka” : je me souvenais que les fichiers `.docx` ou `.xlsx` 
 
 Résultat : les puzzles peuvent être créés avec des outils familiers, et le système les traite automatiquement. Bingo.
 
-![Puzzle Creation](https://snapfilething.homeserver-ericp.fr/uploads/alghive_1753084257_8143805a_.png)
+![Puzzle Creation](https://snapfilething.ericwlab.xyz/uploads/alghive_1753084257_8143805a_.png)
 
 ## Le marathon de développement
 
@@ -95,7 +95,7 @@ Le serveur web en Go a été une vraie satisfaction. Swagger m’a sauvé la vie
 
 Pas sexy, mais indispensable. Des composants React à la chaîne : gestion des users, campus, compétitions, déploiement de puzzles... Le royaume du CRUD.
 
-![Admin Panel](https://snapfilething.homeserver-ericp.fr/uploads/backoffice_1753081591_d606c05a_.png)
+![Admin Panel](https://snapfilething.ericwlab.xyz/uploads/backoffice_1753081591_d606c05a_.png)
 
 > Ne faites pas attention aux données de test, j'essayais juste d'obtenir l'interface utilisateur correcte tout en ayant un match de Rocket League en arrière-plan...
 
@@ -116,7 +116,7 @@ J’ai tout déplacé dans une organisation GitHub et séparé le monolithe, et 
 
 Le thème des abeilles est arrivé tout seul… et j’ai décidé de le garder. 🐝
 
-![Repositories](https://snapfilething.homeserver-ericp.fr/uploads/repositories_1753081591_5086491e_.png)
+![Repositories](https://snapfilething.ericwlab.xyz/uploads/repositories_1753081591_5086491e_.png)
 
 ## Le rush sur l’interface
 
@@ -125,7 +125,7 @@ Le thème des abeilles est arrivé tout seul… et j’ai décidé de le garder.
 Et en fait, c’est là que le fun est revenu. Après des semaines à coder de l’admin, construire une interface sympa et moderne pour les étudiants m’a remotivé. Je voulais quelque chose de plus propre et agréable à utiliser – loin des plateformes institutionnelles tristes qu’on connaît tous.
 Le tout en gardant en tête de faire quelque chose de responsive pour que les étudiants puissent participer depuis n'importe quel appareil.
 
-![Mockups](https://snapfilething.homeserver-ericp.fr/uploads/phonemockups_1753081753_3979232a_.png)
+![Mockups](https://snapfilething.ericwlab.xyz/uploads/phonemockups_1753081753_3979232a_.png)
 
 ## L’explosion de l’écosystème
 
@@ -137,14 +137,14 @@ Un service Go à part pour l’exécution des puzzles, la génération des entr�
 
 Le serveur principal n'a alors qu'à servir de proxie pour les requêtes pour les énigmes, tout en permettant de pouvoir distribuer la charge entre plusieurs instances BeeAPI si besoin.
 
-![BeeAPI Architecture](https://snapfilething.homeserver-ericp.fr/uploads/beeapi_1753083210_46711f65_.png)
+![BeeAPI Architecture](https://snapfilething.ericwlab.xyz/uploads/beeapi_1753083210_46711f65_.png)
 
 ### BeeHub
 
 Quand les étudiants de Montpellier ont voulu créer et tester des puzzles à plusieurs, j’ai codé une app web dédiée. Backend Flask, frontend React. C’est devenu leur QG de création.
 L'application se met en relation directe avec les BeeAPI pour pouvoir gérer les différents catalogues de puzzles, sous tous les environnements. Le tout protégé d'une part par un système d'API Key, et d'une autre part par une isolation en ne gardant accessible que ce que le service doit voir.
 
-![BeeHub](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-07-21_at_09-26-38_excalidraw_1753082808_ee9b37be_.png)
+![BeeHub](https://snapfilething.ericwlab.xyz/uploads/screenshot_2025-07-21_at_09-26-38_excalidraw_1753082808_ee9b37be_.png)
 
 ## Le sprint final
 
@@ -167,11 +167,11 @@ Chaque compétition durait 6h, avec 16 puzzles max par étudiant (donc 32 partie
 Cela a été pour moi une occasion de me challenger sur la création de puzzles. J’ai pu tester des idées, des mécaniques de jeu, et surtout, j’ai appris à créer des énigmes qui tiennent la route.
 Ca m'a permis par exemple de faire une énigme où les étudiants devaient implémenter le jeu de la vie de Conway !
 
-![Conway](https://snapfilething.homeserver-ericp.fr/uploads/gameoflife_1753081591_071ddbd0_.png)
+![Conway](https://snapfilething.ericwlab.xyz/uploads/gameoflife_1753081591_071ddbd0_.png)
 
 J'ai aussi pu implémenter un système de prévention à l'utilisation abusive de l'IA. J'ai fais en sorte que, dans les consignes de chaque puzzle, il y ait des prompts transparents, se déplacant dans le texte, pour éviter que les étudiants ne puissent simplement copier-coller les instructions dans une IA.
 
-![IA](https://snapfilething.homeserver-ericp.fr/uploads/screenshot_2025-07-21_at_11-38-29_prompt_injection_avertie_1753090717_666fcdbb_.png)
+![IA](https://snapfilething.ericwlab.xyz/uploads/screenshot_2025-07-21_at_11-38-29_prompt_injection_avertie_1753090717_666fcdbb_.png)
 
 > Solide solution pour calmer les ardeurs des étudiants professionnels du "Copier-Coller IA".
 
@@ -179,7 +179,7 @@ J'ai aussi pu implémenter un système de prévention à l'utilisation abusive d
 
 Dès le début, j’ai pensé au déploiement. Chaque service dans un conteneur Docker, avec des `docker-compose` différents pour le dev, le staging, et la prod. Je pouvais tester et mettre à jour sans crainte de casser la plateforme en live.
 
-![Docker packages](https://snapfilething.homeserver-ericp.fr/uploads/packages_1753083609_831e7be7_.png)
+![Docker packages](https://snapfilething.ericwlab.xyz/uploads/packages_1753083609_831e7be7_.png)
 
 ## Sécurité & monitoring de dernière minute
 
@@ -187,7 +187,7 @@ Juste avant le jour J, un éclair de lucidité : et si tout plantait et que je n
 
 J'ai décidé d'installer en express Grafana et Prometheus: Monitoring CPU, mémoire, réponses API, connexions DB – je voulais tout voir.
 
-![Grafana Dashboard](https://snapfilething.homeserver-ericp.fr/uploads/grafana_1753082247_833cc66a_.png)
+![Grafana Dashboard](https://snapfilething.ericwlab.xyz/uploads/grafana_1753082247_833cc66a_.png)
 
 Côté sécurité j'en ai profité pour implémenter une limitation de requêtes sur les endpoints sensibles, une validation des entrées, vérification de l’auth. Mieux vaut prévenir que guérir.
 
@@ -209,7 +209,7 @@ Le problème ? Ma propre protection contre le DDOS.
 
 Tous les étudiants étaient connectés sur le même réseau Wi-Fi… donc même IP. Et j’avais oublié ce détail. Résultat : ma limite de requêtes par IP bloquait tout le monde.
 
-![Too Many Requests](https://snapfilething.homeserver-ericp.fr/uploads/toomanyrequests_1753089657_3f433cfb_.png)
+![Too Many Requests](https://snapfilething.ericwlab.xyz/uploads/toomanyrequests_1753089657_3f433cfb_.png)
 
 Imaginez-moi, en SSH sur le serveur en prod, pendant une compétition en live, en train de modifier mes règles de rate limiting dans l’urgence pendant que 100 étudiants attendent. Pas idéal.
 
@@ -227,7 +227,7 @@ Si je devais le refaire, je corrigerais ce problème avec un captcha sur la page
 
 Juste après la compétition, j'ai également pris la casquette de graphiste pour créer des visuels pour compiler les résultats des trois campus. J'en ai également profité pour faire un second visuel rassemblant les quelques statistiques du développement de la plateforme.
 
-![Statistics](https://snapfilething.homeserver-ericp.fr/uploads/visuals_1753088834_cd4bb3dd_.png)
+![Statistics](https://snapfilething.ericwlab.xyz/uploads/visuals_1753088834_cd4bb3dd_.png)
 
 ## Ce que j’ai appris
 
@@ -277,7 +277,7 @@ Pour ma dernière année d’études, je veux en faire un vrai projet d’équip
 
 On prévoit plus d’événements dans les campus de Toulouse, peut-être ailleurs en France. L’objectif : créer un **réseau d’événements de prog compétitive** que les étudiants attendent avec impatience.
 
-![Roadmap](https://snapfilething.homeserver-ericp.fr/uploads/roadmap_1753091299_eee2c82f_.png)
+![Roadmap](https://snapfilething.ericwlab.xyz/uploads/roadmap_1753091299_eee2c82f_.png)
 
 Je veux aussi bâtir une vraie communauté autour du projet : une doc claire, des tutos, un forum, et pourquoi pas des ateliers pour les campus qui veulent se lancer.
 
@@ -289,7 +289,7 @@ Cette expérience m’a prouvé que les meilleurs apprentissages naissent souven
 
 La plateforme AlgoHive est et restera **open-source**, prête à l’emploi pour celles et ceux qui veulent se lancer dans leur propre compétition de programmation. Que vous soyez une école, une entreprise ou juste un·e passionné·e de puzzles… tout est là.
 
-![AlgoHive on GitHub](https://snapfilething.homeserver-ericp.fr/uploads/algohivegit_1753089763_08f45791_.png)
+![AlgoHive on GitHub](https://snapfilething.ericwlab.xyz/uploads/algohivegit_1753089763_08f45791_.png)
 
 J’espère que ce post vous aura donné un bon aperçu du parcours, et peut-être l’envie de lancer **votre propre projet (presque) impossible**.
 

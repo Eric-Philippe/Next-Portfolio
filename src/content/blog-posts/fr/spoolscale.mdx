@@ -21,7 +21,7 @@ Spoiler : l'électronique n'est pas ce qui a le plus cassé dans cette histoire.
 
 Avant de commander quoi que ce soit, j'ai dessiné ce à quoi je voulais que le produit final ressemble, en piochant dans mes différentes inspirations :
 
-![Le plan](https://snapfilething.homeserver-ericp.fr/uploads/plans_1783786287_6ab918a8_.png)
+![Le plan](https://snapfilething.ericwlab.xyz/uploads/plans_1783786287_6ab918a8_.png)
 
 Après quelques recherches, voici la liste de courses :
 
@@ -38,7 +38,7 @@ Après quelques recherches, voici la liste de courses :
 
 Cette partie, c'était la maison. Câbler des composants sur une breadboard, c'est le « hello world » de l'électronique, exactement ce pour quoi mes kits débutants m'avaient préparé. Après un peu de bidouille et un premier brouillon imprimé en 3D pour tenir le tout, premier test concluant :
 
-![Premier test concluant](https://snapfilething.homeserver-ericp.fr/uploads/testings_1783786289_55f3a91c_.jpg)
+![Premier test concluant](https://snapfilething.ericwlab.xyz/uploads/testings_1783786289_55f3a91c_.jpg)
 
 Le lecteur RFID voyait un tag, l'écran affichait des choses, l'ESP32 parlait à mon Wi-Fi. Parfait. Il ne restait plus qu'à connecter la cellule de charge à la carte HX711.
 
@@ -56,13 +56,13 @@ Quand les points ont enfin eu l'air « acceptables » (le mot est généreux), j
 
 La cellule enfin connectée, il fallait la calibrer. La méthode propre implique des poids de référence certifiés. Ma méthode impliquait une bombe de WD40 et ma balance de cuisine comme source de vérité :
 
-![L'atelier](https://snapfilething.homeserver-ericp.fr/uploads/atelier_1783786284_c374db8d_.jpg)
+![L'atelier](https://snapfilething.ericwlab.xyz/uploads/atelier_1783786284_c374db8d_.jpg)
 
 C'est là que j'ai découvert à quel point une cellule de charge est sensible. On s'appuie sur le bureau, la valeur bouge. On respire à côté, la valeur bouge. C'est honnêtement impressionnant, et légèrement exaspérant quand on essaie de déterminer si c'est la soudure ou le code qui est instable.
 
 Parce que oui, c'était le thème récurrent de la journée : écrire un firmware de plus en plus complet, le voir planter, remettre en question mon code, et finir par découvrir qu'un point de soudure avait lâché. Puis ressouder, reflasher, recommencer. Sans m'en rendre compte, cinq heures s'étaient évaporées, et mon bureau documentait la descente :
 
-![Le bureau en chantier](https://snapfilething.homeserver-ericp.fr/uploads/atelierwide_1783786285_8bc79530_.jpg)
+![Le bureau en chantier](https://snapfilething.ericwlab.xyz/uploads/atelierwide_1783786285_8bc79530_.jpg)
 
 ## Le câblage
 
@@ -169,11 +169,11 @@ J'ai dû en commander trois autres, mettre le projet en pause une journée, et p
 
 À la réception des nouveaux écrans, j'ai tout monté correctement (vis à peine serrées, espace accepté, ego rangé), et la balance a enfin pris forme :
 
-![La balance de face](https://snapfilething.homeserver-ericp.fr/uploads/hero_1783786287_fd2e00dc_.jpg)
+![La balance de face](https://snapfilething.ericwlab.xyz/uploads/hero_1783786287_fd2e00dc_.jpg)
 
-![La balance de dos](https://snapfilething.homeserver-ericp.fr/uploads/back_1783786286_efa2c0d0_.jpg)
+![La balance de dos](https://snapfilething.ericwlab.xyz/uploads/back_1783786286_efa2c0d0_.jpg)
 
-![La balance de côté](https://snapfilething.homeserver-ericp.fr/uploads/side_1783786288_e6e7bca1_.jpg)
+![La balance de côté](https://snapfilething.ericwlab.xyz/uploads/side_1783786288_e6e7bca1_.jpg)
 
 On pose une bobine dessus, le lecteur RFID l'identifie, la cellule de charge la pèse, et le résultat atterrit dans [Filaventory](/tech/filaventory) sans que je tape le moindre chiffre. L'encodeur rotatif gère les opérations locales : le tarage, et la sélection du profil de bobine pour que le poids de la bobine vide soit correctement soustrait.
 
