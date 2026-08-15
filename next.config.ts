@@ -35,7 +35,7 @@ const config: NextConfig = {
       },
       {
         protocol: "https" as const,
-        hostname: "snapfilething.homeserver-ericp.fr",
+        hostname: "snapfilething.ericwlab.xyz",
         pathname: "/uploads/**",
       },
       {

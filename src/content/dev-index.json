@@ -122,7 +122,7 @@
       "shortDesc": "Une application web simple et légère pour suivre et analyser les scores de fléchettes. Enregistrez facilement vos scores, consultez des statistiques, et améliorez votre jeu. Construit avec React et TypeScript."
     },
     "techs": ["React", "TypeScript"],
-    "link": "https://darts.homeserver-ericp.fr/",
+    "link": "https://darts.ericwlab.xyz/",
     "date": "2025/03",
     "tags": ["WebDev"],
     "priority": 710
